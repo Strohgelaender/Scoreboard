@@ -20,9 +20,6 @@ const streamDeck = openStreamDeck();
 const SHOW_EDIN = 0;
 const SHOW_BERNHARD = 1;
 const SHOW_BOTH = 2;
-const SHOW_SHOP = 8;
-
-//TODO public constants (wie hier und auch im Browser verwenden?)
 
 streamDeck.on('down', keyIndex => {
 	console.log('key %d down', keyIndex);
@@ -40,11 +37,6 @@ streamDeck.on('down', keyIndex => {
 			case SHOW_BOTH:
 				server.sendEvent({
 					eventType: 'SHOW_NAMES'
-				});
-				break;
-			case SHOW_SHOP:
-				server.sendEvent({
-					eventType: 'SHOW_SHOP'
 				});
 				break;
 		}
@@ -72,8 +64,6 @@ async function loadKeyImages() {
 	streamDeck.fillImage(SHOW_EDIN, await createImageBuffer('1860_watermark.png'));
 	streamDeck.fillImage(SHOW_BERNHARD, await createImageBuffer('errea_watermark.png'));
 	streamDeck.fillImage(SHOW_BOTH, await createImageBuffer('2.png'));
-	streamDeck.fillImage(SHOW_SHOP, await createImageBuffer('shop.png'));
-
 }
 
 function createImageBuffer(imageName) {

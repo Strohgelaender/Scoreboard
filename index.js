@@ -3,7 +3,6 @@ const fs = require('fs');
 const express = require('express');
 const app = express();
 const expressWs = require('express-ws')(app);
-//const {createMatchdayData, createTableData} = require('./BFVParser');
 
 const debug = true;
 
@@ -57,6 +56,13 @@ app.get('/image/:team', (req, res) => {
 app.get('/data/:team/:param', (req, res) => {
 	const team = getTeam(req.params.team.toUpperCase());
 	res.send(team[req.params.param]);
+});
+
+app.get('/data/info', (req, res) => {
+   const data = {
+       "home": homeTeam, "away": awayTeam
+   };
+    res.send(data);
 });
 
 app.get('/scores', (req, res) => {

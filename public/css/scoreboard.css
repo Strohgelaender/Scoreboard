@@ -94,6 +94,26 @@ html {
     left: 402px;
 }
 
+.shirtLine {
+    position: absolute;
+    width: 150px;
+    height: 10px;
+    top: 115px;
+    background-color: #59aadf;
+    border-radius: 0px 0px 10px 10px;
+}
+
+#homeShirtLine {
+    left: 180px;
+}
+
+#awayShirtLine {
+    left: 455px;
+}
+
+
+
+
 #ties {
     position: absolute;
 }
@@ -136,15 +156,4 @@ html {
 #tiesRightContent {
     left: 1200px;
     direction: rtl;
-}
-
-#tiesQR {
-    position: absolute;
-    top: 1100px;
-    left: 810px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-    height: 400px;
 }
