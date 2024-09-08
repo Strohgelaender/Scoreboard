@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<title>Scoreboard</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="/css/default.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="/css/scoreboard.css" media="screen">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" defer></script>
+	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/textFit.js" defer></script>
+	<script src="/scripts/eventSocket.js" defer></script>
+	<script src="/scripts/scoreboard.js" defer></script>
+</head>
+<body>
+<div id="scoreboard">
+	<img id="scoreboardImage" src="/images/scoreboardBL2.png" alt="Spielstand_Background"/>
+	<div id="homeImageBox" class="teamImageBox">
+		<img id="homeImage" class="teamImage" src="/image/home" alt="Home Team">
+	</div>
+	<div id="homeNameBox" class="teamNameBox">
+		<span id="homeName" class="teamName">Home</span>
+	</div>
+	<span id="homeScore" class="teamScore">0</span>
+	<span id="awayScore" class="teamScore">0</span>
+	<div id="awayNameBox" class="teamNameBox">
+		<span id="awayName" class="teamName">Away</span>
+	</div>
+	<img id="awayImage" class="teamImage" src="/image/away" alt="Away Team">
+</div>
+<!-- <div id="ties">
+	<img id="tiesRightPart" class="tieImg blend blendRight blendNames" src="/images/ties_right.png" alt="Ties right">
+	<img id="tiesLeftPart" class="tieImg blend blendLeft blendExtra blendNames" src="/images/ties_left.png"
+	     alt="Ties left">
+	<span id="tiesLeftContent" class="tieContent blend blendLeft blendNames">Edin Kulasic, 1860 Futsal</span>
+	<span id="tiesRightContent" class="tieContent blend blendRight blendNames">Bernhard Winkler, Errea</span>
+	<span id="tiesExtraContent" class="tieContent blend blendExtra">TestText</span>
+</div> -->
+</body>
+</html>

@@ -1,0 +1,150 @@
+html {
+    background: transparent;
+}
+
+#scoreboard {
+    position: relative;
+    left: 30px;
+    height: 40px;
+}
+
+#scoreboardImage {
+    position: relative;
+    width: 700px;
+    height: auto;
+    z-index: -1;
+}
+
+#bfvLogo {
+    position: absolute;
+    display: inline-block;
+}
+
+#bfvLogoImage {
+    position: relative;
+    width: auto;
+    height: 60px;
+    top: 60px;
+}
+
+#bfvClosing {
+    position: relative;
+    left: 30px;
+    top: -8px;
+}
+
+.teamImage {
+    position: absolute;
+    width: auto;
+    height: 81px;
+    z-index: 1;
+    top: 48px;
+}
+
+.teamImageBox {
+
+}
+
+#homeImage {
+    left: 120px;
+}
+
+#awayImage {
+    left: 625px;
+    top: 64px;
+    height: 50px;
+}
+
+.teamNameBox {
+    width: 190px;
+    height: 45px;
+    position: absolute;
+    top: 68px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 45px;
+}
+
+#homeNameBox {
+    left: 160px;
+}
+
+#awayNameBox {
+    left: 435px;
+}
+
+.teamName {
+    z-index: 1;
+    font-size: 22px;
+}
+
+.teamScore {
+    z-index: 1;
+    position: absolute;
+    font-size: 35px;
+    top: 69px;
+    font-family: DFBSans-Bold, sans-serif;
+}
+
+#homeScore {
+    left: 365px;
+}
+
+#awayScore {
+    left: 402px;
+}
+
+#ties {
+    position: absolute;
+}
+
+.tieImg {
+    position: absolute;
+    top: 25px;
+}
+
+#watermark {
+    opacity: 0.2;
+}
+
+.blend {
+    display: none;
+}
+
+.tieContent {
+    position: absolute;
+    overflow: hidden;
+    box-sizing: border-box;
+    height: 120px;
+    padding: 25px;
+    top: 900px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 70px;
+    font-size: 40px;
+    border-radius: 25px;
+    background: #59aadf;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    max-width: 1500px;
+}
+
+#tiesLeftContent, #tiesExtraContent {
+    left: 240px;
+}
+
+#tiesRightContent {
+    left: 1200px;
+    direction: rtl;
+}
+
+#tiesQR {
+    position: absolute;
+    top: 1100px;
+    left: 810px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 400px;
+}

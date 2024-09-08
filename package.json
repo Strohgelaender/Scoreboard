@@ -1,0 +1,25 @@
+{
+  "name": "scoreboard",
+  "version": "1.0.0",
+  "description": "Small Helper Program that generates Stream-Overlay-Scoreboards",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon streamdeck.js"
+  },
+  "author": "Strohgelaender",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "canvas": "^2.11.2",
+    "elgato-stream-deck": "^4.3.0",
+    "express": "^4.19.2",
+    "express-ws": "^5.0.2",
+    "node-html-parser": "^6.1.13",
+    "node-tesseract-ocr": "^2.2.1",
+    "node-webcam": "^0.8.2",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "nexe": "^3.3.7",
+    "nodemon": "^3.1.4"
+  }
+}
