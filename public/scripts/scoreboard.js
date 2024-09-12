@@ -50,6 +50,7 @@ function handleEventInternal(event) {
             break;
         case "FOUL":
         case "REMOVE_FOUL":
+        case "CLEAR_FOULS":
             updateFouls();
             break;
     }
@@ -67,10 +68,10 @@ function updateFouls() {
 function updateFoulsContent(foulsBox, foulsText, fouls) {
     if (fouls > 0 && foulsBox.css('display') === 'none') {
         foulsBox.fadeIn(1000);
-    } else if (foulsHome === 0) {
-       foulsBox.fadeOut(1000);
+    } else if (fouls === 0) {
+        foulsBox.fadeOut(1000);
     }
-    foulsText?.text(foulsToText(foulsHome));
+    foulsText?.text(foulsToText(fouls));
 }
 
 function foulsToText(fouls) {

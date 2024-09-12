@@ -9,10 +9,9 @@ let streamDeck;
 
 const HOME_TEAM_KEY = 3;
 const AWAY_TEAM_KEY = 4;
-const YELLOW_CARD_KEY = 11;
-const RED_CARD_KEY = 12;
-const FOUL_KEY = 19;
-const REMOVE_FOUL_KEY = 20;
+const FOUL_KEY = 11;
+const REMOVE_FOUL_KEY = 12;
+const CLEAR_FOULS_KEY = 13;
 const GOAL_KEY = 26;
 const OWN_GOAL_KEY = 27;
 const SCOREBOARD_VISIBILITY_KEY = 28; //TODO really own key?
@@ -32,6 +31,14 @@ try {
     streamDeck = openStreamDeck();
     streamDeck.on('down', keyIndex => {
         console.log('key %d down', keyIndex);
+
+        if (keyIndex === CLEAR_FOULS_KEY) {
+            server.sendEvent({
+                eventType: 'CLEAR_FOULS'
+            });
+            return;
+        }
+
         if (isNumberInput(keyIndex)) {
             //Numpad Handler
             const val = getNumberValue(keyIndex);
@@ -52,12 +59,6 @@ try {
                     break;
                 case AWAY_TEAM_KEY:
                     event.team = 'AWAY';
-                    break;
-                case YELLOW_CARD_KEY:
-                    event.eventType = 'YELLOW_CARD';
-                    break;
-                case RED_CARD_KEY:
-                    event.eventType = 'RED_CARD';
                     break;
                 case GOAL_KEY:
                     event.eventType = 'GOAL';
@@ -80,7 +81,7 @@ try {
         }
 
         //Send Event
-        if (event.eventType && event.team && event.number !== '') {
+        if (event.eventType && event.team) {
             server.sendEvent(event);
             event = {...DEFAULT_EVENT};
         }
@@ -133,9 +134,9 @@ async function loadKeyImages() {
     streamDeck.fillImage(24, await createImageBuffer('cancel.png'));
     streamDeck.fillImage(HOME_TEAM_KEY, await createImageBuffer('homeTeam.png'));
     streamDeck.fillImage(AWAY_TEAM_KEY, await createImageBuffer('awayTeam.png'));
-    streamDeck.fillImage(YELLOW_CARD_KEY, await createImageBuffer('yellow.png'));
-    streamDeck.fillImage(RED_CARD_KEY, await createImageBuffer('red.png'));
     streamDeck.fillImage(FOUL_KEY, await createImageBuffer('whistle.png'));
+    streamDeck.fillImage(REMOVE_FOUL_KEY, await createImageBuffer('whistle_red.png'));
+    streamDeck.fillImage(CLEAR_FOULS_KEY, await createImageBuffer('whistle_all.png'));
     streamDeck.fillImage(GOAL_KEY, await createImageBuffer('football.webp'));
     streamDeck.fillImage(OWN_GOAL_KEY, await createImageBuffer('owngoal.png'));
 }

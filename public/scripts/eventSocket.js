@@ -52,6 +52,9 @@ function handleWebsocketMessageCommon(msg) {
         case "REMOVE_FOUL":
             decreaseFoul(msg.team === 'HOME');
             break;
+        case "CLEAR_FOULS":
+            foulsHome = foulsAway = 0;
+            break;
     }
 
     handleEventInternal(msg);

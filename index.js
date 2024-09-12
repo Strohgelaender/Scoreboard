@@ -108,6 +108,8 @@ function handleEventInternal(event) {
         addFoul(event.team === 'HOME');
     } else if (event.eventType === "REMOVE_FOUL") {
         reduceFoul(event.team === 'HOME');
+    } else if (event.eventType === "CLEAR_FOULS") {
+        foulsHome = foulsAway = 0;
     }
 
 	if (event.playerData === undefined) {
