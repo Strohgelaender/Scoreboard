@@ -106,4 +106,7 @@ function updateScoreboard() {
     //TODO animations
     $('#homeScore').text(scoreHome);
     $('#awayScore').text(scoreAway);
+    if (updateScoreboardInternal) {
+        updateScoreboardInternal();
+    }
 }

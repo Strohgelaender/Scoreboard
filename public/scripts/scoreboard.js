@@ -55,6 +55,10 @@ function handleEventInternal(event) {
     }
 }
 
+function updateScoreboardInternal() {
+    updateFouls();
+}
+
 function updateFouls() {
     updateFoulsContent($('#homeFoulsBox'), $('#homeFouls'), foulsHome);
     updateFoulsContent($('#awayFoulsBox'), $('#awayFouls'), foulsAway);
