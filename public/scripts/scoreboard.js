@@ -48,7 +48,35 @@ function handleEventInternal(event) {
             if (event.text)
                 showExtra(event.text, 10000);
             break;
+        case "FOUL":
+        case "REMOVE_FOUL":
+            updateFouls();
+            break;
     }
+}
+
+function updateFouls() {
+    updateFoulsContent($('#homeFoulsBox'), $('#homeFouls'), foulsHome);
+    updateFoulsContent($('#awayFoulsBox'), $('#awayFouls'), foulsAway);
+}
+
+function updateFoulsContent(foulsBox, foulsText, fouls) {
+    if (fouls > 0 && foulsBox.css('display') === 'none') {
+        foulsBox.fadeIn(1000);
+    } else if (foulsHome === 0) {
+       foulsBox.fadeOut(1000);
+    }
+    foulsText?.text(foulsToText(foulsHome));
+}
+
+function foulsToText(fouls) {
+    let result = "";
+    while (fouls >= 5) {
+        result += "V";
+        fouls -= 5;
+    }
+    result += "|".repeat(fouls);
+    return result;
 }
 
 function showLowerThirds(selectorName) {

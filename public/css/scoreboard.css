@@ -98,9 +98,10 @@ html {
     position: absolute;
     width: 150px;
     height: 10px;
-    top: 115px;
+    top: 54px;
     background-color: #59aadf;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px 10px 0px 0px;
+    z-index: -5;
 }
 
 #homeShirtLine {
@@ -111,6 +112,45 @@ html {
     left: 455px;
 }
 
+.foulsBox {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    top: 115px;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    vertical-align: center;
+    z-index: -5;
+    border-top: 2px solid #6edce6;
+}
+
+.fouls {
+    z-index: 1;
+    font-size: 20px;
+    vertical-align: top;
+    font-family: DFBSans-Bold, sans-serif;
+}
+
+#homeFoulsBox {
+    left: 230px;
+    background-color: #096780;
+}
+
+#awayFoulsBox {
+    left: 505px;
+    background-color: #024359;
+}
+
+
+#bottomHomeBox {
+    position: absolute;
+    width: 800px;
+    height: 50px;
+    top: 900px;
+    left: 100px;
+    background-color: #59aadf;
+    border-radius: 15px 15px 15px 15px;
+}
 
 
 

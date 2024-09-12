@@ -16,6 +16,8 @@ const awayTeam = require(AWAY_PATH);
 
 let scoreHome = 0;
 let scoreAway = 0;
+let foulsHome = 0;
+let foulsAway = 0;
 
 const eventWS = [];
 
@@ -66,7 +68,7 @@ app.get('/data/info', (req, res) => {
 });
 
 app.get('/scores', (req, res) => {
-	res.send({scoreHome, scoreAway});
+	res.send({scoreHome, scoreAway, foulsHome, foulsAway});
 });
 
 app.get('/matchdayData/:day', (async (req, res) => {
@@ -101,6 +103,12 @@ function handleEventInternal(event) {
 	} else if (event.eventType === "OWN_GOAL") {
 		reduceScore(event.team === 'HOME');
 	}
+
+    if (event.eventType === "FOUL") {
+        addFoul(event.team === 'HOME');
+    } else if (event.eventType === "REMOVE_FOUL") {
+        reduceFoul(event.team === 'HOME');
+    }
 
 	if (event.playerData === undefined) {
 		//Player Input wrong or not included
@@ -154,6 +162,26 @@ function reduceScore(homeTeam) {
     } else {
         if (scoreAway > 0) {
             scoreAway -= 1;
+        }
+    }
+}
+
+function addFoul(homeTeam) {
+    if (homeTeam) {
+        foulsHome += 1;
+    } else {
+        foulsAway += 1;
+    }
+}
+
+function reduceFoul(homeTeam) {
+    if (homeTeam) {
+        if (foulsHome > 0) {
+            foulsHome -= 1;
+        }
+    } else {
+        if (foulsAway > 0) {
+            foulsAway -= 1;
         }
     }
 }

@@ -11,18 +11,18 @@ const HOME_TEAM_KEY = 3;
 const AWAY_TEAM_KEY = 4;
 const YELLOW_CARD_KEY = 11;
 const RED_CARD_KEY = 12;
+const FOUL_KEY = 19;
+const REMOVE_FOUL_KEY = 20;
 const GOAL_KEY = 26;
 const OWN_GOAL_KEY = 27;
-const SCOREBOARD_VISIBILITY_KEY = 19; //TODO really own key?
+const SCOREBOARD_VISIBILITY_KEY = 28; //TODO really own key?
 
 //TODO public constants (wie hier und auch im Browser verwenden?)
-
-//TODO Paging
-
-//TODO kominierte Keys Overlay + OBS (z.B. Replay mit einegem Overlay)
+//TODO Paging?
+//TODO kominierte Keys Overlay + OBS (z.B. Replay mit eigenem Overlay)
 
 const DEFAULT_EVENT = {
-	number: '',
+    number: '',
 };
 
 let resetTime;
@@ -65,6 +65,12 @@ try {
                 case OWN_GOAL_KEY:
                     event.eventType = 'OWN_GOAL';
                     break;
+                case FOUL_KEY:
+                    event.eventType = 'FOUL';
+                    break;
+                case REMOVE_FOUL_KEY:
+                    event.eventType = 'REMOVE_FOUL';
+                    break;
                 case SCOREBOARD_VISIBILITY_KEY:
                     server.sendEvent({
                         eventType: 'TOGGLE_SCOREBOARD'
@@ -95,50 +101,49 @@ try {
 
 
 function isNumberInput(keyIndex) {
-	return keyIndex % 8 >= 0 && keyIndex % 8 <= 2 && keyIndex !== 26;
+    return keyIndex % 8 >= 0 && keyIndex % 8 <= 2 && keyIndex !== 26;
 }
 
 function getNumberValue(keyIndex) {
-	if (keyIndex === 24)
-		return -1;
-	else if (keyIndex === 25)
-		return 0;
-	return Math.floor(keyIndex / 8) * 3 + keyIndex % 8 + 1;
+    if (keyIndex === 24)
+        return -1;
+    else if (keyIndex === 25)
+        return 0;
+    return Math.floor(keyIndex / 8) * 3 + keyIndex % 8 + 1;
 }
 
 function setKeyText() {
-	const canvas = new Canvas(streamDeck.ICON_SIZE, streamDeck.ICON_SIZE);
-	const ctx = canvas.getContext('2d');
-
-
+    const canvas = new Canvas(streamDeck.ICON_SIZE, streamDeck.ICON_SIZE);
+    const ctx = canvas.getContext('2d');
 }
 
 async function loadKeyImages() {
-	//streamDeck.clearAllKeys();
-	streamDeck.fillImage(0, await createImageBuffer('1.png'));
-	streamDeck.fillImage(1, await createImageBuffer('2.png'));
-	streamDeck.fillImage(2, await createImageBuffer('3.png'));
-	streamDeck.fillImage(8, await createImageBuffer('4.png'));
-	streamDeck.fillImage(9, await createImageBuffer('5.png'));
-	streamDeck.fillImage(10, await createImageBuffer('6.png'));
-	streamDeck.fillImage(16, await createImageBuffer('7.png'));
-	streamDeck.fillImage(17, await createImageBuffer('8.png'));
-	streamDeck.fillImage(18, await createImageBuffer('9.png'));
-	streamDeck.fillImage(25, await createImageBuffer('0.png'));
-	streamDeck.fillImage(24, await createImageBuffer('cancel.png'));
-	streamDeck.fillImage(24, await createImageBuffer('cancel.png'));
-	streamDeck.fillImage(HOME_TEAM_KEY, await createImageBuffer('homeTeam.png'));
-	streamDeck.fillImage(AWAY_TEAM_KEY, await createImageBuffer('awayTeam.png'));
-	streamDeck.fillImage(YELLOW_CARD_KEY, await createImageBuffer('yellow.png'));
-	streamDeck.fillImage(RED_CARD_KEY, await createImageBuffer('red.png'));
-	streamDeck.fillImage(GOAL_KEY, await createImageBuffer('football.webp'));
-	streamDeck.fillImage(OWN_GOAL_KEY, await createImageBuffer('owngoal.png'));
+    //streamDeck.clearAllKeys();
+    streamDeck.fillImage(0, await createImageBuffer('1.png'));
+    streamDeck.fillImage(1, await createImageBuffer('2.png'));
+    streamDeck.fillImage(2, await createImageBuffer('3.png'));
+    streamDeck.fillImage(8, await createImageBuffer('4.png'));
+    streamDeck.fillImage(9, await createImageBuffer('5.png'));
+    streamDeck.fillImage(10, await createImageBuffer('6.png'));
+    streamDeck.fillImage(16, await createImageBuffer('7.png'));
+    streamDeck.fillImage(17, await createImageBuffer('8.png'));
+    streamDeck.fillImage(18, await createImageBuffer('9.png'));
+    streamDeck.fillImage(25, await createImageBuffer('0.png'));
+    streamDeck.fillImage(24, await createImageBuffer('cancel.png'));
+    streamDeck.fillImage(24, await createImageBuffer('cancel.png'));
+    streamDeck.fillImage(HOME_TEAM_KEY, await createImageBuffer('homeTeam.png'));
+    streamDeck.fillImage(AWAY_TEAM_KEY, await createImageBuffer('awayTeam.png'));
+    streamDeck.fillImage(YELLOW_CARD_KEY, await createImageBuffer('yellow.png'));
+    streamDeck.fillImage(RED_CARD_KEY, await createImageBuffer('red.png'));
+    streamDeck.fillImage(FOUL_KEY, await createImageBuffer('whistle.png'));
+    streamDeck.fillImage(GOAL_KEY, await createImageBuffer('football.webp'));
+    streamDeck.fillImage(OWN_GOAL_KEY, await createImageBuffer('owngoal.png'));
 }
 
 function createImageBuffer(imageName) {
-	return sharp(path.resolve(__dirname, 'icons', imageName))
-		.flatten() // Eliminate alpha channel, if any.
-		.resize(streamDeck.ICON_SIZE, streamDeck.ICON_SIZE) // Scale up/down to the right size, cropping if necessary.
-		.raw() // Give us uncompressed RGB.
-		.toBuffer();
+    return sharp(path.resolve(__dirname, 'icons', imageName))
+        .flatten() // Eliminate alpha channel, if any.
+        .resize(streamDeck.ICON_SIZE, streamDeck.ICON_SIZE) // Scale up/down to the right size, cropping if necessary.
+        .raw() // Give us uncompressed RGB.
+        .toBuffer();
 }

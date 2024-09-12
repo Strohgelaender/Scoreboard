@@ -4,7 +4,8 @@
   "description": "Small Helper Program that generates Stream-Overlay-Scoreboards",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon streamdeck.js"
+    "start": "node streamdeck.js",
+    "dev": "nodemon streamdeck.js"
   },
   "author": "Strohgelaender",
   "dependencies": {
