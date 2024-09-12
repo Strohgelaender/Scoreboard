@@ -12,6 +12,7 @@ const AWAY_TEAM_KEY = 4;
 const FOUL_KEY = 11;
 const REMOVE_FOUL_KEY = 12;
 const CLEAR_FOULS_KEY = 13;
+const SHOW_LINEUP_KEY = 19;
 const GOAL_KEY = 26;
 const OWN_GOAL_KEY = 27;
 const SCOREBOARD_VISIBILITY_KEY = 28; //TODO really own key?
@@ -71,6 +72,9 @@ try {
                     break;
                 case REMOVE_FOUL_KEY:
                     event.eventType = 'REMOVE_FOUL';
+                    break;
+                case SHOW_LINEUP_KEY:
+                    event.eventType = 'LINEUP';
                     break;
                 case SCOREBOARD_VISIBILITY_KEY:
                     server.sendEvent({

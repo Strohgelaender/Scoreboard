@@ -1,5 +1,7 @@
 'use strict';
 
+let showingLineup = false;
+
 $(() => {
     loadTeams();
 });
@@ -48,6 +50,9 @@ function handleEventInternal(event) {
             if (event.text)
                 showExtra(event.text, 10000);
             break;
+        case "LINEUP":
+            animateLineup(event.team);
+            break;
         case "FOUL":
         case "REMOVE_FOUL":
         case "CLEAR_FOULS":
@@ -82,6 +87,24 @@ function foulsToText(fouls) {
     }
     result += "|".repeat(fouls);
     return result;
+}
+
+function animateLineup(team) {
+    if (!showingLineup) {
+        showingLineup = true;
+        $('#aufstellungSpielfeld').css('animation', 'SpielfeldIn 1s linear 1 normal forwards');
+        $('#aufstellungBox').animate({left: '520px'}, 1000);
+        setTimeout(() => {
+            $('#aufstellungSpielfeld').css('object-position', '0 0').css('animation', 'none');
+        }, 2000);
+    } else {
+        showingLineup = false;
+        $('#aufstellungSpielfeld').css('animation', 'SpielfeldOut 1s linear 1 normal forwards');
+        $('#aufstellungBox').animate({left: '2000px'}, 1000);
+        setTimeout(() => {
+            $('#aufstellungSpielfeld').css('object-position', '0 1500px').css('animation', 'none');
+        }, 2000);
+    }
 }
 
 function showLowerThirds(selectorName) {
