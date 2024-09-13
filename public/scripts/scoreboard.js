@@ -57,7 +57,7 @@ function handleEventInternal(event) {
                 showExtra(event.text, 10000);
             break;
         case "LINEUP":
-            animateLineup(event.team === 'HOME' ? 0 : 1);
+            animateLineup(event.team === 'HOME' ? 0 : 1, event.playerData);
             break;
         case "FOUL":
         case "REMOVE_FOUL":
@@ -95,10 +95,18 @@ function foulsToText(fouls) {
     return result;
 }
 
-function animateLineup(team) {
+function animateLineup(team, players) {
+    const startingPlayersTable = $('#startingPlayers');
+    const substitutePlayersTable = $('#substitutePlayers');
+
     if (!showingLineup) {
         $('#aufstellungTeamname').text(fullNames[team]);
         $('#aufstellungLogo').attr('src', teamImages[team]);
+
+        players = players.sort((a, b) => +a.number - +b.number);
+        for (const player of players) {
+            createPlayerRow(player, player.is_starting ? startingPlayersTable : substitutePlayersTable);
+        }
 
         showingLineup = true;
         $('#aufstellungSpielfeld').css('animation', 'SpielfeldIn 1s linear 1 normal forwards');
@@ -108,12 +116,23 @@ function animateLineup(team) {
         }, 2000);
     } else {
         showingLineup = false;
+
         $('#aufstellungSpielfeld').css('animation', 'SpielfeldOut 1s linear 1 normal forwards');
         $('#aufstellungBox').animate({left: '2000px'}, 1000);
         setTimeout(() => {
             $('#aufstellungSpielfeld').css('object-position', '0 1500px').css('animation', 'none');
+            startingPlayersTable.empty();
+            substitutePlayersTable.empty();
         }, 2000);
     }
+}
+
+function createPlayerRow(player, table) {
+    const row = $('<tr>');
+    row.append($('<td>').text(player.number));
+    row.append($('<td>').text(player.firstName).addClass('playerFirstName'));
+    row.append($('<td>').text(player.lastName).addClass('playerLastName'));
+    table.append(row);
 }
 
 function showLowerThirds(selectorName) {

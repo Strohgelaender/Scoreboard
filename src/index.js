@@ -1,8 +1,10 @@
-//TODO lokales node.js, lädt sonst nicht offline!
+//TODO lokales jquery, lädt sonst nicht offline!
 const fs = require('fs');
 const express = require('express');
 const app = express();
 const expressWs = require('express-ws')(app);
+
+const { readLineup } = require('./AufstellungParser');
 
 const debug = true;
 
@@ -75,12 +77,25 @@ app.get('/matchdayData/:day', (async (req, res) => {
 	//res.send(await createMatchdayData(req.params.day));
 }));
 
+exports.updateLineup = async () => {
+    const lineup = await readLineup();
+    homeTeam.players = lineup.home;
+    awayTeam.players = lineup.away;
+    console.log('Lineup updated');
+    console.log(homeTeam.players);
+    // saveData();
+}
+
 exports.sendEvent = event => {
 
 	const team = getTeam(event.team);
 	event.playerData = team.players[event.number];
 
 	handleEventInternal(event);
+
+    if (event.eventType === 'LINEUP') {
+        event.playerData = team.players;
+    }
 
 	if (eventWS.length === 0) {
 		console.log('Websocket not active yet');
@@ -116,7 +131,7 @@ function handleEventInternal(event) {
 		//Player Input wrong or not included
 		//still handle event (e.g update score on goal)
 		//but no lower thirds
-		console.log('Player not found. Please update Event Data manually:', event);
+		// console.log('Player not found. Please update Event Data manually:', event);
 	} else {
 		const property = getPropertyOfEvent(event);
 		updatePlayerProperty(event.playerData, property);
@@ -202,6 +217,6 @@ function getPropertyOfEvent(event) {
 }
 
 function saveData() {
-	fs.writeFile(HOME_PATH, JSON.stringify(homeTeam));
-	fs.writeFile(AWAY_PATH, JSON.stringify(awayTeam));
+	// fs.writeFile(HOME_PATH, JSON.stringify(homeTeam));
+	// fs.writeFile(AWAY_PATH, JSON.stringify(awayTeam));
 }

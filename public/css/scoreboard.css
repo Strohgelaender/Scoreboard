@@ -186,6 +186,37 @@ html {
     height: 300px;
 }
 
+#aufstellungPlayersBox {
+    position: fixed;
+    width: 1300px;
+    height: 600px;
+    padding: 10px;
+    margin: 0;
+    top: 350px;
+}
+
+.players {
+    font-size: 30px;
+    margin: 50px;
+    padding: 5px;
+    display: inline-block;
+    float: left;
+    text-align: center;
+}
+
+.players td {
+    padding: 5px;
+}
+
+
+.playerFirstName {
+    font-family: DFBSans-Italic, sans-serif;
+}
+
+.playerLastName {
+    font-family: DFBSans-BoldItalic, sans-serif;
+}
+
 
 #bottomHomeBox {
     position: absolute;

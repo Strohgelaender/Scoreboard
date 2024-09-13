@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/streamdeck.js",
-    "dev": "nodemon src/streamdeck.js"
+    "dev": "nodemon src/streamdeck.js",
+    "lineup": "node src/AufstellungParser.js",
+    "lineup:dev": "nodemon src/AufstellungParser.js"
   },
   "author": "Strohgelaender",
   "dependencies": {

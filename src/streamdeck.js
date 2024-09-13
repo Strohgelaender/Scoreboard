@@ -74,8 +74,12 @@ try {
                     event.eventType = 'REMOVE_FOUL';
                     break;
                 case SHOW_LINEUP_KEY:
-                    event.eventType = 'LINEUP';
-                    break;
+                    server.updateLineup().then(() => {
+                        event.eventType = 'LINEUP';
+                        server.sendEvent(event);
+                        event = {...DEFAULT_EVENT};
+                    });
+                    return;
                 case SCOREBOARD_VISIBILITY_KEY:
                     server.sendEvent({
                         eventType: 'TOGGLE_SCOREBOARD'
