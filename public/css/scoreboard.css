@@ -36,13 +36,9 @@ html {
 .teamImage {
     position: absolute;
     width: auto;
-    height: 81px;
+    height: 48px;
     z-index: 1;
-    top: 48px;
-}
-
-.teamImageBox {
-
+    top: 65px;
 }
 
 #homeImage {
@@ -51,8 +47,6 @@ html {
 
 #awayImage {
     left: 625px;
-    top: 64px;
-    height: 50px;
 }
 
 .teamNameBox {
@@ -186,10 +180,10 @@ html {
 
 #aufstellungLogo {
     position: relative;
-    top: -100px;
+    top: -50px;
     left: 1100px;
     width: auto;
-    height: 400px;
+    height: 300px;
 }
 
 
