@@ -15,7 +15,7 @@ const CLEAR_FOULS_KEY = 13;
 const SHOW_LINEUP_KEY = 19;
 const GOAL_KEY = 26;
 const OWN_GOAL_KEY = 27;
-const SCOREBOARD_VISIBILITY_KEY = 28; //TODO really own key?
+const SCOREBOARD_VISIBILITY_KEY = 28;
 
 //TODO public constants (wie hier und auch im Browser verwenden?)
 //TODO Paging?
@@ -143,10 +143,11 @@ async function loadKeyImages() {
     streamDeck.fillImage(CLEAR_FOULS_KEY, await createImageBuffer('whistle_all.png'));
     streamDeck.fillImage(GOAL_KEY, await createImageBuffer('football.webp'));
     streamDeck.fillImage(OWN_GOAL_KEY, await createImageBuffer('owngoal.png'));
+    streamDeck.fillImage(SCOREBOARD_VISIBILITY_KEY, await createImageBuffer('eye.png'));
 }
 
 function createImageBuffer(imageName) {
-    return sharp(path.resolve(__dirname, 'icons', imageName))
+    return sharp(path.resolve(__dirname, '..', 'icons', imageName))
         .flatten() // Eliminate alpha channel, if any.
         .resize(streamDeck.ICON_SIZE, streamDeck.ICON_SIZE) // Scale up/down to the right size, cropping if necessary.
         .raw() // Give us uncompressed RGB.

@@ -8,8 +8,8 @@ const debug = true;
 
 const PORT = process.env.PORT || 1860;
 
-const HOME_PATH = './data/home.json';
-const AWAY_PATH = './data/away.json';
+const HOME_PATH = '../data/home.json';
+const AWAY_PATH = '../data/away.json';
 
 const homeTeam = require(HOME_PATH);
 const awayTeam = require(AWAY_PATH);
