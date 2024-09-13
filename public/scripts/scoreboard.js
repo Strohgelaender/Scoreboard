@@ -82,10 +82,12 @@ function updateFouls() {
 function updateFoulsContent(foulsBox, foulsText, fouls) {
     if (fouls > 0 && foulsBox.css('display') === 'none') {
         foulsBox.fadeIn(1000);
+        foulsText?.text(foulsToText(fouls));
     } else if (fouls === 0) {
-        foulsBox.fadeOut(1000);
+        foulsBox.fadeOut(1000, () => foulsText?.text(''));
+    } else {
+        foulsText?.text(foulsToText(fouls));
     }
-    foulsText?.text(foulsToText(fouls));
 }
 
 function foulsToText(fouls) {
