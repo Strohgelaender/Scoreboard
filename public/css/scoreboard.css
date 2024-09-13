@@ -177,6 +177,21 @@ html {
     object-position: 0px 1500px;
 }
 
+#aufstellungTeamname {
+    font-size: 60px;
+    margin: 30px;
+    position: relative;
+    top: 30px;
+}
+
+#aufstellungLogo {
+    position: relative;
+    top: -100px;
+    left: 1100px;
+    width: auto;
+    height: 400px;
+}
+
 
 #bottomHomeBox {
     position: absolute;

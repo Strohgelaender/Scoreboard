@@ -1,6 +1,8 @@
 'use strict';
 
 let showingLineup = false;
+let fullNames;
+let teamImages;
 
 $(() => {
     loadTeams();
@@ -13,6 +15,10 @@ function loadTeams() {
     }).done(value => {
         const home = value.home;
         const away = value.away;
+
+        fullNames = [home.fullName, away.fullName];
+        teamImages = [home.imagePath, away.imagePath];
+
         $('#homeName').text(home.name);
         $('#awayName').text(away.name);
         $(`#homeShirtLine`).css('background-color', home.shirtColor);
@@ -51,7 +57,7 @@ function handleEventInternal(event) {
                 showExtra(event.text, 10000);
             break;
         case "LINEUP":
-            animateLineup(event.team);
+            animateLineup(event.team === 'HOME' ? 0 : 1);
             break;
         case "FOUL":
         case "REMOVE_FOUL":
@@ -91,6 +97,9 @@ function foulsToText(fouls) {
 
 function animateLineup(team) {
     if (!showingLineup) {
+        $('#aufstellungTeamname').text(fullNames[team]);
+        $('#aufstellungLogo').attr('src', teamImages[team]);
+
         showingLineup = true;
         $('#aufstellungSpielfeld').css('animation', 'SpielfeldIn 1s linear 1 normal forwards');
         $('#aufstellungBox').animate({left: '520px'}, 1000);

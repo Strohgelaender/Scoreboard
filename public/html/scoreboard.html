@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-	<title>Scoreboard</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="/css/default.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="/css/scoreboard.css" media="screen">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" defer></script>
-	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/textFit.js" defer></script>
-	<script src="/scripts/eventSocket.js" defer></script>
-	<script src="/scripts/scoreboard.js" defer></script>
+    <title>Scoreboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/scoreboard.css" media="screen">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" defer></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/textFit.js" defer></script>
+    <script src="/scripts/eventSocket.js" defer></script>
+    <script src="/scripts/scoreboard.js" defer></script>
 </head>
 <body>
 <div id="scoreboard">
-	<img id="scoreboardImage" src="/images/scoreboardBL2.png" alt="Spielstand_Background"/>
-	<div id="homeImageBox" class="teamImageBox">
-		<img id="homeImage" class="teamImage" src="/image/home" alt="Home Team">
-	</div>
-	<div id="homeNameBox" class="teamNameBox">
-		<span id="homeName" class="teamName">Home</span>
-	</div>
-	<span id="homeScore" class="teamScore">0</span>
-	<span id="awayScore" class="teamScore">0</span>
-	<div id="awayNameBox" class="teamNameBox">
-		<span id="awayName" class="teamName">Away</span>
-	</div>
-	<img id="awayImage" class="teamImage" src="/image/away" alt="Away Team">
+    <img id="scoreboardImage" src="/images/scoreboardBL2.png" alt="Spielstand_Background"/>
+    <div id="homeImageBox" class="teamImageBox">
+        <img id="homeImage" class="teamImage" src="/image/home" alt="Home Team">
+    </div>
+    <div id="homeNameBox" class="teamNameBox">
+        <span id="homeName" class="teamName">Home</span>
+    </div>
+    <span id="homeScore" class="teamScore">0</span>
+    <span id="awayScore" class="teamScore">0</span>
+    <div id="awayNameBox" class="teamNameBox">
+        <span id="awayName" class="teamName">Away</span>
+    </div>
+    <img id="awayImage" class="teamImage" src="/image/away" alt="Away Team">
     <div id="homeShirtLine" class="shirtLine"></div>
     <div id="awayShirtLine" class="shirtLine"></div>
     <div id="homeFoulsBox" class="foulsBox" style="display: none">
@@ -44,8 +44,15 @@
 <div id="aufstellung">
     <div id="aufstellungBox">
         <!-- <img id="aufstellungStripes" class="stripes" src="/images/stripes.png" alt="Aufstellung stripes"> -->
+        <div>
+            <span id="aufstellungTeamname"></span>
+        </div>
+        <div>
+            <img id="aufstellungLogo">
+        </div>
     </div>
-    <img id="aufstellungSpielfeld" class="spielfeld" src="/images/Futsal_Spielfeld_Mitte.png" alt="Aufstellung spielfeld">
+    <img id="aufstellungSpielfeld" class="spielfeld" src="/images/Futsal_Spielfeld_Mitte.png"
+         alt="Aufstellung spielfeld">
 </div>
 
 <!-- <div id="ties">
