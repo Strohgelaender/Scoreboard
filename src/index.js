@@ -1,21 +1,24 @@
 //TODO lokales jquery, lädt sonst nicht offline!
-const fs = require('fs');
-const express = require('express');
-const app = express();
-const expressWs = require('express-ws')(app);
-
-const { readLineup, readReferees } = require('./AufstellungParser');
+import express from 'express';
+import { tinyws } from 'tinyws';
+import fs from 'fs';
+import { readLineup, readReferees } from './AufstellungParser.js';
 
 const debug = true;
 
 const PORT = process.env.PORT || 1860;
 
-const HOME_PATH = '../data/home.json';
-const AWAY_PATH = '../data/away.json';
+const HOME_PATH = 'data/home.json';
+const AWAY_PATH = 'data/away.json';
 
-const homeTeam = require(HOME_PATH);
-const awayTeam = require(AWAY_PATH);
+let homeTeam;
+let awayTeam;
 let referees = [];
+
+(async () => {
+    homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
+    awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
+})();
 
 let scoreHome = 0;
 let scoreAway = 0;
@@ -23,6 +26,8 @@ let foulsHome = 0;
 let foulsAway = 0;
 
 const eventWS = [];
+
+const app = express();
 
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
 
@@ -48,8 +53,11 @@ app.get('/matchday/:day', ((req, res) => {
 	res.redirect(`/html/matchday.html?day=${req.params.day}`);
 }));
 
-app.ws('/events', (ws, req) => {
-	eventWS.push(ws);
+app.use('/events', tinyws(), async (req, res) => {
+    if (req.ws) {
+        const ws = await req.ws();
+        eventWS.push(ws);
+    }
 });
 
 //Data Endpoints
@@ -78,7 +86,7 @@ app.get('/matchdayData/:day', (async (req, res) => {
 	//res.send(await createMatchdayData(req.params.day));
 }));
 
-exports.updateLineup = async () => {
+export async function updateLineup(){
     const lineup = await readLineup();
     homeTeam.players = lineup.home;
     awayTeam.players = lineup.away;
@@ -87,14 +95,14 @@ exports.updateLineup = async () => {
     // saveData();
 };
 
-exports.readReferees = async () => {
+export async function saveReferees() {
     referees = await readReferees();
-};
+}
 
-exports.sendEvent = event => {
+export function sendEvent(event) {
 
 	const team = getTeam(event.team);
-	event.playerData = team.players[event.number];
+	event.playerData = team?.players[event.number];
 
 	handleEventInternal(event);
 
@@ -113,7 +121,7 @@ exports.sendEvent = event => {
 			ws.send(JSON.stringify(event));
 		}
 	}
-};
+}
 
 function getTeam(specifier) {
 	return specifier === 'HOME' ? homeTeam : awayTeam;

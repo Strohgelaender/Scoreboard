@@ -1,5 +1,5 @@
-const axios = require('axios');
-const {parse} = require('node-html-parser');
+import axios from "axios";
+import {parse} from "node-html-parser";
 
 //http://www.fussball.de/ajax.fixtures.tournament/-/action/OPEN/staffel/02C96CGFVK000001VS5489B4VSC3ER83-G
 const games = axios.create({

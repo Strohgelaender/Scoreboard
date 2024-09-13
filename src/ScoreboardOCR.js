@@ -2,9 +2,9 @@
 // The data is send to the main storage and the to the scorebaord overlay
 // The first aim is to read the clock
 // but we can extend this later to automaticly check the current situation (e.g a goal happend -> extra goal transiton + additional overlay)
+import Path from "path";
+import NodeWebcam from "node-webcam";
 
-const Path = require('path');
-const NodeWebcam = require("node-webcam");
 var webcamOpts = {
 	width: 1280,
 	height: 720,

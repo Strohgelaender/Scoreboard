@@ -10,17 +10,18 @@
     "lineup:dev": "nodemon src/AufstellungParser.js"
   },
   "author": "Strohgelaender",
+  "type": "module",
   "dependencies": {
     "@elgato-stream-deck/node": "7.0.1",
     "@julusian/jpeg-turbo": "^2.2.0",
     "axios": "1.7.7",
     "canvas": "2.11.2",
     "express": "4.21.0",
-    "express-ws": "5.0.2",
     "node-html-parser": "6.1.13",
     "node-tesseract-ocr": "2.2.1",
     "node-webcam": "0.8.2",
-    "sharp": "0.33.5"
+    "sharp": "0.33.5",
+    "tinyws": "^0.1.0"
   },
   "devDependencies": {
     "nexe": "^3.3.7",

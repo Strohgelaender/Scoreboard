@@ -1,10 +1,13 @@
-const {openStreamDeck, listStreamDecks} = require('@elgato-stream-deck/node');
-const path = require('path');
-const sharp = require('sharp');
-const Canvas = require('canvas');
-const {Image} = Canvas;
+import {listStreamDecks, openStreamDeck} from "@elgato-stream-deck/node";
+import path from "path";
+import sharp from "sharp";
+import Canvas from "canvas";
+import { fileURLToPath } from 'url';
+import {updateLineup, saveReferees, sendEvent} from "./index.js";
 
-const server = require('./index');
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __dirname = path.dirname(__filename); // get the name of the directory
+
 let streamDeck;
 
 const ICON_SIZE = 96;
@@ -47,7 +50,7 @@ let event = {...DEFAULT_EVENT};
             console.log('key %d down', keyIndex);
 
             if (keyIndex === CLEAR_FOULS_KEY) {
-                server.sendEvent({
+                sendEvent({
                     eventType: 'CLEAR_FOULS'
                 });
                 return;
@@ -87,19 +90,19 @@ let event = {...DEFAULT_EVENT};
                         event.eventType = 'REMOVE_FOUL';
                         break;
                     case SHOW_LINEUP_KEY:
-                        server.updateLineup().then(() => {
+                        updateLineup().then(() => {
                             event.eventType = 'LINEUP';
-                            sendEvent(event);
+                            sendAndReset(event);
                         });
                         return;
                     case SHOW_REFEREES_KEY:
-                        server.readReferees().then(() => {
+                        saveReferees().then(() => {
                             event.eventType = 'REFEREES';
-                            sendEvent(event);
+                            sendAndReset(event);
                         });
                         return;
                     case SCOREBOARD_VISIBILITY_KEY:
-                        server.sendEvent({
+                        sendEvent({
                             eventType: 'TOGGLE_SCOREBOARD'
                         });
                         break;
@@ -107,7 +110,7 @@ let event = {...DEFAULT_EVENT};
             }
 
             if (event.eventType && event.team) {
-                sendEvent(event);
+                sendAndReset(event);
             }
         });
 
@@ -121,8 +124,8 @@ let event = {...DEFAULT_EVENT};
     }
 })();
 
-function sendEvent(e) {
-    server.sendEvent(e);
+function sendAndReset(e) {
+    sendEvent(e);
     event = {...DEFAULT_EVENT};
 }
 

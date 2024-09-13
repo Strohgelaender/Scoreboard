@@ -1,5 +1,5 @@
-const axios = require('axios');
-const {parse} = require('node-html-parser');
+import axios from "axios";
+import {parse} from "node-html-parser";
 
 // IMPORTANT: Always update there two URLs before starting the prod server
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/02Q0SKPL4K000000VS5489B3VU5PPGUO/ticker-id/selectedTickerId';
@@ -9,7 +9,7 @@ const overviewUrl = 'https://www.dfb.de/futsal/futsal-bundesliga/spieltagtabelle
 const game = axios.create({baseURL: matchUrl});
 const overview = axios.create({baseURL: overviewUrl});
 
-async function readLineup() {
+export async function readLineup() {
     const response = await game.get('');
     const root = response.data;
     const home = parsePlayers(root.home_team);
@@ -35,7 +35,7 @@ function parsePlayers(team) {
     return players;
 }
 
-async function readReferees() {
+export async function readReferees() {
     const response = await overview.get('');
     const root = parse(response.data);
     let result = [];
@@ -47,6 +47,3 @@ async function readReferees() {
     }
     return result;
 }
-
-module.exports.readLineup = readLineup;
-module.exports.readReferees = readReferees;
