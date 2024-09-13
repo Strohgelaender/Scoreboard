@@ -11,9 +11,10 @@
   },
   "author": "Strohgelaender",
   "dependencies": {
+    "@elgato-stream-deck/node": "7.0.1",
+    "@julusian/jpeg-turbo": "^2.2.0",
     "axios": "^1.7.7",
     "canvas": "^2.11.2",
-    "elgato-stream-deck": "^4.3.0",
     "express": "^4.21.0",
     "express-ws": "^5.0.2",
     "node-html-parser": "^6.1.13",

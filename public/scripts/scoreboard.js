@@ -59,6 +59,9 @@ function handleEventInternal(event) {
         case "LINEUP":
             animateLineup(event.team === 'HOME' ? 0 : 1, event.playerData);
             break;
+        case "REFEREES":
+            animateReferees(event.playerData);
+            break;
         case "FOUL":
         case "REMOVE_FOUL":
         case "CLEAR_FOULS":
@@ -133,6 +136,10 @@ function createPlayerRow(player, table) {
     row.append($('<td>').text(player.firstName).addClass('playerFirstName'));
     row.append($('<td>').text(player.lastName).addClass('playerLastName'));
     table.append(row);
+}
+
+function animateReferees(referees) {
+
 }
 
 function showLowerThirds(selectorName) {

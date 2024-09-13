@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const expressWs = require('express-ws')(app);
 
-const { readLineup } = require('./AufstellungParser');
+const { readLineup, readReferees } = require('./AufstellungParser');
 
 const debug = true;
 
@@ -15,6 +15,7 @@ const AWAY_PATH = '../data/away.json';
 
 const homeTeam = require(HOME_PATH);
 const awayTeam = require(AWAY_PATH);
+let referees = [];
 
 let scoreHome = 0;
 let scoreAway = 0;
@@ -84,7 +85,11 @@ exports.updateLineup = async () => {
     console.log('Lineup updated');
     console.log(homeTeam.players);
     // saveData();
-}
+};
+
+exports.readReferees = async () => {
+    referees = await readReferees();
+};
 
 exports.sendEvent = event => {
 
@@ -95,6 +100,8 @@ exports.sendEvent = event => {
 
     if (event.eventType === 'LINEUP') {
         event.playerData = team.players;
+    } else if (event.eventType === 'REFEREES') {
+        event.playerData = referees;
     }
 
 	if (eventWS.length === 0) {
