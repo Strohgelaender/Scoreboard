@@ -12,7 +12,7 @@
     "axios": "^1.7.7",
     "canvas": "^2.11.2",
     "elgato-stream-deck": "^4.3.0",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "express-ws": "^5.0.2",
     "node-html-parser": "^6.1.13",
     "node-tesseract-ocr": "^2.2.1",
