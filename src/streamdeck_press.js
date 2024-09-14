@@ -62,10 +62,9 @@ async function loadKeyImages() {
 }
 
 function createImageBuffer(imageName) {
-    const ICON_SIZE = 96;
 	return sharp(path.resolve(__dirname, 'icons', imageName))
 		.flatten() // Eliminate alpha channel, if any.
-		.resize(ICON_SIZE, ICON_SIZE) // Scale up/down to the right size, cropping if necessary.
+		.resize(streamDeck.CONTROLS[0].pixelSize.width, streamDeck.CONTROLS[0].pixelSize.height) // Scale up/down to the right size, cropping if necessary.
 		.raw() // Give us uncompressed RGB.
 		.toBuffer();
 }

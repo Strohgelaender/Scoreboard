@@ -10,8 +10,6 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 
 let streamDeck;
 
-const ICON_SIZE = 96;
-
 const HOME_TEAM_KEY = 3;
 const AWAY_TEAM_KEY = 4;
 const FOUL_KEY = 11;
@@ -149,32 +147,36 @@ function setKeyText() {
 
 async function loadKeyImages() {
     //streamDeck.clearAllKeys();
-    streamDeck.fillKeyBuffer(0, await createImageBuffer('1.png'));
-    streamDeck.fillKeyBuffer(1, await createImageBuffer('2.png'));
-    streamDeck.fillKeyBuffer(2, await createImageBuffer('3.png'));
-    streamDeck.fillKeyBuffer(8, await createImageBuffer('4.png'));
-    streamDeck.fillKeyBuffer(9, await createImageBuffer('5.png'));
-    streamDeck.fillKeyBuffer(10, await createImageBuffer('6.png'));
-    streamDeck.fillKeyBuffer(16, await createImageBuffer('7.png'));
-    streamDeck.fillKeyBuffer(17, await createImageBuffer('8.png'));
-    streamDeck.fillKeyBuffer(18, await createImageBuffer('9.png'));
-    streamDeck.fillKeyBuffer(25, await createImageBuffer('0.png'));
-    streamDeck.fillKeyBuffer(24, await createImageBuffer('cancel.png'));
-    streamDeck.fillKeyBuffer(24, await createImageBuffer('cancel.png'));
-    streamDeck.fillKeyBuffer(HOME_TEAM_KEY, await createImageBuffer('homeTeam.png'));
-    streamDeck.fillKeyBuffer(AWAY_TEAM_KEY, await createImageBuffer('awayTeam.png'));
-    streamDeck.fillKeyBuffer(FOUL_KEY, await createImageBuffer('whistle.png'));
-    streamDeck.fillKeyBuffer(REMOVE_FOUL_KEY, await createImageBuffer('whistle_red.png'));
-    streamDeck.fillKeyBuffer(CLEAR_FOULS_KEY, await createImageBuffer('whistle_all.png'));
-    streamDeck.fillKeyBuffer(GOAL_KEY, await createImageBuffer('football.webp'));
-    streamDeck.fillKeyBuffer(OWN_GOAL_KEY, await createImageBuffer('owngoal.png'));
-    streamDeck.fillKeyBuffer(SCOREBOARD_VISIBILITY_KEY, await createImageBuffer('eye.png'));
+    loadImage(0, '1.png');
+    loadImage(1, '2.png');
+    loadImage(2, '3.png');
+    loadImage(8, '4.png');
+    loadImage(9, '5.png');
+    loadImage(10, '6.png');
+    loadImage(16, '7.png');
+    loadImage(17, '8.png');
+    loadImage(18, '9.png');
+    loadImage(25, '0.png');
+    loadImage(24, 'cancel.png');
+    loadImage(24, 'cancel.png');
+    loadImage(HOME_TEAM_KEY,'homeTeam.png');
+    loadImage(AWAY_TEAM_KEY, 'awayTeam.png');
+    loadImage(FOUL_KEY, 'whistle.png');
+    loadImage(REMOVE_FOUL_KEY, 'whistle_red.png');
+    loadImage(CLEAR_FOULS_KEY,'whistle_all.png');
+    loadImage(GOAL_KEY, 'football.webp');
+    loadImage(OWN_GOAL_KEY, 'owngoal.png');
+    loadImage(SCOREBOARD_VISIBILITY_KEY,'eye.png');
 }
 
-function createImageBuffer(imageName) {
+async function loadImage(index, imageName) {
+    streamDeck.fillKeyBuffer(index, await createImageBuffer(index, imageName));
+}
+
+function createImageBuffer(index, imageName) {
     return sharp(path.resolve(__dirname, '..', 'icons', imageName))
         .flatten() // Eliminate alpha channel, if any.
-        .resize(ICON_SIZE, ICON_SIZE) // Scale up/down to the right size, cropping if necessary.
+        .resize(streamDeck.CONTROLS[index].pixelSize.width, streamDeck.CONTROLS[index].pixelSize.height) // Scale up/down to the right size, cropping if necessary.
         .raw() // Give us uncompressed RGB.
         .toBuffer();
 }
