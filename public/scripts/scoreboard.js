@@ -104,6 +104,8 @@ function animateLineup(team, players) {
     const startingPlayersTable = $('#startingPlayers');
     const substitutePlayersTable = $('#substitutePlayers');
 
+    // TODO: Spielfeldanimaton muss besser werden, vlt via Paths?
+
     if (!showingLineup) {
         $('#aufstellungTeamname').text(fullNames[team]);
         $('#aufstellungLogo').attr('src', teamImages[team]);
@@ -114,16 +116,18 @@ function animateLineup(team, players) {
         }
 
         showingLineup = true;
-        $('#aufstellungSpielfeld').css('animation', 'SpielfeldIn 1s linear 1 normal forwards');
-        $('#aufstellungBox').animate({left: '520px'}, 1000);
+        $('#aufstellungSpielfeld').css('animation', 'SpielfeldIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $('#aufstellungBox').css('animation', 'AufstellungBoxIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         setTimeout(() => {
             $('#aufstellungSpielfeld').css('object-position', '0 0').css('animation', 'none');
+            // $('#aufstellungSpielfeld').css('object-position', '0 0').css('animation', 'none');
         }, 2000);
     } else {
         showingLineup = false;
 
-        $('#aufstellungSpielfeld').css('animation', 'SpielfeldOut 1s linear 1 normal forwards');
-        $('#aufstellungBox').animate({left: '2000px'}, 1000);
+        // Reversed bezier curve via https://codepen.io/michellebarker/pen/jQpwKq
+        $('#aufstellungSpielfeld').css('animation', 'SpielfeldOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00)  1 normal forwards');
+        $('#aufstellungBox').css('animation', 'AufstellungBoxOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00)  1 normal forwards');
         setTimeout(() => {
             $('#aufstellungSpielfeld').css('object-position', '0 1500px').css('animation', 'none');
             startingPlayersTable.empty();
@@ -141,7 +145,9 @@ function createPlayerRow(player, table) {
 }
 
 function animateReferees(referees) {
-
+    for(let i = 1; i <= 4; i++) {
+        $(`#referee${i}Text`).text(referees[i - 1] || '');
+    }
 }
 
 function showLowerThirds(selectorName) {

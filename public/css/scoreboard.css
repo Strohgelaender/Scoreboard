@@ -135,13 +135,23 @@ html {
     background-color: #024359;
 }
 
+@keyframes AufstellungBoxIn {
+    from { left: 2000px; }
+    to {  left: 520px; }
+}
+
+@keyframes AufstellungBoxOut {
+    from { left: 520px }
+    to { left: 2000px; }
+}
+
 #aufstellungBox {
     position: absolute;
     height: 800px;
     width: 1400px;
     top: 200px;
     left: 2000px;
-    background: linear-gradient(to right, rgba(110, 220, 230, 0.7) 25%, rgba(2, 67, 89, 0.9));
+    background: linear-gradient(to right, rgba(30, 180, 200, 0.8) 25%, rgba(2, 67, 89, 0.9));
 }
 
 .stripes {
@@ -217,6 +227,44 @@ html {
     font-family: DFBSans-BoldItalic, sans-serif;
 }
 
+#referees {
+    text-align: center;
+    font-size: 30px;
+    position: absolute;
+    width: 100%;
+    top: 650px;
+}
+
+.refsTable {
+    display: inline-block;
+    background: linear-gradient(to right, rgb(30, 180, 200) 10%, rgb(2, 67, 89));
+}
+
+.refBox {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.refImage {
+    position: static;
+    left: 50%;
+}
+
+.refBox td {
+    padding: 10px;
+}
+
+.refBox tr {
+    border: none;
+}
+
+#referee1 {
+    background: linear-gradient(to right, rgb(30, 180, 200) 10%, rgb(2, 67, 89));
+}
+
+
+
+
 
 #bottomHomeBox {
     position: absolute;
@@ -227,6 +275,8 @@ html {
     background-color: #59aadf;
     border-radius: 15px 15px 15px 15px;
 }
+
+
 
 
 

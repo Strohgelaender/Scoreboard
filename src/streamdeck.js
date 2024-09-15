@@ -4,6 +4,7 @@ import sharp from "sharp";
 import Canvas from "canvas";
 import { fileURLToPath } from 'url';
 import {updateLineup, saveReferees, sendEvent} from "./index.js";
+import readline from "readline";
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
@@ -31,6 +32,24 @@ const DEFAULT_EVENT = {
 
 let resetTime;
 let event = {...DEFAULT_EVENT};
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.on('line', input => {
+    // TODO other events
+    input = input.trim().toUpperCase();
+    if (input === 'REFEREES' || input === 'REF') {
+        saveReferees().then(() => {
+            event.eventType = 'REFEREES';
+            sendAndReset(event);
+        });
+        return;
+    }
+});
+
 
 ;(async () => {
     try {
