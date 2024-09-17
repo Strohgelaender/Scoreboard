@@ -145,7 +145,6 @@ function getTeam(specifier) {
 }
 
 function handleEventInternal(event) {
-    getObsTimestamp();
 	if (event.eventType === "GOAL") {
 		addScore(event.team === 'HOME');
 	} else if (event.eventType === "OWN_GOAL") {

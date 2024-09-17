@@ -2,7 +2,7 @@ import {listStreamDecks, openStreamDeck} from "@elgato-stream-deck/node";
 import path from "path";
 import sharp from "sharp";
 import Canvas from "canvas";
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 import {updateLineup, saveReferees, sendEvent} from "./index.js";
 import readline from "readline";
 
@@ -50,6 +50,13 @@ rl.on('line', input => {
     }
 });
 
+const EVENT_MAPPING = {
+    [GOAL_KEY]: 'GOAL',
+    [OWN_GOAL_KEY]: 'OWN_GOAL',
+    [FOUL_KEY]: 'FOUL',
+    [REMOVE_FOUL_KEY]: 'REMOVE_FOUL',
+};
+
 
 ;(async () => {
     try {
@@ -87,24 +94,16 @@ rl.on('line', input => {
                     resetTime = new Date();
                 }
             } else {
+                if (EVENT_MAPPING.hasOwnProperty(keyIndex)) {
+                    event.eventType = EVENT_MAPPING[keyIndex];
+                }
+
                 switch (keyIndex) {
                     case HOME_TEAM_KEY:
                         event.team = 'HOME';
                         break;
                     case AWAY_TEAM_KEY:
                         event.team = 'AWAY';
-                        break;
-                    case GOAL_KEY:
-                        event.eventType = 'GOAL';
-                        break;
-                    case OWN_GOAL_KEY:
-                        event.eventType = 'OWN_GOAL';
-                        break;
-                    case FOUL_KEY:
-                        event.eventType = 'FOUL';
-                        break;
-                    case REMOVE_FOUL_KEY:
-                        event.eventType = 'REMOVE_FOUL';
                         break;
                     case SHOW_LINEUP_KEY:
                         updateLineup().then(() => {
@@ -146,7 +145,6 @@ function sendAndReset(e) {
     event = {...DEFAULT_EVENT};
 }
 
-
 function isNumberInput(keyIndex) {
     return keyIndex % 8 >= 0 && keyIndex % 8 <= 2 && keyIndex !== 26;
 }
@@ -159,33 +157,32 @@ function getNumberValue(keyIndex) {
     return Math.floor(keyIndex / 8) * 3 + keyIndex % 8 + 1;
 }
 
-function setKeyText() {
-    const canvas = new Canvas(ICON_SIZE, ICON_SIZE);
-    const ctx = canvas.getContext('2d');
-}
+const IMAGES = {
+    0: '1.png',
+    1: '2.png',
+    2: '3.png',
+    8: '4.png',
+    9: '5.png',
+    10: '6.png',
+    16: '7.png',
+    17: '8.png',
+    18: '9.png',
+    25: '0.png',
+    24: 'cancel.png',
+    [HOME_TEAM_KEY]: 'homeTeam.png',
+    [AWAY_TEAM_KEY]: 'awayTeam.png',
+    [FOUL_KEY]: 'whistle.png',
+    [REMOVE_FOUL_KEY]: 'whistle_red.png',
+    [CLEAR_FOULS_KEY]: 'whistle_all.png',
+    [GOAL_KEY]: 'football.webp',
+    [OWN_GOAL_KEY]: 'owngoal.png',
+    [SCOREBOARD_VISIBILITY_KEY]: 'eye.png',
+};
 
 async function loadKeyImages() {
-    //streamDeck.clearAllKeys();
-    loadImage(0, '1.png');
-    loadImage(1, '2.png');
-    loadImage(2, '3.png');
-    loadImage(8, '4.png');
-    loadImage(9, '5.png');
-    loadImage(10, '6.png');
-    loadImage(16, '7.png');
-    loadImage(17, '8.png');
-    loadImage(18, '9.png');
-    loadImage(25, '0.png');
-    loadImage(24, 'cancel.png');
-    loadImage(24, 'cancel.png');
-    loadImage(HOME_TEAM_KEY,'homeTeam.png');
-    loadImage(AWAY_TEAM_KEY, 'awayTeam.png');
-    loadImage(FOUL_KEY, 'whistle.png');
-    loadImage(REMOVE_FOUL_KEY, 'whistle_red.png');
-    loadImage(CLEAR_FOULS_KEY,'whistle_all.png');
-    loadImage(GOAL_KEY, 'football.webp');
-    loadImage(OWN_GOAL_KEY, 'owngoal.png');
-    loadImage(SCOREBOARD_VISIBILITY_KEY,'eye.png');
+    for (const key in IMAGES) {
+        loadImage(key, IMAGES[key]);
+    }
 }
 
 async function loadImage(index, imageName) {
