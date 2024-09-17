@@ -1,4 +1,5 @@
 //TODO lokales jquery, lädt sonst nicht offline!
+import 'dotenv/config'
 import express from 'express';
 import { tinyws } from 'tinyws';
 import fs from 'fs';
