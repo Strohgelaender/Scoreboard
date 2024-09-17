@@ -2,11 +2,13 @@
 import express from 'express';
 import { tinyws } from 'tinyws';
 import fs from 'fs';
+import { OBSWebSocket } from 'obs-websocket-js';
 import { readLineup, readReferees } from './AufstellungParser.js';
 
 const debug = true;
 
 const PORT = process.env.PORT || 1860;
+const OBS_PASSWORD = process.env.OBS_PASSWORD || '';
 
 const HOME_PATH = 'data/home.json';
 const AWAY_PATH = 'data/away.json';
@@ -28,6 +30,20 @@ let foulsAway = 0;
 const eventWS = [];
 
 const app = express();
+const obs = new OBSWebSocket();
+
+(async () => {
+    try {
+       await obs.connect('ws://localhost:4455',  OBS_PASSWORD);
+       console.log('OBS connected');
+    } catch (error) {
+        console.log('OBS not connected', error);
+    }
+})();
+
+process.on('exit', async function() {
+    await obs.disconnect();
+});
 
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
 
@@ -128,6 +144,7 @@ function getTeam(specifier) {
 }
 
 function handleEventInternal(event) {
+    getObsTimestamp();
 	if (event.eventType === "GOAL") {
 		addScore(event.team === 'HOME');
 	} else if (event.eventType === "OWN_GOAL") {
@@ -229,6 +246,17 @@ function getPropertyOfEvent(event) {
 		case 'YELLOW_CARD':
 			return 'yellowCards';
 	}
+}
+
+async function getObsTimestamp() {
+    const streamStatus = await obs.call('GetStreamStatus');
+    console.log(streamStatus);
+    const recordingStatus = await obs.call('GetRecordStatus');
+    console.log(recordingStatus);
+    return {
+        stream: streamStatus.outputTimecode,
+        recording: streamStatus.outputTimecode
+    };
 }
 
 function saveData() {
