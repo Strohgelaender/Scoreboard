@@ -20,6 +20,7 @@
     "node-html-parser": "6.1.13",
     "node-tesseract-ocr": "2.2.1",
     "node-webcam": "0.8.2",
+    "obs-websocket-js": "^5.0.6",
     "sharp": "0.33.5",
     "tinyws": "^0.1.0"
   },
