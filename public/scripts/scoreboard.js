@@ -62,7 +62,7 @@ function handleEventInternal(event) {
             break;
         case "REFEREES":
             if (showingRefs) {
-                fadeRefs(0, 4);
+                fadeRefs(3, -1);
             } else {
                 animateReferees(event.playerData);
             }
@@ -157,16 +157,16 @@ function animateReferees(referees) {
 }
 
 function fadeRefs(index, max) {
-    if (index >= max) {
+    if (index == max) {
         showingRefs = !showingRefs;
         return;
     }
     if (showingRefs) {
-        $(`#referee${index + 1}Box`).fadeOut(1000, "swing", () => {
-            fadeRefs(index + 1, max);
+        $(`#referee${index + 1}Box`).animate({opacity: '0'}, 1000, () => {
+            fadeRefs(index - 1, max);
         });
     } else {
-        $(`#referee${index + 1}Box`).fadeIn(1000, "swing", () => {
+        $(`#referee${index + 1}Box`).animate({opacity: '1.0'}, 1000, () => {
             fadeRefs(index + 1, max);
         });
     }

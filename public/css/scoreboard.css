@@ -243,7 +243,8 @@ html {
 .refBox {
     text-align: center;
     vertical-align: middle;
-    display: none;
+    display: table-row-group;
+    opacity: 0;
 }
 
 .refImage {
