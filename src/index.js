@@ -147,6 +147,7 @@ function getTeam(specifier) {
 function handleEventInternal(event) {
 	if (event.eventType === "GOAL") {
 		addScore(event.team === 'HOME');
+		logEvent(event);
 	} else if (event.eventType === "OWN_GOAL") {
 		reduceScore(event.team === 'HOME');
 	}
@@ -258,7 +259,10 @@ async function getObsTimestamp() {
         recording: streamStatus.outputTimecode
     };
 }
-
+async function logEvent(event){;
+    const Timestamp = await getObsTimestamp();
+    console.log("Zu "+ Timestamp.stream + " wurde " + event.eventType + " aufgezeichnet.");
+}
 function saveData() {
 	// fs.writeFile(HOME_PATH, JSON.stringify(homeTeam));
 	// fs.writeFile(AWAY_PATH, JSON.stringify(awayTeam));
