@@ -73,13 +73,6 @@ const EVENT_MAPPING = {
             const keyIndex = control.index;
             console.log('key %d down', keyIndex);
 
-            if (keyIndex === CLEAR_FOULS_KEY) {
-                sendEvent({
-                    eventType: 'CLEAR_FOULS'
-                });
-                return;
-            }
-
             if (isNumberInput(keyIndex)) {
                 //Numpad Handler
                 const val = getNumberValue(keyIndex);
@@ -121,7 +114,12 @@ const EVENT_MAPPING = {
                         sendEvent({
                             eventType: 'TOGGLE_SCOREBOARD'
                         });
-                        break;
+                        return;
+                    case CLEAR_FOULS_KEY:
+                        sendEvent({
+                            eventType: 'CLEAR_FOULS'
+                        });
+                        return;
                 }
             }
 
