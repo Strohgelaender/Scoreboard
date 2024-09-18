@@ -175,6 +175,7 @@ const IMAGES = {
     [GOAL_KEY]: 'football.webp',
     [OWN_GOAL_KEY]: 'owngoal.png',
     [SCOREBOARD_VISIBILITY_KEY]: 'eye.png',
+    [SHOW_REFEREES_KEY]: 'dfb-picto-schiriansetzung-rgb-white.png',
 };
 
 async function loadKeyImages() {

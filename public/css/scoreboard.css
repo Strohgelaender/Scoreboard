@@ -237,7 +237,6 @@ html {
 
 .refsTable {
     display: inline-block;
-    background: linear-gradient(to right, rgb(30, 180, 200) 10%, rgb(2, 67, 89));
 }
 
 .refBox {
@@ -258,7 +257,7 @@ html {
     border: none;
 }
 
-#referee1 {
+#referee1Box {
     background: linear-gradient(to right, rgb(30, 180, 200) 10%, rgb(2, 67, 89));
 }
 

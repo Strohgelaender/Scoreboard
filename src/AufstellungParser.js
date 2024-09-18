@@ -3,7 +3,7 @@ import {parse} from "node-html-parser";
 
 // IMPORTANT: Always update there two URLs before starting the prod server
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/02Q0SKPL4K000000VS5489B3VU5PPGUO/ticker-id/selectedTickerId';
-const overviewUrl = 'https://www.dfb.de/futsal/futsal-bundesliga/spieltagtabelle/?no_cache=1&spieledb_path=/datencenter/futsal-bundesliga/2024-2025/spieltag/beton-boys-muenchen-futsal-sv-pars-neu-isenburg-2388070';
+const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/hot-05-futsal-beton-boys-muenchen-futsal-2388072';
 // TODO Referees, Coach
 
 const game = axios.create({baseURL: matchUrl});
@@ -39,11 +39,9 @@ export async function readReferees() {
     const response = await overview.get('');
     const root = parse(response.data);
     let result = [];
-    for (const table of root.querySelectorAll('.table-comparison')) {
-        if (table.querySelector('caption').text === 'Schiedsrichter/innen') {
-            const referees = table.querySelectorAll('a');
-            result = referees.map(referee => referee.text);
-        }
+    for (const table of root.querySelectorAll('.m-MatchDetails-referees-list')) {
+        const referees = table.querySelectorAll('a');
+        result = referees.map(referee => referee.text);
     }
     return result;
 }
