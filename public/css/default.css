@@ -18,3 +18,10 @@ html {
     color: white;
     overflow: hidden;
 }
+
+:root {
+    --futsal-blue-1: #003246;
+    --futsal-blue-2: #1eb4c8;
+    --futsal-accent: #6edce6;
+    --futsal-grey: #ebf0f6;
+}

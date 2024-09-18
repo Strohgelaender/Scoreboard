@@ -237,11 +237,13 @@ html {
 
 .refsTable {
     display: inline-block;
+    border-collapse: collapse;
 }
 
 .refBox {
     text-align: center;
     vertical-align: middle;
+    display: none;
 }
 
 .refImage {
@@ -258,9 +260,20 @@ html {
 }
 
 #referee1Box {
-    background: linear-gradient(to right, rgb(30, 180, 200) 10%, rgb(2, 67, 89));
+    background: linear-gradient(to right, var(--futsal-blue-1) 25%, var(--futsal-blue-2));
 }
 
+#referee2Box {
+    background: var(--futsal-blue-2);
+}
+
+#referee3Box {
+    background: var(--futsal-accent);
+}
+
+#referee4Box {
+    background: #000000;
+}
 
 
 

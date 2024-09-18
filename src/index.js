@@ -13,6 +13,7 @@ const OBS_PASSWORD = process.env.OBS_PASSWORD || '';
 
 const HOME_PATH = 'data/home.json';
 const AWAY_PATH = 'data/away.json';
+const EVENT_FILE = `data/${new Date().toISOString().replace(/:/g, '-')}.json`;
 
 let homeTeam;
 let awayTeam;
@@ -110,7 +111,7 @@ export async function updateLineup() {
     console.log('Lineup updated');
     console.log(homeTeam.players);
     // saveData();
-};
+}
 
 export async function saveReferees() {
     referees = await readReferees();
@@ -262,10 +263,16 @@ async function getObsTimestamp() {
 
 async function logEvent(event) {
     try {
-        const Timestamp = await getObsTimestamp();
-        console.log("Zu " + Timestamp.stream + " wurde " + event.eventType + " aufgezeichnet.");
+        const timestamp = await getObsTimestamp();
+        let eventString = `${event.eventType}:${event.team}\t${timestamp.stream}\t${timestamp.recording}`;
+        if (fs.existsSync(EVENT_FILE)) {
+            fs.appendFileSync(EVENT_FILE, eventString);
+        } else {
+            eventString = 'Event\tStream\tRecording\n' + eventString;
+            fs.writeFileSync(EVENT_FILE, eventString);
+        }
     } catch (e) {
-        console.error(e);
+        console.error(e.message);
     }
 }
 

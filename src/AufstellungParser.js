@@ -3,7 +3,8 @@ import {parse} from "node-html-parser";
 
 // IMPORTANT: Always update there two URLs before starting the prod server
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/02Q0SKPL4K000000VS5489B3VU5PPGUO/ticker-id/selectedTickerId';
-const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/hot-05-futsal-beton-boys-muenchen-futsal-2388072';
+// const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/hot-05-futsal-beton-boys-muenchen-futsal-2388072';
+const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/beton-boys-muenchen-futsal-sv-pars-neu-isenburg-2388070';
 // TODO Referees, Coach
 
 const game = axios.create({baseURL: matchUrl});

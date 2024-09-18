@@ -1,6 +1,7 @@
 'use strict';
 
 let showingLineup = false;
+let showingRefs = false;
 let fullNames;
 let teamImages;
 
@@ -60,7 +61,11 @@ function handleEventInternal(event) {
             animateLineup(event.team === 'HOME' ? 0 : 1, event.playerData);
             break;
         case "REFEREES":
-            animateReferees(event.playerData);
+            if (showingRefs) {
+                fadeRefs(0, 4);
+            } else {
+                animateReferees(event.playerData);
+            }
             break;
         case "FOUL":
         case "REMOVE_FOUL":
@@ -147,6 +152,23 @@ function createPlayerRow(player, table) {
 function animateReferees(referees) {
     for(let i = 1; i <= 4; i++) {
         $(`#referee${i}Text`).text(referees[i - 1] || '');
+    }
+    fadeRefs(0, referees.length)
+}
+
+function fadeRefs(index, max) {
+    if (index >= max) {
+        showingRefs = !showingRefs;
+        return;
+    }
+    if (showingRefs) {
+        $(`#referee${index + 1}Box`).fadeOut(1000, "swing", () => {
+            fadeRefs(index + 1, max);
+        });
+    } else {
+        $(`#referee${index + 1}Box`).fadeIn(1000, "swing", () => {
+            fadeRefs(index + 1, max);
+        });
     }
 }
 

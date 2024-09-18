@@ -58,7 +58,7 @@ const EVENT_MAPPING = {
 };
 
 
-;(async () => {
+async function main(){
     try {
         const devices = await listStreamDecks();
         if (devices.length === 0) {
@@ -136,7 +136,9 @@ const EVENT_MAPPING = {
         console.error(error);
         console.error('Could not find a Stream Deck.');
     }
-})();
+}
+main();
+
 
 function sendAndReset(e) {
     sendEvent(e);
