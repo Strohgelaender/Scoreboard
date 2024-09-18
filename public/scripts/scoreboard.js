@@ -157,16 +157,16 @@ function animateReferees(referees) {
 }
 
 function fadeRefs(index, max) {
-    if (index == max) {
+    if (index === max) {
         showingRefs = !showingRefs;
         return;
     }
     if (showingRefs) {
-        $(`#referee${index + 1}Box`).animate({opacity: '0'}, 1000, () => {
+        $(`#referee${index + 1}Box`).animate({opacity: '0'}, 500, () => {
             fadeRefs(index - 1, max);
         });
     } else {
-        $(`#referee${index + 1}Box`).animate({opacity: '1.0'}, 1000, () => {
+        $(`#referee${index + 1}Box`).animate({opacity: '1.0'}, 500, () => {
             fadeRefs(index + 1, max);
         });
     }
