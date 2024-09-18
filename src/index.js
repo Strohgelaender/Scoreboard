@@ -261,8 +261,12 @@ async function getObsTimestamp() {
 }
 
 async function logEvent(event) {
-    const Timestamp = await getObsTimestamp();
-    console.log("Zu " + Timestamp.stream + " wurde " + event.eventType + " aufgezeichnet.");
+    try {
+        const Timestamp = await getObsTimestamp();
+        console.log("Zu " + Timestamp.stream + " wurde " + event.eventType + " aufgezeichnet.");
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function saveData() {

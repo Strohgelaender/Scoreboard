@@ -179,7 +179,7 @@ const IMAGES = {
 
 async function loadKeyImages() {
     for (const key in IMAGES) {
-        loadImage(key, IMAGES[key]);
+        loadImage(+key, IMAGES[key]);
     }
 }
 
