@@ -166,13 +166,15 @@ function fadeRefs(index, max) {
         return;
     }
     if (showingRefs) {
-        $(`#referee${index + 1}Box`).animate({opacity: '0'}, 500, () => {
+        $(`#referee${index + 1}Box`).css('animation', 'revealOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        setTimeout(() => {
             fadeRefs(index - 1, max);
-        });
+        }, 200);
     } else {
-        $(`#referee${index + 1}Box`).animate({opacity: '1.0'}, 500, () => {
+        $(`#referee${index + 1}Box`).css('animation', 'reveal 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        setTimeout(() => {
             fadeRefs(index + 1, max);
-        });
+        }, 200);
     }
 }
 
