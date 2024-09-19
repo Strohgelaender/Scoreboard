@@ -121,20 +121,24 @@ function animateLineup(team, players) {
         }
 
         showingLineup = true;
-        $('#aufstellungSpielfeld').css('animation', 'SpielfeldIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $('#aufstellungSpielfeldCircle').css('animation', 'drawCircleIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $('#aufstellungSpielfeldLine').css('animation', 'drawLineIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         $('#aufstellungBox').css('animation', 'AufstellungBoxIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         setTimeout(() => {
             $('#aufstellungSpielfeld').css('object-position', '0 0').css('animation', 'none');
-            // $('#aufstellungSpielfeld').css('object-position', '0 0').css('animation', 'none');
+            $('#aufstellungSpielfeldCircle').css('stroke-dashoffset', '0').css('animation', 'none');
+            $('#aufstellungSpielfeldLine').css('stroke-dashoffset', '0').css('animation', 'none');
         }, 2000);
     } else {
         showingLineup = false;
 
         // Reversed bezier curve via https://codepen.io/michellebarker/pen/jQpwKq
-        $('#aufstellungSpielfeld').css('animation', 'SpielfeldOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00)  1 normal forwards');
+        $('#aufstellungSpielfeldLine').css('animation', 'drawLineOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
+        $('#aufstellungSpielfeldCircle').css('animation', 'drawCircleOut 1.5s  cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
         $('#aufstellungBox').css('animation', 'AufstellungBoxOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00)  1 normal forwards');
         setTimeout(() => {
-            $('#aufstellungSpielfeld').css('object-position', '0 1500px').css('animation', 'none');
+            $('#aufstellungSpielfeldCircle').css('stroke-dashoffset', '1257').css('animation', 'none');
+            $('#aufstellungSpielfeldLine').css('stroke-dashoffset', '1200').css('animation', 'none');
             startingPlayersTable.empty();
             substitutePlayersTable.empty();
         }, 2000);

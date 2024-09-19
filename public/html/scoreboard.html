@@ -55,8 +55,16 @@
             <table id="substitutePlayers" class="players"></table>
         </div>
     </div>
-    <img id="aufstellungSpielfeld" class="spielfeld" src="/images/Futsal_Spielfeld_Mitte.png"
-         alt="Aufstellung spielfeld">
+    <div>
+        <svg id="aufstellungSpielfeldCircle" width="950" height="950" viewBox="0 0 900 900">
+            <circle class="circle" cx="220" cy="220" r="200" fill="none" stroke="#0088f7" stroke-width="4" />
+        </svg>
+        <svg id="aufstellungSpielfeldLine" width="100" height="1000" viewBox="0 0 100 1100">
+            <!-- Line going from the top to the bottom -->
+            <line class="line" x1="50" y1="0" x2="50" y2="1200" stroke="#0088f7" stroke-width="4" />
+        </svg>
+    </div>
+
 </div>
 
 <div id="referees">

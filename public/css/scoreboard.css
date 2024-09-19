@@ -178,7 +178,57 @@ html {
     top: -250px;
     left: 50px;
     z-index: -10;
-    object-position: 0px 1500px;
+}
+
+#aufstellungSpielfeldCircle {
+    stroke-dasharray: 1257; /* Circumference of the circle */
+    stroke-dashoffset: 1257;
+    position: absolute;
+    left: 200px;
+    top: 350px;
+}
+
+#aufstellungSpielfeldLine {
+    position: absolute;
+    left: 380px;
+    stroke-dasharray: 1200; /* Total length of the line */
+    stroke-dashoffset: 1200; /* Initially hidden */
+}
+
+@keyframes drawCircleIn {
+    0% {
+        stroke-dashoffset: 1257; /* Hidden */
+    }
+    100% {
+        stroke-dashoffset: 0; /* Fully visible */
+    }
+}
+
+@keyframes drawCircleOut {
+    0% {
+        stroke-dashoffset: 0; /* Fully visible */
+    }
+    100% {
+        stroke-dashoffset: 1257; /* Hidden */
+    }
+}
+
+@keyframes drawLineIn {
+    0% {
+        stroke-dashoffset: 1200; /* Hidden */
+    }
+    100% {
+        stroke-dashoffset: 0; /* Fully visible */
+    }
+}
+
+@keyframes drawLineOut {
+    0% {
+        stroke-dashoffset: 0; /* Fully visible */
+    }
+    100% {
+        stroke-dashoffset: 1200; /* Hidden */
+    }
 }
 
 #aufstellungTeamname {
