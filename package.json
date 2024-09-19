@@ -7,12 +7,13 @@
     "start": "node src/streamdeck.js",
     "dev": "nodemon src/streamdeck.js",
     "lineup": "node src/AufstellungParser.js",
-    "lineup:dev": "nodemon src/AufstellungParser.js"
+    "lineup:dev": "nodemon src/AufstellungParser.js",
+    "update": "ncu -i --format group"
   },
   "author": "Strohgelaender",
   "type": "module",
   "dependencies": {
-    "@elgato-stream-deck/node": "7.0.1",
+    "@elgato-stream-deck/node": "7.0.2",
     "@julusian/jpeg-turbo": "2.2.0",
     "axios": "1.7.7",
     "canvas": "2.11.2",
@@ -25,6 +26,6 @@
   },
   "devDependencies": {
     "nexe": "^3.3.7",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.6"
   }
 }
