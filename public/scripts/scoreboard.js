@@ -22,6 +22,8 @@ function loadTeams() {
 
         $('#homeName').text(home.name);
         $('#awayName').text(away.name);
+        $('#bigHomeName').text(home.fullName);
+        $('#bigAwayName').text(away.fullName);
         $(`#homeShirtLine`).css('background-color', home.shirtColor);
         $(`#awayShirtLine`).css('background-color', away.shirtColor);
     }).catch(error => {
@@ -32,14 +34,11 @@ function loadTeams() {
 function handleEventInternal(event) {
     switch (event.eventType) {
         case 'GOAL':
-            if (event.hasOwnProperty('playerData')) {
-                //showLowerThirds(event);
-            }
-            break;
         case 'OWN_GOAL':
             if (event.hasOwnProperty('playerData')) {
                 //showLowerThirds(event);
             }
+            updateScoreboardInternal();
             break;
         case 'TOGGLE_SCOREBOARD':
             $('#scoreboard').fadeToggle(1000, "swing");
@@ -76,7 +75,13 @@ function handleEventInternal(event) {
 }
 
 function updateScoreboardInternal() {
+    updateScore();
     updateFouls();
+}
+
+function updateScore() {
+    $('#bigHomeScore').text(scoreHome);
+    $('#bigAwayScore').text(scoreAway);
 }
 
 function updateFouls() {
@@ -108,8 +113,6 @@ function foulsToText(fouls) {
 function animateLineup(team, players) {
     const startingPlayersTable = $('#startingPlayers');
     const substitutePlayersTable = $('#substitutePlayers');
-
-    // TODO: Spielfeldanimaton muss besser werden, vlt via Paths?
 
     if (!showingLineup) {
         $('#aufstellungTeamname').text(fullNames[team]);

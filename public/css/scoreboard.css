@@ -136,13 +136,13 @@ html {
 }
 
 @keyframes AufstellungBoxIn {
-    from { left: 2000px; }
-    to {  left: 520px; }
+    0% { clip-path: inset(0 0 0 100%); }
+    100% { clip-path: inset(0 0 0 0); }
 }
 
 @keyframes AufstellungBoxOut {
-    from { left: 520px }
-    to { left: 2000px; }
+    0% { clip-path: inset(0 0 0 0); }
+    100% { clip-path: inset(0 0 0 100%); }
 }
 
 #aufstellungBox {
@@ -150,24 +150,15 @@ html {
     height: 800px;
     width: 1400px;
     top: 200px;
-    left: 2000px;
+    left: 520px;
     background: linear-gradient(to right, rgba(30, 180, 200, 0.8) 25%, rgba(2, 67, 89, 0.9));
+    clip-path: inset(0 0 0 100%);
 }
 
 .stripes {
     max-width:100%;
     max-height:100%;
     opacity: 0.8;
-}
-
-@keyframes SpielfeldIn {
-    from { object-position: 0px 1500px;}
-    to { object-position: 0px 0px; }
-}
-
-@keyframes SpielfeldOut {
-    from { object-position: 0px 0px; }
-    to { object-position: 0px 1500px;}
 }
 
 #aufstellungSpielfeld {
@@ -341,22 +332,64 @@ html {
 }
 
 #referee4Box {
-    background: #000000;
+    background: #212121;
 }
 
 
 
 
-#bottomHomeBox {
+#bottomScore {
     position: absolute;
-    width: 800px;
-    height: 50px;
+    width: 1300px;
+    height: 80px;
     top: 900px;
-    left: 100px;
-    background-color: #59aadf;
+    left: 300px;
+    background: linear-gradient(to left, var(--futsal-blue-1) 25%, var(--futsal-blue-2));
     border-radius: 15px 15px 15px 15px;
 }
 
+.bigTeamImage {
+    position: absolute;
+    width: auto;
+    height: 70px;
+    z-index: 1;
+    padding: 5px;
+}
+
+#bigHomeImage{
+    left: 10px;
+}
+
+#bigAwayImage{
+    left: 1200px;
+}
+
+.bigTeamNameBox {
+    position: absolute;
+    width: 600px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 70px;
+}
+
+#bigHomeNameBox {
+    left: 50px;
+}
+
+#bigAwayNameBox {
+    left: 700px;
+}
+
+.bigTeamName {
+    font-size: 40px;
+}
+
+.bigTeamScore {
+    z-index: 1;
+    position: absolute;
+    font-size: 80px;
+    font-family: DFBSans-Bold, sans-serif;
+}
 
 
 
