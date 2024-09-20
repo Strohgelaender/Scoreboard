@@ -105,16 +105,19 @@ app.get('/matchdayData/:day', (async (req, res) => {
 }));
 
 export async function updateLineup() {
-    const lineup = await readLineup();
-    homeTeam.players = lineup.home;
-    awayTeam.players = lineup.away;
-    console.log('Lineup updated');
-    console.log(homeTeam.players);
-    // saveData();
+    if (!homeTeam.players || !awayTeam.players) {
+        const lineup = await readLineup();
+        homeTeam.players = lineup.home;
+        awayTeam.players = lineup.away;
+        console.log('Lineup updated');
+        console.log(homeTeam.players);
+    }
 }
 
 export async function saveReferees() {
-    referees = await readReferees();
+    if (!referees) {
+        referees = await readReferees();
+    }
 }
 
 export function sendEvent(event) {
