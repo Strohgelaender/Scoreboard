@@ -5,7 +5,9 @@ html {
 #scoreboard {
     position: relative;
     left: 30px;
-    height: 40px;
+    height: 150px;
+    width: 800px;
+    clip-path: inset(0 0 0 0);
 }
 
 #scoreboardImage {
@@ -135,16 +137,6 @@ html {
     background-color: #024359;
 }
 
-@keyframes AufstellungBoxIn {
-    0% { clip-path: inset(0 0 0 100%); }
-    100% { clip-path: inset(0 0 0 0); }
-}
-
-@keyframes AufstellungBoxOut {
-    0% { clip-path: inset(0 0 0 0); }
-    100% { clip-path: inset(0 0 0 100%); }
-}
-
 #aufstellungBox {
     position: absolute;
     height: 800px;
@@ -226,7 +218,7 @@ html {
 #aufstellungGoalline {
     position: absolute;
     left: 1600px;
-    top: 250px;
+    top: 230px;
     z-index: -10;
     stroke-dasharray: 1200; /* Large value for the full length of the paths/lines */
     stroke-dashoffset: 1200; /* Initially hidden */
@@ -323,7 +315,7 @@ html {
     clip-path: inset(0 0 0 100%);
 }
 
-@keyframes reveal {
+@keyframes revealToLeft {
     0% {
         clip-path: inset(0 0 0 100%); /* Completely hidden */
     }
@@ -332,12 +324,30 @@ html {
     }
 }
 
-@keyframes revealOut {
+@keyframes revealToLeftOut {
     0% {
         clip-path: inset(0 0 0 0); /* Fully visible */
     }
     100% {
         clip-path: inset(0 0 0 100%); /* Completely hidden */
+    }
+}
+
+@keyframes revealToRight {
+    0% {
+        clip-path: inset(0 100% 0 0); /* Completely hidden */
+    }
+    100% {
+        clip-path: inset(0 0 0 0); /* Fully visible */
+    }
+}
+
+@keyframes revealToRightOut {
+    0% {
+        clip-path: inset(0 0 0 0); /* Fully visible */
+    }
+    100% {
+        clip-path: inset(0 100% 0 0); /* Completely hidden */
     }
 }
 

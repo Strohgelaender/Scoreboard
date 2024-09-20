@@ -2,6 +2,8 @@
 
 let showingLineup = false;
 let showingRefs = false;
+let showingSmallScoreboard = true;
+let showingBixScoreboard = false;
 let fullNames;
 let teamImages;
 
@@ -41,7 +43,7 @@ function handleEventInternal(event) {
             updateScoreboardInternal();
             break;
         case 'TOGGLE_SCOREBOARD':
-            $('#scoreboard').fadeToggle(1000, "swing");
+            toggleScoreboard();
             break;
         case 'SHOW_NAMES':
             showLowerThirds('.blendNames');
@@ -72,6 +74,15 @@ function handleEventInternal(event) {
             updateFouls();
             break;
     }
+}
+
+function toggleScoreboard() {
+    if (!showingSmallScoreboard) {
+        $('#scoreboard').css('animation', 'revealToRight 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+    } else {
+        $('#scoreboard').css('animation', 'revealToRightOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+    }
+    showingSmallScoreboard = !showingSmallScoreboard;
 }
 
 function updateScoreboardInternal() {
@@ -128,7 +139,7 @@ function animateLineup(team, players) {
         $('#aufstellungSpielfeldCircle').css('animation', 'drawCircleIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         $('#aufstellungSpielfeldLine').css('animation', 'drawLineIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         $('#aufstellungGoalline').css('animation', 'drawLineIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-        $('#aufstellungBox').css('animation', 'AufstellungBoxIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $('#aufstellungBox').css('animation', 'revealToLeft 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         logo.css('animation', 'growImage 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         setTimeout(() => {
             $('#aufstellungSpielfeld').css('object-position', '0 0').css('animation', 'none');
@@ -144,7 +155,7 @@ function animateLineup(team, players) {
         $('#aufstellungSpielfeldLine').css('animation', 'drawLineOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
         $('#aufstellungGoalline').css('animation', 'drawLineOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
         $('#aufstellungSpielfeldCircle').css('animation', 'drawCircleOut 1.5s  cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
-        $('#aufstellungBox').css('animation', 'AufstellungBoxOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
+        $('#aufstellungBox').css('animation', 'revealToLeftOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
         $('#aufstellungLogo').css('animation', 'hideImage 1s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
         setTimeout(() => {
             $('#aufstellungSpielfeldCircle').css('stroke-dashoffset', '1257').css('animation', 'none');
@@ -178,12 +189,12 @@ function fadeRefs(index, max) {
         return;
     }
     if (showingRefs) {
-        $(`#referee${index + 1}Box`).css('animation', 'revealOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $(`#referee${index + 1}Box`).css('animation', 'revealToLeftOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         setTimeout(() => {
             fadeRefs(index - 1, max);
         }, 200);
     } else {
-        $(`#referee${index + 1}Box`).css('animation', 'reveal 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $(`#referee${index + 1}Box`).css('animation', 'revealToLeft 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         setTimeout(() => {
             fadeRefs(index + 1, max);
         }, 200);
