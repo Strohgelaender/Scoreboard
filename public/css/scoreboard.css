@@ -177,6 +177,7 @@ html {
     position: absolute;
     left: 200px;
     top: 350px;
+    z-index: -10;
 }
 
 #aufstellungSpielfeldLine {
@@ -222,6 +223,15 @@ html {
     }
 }
 
+#aufstellungGoalline {
+    position: absolute;
+    left: 1600px;
+    top: 250px;
+    z-index: -10;
+    stroke-dasharray: 1200; /* Large value for the full length of the paths/lines */
+    stroke-dashoffset: 1200; /* Initially hidden */
+}
+
 #aufstellungTeamname {
     font-size: 60px;
     margin: 30px;
@@ -236,6 +246,7 @@ html {
     width: auto;
     height: 300px;
     transform: scale(0);
+    z-index: 10;
 }
 
 @keyframes growImage {
