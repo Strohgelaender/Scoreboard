@@ -175,6 +175,7 @@ html {
 #aufstellungSpielfeldLine {
     position: absolute;
     left: 380px;
+    top: -100px;
     stroke-dasharray: 1200; /* Total length of the line */
     stroke-dashoffset: 1200; /* Initially hidden */
 }
