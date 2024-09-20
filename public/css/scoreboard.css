@@ -235,6 +235,29 @@ html {
     left: 1100px;
     width: auto;
     height: 300px;
+    transform: scale(0);
+}
+
+@keyframes growImage {
+    0% {
+        transform: scale(0); /* Fully hidden (small size) */
+        opacity: 0;          /* Invisible */
+    }
+    100% {
+        transform: scale(1); /* Full size */
+        opacity: 1;          /* Fully visible */
+    }
+}
+
+@keyframes hideImage {
+    0% {
+        transform: scale(1); /* Full size */
+        opacity: 1;          /* Fully visible */
+    }
+    100% {
+        transform: scale(0); /* Fully hidden (small size) */
+        opacity: 0;          /* Invisible */
+    }
 }
 
 #aufstellungPlayersBox {
