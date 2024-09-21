@@ -105,7 +105,7 @@ app.get('/matchdayData/:day', (async (req, res) => {
 }));
 
 export async function updateLineup() {
-    if (!homeTeam.players || !awayTeam.players) {
+    if (!homeTeam.players?.length || !awayTeam.players?.length) {
         const lineup = await readLineup();
         homeTeam.players = lineup.home;
         awayTeam.players = lineup.away;

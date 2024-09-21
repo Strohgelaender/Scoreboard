@@ -170,10 +170,28 @@ function animateLineup(team, players) {
 
 function createPlayerRow(player, table) {
     const row = $('<tr>');
+    row.append($('<td>').text(getPlayerRoleText(player)));
     row.append($('<td>').text(player.number));
     row.append($('<td>').text(player.firstName).addClass('playerFirstName'));
     row.append($('<td>').text(player.lastName).addClass('playerLastName'));
     table.append(row);
+}
+
+function getPlayerRoleText(player) {
+    let result = '';
+    if (player.is_captain) {
+        result = 'C ';
+    }
+
+    if (player.is_keeper) {
+        if (player.is_starting) {
+            result += "TW";
+        } else {
+            result += "ETW";
+        }
+    }
+
+    return result.trim();
 }
 
 function animateReferees(referees) {

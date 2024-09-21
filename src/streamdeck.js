@@ -39,14 +39,37 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', input => {
-    // TODO other events
+    // TODO less duplication via objects?
     input = input.trim().toUpperCase();
-    if (input === 'REFEREES' || input === 'REF') {
-        saveReferees().then(() => {
-            event.eventType = 'REFEREES';
-            sendAndReset(event);
-        });
-        return;
+
+    switch (input) {
+        case 'HOME':
+            event.team = 'HOME';
+            break;
+        case 'AWAY':
+            event.team = 'AWAY';
+            break;
+        case 'GOAL':
+            event.eventType = 'GOAL';
+            break;
+        case 'OWN GOAL':
+        case 'OWN_GOAL':
+            event.eventType = 'OWN_GOAL';
+            break;
+        case 'FOUL':
+            event.eventType = 'FOUL';
+            break;
+        case 'LINEUP':
+            showLineup();
+            return;
+        case 'REFEREES':
+        case 'REF':
+            showReferees();
+            return;
+    }
+
+    if (event.eventType && event.team) {
+        sendAndReset(event);
     }
 });
 
@@ -58,7 +81,7 @@ const EVENT_MAPPING = {
 };
 
 
-async function main(){
+async function main() {
     try {
         const devices = await listStreamDecks();
         if (devices.length === 0) {
@@ -99,16 +122,10 @@ async function main(){
                         event.team = 'AWAY';
                         break;
                     case SHOW_LINEUP_KEY:
-                        updateLineup().then(() => {
-                            event.eventType = 'LINEUP';
-                            sendAndReset(event);
-                        });
+                        showLineup();
                         return;
                     case SHOW_REFEREES_KEY:
-                        saveReferees().then(() => {
-                            event.eventType = 'REFEREES';
-                            sendAndReset(event);
-                        });
+                        showReferees();
                         return;
                     case SCOREBOARD_VISIBILITY_KEY:
                         sendEvent({
@@ -137,8 +154,22 @@ async function main(){
         console.error('Could not find a Stream Deck.');
     }
 }
+
 main();
 
+function showLineup() {
+    updateLineup().then(() => {
+        event.eventType = 'LINEUP';
+        sendAndReset(event);
+    });
+}
+
+function showReferees() {
+    saveReferees().then(() => {
+        event.eventType = 'REFEREES';
+        sendAndReset(event);
+    });
+}
 
 function sendAndReset(e) {
     sendEvent(e);
