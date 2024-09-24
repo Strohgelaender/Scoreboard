@@ -78,9 +78,9 @@ function handleEventInternal(event) {
 
 function toggleScoreboard() {
     if (!showingSmallScoreboard) {
-        $('#scoreboard').css('animation', 'revealToRight 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $('#scoreboard').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
     } else {
-        $('#scoreboard').css('animation', 'revealToRightOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $('#scoreboard').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
     }
     showingSmallScoreboard = !showingSmallScoreboard;
 }

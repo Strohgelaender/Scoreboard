@@ -65,6 +65,13 @@ rl.on('line', input => {
         case 'REF':
             showReferees();
             return;
+        case 'SCOREBOARD':
+        case 'TOGGLE_SCOREBOARD':
+        case 'TOGGLE':
+            sendEvent({
+                eventType: 'TOGGLE_SCOREBOARD'
+            });
+            return;
     }
 
     if (event.eventType && event.team) {

@@ -334,21 +334,21 @@ html {
     }
 }
 
-@keyframes revealToRight {
+@keyframes revealCenter {
     0% {
-        clip-path: inset(0 100% 0 0); /* Completely hidden */
+        clip-path: inset(0 50% 0 50%); /* Completely hidden */
     }
     100% {
         clip-path: inset(0 0 0 0); /* Fully visible */
     }
 }
 
-@keyframes revealToRightOut {
+@keyframes revealCenterOut {
     0% {
         clip-path: inset(0 0 0 0); /* Fully visible */
     }
     100% {
-        clip-path: inset(0 100% 0 0); /* Completely hidden */
+        clip-path: inset(0 50% 0 50%); /* Completely hidden */
     }
 }
 
