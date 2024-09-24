@@ -99,11 +99,23 @@ function toggleBigScoreboard() {
 function updateScoreboardInternal() {
     updateScore();
     updateFouls();
+    doubleDigitAdjustments();
 }
 
 function updateScore() {
     $('#bigHomeScore').text(scoreHome);
     $('#bigAwayScore').text(scoreAway);
+}
+
+function doubleDigitAdjustments() {
+    if (scoreHome >= 10) {
+        $('#bigHomeScore').css('left', '600px');
+        $('#homeScore').css('left', '355px');
+    }
+    if (scoreAway >= 10) {
+        $('#bigAwayScore').css('left', '695px');
+        $('#awayScore').css('left', '390px');
+    }
 }
 
 function updateFouls() {
