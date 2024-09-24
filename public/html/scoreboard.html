@@ -35,36 +35,38 @@
     </div>
 </div>
 
-<div id="bottomScore" style="display: none;">
-    <div id="bigHomeImageBox" class="bigTeamImageBox">
-        <img id="bigHomeImage" class="bigTeamImage" src="/image/home" alt="Home Team">
-    </div>
-    <div class="bigTeamNameBox" id="bigHomeNameBox">
-        <span id="bigHomeName" class="bigTeamName">Home</span>
-    </div>
-    <span id="bigHomeScore" class="bigTeamScore">0</span>
-    <span id="bigAwayScore" class="bigTeamScore">0</span>
-    <div class="bigTeamNameBox" id="bigAwayNameBox">
-        <span id="bigAwayName" class="bigTeamName">Away</span>
-    </div>
-    <div id="bigAwayImageBox" class="bigTeamImageBox">
-        <img id="bigAwayImage" class="bigTeamImage" src="/image/away" alt="Away Team">
+<div id="bottomScore">
+    <div id="bottomScoreWrapper">
+        <div id="bottomScoreBackground">
+            <svg id="bottomSpielfeldCircle" width="200" height="100" viewBox="0 0 200 100">
+                <circle cx="100" cy="46" r="95" fill="none" stroke="#0088f7" stroke-width="4"/>
+                <line x1="100" y1="0" x2="100" y2="200" stroke="#0088f7" stroke-width="4"/>
+            </svg>
+        </div>
+        <div id="bottomContent">
+            <img id="bigHomeImage" class="bigTeamImage" src="/image/home" alt="Home Team">
+            <span id="bigHomeName" class="bigTeamName">Home</span>
+            <span id="bigHomeScore" class="bigTeamScore">0</span>
+            <span id="bigAwayScore" class="bigTeamScore">0</span>
+            <span id="bigAwayName" class="bigTeamName">Away</span>
+            <img id="bigAwayImage" class="bigTeamImage" src="/image/away" alt="Away Team">
+        </div>
     </div>
 </div>
 
 <div id="aufstellung">
-    <div id="aufstellungBox">
-        <!-- <img id="aufstellungStripes" class="stripes" src="/images/stripes.png" alt="Aufstellung stripes"> -->
-        <div>
-            <span id="aufstellungTeamname"></span>
+    <div id="aufstellungContent">
+        <div id="aufstellungBox">
+            <!-- <img id="aufstellungStripes" class="stripes" src="/images/stripes.png" alt="Aufstellung stripes"> -->
+            <div>
+                <span id="aufstellungTeamname"></span>
+            </div>
+            <div id="aufstellungPlayersBox">
+                <table id="startingPlayers" class="players"></table>
+                <table id="substitutePlayers" class="players"></table>
+            </div>
         </div>
-        <div>
-            <img id="aufstellungLogo"/>
-        </div>
-        <div id="aufstellungPlayersBox">
-            <table id="startingPlayers" class="players"></table>
-            <table id="substitutePlayers" class="players"></table>
-        </div>
+        <img id="aufstellungLogo"/>
     </div>
     <div>
         <svg id="aufstellungSpielfeldCircle" width="950" height="950" viewBox="0 0 900 900">
@@ -77,7 +79,8 @@
         <svg id="aufstellungGoalline" width="400" height="800">
             <!-- Vertical goal line -->
             <!-- line x1="360" y1="100" x2="360" y2="700" stroke="#0088f7" stroke-width="4"/ -->
-            <path d="M 360 100 A 240 240 0 0 0 120 340 L 120 460 A 240 240 0 0 0 360 700" stroke="#0088f7" fill="none" stroke-width="4" />
+            <path d="M 360 100 A 240 240 0 0 0 120 340 L 120 460 A 240 240 0 0 0 360 700" stroke="#0088f7" fill="none"
+                  stroke-width="4"/>
         </svg>
     </div>
 

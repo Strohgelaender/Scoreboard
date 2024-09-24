@@ -17,6 +17,7 @@ const REMOVE_FOUL_KEY = 12;
 const CLEAR_FOULS_KEY = 13;
 const SHOW_LINEUP_KEY = 19;
 const SHOW_REFEREES_KEY = 20;
+const SHOW_BOTTOM_SCOREBOARD_KEY = 21;
 const GOAL_KEY = 26;
 const OWN_GOAL_KEY = 27;
 const SCOREBOARD_VISIBILITY_KEY = 28;
@@ -70,6 +71,12 @@ rl.on('line', input => {
         case 'TOGGLE':
             sendEvent({
                 eventType: 'TOGGLE_SCOREBOARD'
+            });
+            return;
+        case 'BOTTOM':
+        case 'BOTTOM_SCOREBOARD':
+            sendEvent({
+                eventType: 'SHOW_BOTTOM_SCOREBOARD'
             });
             return;
     }
@@ -136,6 +143,11 @@ async function main() {
                     case SCOREBOARD_VISIBILITY_KEY:
                         sendEvent({
                             eventType: 'TOGGLE_SCOREBOARD'
+                        });
+                        return;
+                    case SHOW_BOTTOM_SCOREBOARD_KEY:
+                        sendEvent({
+                            eventType: 'SHOW_BOTTOM_SCOREBOARD'
                         });
                         return;
                     case CLEAR_FOULS_KEY:
@@ -214,6 +226,7 @@ const IMAGES = {
     [GOAL_KEY]: 'football.webp',
     [OWN_GOAL_KEY]: 'owngoal.png',
     [SCOREBOARD_VISIBILITY_KEY]: 'eye.png',
+    [SHOW_BOTTOM_SCOREBOARD_KEY]: 'eye.png',
     [SHOW_REFEREES_KEY]: 'dfb-picto-schiriansetzung-rgb-white.png',
 };
 

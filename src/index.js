@@ -114,7 +114,7 @@ export async function updateLineup() {
 }
 
 export async function saveReferees() {
-    if (!referees) {
+    if (!referees?.length) {
         referees = await readReferees();
     }
 }

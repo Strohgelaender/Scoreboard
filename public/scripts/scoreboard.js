@@ -45,6 +45,8 @@ function handleEventInternal(event) {
         case 'TOGGLE_SCOREBOARD':
             toggleScoreboard();
             break;
+        case 'SHOW_BOTTOM_SCOREBOARD':
+            toggleBigScoreboard();
         case 'SHOW_NAMES':
             showLowerThirds('.blendNames');
             break;
@@ -83,6 +85,15 @@ function toggleScoreboard() {
         $('#scoreboard').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
     }
     showingSmallScoreboard = !showingSmallScoreboard;
+}
+
+function toggleBigScoreboard() {
+    if (!showingBixScoreboard) {
+        $('#bottomScore').css('animation', 'revealCenter 2s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+    } else {
+        $('#bottomScore').css('animation', 'revealCenterOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+    }
+    showingBixScoreboard = !showingBixScoreboard;
 }
 
 function updateScoreboardInternal() {

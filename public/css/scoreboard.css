@@ -137,14 +137,19 @@ html {
     background-color: #024359;
 }
 
-#aufstellungBox {
+#aufstellungContent {
     position: absolute;
-    height: 800px;
-    width: 1400px;
     top: 200px;
     left: 520px;
+}
+
+
+#aufstellungBox {
+    height: 800px;
+    width: 1400px;
     background: linear-gradient(to right, rgba(30, 180, 200, 0.8) 25%, rgba(2, 67, 89, 0.9));
     clip-path: inset(0 0 0 100%);
+    z-index: 3;
 }
 
 .stripes {
@@ -153,23 +158,13 @@ html {
     opacity: 0.8;
 }
 
-#aufstellungSpielfeld {
-    position: absolute;
-    max-width: 700px;
-    width: 700px;
-    height: auto;
-    top: -250px;
-    left: 50px;
-    z-index: -10;
-}
-
 #aufstellungSpielfeldCircle {
     stroke-dasharray: 1257; /* Circumference of the circle */
     stroke-dashoffset: 1257;
     position: absolute;
     left: 200px;
     top: 350px;
-    z-index: -10;
+    z-index: 5;
 }
 
 #aufstellungSpielfeldLine {
@@ -178,6 +173,7 @@ html {
     top: -100px;
     stroke-dasharray: 1200; /* Total length of the line */
     stroke-dashoffset: 1200; /* Initially hidden */
+    z-index: 5;
 }
 
 @keyframes drawCircleIn {
@@ -220,7 +216,7 @@ html {
     position: absolute;
     left: 1600px;
     top: 230px;
-    z-index: -10;
+    z-index: 5;
     stroke-dasharray: 1200; /* Large value for the full length of the paths/lines */
     stroke-dashoffset: 1200; /* Initially hidden */
 }
@@ -234,7 +230,7 @@ html {
 
 #aufstellungLogo {
     position: relative;
-    top: -50px;
+    top: -750px;
     left: 1100px;
     width: auto;
     height: 300px;
@@ -381,53 +377,78 @@ html {
     background: #212121;
 }
 
-
-
-
 #bottomScore {
     position: absolute;
-    width: 1300px;
-    height: 80px;
     top: 900px;
-    left: 300px;
-    background: linear-gradient(to left, var(--futsal-blue-1) 25%, var(--futsal-blue-2));
+    width: 1920px;
+    height: 80px;
+    clip-path: inset(0 50% 0 50%);
+}
+
+
+#bottomScoreWrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+
+#bottomScoreBackground {
+    vertical-align: middle;
+    text-align: center;
+    height: 80px;
+    width: 1400px;
+    background: linear-gradient(to left, var(--futsal-blue-1) 50%, var(--futsal-blue-2));
     border-radius: 15px 15px 15px 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+#bottomSpielfeldCircle {
+    width: 200px; /* Width of the circle */
+    height: 100px; /* Height of the circle */
+}
+
+#bottomContent {
+    position: absolute;
+    display: inline-block;
+    height: 80px;
+    width: 1400px;
 }
 
 .bigTeamImage {
-    position: absolute;
     width: auto;
     height: 70px;
     z-index: 1;
     padding: 5px;
+    position: relative;
 }
 
 #bigHomeImage{
-    left: 10px;
+    left: 20px;
 }
 
 #bigAwayImage{
-    left: 1200px;
-}
-
-.bigTeamNameBox {
-    position: absolute;
-    width: 600px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 70px;
-}
-
-#bigHomeNameBox {
-    left: 50px;
-}
-
-#bigAwayNameBox {
-    left: 700px;
+    left: 1240px;
 }
 
 .bigTeamName {
-    font-size: 40px;
+    position: absolute;
+    height: 70px;
+    width: 480px;
+    font-size: 37px;
+    text-align: center;
+    line-height: 70px;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+#bigHomeName {
+    left: 100px;
+}
+
+#bigAwayName {
+    left: 810px;
 }
 
 .bigTeamScore {
@@ -435,6 +456,19 @@ html {
     position: absolute;
     font-size: 80px;
     font-family: DFBSans-Bold, sans-serif;
+    height: 70px;
+    width: auto;
+    line-height: 65px;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+#bigHomeScore {
+    left: 625px;
+}
+
+#bigAwayScore {
+    left: 717px;
 }
 
 
