@@ -312,6 +312,25 @@ html {
     clip-path: inset(0 0 0 100%);
 }
 
+@keyframes revealToRight {
+    0% {
+        clip-path: inset(0 100% 0 0); /* Completely hidden */
+    }
+    100% {
+        clip-path: inset(0 0 0 0); /* Fully visible */
+    }
+}
+
+@keyframes revealToRightOut {
+    0% {
+        clip-path: inset(0 0 0 0); /* Fully visible */
+    }
+    100% {
+        clip-path: inset(0 100% 0 0); /* Completely hidden */
+    }
+}
+
+
 @keyframes revealToLeft {
     0% {
         clip-path: inset(0 0 0 100%); /* Completely hidden */
@@ -469,6 +488,99 @@ html {
 
 #bigAwayScore {
     left: 717px;
+}
+
+
+#lowerThrid {
+    position: absolute;
+    top: 900px;
+    width: 1920px;
+    height: 100px;
+}
+
+
+.lowerThridContent {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+#lowerMainContent {
+    position: relative;
+    clip-path: inset(0 100% 0 0);
+}
+
+#lowerSubContent {
+    position: relative;
+    clip-path: inset(0 0 100% 0);
+}
+
+.lowerContent {
+    height: 50px;
+    width: 400px;
+}
+
+#lowerMainBackground {
+    vertical-align: middle;
+    text-align: center;
+    height: 50px;
+    width: 400px;
+    background: var(--futsal-blue-1);
+    position: absolute;
+    overflow: hidden;
+}
+
+.lowerText {
+    position: absolute;
+    width: 400px;
+    height: 50px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 50px;
+}
+
+#lowerMainText {
+    font-size: 30px;
+}
+
+#lowerSubBackground {
+    height: 50px;
+    width: 400px;
+    background: var(--futsal-blue-2);
+    position: absolute;
+}
+
+#lowerSubAdditionalBackground {
+    height: 50px;
+    width: 400px;
+    background: white;
+    position: absolute;
+    z-index: -1;
+    clip-path: inset(0 0 100% 0);
+}
+
+#lowerSubText {
+    font-family: "DFBSans-Italic";
+    font-size: 25px;
+}
+
+@keyframes revealDown {
+    0% {
+        clip-path: inset(0 0 100% 0); /* Completely hidden */
+    }
+    100% {
+        clip-path: inset(0 0 0 0); /* Fully visible */
+    }
+}
+
+@keyframes revealDownOut {
+    0% {
+        clip-path: inset(0 0 0 0); /* Fully visible */
+    }
+    100% {
+        clip-path: inset(0 0 100% 0); /* Completely hidden */
+    }
 }
 
 

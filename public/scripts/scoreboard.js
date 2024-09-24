@@ -3,7 +3,8 @@
 let showingLineup = false;
 let showingRefs = false;
 let showingSmallScoreboard = true;
-let showingBixScoreboard = false;
+let showingBigScoreboard = false;
+let showingLowerThird = false;
 let fullNames;
 let teamImages;
 
@@ -70,6 +71,9 @@ function handleEventInternal(event) {
                 animateReferees(event.playerData);
             }
             break;
+        case "CASTER":
+            toggleLowerThird();
+            break;
         case "FOUL":
         case "REMOVE_FOUL":
         case "CLEAR_FOULS":
@@ -88,12 +92,31 @@ function toggleScoreboard() {
 }
 
 function toggleBigScoreboard() {
-    if (!showingBixScoreboard) {
+    if (!showingBigScoreboard) {
         $('#bottomScore').css('animation', 'revealCenter 2s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
     } else {
         $('#bottomScore').css('animation', 'revealCenterOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
     }
-    showingBixScoreboard = !showingBixScoreboard;
+    showingBigScoreboard = !showingBigScoreboard;
+}
+
+function toggleLowerThird() {
+    if (!showingLowerThird) {
+        $('#lowerMainContent').css('animation', 'revealToRight 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        setTimeout(() => {
+            $('#lowerSubAdditionalBackground').css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+            $('#lowerSubContent').css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        }, 500);
+    } else {
+        $('#lowerSubContent').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        setTimeout(() => {
+            $('#lowerSubAdditionalBackground').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        }, 200);
+        setTimeout(() => {
+            $('#lowerMainContent').css('animation', 'revealToRightOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        }, 700);
+    }
+    showingLowerThird = !showingLowerThird;
 }
 
 function updateScoreboardInternal() {

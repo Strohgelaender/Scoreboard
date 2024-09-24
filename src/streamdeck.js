@@ -21,6 +21,7 @@ const SHOW_BOTTOM_SCOREBOARD_KEY = 21;
 const GOAL_KEY = 26;
 const OWN_GOAL_KEY = 27;
 const SCOREBOARD_VISIBILITY_KEY = 28;
+const CASTER_KEY = 29;
 
 //TODO public constants (wie hier und auch im Browser verwenden?)
 //TODO Paging?
@@ -77,6 +78,12 @@ rl.on('line', input => {
         case 'BOTTOM_SCOREBOARD':
             sendEvent({
                 eventType: 'SHOW_BOTTOM_SCOREBOARD'
+            });
+            return;
+        case 'CASTER':
+        case 'LOWER':
+            sendEvent({
+                eventType: 'CASTER'
             });
             return;
     }
@@ -155,6 +162,11 @@ async function main() {
                             eventType: 'CLEAR_FOULS'
                         });
                         return;
+                    case CASTER_KEY:
+                        sendEvent({
+                            eventType: 'CASTER'
+                        });
+                        return;
                 }
             }
 
@@ -228,6 +240,8 @@ const IMAGES = {
     [SCOREBOARD_VISIBILITY_KEY]: 'eye.png',
     [SHOW_BOTTOM_SCOREBOARD_KEY]: 'eye.png',
     [SHOW_REFEREES_KEY]: 'dfb-picto-schiriansetzung-rgb-white.png',
+    [SHOW_LINEUP_KEY]: 'lineup.png',
+    [CASTER_KEY]: 'microphone-342.png',
 };
 
 async function loadKeyImages() {
