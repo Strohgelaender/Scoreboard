@@ -15,14 +15,9 @@ const HOME_PATH = 'data/home.json';
 const AWAY_PATH = 'data/away.json';
 const EVENT_FILE = `data/${new Date().toISOString().replace(/:/g, '-')}.json`;
 
-let homeTeam;
-let awayTeam;
+let homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
+let awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
 let referees = [];
-
-(async () => {
-    homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
-    awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
-})();
 
 let scoreHome = 0;
 let scoreAway = 0;
@@ -39,11 +34,14 @@ const obs = new OBSWebSocket();
         await obs.connect('ws://localhost:4455', OBS_PASSWORD);
         console.log('OBS connected');
     } catch (error) {
-        console.log('OBS not connected', error);
+        console.error('OBS not connected');
     }
-})();
+})().then();
 
-process.on('exit', async function () {
+process.on('SIGTERM', async function () {
+    for (const ws of eventWS) {
+        ws.close();
+    }
     await obs.disconnect();
 });
 

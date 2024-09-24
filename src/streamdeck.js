@@ -155,7 +155,7 @@ async function main() {
     }
 }
 
-main();
+main().then();
 
 function showLineup() {
     updateLineup().then(() => {
