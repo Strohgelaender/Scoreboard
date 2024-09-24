@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "nexe": "^3.3.7",
-    "nodemon": "^3.1.6"
+    "nodemon": "^3.1.7",
+    "npm-check-updates": "^17.1.3"
   }
 }
