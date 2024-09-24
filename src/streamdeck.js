@@ -1,7 +1,6 @@
 import {listStreamDecks, openStreamDeck} from "@elgato-stream-deck/node";
 import path from "path";
 import sharp from "sharp";
-import Canvas from "canvas";
 import {fileURLToPath} from 'url';
 import {updateLineup, saveReferees, sendEvent} from "./index.js";
 import readline from "readline";
@@ -110,7 +109,7 @@ async function main() {
                     resetTime = new Date();
                 }
             } else {
-                if (EVENT_MAPPING.hasOwnProperty(keyIndex)) {
+                if (keyIndex in EVENT_MAPPING) {
                     event.eventType = EVENT_MAPPING[keyIndex];
                 }
 

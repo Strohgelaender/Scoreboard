@@ -26,7 +26,7 @@ const gameDetails = axios.create({
 //TODO Presentation layer
 
 //TODO auch Nord parsen
-async function createMatchdayData(day) {
+export async function createMatchdayData(day) {
 	const result = [];
 	const response = await games.get(`/${day}`);
 
@@ -68,9 +68,7 @@ async function createMatchdayData(day) {
 	return result;
 }
 
-exports.createMatchdayData = createMatchdayData;
-
-async function createTableData() {
+export async function createTableData() {
 	const result = [];
 	const response = (await table.get('')).data;
 	const data = parse(response);
@@ -86,9 +84,9 @@ async function createTableData() {
 	return result;
 }
 
-exports.createTableData = createTableData;
-
-exports.createGoalgetterTable = async () => (await goalgetterTable.get('')).data.results;
+export async function createGoalgetterTable() {
+    return (await goalgetterTable.get('')).data.results;
+}
 
 async function createPlayers(gameId) {
 	const result = {

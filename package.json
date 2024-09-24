@@ -25,6 +25,9 @@
     "tinyws": "^0.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "eslint": "^9.11.1",
+    "globals": "^15.9.0",
     "nexe": "^3.3.7",
     "nodemon": "^3.1.7",
     "npm-check-updates": "^17.1.3"

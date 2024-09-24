@@ -1,4 +1,3 @@
-//TODO lokales jquery, lädt sonst nicht offline!
 import 'dotenv/config'
 import express from 'express';
 import {tinyws} from 'tinyws';
@@ -33,7 +32,7 @@ const obs = new OBSWebSocket();
     try {
         await obs.connect('ws://localhost:4455', OBS_PASSWORD);
         console.log('OBS connected');
-    } catch (error) {
+    } catch {
         console.error('OBS not connected');
     }
 })().then();
@@ -75,7 +74,7 @@ app.get('/matchday/:day', ((req, res) => {
     res.redirect(`/html/matchday.html?day=${req.params.day}`);
 }));
 
-app.use('/events', tinyws(), async (req, res) => {
+app.use('/events', tinyws(), async (req) => {
     if (req.ws) {
         const ws = await req.ws();
         eventWS.push(ws);
@@ -103,10 +102,6 @@ app.get('/data/info', (req, res) => {
 app.get('/scores', (req, res) => {
     res.send({scoreHome, scoreAway, foulsHome, foulsAway});
 });
-
-app.get('/matchdayData/:day', (async (req, res) => {
-    //res.send(await createMatchdayData(req.params.day));
-}));
 
 export async function updateLineup() {
     if (!homeTeam.players?.length || !awayTeam.players?.length) {
@@ -178,7 +173,7 @@ function handleEventInternal(event) {
         updatePlayerProperty(event.playerData, property);
 
         if (event.eventType === 'YELLOW_CARD') {
-            if (!event.playerData.hasOwnProperty('gameYellowCard')) {
+            if (!('gameYellowCard' in event.playerData)) {
                 event.playerData.gameYellowCard = true;
             } else {
                 //Gelb-Rote Karte
@@ -197,7 +192,7 @@ function handleEventInternal(event) {
 }
 
 function updatePlayerProperty(player, property) {
-    if (player.hasOwnProperty(property)) {
+    if (property in player) {
         player[property] += 1;
     } else {
         player[property] = 1;
