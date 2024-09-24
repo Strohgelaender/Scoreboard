@@ -38,12 +38,18 @@ const obs = new OBSWebSocket();
     }
 })().then();
 
-process.on('SIGTERM', async function () {
+process.on('SIGTERM', cleanup);
+process.on('SIGINT', cleanup);
+process.on('SIGKILL', cleanup);
+
+async function cleanup() {
+    console.log("cleanup");
     for (const ws of eventWS) {
         ws.close();
     }
     await obs.disconnect();
-});
+    process.exit(0);
+}
 
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
 
