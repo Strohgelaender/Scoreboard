@@ -257,7 +257,7 @@ function animateReferees() {
 		}, 200);
 		setTimeout(() => {
 			$('#referee1Box').css('animation', 'revealCenterOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 700);
+		}, 500);
 	} else {
 		$('#referee1Box').css('animation', 'revealCenter 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
