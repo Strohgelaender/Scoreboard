@@ -95,14 +95,25 @@ function toggleScoreboard() {
 function toggleBigScoreboard() {
 	if (!showingBigScoreboard) {
 		$('#bottomScore').css('animation', 'revealCenter 2s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottom 2s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
 			$('#bigHomeImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 			$('#bigAwayImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 500);
+			$('#bigHomeName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			$('#bigAwayName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			$('#bigHomeScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			$('#bigAwayScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		}, 300);
 	} else {
 		$('#bottomScore').css('animation', 'revealCenterOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		$('#bigHomeImage').css('animation', 'hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		$('#bigAwayImage').css('animation', 'hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#bigHomeName').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#bigAwayName').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#bigHomeScore').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#bigAwayScore').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottomOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+
 	}
 	showingBigScoreboard = !showingBigScoreboard;
 }
@@ -110,6 +121,7 @@ function toggleBigScoreboard() {
 function toggleLowerThird() {
 	if (!showingLowerThird) {
 		$('#lowerMainContent').css('animation', 'revealToRight 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#lowerMainText').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
 			$('#lowerSubAdditionalBackground').css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 			$('#lowerSubContent').css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
@@ -121,7 +133,8 @@ function toggleLowerThird() {
 		}, 200);
 		setTimeout(() => {
 			$('#lowerMainContent').css('animation', 'revealToRightOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 700);
+			$('#lowerMainText').css('animation', 'opacityOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		}, 600);
 	}
 	showingLowerThird = !showingLowerThird;
 }
@@ -250,14 +263,14 @@ function getPlayerRoleText(player) {
 function animateReferees() {
 	if (showingRefs) {
 		$('#refSubContent').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#refAdditionalContent').css('animation', 'revealUpOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#refAdditionalContent').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
 			$('#lowerRefAdditionalBackground').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#refUpAdditionalBackground').css('animation', 'revealUpOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 200);
+			$('#refUpAdditionalBackground').css('animation', 'revealUpOut 0.8s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		}, 250);
 		setTimeout(() => {
 			$('#referee1Box').css('animation', 'revealCenterOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 500);
+		}, 1000);
 	} else {
 		$('#referee1Box').css('animation', 'revealCenter 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
@@ -266,7 +279,7 @@ function animateReferees() {
 		}, 300);
 		setTimeout(() => {
 			$('#refUpAdditionalBackground').css('animation', 'revealUp 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#refAdditionalContent').css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			$('#refAdditionalContent').css('animation', 'revealUp 0.8s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		}, 700);
 	}
 	showingRefs = !showingRefs;
