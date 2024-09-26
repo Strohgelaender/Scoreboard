@@ -48,6 +48,7 @@ function handleEventInternal(event) {
             break;
         case 'SHOW_BOTTOM_SCOREBOARD':
             toggleBigScoreboard();
+            break;
         case 'SHOW_NAMES':
             showLowerThirds('.blendNames');
             break;
@@ -95,14 +96,14 @@ function toggleBigScoreboard() {
     if (!showingBigScoreboard) {
         $('#bottomScore').css('animation', 'revealCenter 2s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         setTimeout(() => {
-        $('#bigHomeImage').css('animation','growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-        $('#bigAwayImage').css('animation','growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+            $('#bigHomeImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+            $('#bigAwayImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
         }, 500);
 
     } else {
         $('#bottomScore').css('animation', 'revealCenterOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-        $('#bigHomeImage').css('animation','hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-        $('#bigAwayImage').css('animation','hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $('#bigHomeImage').css('animation', 'hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+        $('#bigAwayImage').css('animation', 'hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
     }
     showingBigScoreboard = !showingBigScoreboard;
 }
