@@ -1,153 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <title>Scoreboard</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/default.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/css/scoreboard.css" media="screen">
-    <script src="/scripts/vendor/jquery.js" defer></script>
-    <script src="/scripts/vendor/textFit.js" defer></script>
-    <script src="/scripts/eventSocket.js" defer></script>
-    <script src="/scripts/scoreboard.js" defer></script>
-</head>
-<body>
-<div id="scoreboard">
-    <img id="scoreboardImage" src="/images/scoreboardBL2.png" alt="Spielstand_Background"/>
-    <div id="homeImageBox" class="teamImageBox">
-        <img id="homeImage" class="teamImage" src="/image/home" alt="Home Team">
-    </div>
-    <div id="homeNameBox" class="teamNameBox">
-        <span id="homeName" class="teamName">Home</span>
-    </div>
-    <span id="homeScore" class="teamScore">0</span>
-    <span id="awayScore" class="teamScore">0</span>
-    <div id="awayNameBox" class="teamNameBox">
-        <span id="awayName" class="teamName">Away</span>
-    </div>
-    <img id="awayImage" class="teamImage" src="/image/away" alt="Away Team">
-    <div id="homeShirtLine" class="shirtLine"></div>
-    <div id="awayShirtLine" class="shirtLine"></div>
-    <div id="homeFoulsBox" class="foulsBox" style="display: none">
-        <span id="homeFouls" class="fouls">0</span>
-    </div>
-    <div id="awayFoulsBox" class="foulsBox" style="display: none">
-        <span id="awayFouls" class="fouls">0</span>
-    </div>
-</div>
+	<head>
+		<title>Scoreboard</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="/css/default.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/scoreboard.css" media="screen" />
+		<script src="/scripts/vendor/jquery.js" defer></script>
+		<script src="/scripts/vendor/textFit.js" defer></script>
+		<script src="/scripts/eventSocket.js" defer></script>
+		<script src="/scripts/scoreboard.js" defer></script>
+	</head>
+	<body>
+		<div id="scoreboard">
+			<img id="scoreboardImage" src="/images/scoreboardBL2.png" alt="Spielstand_Background" />
+			<div id="homeImageBox" class="teamImageBox">
+				<img id="homeImage" class="teamImage" src="/image/home" alt="Home Team" />
+			</div>
+			<div id="homeNameBox" class="teamNameBox">
+				<span id="homeName" class="teamName">Home</span>
+			</div>
+			<span id="homeScore" class="teamScore">0</span>
+			<span id="awayScore" class="teamScore">0</span>
+			<div id="awayNameBox" class="teamNameBox">
+				<span id="awayName" class="teamName">Away</span>
+			</div>
+			<img id="awayImage" class="teamImage" src="/image/away" alt="Away Team" />
+			<div id="homeShirtLine" class="shirtLine"></div>
+			<div id="awayShirtLine" class="shirtLine"></div>
+			<div id="homeFoulsBox" class="foulsBox" style="display: none">
+				<span id="homeFouls" class="fouls">0</span>
+			</div>
+			<div id="awayFoulsBox" class="foulsBox" style="display: none">
+				<span id="awayFouls" class="fouls">0</span>
+			</div>
+		</div>
 
-<div id="bottomScore">
-    <div id="bottomScoreWrapper">
-        <div id="bottomScoreBackground">
-            <svg id="bottomSpielfeldCircle" width="200" height="100" viewBox="0 0 200 100">
-                <circle cx="100" cy="46" r="95" fill="none" stroke="#0088f7" stroke-width="4"/>
-                <line x1="100" y1="0" x2="100" y2="200" stroke="#0088f7" stroke-width="4"/>
-            </svg>
-        </div>
-        <div id="bottomContent">
-            <img id="bigHomeImage" class="bigTeamImage" src="/image/home" alt="Home Team">
-            <span id="bigHomeName" class="bigTeamName">Home</span>
-            <span id="bigHomeScore" class="bigTeamScore">0</span>
-            <span id="bigAwayScore" class="bigTeamScore">0</span>
-            <span id="bigAwayName" class="bigTeamName">Away</span>
-            <img id="bigAwayImage" class="bigTeamImage" src="/image/away" alt="Away Team">
-        </div>
-    </div>
-</div>
+		<div id="bottomScore">
+			<div id="bottomScoreWrapper">
+				<div id="bottomScoreBackground">
+					<svg id="bottomSpielfeldCircle" width="200" height="100" viewBox="0 0 200 100">
+						<circle cx="100" cy="46" r="95" fill="none" stroke="#0088f7" stroke-width="4" />
+						<line x1="100" y1="0" x2="100" y2="200" stroke="#0088f7" stroke-width="4" />
+					</svg>
+				</div>
+				<div id="bottomContent">
+					<img id="bigHomeImage" class="bigTeamImage" src="/image/home" alt="Home Team" />
+					<span id="bigHomeName" class="bigTeamName">Home</span>
+					<span id="bigHomeScore" class="bigTeamScore">0</span>
+					<span id="bigAwayScore" class="bigTeamScore">0</span>
+					<span id="bigAwayName" class="bigTeamName">Away</span>
+					<img id="bigAwayImage" class="bigTeamImage" src="/image/away" alt="Away Team" />
+				</div>
+			</div>
+		</div>
 
-<div id="aufstellung">
-    <div id="aufstellungContent">
-        <div id="aufstellungBox">
-            <!-- <img id="aufstellungStripes" class="stripes" src="/images/stripes.png" alt="Aufstellung stripes"> -->
-            <div>
-                <span id="aufstellungTeamname"></span>
-            </div>
-            <div id="aufstellungPlayersBox">
-                <table id="startingPlayers" class="players"></table>
-                <table id="substitutePlayers" class="players"></table>
-            </div>
-        </div>
-        <img id="aufstellungLogo"/>
-    </div>
-    <div>
-        <svg id="aufstellungSpielfeldCircle" width="950" height="950" viewBox="0 0 900 900">
-            <circle class="circle" cx="220" cy="220" r="200" fill="none" stroke="#0088f7" stroke-width="4"/>
-        </svg>
-        <svg id="aufstellungSpielfeldLine" width="100" height="1200" viewBox="0 0 100 1200">
-            <!-- Line going from the top to the bottom -->
-            <line class="line" x1="50" y1="0" x2="50" y2="1200" stroke="#0088f7" stroke-width="4"/>
-        </svg>
-        <svg id="aufstellungGoalline" width="400" height="800">
-            <!-- Vertical goal line -->
-            <!-- line x1="360" y1="100" x2="360" y2="700" stroke="#0088f7" stroke-width="4"/ -->
-            <path d="M 360 100 A 240 240 0 0 0 120 340 L 120 460 A 240 240 0 0 0 360 700" stroke="#0088f7" fill="none"
-                  stroke-width="4"/>
-        </svg>
-    </div>
-</div>
+		<div id="aufstellung">
+			<div id="aufstellungContent">
+				<div id="aufstellungBox">
+					<!-- <img id="aufstellungStripes" class="stripes" src="/images/stripes.png" alt="Aufstellung stripes"> -->
+					<div>
+						<span id="aufstellungTeamname"></span>
+					</div>
+					<div id="aufstellungPlayersBox">
+						<table id="startingPlayers" class="players"></table>
+						<table id="substitutePlayers" class="players"></table>
+					</div>
+				</div>
+				<img id="aufstellungLogo" />
+			</div>
+			<div>
+				<svg id="aufstellungSpielfeldCircle" width="950" height="950" viewBox="0 0 900 900">
+					<circle class="circle" cx="220" cy="220" r="200" fill="none" stroke="#0088f7" stroke-width="4" />
+				</svg>
+				<svg id="aufstellungSpielfeldLine" width="100" height="1200" viewBox="0 0 100 1200">
+					<!-- Line going from the top to the bottom -->
+					<line class="line" x1="50" y1="0" x2="50" y2="1200" stroke="#0088f7" stroke-width="4" />
+				</svg>
+				<svg id="aufstellungGoalline" width="400" height="800">
+					<!-- Vertical goal line -->
+					<!-- line x1="360" y1="100" x2="360" y2="700" stroke="#0088f7" stroke-width="4"/ -->
+					<path d="M 360 100 A 240 240 0 0 0 120 340 L 120 460 A 240 240 0 0 0 360 700" stroke="#0088f7" fill="none" stroke-width="4" />
+				</svg>
+			</div>
+		</div>
 
-<div id="referees">
-    <table class="refsTable">
-        <tbody id="referee1Box" class="refBox">
-        <tr>
-            <td>
-                <img id="referee1Image" class="refImage" src="/images/dfb-picto-schiriansetzung-rgb-white.png">
-            </td>
-            <td>
-                <span id="referee1Text" class="refText">Michael Bollenbacher</span>
-            </td>
-        </tr>
-        </tbody>
-        <tbody id="referee2Box" class="refBox">
-        <tr>
-            <td>
-                <img id="referee2Image" class="refImage" src="/images/dfb-picto-schiriansetzung-rgb-white.png">
-            </td>
-            <td>
-                <span id="referee2Text" class="refText">Markus Höhner</span>
-            </td>
-        </tr>
-        </tbody>
-        <tbody id="referee3Box" class="refBox">
-        <tr>
-            <td>
-                <img id="referee3Image" class="refImage" src="/images/dfb-picto-schiriansetzung-rgb-white.png">
-            </td>
-            <td>
-                <span id="referee3Text" class="refText">Tobi Schäfer</span>
-            </td>
-        </tr>
-        </tbody>
-        <tbody id="referee4Box" class="refBox">
-        <tr>
-            <td>
-                <img id="referee4Image" class="refImage" src="/images/dfb-picto-athletic-rgb-white.png">
-            </td>
-            <td>
-                <span id="referee4Text" class="refText">Christina Rann</span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+		<div id="referees" class="lowerThird">
+			<div class="lowerThirdContent">
+				<div id="refAdditionalContent" class="lowerContent">
+					<div id="refAdditionalBackground" class="lowerSubBackground"></div>
+					<span id="referee2Text" class="lowerText">Tobi Schäfer</span><br />
+					<span id="referee3Text" class="lowerText">Julian-Luca Schäfer</span><br />
+					<span id="referee4Text" class="lowerText">Christina Rann</span>
+				</div>
+				<div id="refUpAdditionalBackground" class="lowerSubAdditionalBackground"></div>
+			</div>
+			<div class="lowerThirdContent">
+				<div id="referee1Box" class="lowerContent">
+					<div id="ref1Background" class="mainBackground"></div>
+					<span id="referee1Text" class="lowerText">Michael Bollenbacher</span>
+				</div>
+			</div>
+			<div class="lowerThirdContent">
+				<div id="refSubContent" class="lowerContent">
+					<div id="refSubBackground" class="lowerSubBackground"></div>
+					<span id="refSubText" class="lowerText">Schiedsrichter</span>
+				</div>
+				<div id="lowerRefAdditionalBackground" class="lowerSubAdditionalBackground"></div>
+			</div>
+		</div>
 
-<div id="lowerThrid">
-    <div class="lowerThridContent">
-        <div id="lowerMainContent" class="lowerContent">
-            <div id="lowerMainBackground"></div>
-            <span id="lowerMainText" class="lowerText">Gilbert Kalb</span>
-        </div>
-    </div>
-    <div class="lowerThridContent">
-        <div id="lowerSubContent" class="lowerContent">
-            <div id="lowerSubBackground"></div>
-            <span id="lowerSubText" class="lowerText">KOMMENTATOR</span>
-        </div>
-        <div id="lowerSubAdditionalBackground"></div>
-    </div>
-</div>
+		<div id="lowerThird" class="lowerThird">
+			<div class="lowerThirdContent">
+				<div id="lowerMainContent" class="lowerContent">
+					<div id="lowerMainBackground" class="mainBackground"></div>
+					<span id="lowerMainText" class="lowerText">Gilbert Kalb</span>
+				</div>
+			</div>
+			<div class="lowerThirdContent">
+				<div id="lowerSubContent" class="lowerContent">
+					<div class="lowerSubBackground"></div>
+					<span id="lowerSubText" class="lowerText">KOMMENTATOR</span>
+				</div>
+				<div id="lowerSubAdditionalBackground" class="lowerSubAdditionalBackground"></div>
+			</div>
+		</div>
 
-
-<!-- <div id="ties">
+		<!-- <div id="ties">
     <img id="tiesRightPart" class="tieImg blend blendRight blendNames" src="/images/ties_right.png" alt="Ties right">
     <img id="tiesLeftPart" class="tieImg blend blendLeft blendExtra blendNames" src="/images/ties_left.png"
          alt="Ties left">
@@ -155,5 +133,5 @@
     <span id="tiesRightContent" class="tieContent blend blendRight blendNames">Bernhard Winkler, Errea</span>
     <span id="tiesExtraContent" class="tieContent blend blendExtra">TestText</span>
 </div> -->
-</body>
+	</body>
 </html>

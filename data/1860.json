@@ -1,87 +1,87 @@
 {
-  "name": "TSV 1860 München",
-  "imagePath": "/images/1860.png",
-  "coach": "Franjo Ereiz",
-  "players": {
-    "1": {
-      "firstname": "Martin",
-      "lastname": "Maier"
-    },
-    "2": {
-      "firstname": "Igor",
-      "lastname": "Dulabic"
-    },
-    "4": {
-      "firstname": "Jovan",
-      "lastname": "Mitev"
-    },
-    "4_": {
-      "firstname": "Anton",
-      "lastname": "Bonic"
-    },
-    "5": {
-      "firstname": "Riccardo",
-      "lastname": "Sacilotto"
-    },
-    "6": {
-      "firstname": "Milad",
-      "lastname": "Khojasteh"
-    },
-    "7": {
-      "firstname": "Alex",
-      "lastname": "Lopez"
-    },
-    "8": {
-      "firstname": "Anton",
-      "lastname": "Ziegner"
-    },
-    "9": {
-      "firstname": "David",
-      "lastname": "Vrobil"
-    },
-    "9_": {
-      "firstname": "Anton",
-      "lastname": "Mook"
-    },
-    "10": {
-      "firstname": "Linus",
-      "lastname": "Radau"
-    },
-    "11": {
-      "firstname": "Peter",
-      "lastname": "Lesky"
-    },
-    "11_": {
-      "firstname": "Anton",
-      "lastname": "Ziegner"
-    },
-    "12": {
-      "firstname": "Oliver",
-      "lastname": "Kardell"
-    },
-    "12_": {
-      "firstname": "David",
-      "lastname": "Kardell"
-    },
-    "17": {
-      "firstname": "Daniel",
-      "lastname": "Wolde-Selassie"
-    },
-    "19": {
-      "firstname": "Robert",
-      "lastname": "Rother"
-    },
-    "22": {
-      "firstname": "Rainer",
-      "lastname": "Ehrlichauf"
-    },
-    "77": {
-      "firstname": "Felix",
-      "lastname": "Wöllner"
-    },
-    "69": {
-      "firstname": "Andi",
-      "lastname": "Kört"
-    }
-  }
+	"name": "TSV 1860 München",
+	"imagePath": "/images/1860.png",
+	"coach": "Franjo Ereiz",
+	"players": {
+		"1": {
+			"firstname": "Martin",
+			"lastname": "Maier"
+		},
+		"2": {
+			"firstname": "Igor",
+			"lastname": "Dulabic"
+		},
+		"4": {
+			"firstname": "Jovan",
+			"lastname": "Mitev"
+		},
+		"4_": {
+			"firstname": "Anton",
+			"lastname": "Bonic"
+		},
+		"5": {
+			"firstname": "Riccardo",
+			"lastname": "Sacilotto"
+		},
+		"6": {
+			"firstname": "Milad",
+			"lastname": "Khojasteh"
+		},
+		"7": {
+			"firstname": "Alex",
+			"lastname": "Lopez"
+		},
+		"8": {
+			"firstname": "Anton",
+			"lastname": "Ziegner"
+		},
+		"9": {
+			"firstname": "David",
+			"lastname": "Vrobil"
+		},
+		"9_": {
+			"firstname": "Anton",
+			"lastname": "Mook"
+		},
+		"10": {
+			"firstname": "Linus",
+			"lastname": "Radau"
+		},
+		"11": {
+			"firstname": "Peter",
+			"lastname": "Lesky"
+		},
+		"11_": {
+			"firstname": "Anton",
+			"lastname": "Ziegner"
+		},
+		"12": {
+			"firstname": "Oliver",
+			"lastname": "Kardell"
+		},
+		"12_": {
+			"firstname": "David",
+			"lastname": "Kardell"
+		},
+		"17": {
+			"firstname": "Daniel",
+			"lastname": "Wolde-Selassie"
+		},
+		"19": {
+			"firstname": "Robert",
+			"lastname": "Rother"
+		},
+		"22": {
+			"firstname": "Rainer",
+			"lastname": "Ehrlichauf"
+		},
+		"77": {
+			"firstname": "Felix",
+			"lastname": "Wöllner"
+		},
+		"69": {
+			"firstname": "Andi",
+			"lastname": "Kört"
+		}
+	}
 }

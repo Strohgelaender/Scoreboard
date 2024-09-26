@@ -1,631 +1,639 @@
 html {
-    background: transparent;
+	background: transparent;
 }
 
 #scoreboard {
-    position: relative;
-    left: 30px;
-    height: 150px;
-    width: 800px;
-    clip-path: inset(0 0 0 0);
+	position: relative;
+	left: 30px;
+	height: 150px;
+	width: 800px;
+	clip-path: inset(0 0 0 0);
 }
 
 #scoreboardImage {
-    position: relative;
-    width: 700px;
-    height: auto;
-    z-index: -1;
+	position: relative;
+	width: 700px;
+	height: auto;
+	z-index: -1;
 }
 
 #bfvLogo {
-    position: absolute;
-    display: inline-block;
+	position: absolute;
+	display: inline-block;
 }
 
 #bfvLogoImage {
-    position: relative;
-    width: auto;
-    height: 60px;
-    top: 60px;
+	position: relative;
+	width: auto;
+	height: 60px;
+	top: 60px;
 }
 
 #bfvClosing {
-    position: relative;
-    left: 30px;
-    top: -8px;
+	position: relative;
+	left: 30px;
+	top: -8px;
 }
 
 .teamImage {
-    position: absolute;
-    width: auto;
-    height: 48px;
-    z-index: 1;
-    top: 65px;
+	position: absolute;
+	width: auto;
+	height: 48px;
+	z-index: 1;
+	top: 65px;
 }
 
 #homeImage {
-    left: 120px;
+	left: 120px;
 }
 
 #awayImage {
-    left: 625px;
+	left: 625px;
 }
 
 .teamNameBox {
-    width: 190px;
-    height: 45px;
-    position: absolute;
-    top: 68px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 45px;
+	width: 190px;
+	height: 45px;
+	position: absolute;
+	top: 68px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 45px;
 }
 
 #homeNameBox {
-    left: 160px;
+	left: 160px;
 }
 
 #awayNameBox {
-    left: 435px;
+	left: 435px;
 }
 
 .teamName {
-    z-index: 1;
-    font-size: 22px;
+	z-index: 1;
+	font-size: 22px;
 }
 
 .teamScore {
-    z-index: 1;
-    position: absolute;
-    font-size: 35px;
-    top: 69px;
-    font-family: DFBSans-Bold, sans-serif;
+	z-index: 1;
+	position: absolute;
+	font-size: 35px;
+	top: 69px;
+	font-family: DFBSans-Bold, sans-serif;
 }
 
 #homeScore {
-    left: 365px;
+	left: 365px;
 }
 
 #awayScore {
-    left: 402px;
+	left: 402px;
 }
 
 .shirtLine {
-    position: absolute;
-    width: 150px;
-    height: 10px;
-    top: 54px;
-    background-color: #59aadf;
-    border-radius: 10px 10px 0px 0px;
-    z-index: -5;
+	position: absolute;
+	width: 150px;
+	height: 10px;
+	top: 54px;
+	background-color: #59aadf;
+	border-radius: 10px 10px 0px 0px;
+	z-index: -5;
 }
 
 #homeShirtLine {
-    left: 180px;
+	left: 180px;
 }
 
 #awayShirtLine {
-    left: 455px;
+	left: 455px;
 }
 
 .foulsBox {
-    position: absolute;
-    width: 50px;
-    height: 30px;
-    top: 115px;
-    border-radius: 0 0 10px 10px;
-    text-align: center;
-    vertical-align: center;
-    z-index: -5;
-    border-top: 2px solid #6edce6;
+	position: absolute;
+	width: 50px;
+	height: 30px;
+	top: 115px;
+	border-radius: 0 0 10px 10px;
+	text-align: center;
+	vertical-align: center;
+	z-index: -5;
+	border-top: 2px solid #6edce6;
 }
 
 .fouls {
-    z-index: 1;
-    font-size: 20px;
-    vertical-align: top;
-    font-family: DFBSans-Bold, sans-serif;
+	z-index: 1;
+	font-size: 20px;
+	vertical-align: top;
+	font-family: DFBSans-Bold, sans-serif;
 }
 
 #homeFoulsBox {
-    left: 230px;
-    background-color: #096780;
+	left: 230px;
+	background-color: #096780;
 }
 
 #awayFoulsBox {
-    left: 505px;
-    background-color: #024359;
+	left: 505px;
+	background-color: #024359;
 }
 
 #aufstellungContent {
-    position: absolute;
-    top: 200px;
-    left: 520px;
+	position: absolute;
+	top: 200px;
+	left: 520px;
 }
 
-
 #aufstellungBox {
-    height: 800px;
-    width: 1400px;
-    background: linear-gradient(to right, rgba(30, 180, 200, 0.8) 25%, rgba(2, 67, 89, 0.9));
-    clip-path: inset(0 0 0 100%);
-    z-index: 3;
+	height: 800px;
+	width: 1400px;
+	background: linear-gradient(to right, rgba(30, 180, 200, 0.8) 25%, rgba(2, 67, 89, 0.9));
+	clip-path: inset(0 0 0 100%);
+	z-index: 3;
 }
 
 .stripes {
-    max-width:100%;
-    max-height:100%;
-    opacity: 0.8;
+	max-width: 100%;
+	max-height: 100%;
+	opacity: 0.8;
 }
 
 #aufstellungSpielfeldCircle {
-    stroke-dasharray: 1257; /* Circumference of the circle */
-    stroke-dashoffset: 1257;
-    position: absolute;
-    left: 200px;
-    top: 350px;
-    z-index: 5;
+	stroke-dasharray: 1257; /* Circumference of the circle */
+	stroke-dashoffset: 1257;
+	position: absolute;
+	left: 200px;
+	top: 350px;
+	z-index: 5;
 }
 
 #aufstellungSpielfeldLine {
-    position: absolute;
-    left: 380px;
-    top: -100px;
-    stroke-dasharray: 1200; /* Total length of the line */
-    stroke-dashoffset: 1200; /* Initially hidden */
-    z-index: 5;
+	position: absolute;
+	left: 380px;
+	top: -100px;
+	stroke-dasharray: 1200; /* Total length of the line */
+	stroke-dashoffset: 1200; /* Initially hidden */
+	z-index: 5;
 }
 
 @keyframes drawCircleIn {
-    0% {
-        stroke-dashoffset: 1257; /* Hidden */
-    }
-    100% {
-        stroke-dashoffset: 0; /* Fully visible */
-    }
+	0% {
+		stroke-dashoffset: 1257; /* Hidden */
+	}
+	100% {
+		stroke-dashoffset: 0; /* Fully visible */
+	}
 }
 
 @keyframes drawCircleOut {
-    0% {
-        stroke-dashoffset: 0; /* Fully visible */
-    }
-    100% {
-        stroke-dashoffset: 1257; /* Hidden */
-    }
+	0% {
+		stroke-dashoffset: 0; /* Fully visible */
+	}
+	100% {
+		stroke-dashoffset: 1257; /* Hidden */
+	}
 }
 
 @keyframes drawLineIn {
-    0% {
-        stroke-dashoffset: 1200; /* Hidden */
-    }
-    100% {
-        stroke-dashoffset: 0; /* Fully visible */
-    }
+	0% {
+		stroke-dashoffset: 1200; /* Hidden */
+	}
+	100% {
+		stroke-dashoffset: 0; /* Fully visible */
+	}
 }
 
 @keyframes drawLineOut {
-    0% {
-        stroke-dashoffset: 0; /* Fully visible */
-    }
-    100% {
-        stroke-dashoffset: 1200; /* Hidden */
-    }
+	0% {
+		stroke-dashoffset: 0; /* Fully visible */
+	}
+	100% {
+		stroke-dashoffset: 1200; /* Hidden */
+	}
 }
 
 #aufstellungGoalline {
-    position: absolute;
-    left: 1600px;
-    top: 230px;
-    z-index: 5;
-    stroke-dasharray: 1200; /* Large value for the full length of the paths/lines */
-    stroke-dashoffset: 1200; /* Initially hidden */
+	position: absolute;
+	left: 1600px;
+	top: 230px;
+	z-index: 5;
+	stroke-dasharray: 1200; /* Large value for the full length of the paths/lines */
+	stroke-dashoffset: 1200; /* Initially hidden */
 }
 
 #aufstellungTeamname {
-    font-size: 60px;
-    margin: 30px;
-    position: relative;
-    top: 50px;
+	font-size: 60px;
+	margin: 30px;
+	position: relative;
+	top: 50px;
 }
 
 #aufstellungLogo {
-    position: relative;
-    top: -750px;
-    left: 1100px;
-    width: auto;
-    height: 300px;
-    transform: scale(0);
-    z-index: 10;
+	position: relative;
+	top: -750px;
+	left: 1100px;
+	width: auto;
+	height: 300px;
+	transform: scale(0);
+	z-index: 10;
 }
 
 @keyframes growImage {
-    0% {
-        transform: scale(0); /* Fully hidden (small size) */
-        opacity: 0;          /* Invisible */
-    }
-    100% {
-        transform: scale(1); /* Full size */
-        opacity: 1;          /* Fully visible */
-    }
+	0% {
+		transform: scale(0); /* Fully hidden (small size) */
+		opacity: 0; /* Invisible */
+	}
+	100% {
+		transform: scale(1); /* Full size */
+		opacity: 1; /* Fully visible */
+	}
 }
 
 @keyframes hideImage {
-    0% {
-        transform: scale(1); /* Full size */
-        opacity: 1;          /* Fully visible */
-    }
-    100% {
-        transform: scale(0); /* Fully hidden (small size) */
-        opacity: 0;          /* Invisible */
-    }
+	0% {
+		transform: scale(1); /* Full size */
+		opacity: 1; /* Fully visible */
+	}
+	100% {
+		transform: scale(0); /* Fully hidden (small size) */
+		opacity: 0; /* Invisible */
+	}
 }
 
 #aufstellungPlayersBox {
-    position: fixed;
-    width: 1300px;
-    height: 600px;
-    padding: 10px;
-    margin: 0;
-    top: 350px;
-    left: 600px;
+	position: fixed;
+	width: 1300px;
+	height: 600px;
+	padding: 10px;
+	margin: 0;
+	top: 350px;
+	left: 600px;
 }
 
 .players {
-    font-size: 30px;
-    margin: 50px;
-    padding: 5px;
-    display: inline-block;
-    float: left;
-    text-align: center;
+	font-size: 30px;
+	margin: 50px;
+	padding: 5px;
+	display: inline-block;
+	float: left;
+	text-align: center;
 }
 
 .players td {
-    padding: 5px;
+	padding: 5px;
 }
 
-
 .playerFirstName {
-    font-family: DFBSans-Italic, sans-serif;
+	font-family: DFBSans-Italic, sans-serif;
 }
 
 .playerLastName {
-    font-family: DFBSans-BoldItalic, sans-serif;
-}
-
-#referees {
-    text-align: center;
-    font-size: 30px;
-    position: absolute;
-    width: 100%;
-    top: 650px;
-}
-
-.refsTable {
-    display: inline-block;
-    border-collapse: collapse;
-}
-
-.refBox {
-    text-align: center;
-    vertical-align: middle;
-    display: table-row-group;
-    clip-path: inset(0 0 0 100%);
+	font-family: DFBSans-BoldItalic, sans-serif;
 }
 
 @keyframes revealToRight {
-    0% {
-        clip-path: inset(0 100% 0 0); /* Completely hidden */
-    }
-    100% {
-        clip-path: inset(0 0 0 0); /* Fully visible */
-    }
+	0% {
+		clip-path: inset(0 100% 0 0); /* Completely hidden */
+	}
+	100% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
 }
 
 @keyframes revealToRightOut {
-    0% {
-        clip-path: inset(0 0 0 0); /* Fully visible */
-    }
-    100% {
-        clip-path: inset(0 100% 0 0); /* Completely hidden */
-    }
+	0% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
+	100% {
+		clip-path: inset(0 100% 0 0); /* Completely hidden */
+	}
 }
 
-
 @keyframes revealToLeft {
-    0% {
-        clip-path: inset(0 0 0 100%); /* Completely hidden */
-    }
-    100% {
-        clip-path: inset(0 0 0 0); /* Fully visible */
-    }
+	0% {
+		clip-path: inset(0 0 0 100%); /* Completely hidden */
+	}
+	100% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
 }
 
 @keyframes revealToLeftOut {
-    0% {
-        clip-path: inset(0 0 0 0); /* Fully visible */
-    }
-    100% {
-        clip-path: inset(0 0 0 100%); /* Completely hidden */
-    }
+	0% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
+	100% {
+		clip-path: inset(0 0 0 100%); /* Completely hidden */
+	}
 }
 
 @keyframes revealCenter {
-    0% {
-        clip-path: inset(0 50% 0 50%); /* Completely hidden */
-    }
-    100% {
-        clip-path: inset(0 0 0 0); /* Fully visible */
-    }
+	0% {
+		clip-path: inset(0 50% 0 50%); /* Completely hidden */
+	}
+	100% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
 }
 
 @keyframes revealCenterOut {
-    0% {
-        clip-path: inset(0 0 0 0); /* Fully visible */
-    }
-    100% {
-        clip-path: inset(0 50% 0 50%); /* Completely hidden */
-    }
+	0% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
+	100% {
+		clip-path: inset(0 50% 0 50%); /* Completely hidden */
+	}
 }
 
-.refImage {
-    position: static;
-    left: 50%;
+#referees {
+	top: 750px;
 }
 
-.refBox td {
-    padding: 10px;
-}
-
-.refBox tr {
-    border: none;
+.refsTable {
+	display: inline-block;
+	border-collapse: collapse;
 }
 
 #referee1Box {
-    background: linear-gradient(to right, var(--futsal-blue-1) 25%, var(--futsal-blue-2));
+	clip-path: inset(0 50% 0 50%);
 }
 
-#referee2Box {
-    background: var(--futsal-blue-2);
+#referee1Text {
+	font-size: 30px;
 }
 
-#referee3Box {
-    background: var(--futsal-accent);
+#refAdditionalContent,
+#refAdditionalBackground,
+#refUpAdditionalBackground {
+	height: 130px;
 }
 
-#referee4Box {
-    background: #212121;
+#referee2Text,
+#referee3Text,
+#referee4Text {
+	position: relative;
+	font-size: 25px;
+	line-height: 42px;
+	padding: 20px 10px;
+}
+
+#refSubContent {
+	clip-path: inset(0 0 100% 0);
+}
+
+#refUpAdditionalBackground,
+#refAdditionalContent {
+	clip-path: inset(100% 0 0 0);
 }
 
 #bottomScore {
-    position: absolute;
-    top: 900px;
-    width: 1920px;
-    height: 80px;
-    clip-path: inset(0 50% 0 50%);
+	position: absolute;
+	top: 900px;
+	width: 1920px;
+	height: 80px;
+	clip-path: inset(0 50% 0 50%);
 }
 
-
 #bottomScoreWrapper {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-direction: row;
 }
 
 #bottomScoreBackground {
-    vertical-align: middle;
-    text-align: center;
-    height: 80px;
-    width: 1400px;
-    background: linear-gradient(to left, var(--futsal-blue-1) 50%, var(--futsal-blue-2));
-    border-radius: 15px 15px 15px 15px;
-    position: relative;
-    overflow: hidden;
+	vertical-align: middle;
+	text-align: center;
+	height: 80px;
+	width: 1400px;
+	background: linear-gradient(to left, var(--futsal-blue-1) 50%, var(--futsal-blue-2));
+	border-radius: 15px 15px 15px 15px;
+	position: relative;
+	overflow: hidden;
 }
 
 #bottomSpielfeldCircle {
-    width: 200px; /* Width of the circle */
-    height: 100px; /* Height of the circle */
+	width: 200px; /* Width of the circle */
+	height: 100px; /* Height of the circle */
 }
 
 #bottomContent {
-    position: absolute;
-    display: inline-block;
-    height: 80px;
-    width: 1400px;
+	position: absolute;
+	display: inline-block;
+	height: 80px;
+	width: 1400px;
 }
 
 .bigTeamImage {
-    width: auto;
-    height: 70px;
-    z-index: 1;
-    padding: 5px;
-    position: relative;
+	width: auto;
+	height: 70px;
+	z-index: 1;
+	padding: 5px;
+	position: relative;
+	transform: scale(0);
+	opacity: 0;
 }
 
-#bigHomeImage{
-    left: 20px;
+#bigHomeImage {
+	left: 20px;
 }
 
-#bigAwayImage{
-    left: 1240px;
+#bigAwayImage {
+	left: 1240px;
 }
 
 .bigTeamName {
-    position: absolute;
-    height: 70px;
-    width: 480px;
-    font-size: 37px;
-    text-align: center;
-    line-height: 70px;
-    vertical-align: middle;
-    padding: 5px;
+	position: absolute;
+	height: 70px;
+	width: 480px;
+	font-size: 37px;
+	text-align: center;
+	line-height: 70px;
+	vertical-align: middle;
+	padding: 5px;
 }
 
 #bigHomeName {
-    left: 100px;
+	left: 100px;
 }
 
 #bigAwayName {
-    left: 810px;
+	left: 810px;
 }
 
 .bigTeamScore {
-    z-index: 1;
-    position: absolute;
-    font-size: 80px;
-    font-family: DFBSans-Bold, sans-serif;
-    height: 70px;
-    width: auto;
-    line-height: 65px;
-    vertical-align: middle;
-    padding: 5px;
+	z-index: 1;
+	position: absolute;
+	font-size: 80px;
+	font-family: DFBSans-Bold, sans-serif;
+	height: 70px;
+	width: auto;
+	line-height: 65px;
+	vertical-align: middle;
+	padding: 5px;
 }
 
 #bigHomeScore {
-    left: 625px;
+	left: 625px;
 }
 
 #bigAwayScore {
-    left: 717px;
+	left: 717px;
 }
 
-
-#lowerThrid {
-    position: absolute;
-    top: 900px;
-    width: 1920px;
-    height: 100px;
+.lowerThird {
+	position: absolute;
+	top: 900px;
+	width: 1920px;
+	height: 100px;
 }
 
-
-.lowerThridContent {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
+.lowerThirdContent {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-direction: column;
 }
 
 #lowerMainContent {
-    position: relative;
-    clip-path: inset(0 100% 0 0);
+	clip-path: inset(0 100% 0 0);
 }
 
 #lowerSubContent {
-    position: relative;
-    clip-path: inset(0 0 100% 0);
+	clip-path: inset(0 0 100% 0);
 }
 
 .lowerContent {
-    height: 50px;
-    width: 400px;
+	position: relative;
+	height: 50px;
+	width: 400px;
+	vertical-align: middle;
+	text-align: center;
 }
 
-#lowerMainBackground {
-    vertical-align: middle;
-    text-align: center;
-    height: 50px;
-    width: 400px;
-    background: var(--futsal-blue-1);
-    position: absolute;
-    overflow: hidden;
+.mainBackground {
+	height: 50px;
+	width: 400px;
+	background: var(--futsal-blue-1);
+	position: absolute;
+	overflow: hidden;
 }
 
 .lowerText {
-    position: absolute;
-    width: 400px;
-    height: 50px;
-    vertical-align: middle;
-    text-align: center;
-    line-height: 50px;
+	position: relative;
+	width: 400px;
+	height: 50px;
+	vertical-align: middle;
+	text-align: center;
+	line-height: 50px;
 }
 
 #lowerMainText {
-    font-size: 30px;
+	font-size: 30px;
 }
 
-#lowerSubBackground {
-    height: 50px;
-    width: 400px;
-    background: var(--futsal-blue-2);
-    position: absolute;
+#refSubText {
+	font-size: 25px;
+	font-family: 'DFB Sans Ofc';
 }
 
-#lowerSubAdditionalBackground {
-    height: 50px;
-    width: 400px;
-    background: white;
-    position: absolute;
-    z-index: -1;
-    clip-path: inset(0 0 100% 0);
+.lowerSubBackground {
+	height: 50px;
+	width: 400px;
+	background: var(--futsal-blue-2);
+	position: absolute;
+}
+
+.lowerSubAdditionalBackground {
+	height: 50px;
+	width: 400px;
+	background: white;
+	position: absolute;
+	z-index: -1;
+	clip-path: inset(0 0 100% 0);
 }
 
 #lowerSubText {
-    font-family: "DFBSans-Italic";
-    font-size: 25px;
+	font-family: 'DFBSans-Italic';
+	font-size: 25px;
 }
 
 @keyframes revealDown {
-    0% {
-        clip-path: inset(0 0 100% 0); /* Completely hidden */
-    }
-    100% {
-        clip-path: inset(0 0 0 0); /* Fully visible */
-    }
+	0% {
+		clip-path: inset(0 0 100% 0); /* Completely hidden */
+	}
+	100% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
 }
 
 @keyframes revealDownOut {
-    0% {
-        clip-path: inset(0 0 0 0); /* Fully visible */
-    }
-    100% {
-        clip-path: inset(0 0 100% 0); /* Completely hidden */
-    }
+	0% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
+	100% {
+		clip-path: inset(0 0 100% 0); /* Completely hidden */
+	}
 }
 
+@keyframes revealUp {
+	0% {
+		clip-path: inset(100% 0 0 0); /* Completely hidden */
+	}
+	100% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
+}
 
-
+@keyframes revealUpOut {
+	0% {
+		clip-path: inset(0 0 0 0); /* Fully visible */
+	}
+	100% {
+		clip-path: inset(100% 0 0 0); /* Completely hidden */
+	}
+}
 
 #ties {
-    position: absolute;
+	position: absolute;
 }
 
 .tieImg {
-    position: absolute;
-    top: 25px;
+	position: absolute;
+	top: 25px;
 }
 
 #watermark {
-    opacity: 0.2;
+	opacity: 0.2;
 }
 
 .blend {
-    display: none;
+	display: none;
 }
 
 .tieContent {
-    position: absolute;
-    overflow: hidden;
-    box-sizing: border-box;
-    height: 120px;
-    padding: 25px;
-    top: 900px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 70px;
-    font-size: 40px;
-    border-radius: 25px;
-    background: #59aadf;
-    white-space: nowrap;
-    letter-spacing: 2px;
-    max-width: 1500px;
+	position: absolute;
+	overflow: hidden;
+	box-sizing: border-box;
+	height: 120px;
+	padding: 25px;
+	top: 900px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 70px;
+	font-size: 40px;
+	border-radius: 25px;
+	background: #59aadf;
+	white-space: nowrap;
+	letter-spacing: 2px;
+	max-width: 1500px;
 }
 
-#tiesLeftContent, #tiesExtraContent {
-    left: 240px;
+#tiesLeftContent,
+#tiesExtraContent {
+	left: 240px;
 }
 
 #tiesRightContent {
-    left: 1200px;
-    direction: rtl;
+	left: 1200px;
+	direction: rtl;
 }

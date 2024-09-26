@@ -1,22 +1,22 @@
 html {
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .teamScore {
-    z-index: 1;
-    position: absolute;
-    font-size: 300px;
-    top: 455px;
-    font-family: DFBSans-Bold, sans-serif;
+	z-index: 1;
+	position: absolute;
+	font-size: 300px;
+	top: 455px;
+	font-family: DFBSans-Bold, sans-serif;
 }
 
 #homeScore {
-    left: 710px;
+	left: 710px;
 }
 
 #awayScore {
-    left: 1020px;
+	left: 1020px;
 }

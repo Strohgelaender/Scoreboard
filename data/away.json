@@ -1,9 +1,8 @@
 {
-  "name": "Jahn Regensburg",
-  "fullName":  "SSV Jahn Regensburg Futsal",
-  "shirtColor": "#ff0000",
-  "imagePath": "/images/logo_jahn_futsal_weiss.png",
-  "coach": "",
-  "players": {
-  }
+	"name": "Jahn Regensburg",
+	"fullName": "SSV Jahn Regensburg Futsal",
+	"shirtColor": "#ff0000",
+	"imagePath": "/images/logo_jahn_futsal_weiss.png",
+	"coach": "",
+	"players": {}
 }

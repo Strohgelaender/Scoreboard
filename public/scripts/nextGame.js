@@ -2,7 +2,7 @@
 
 $(() => {
 	const loc = window.location;
-	const new_uri = `${(loc.protocol === "https:") ? "wss:" : "ws:"}//${loc.host}/ws`;
+	const new_uri = `${loc.protocol === 'https:' ? 'wss:' : 'ws:'}//${loc.host}/ws`;
 
 	console.log(new_uri);
 
@@ -11,13 +11,11 @@ $(() => {
 		const data = JSON.parse(msg.data);
 		console.log(data);
 		if (data.current) {
-
 		}
 
 		if (data.next) {
 			$('#team').text(data.next.team);
 			$('#time').text(data.next.time);
 		}
-
-	}
+	};
 });

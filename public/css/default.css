@@ -1,27 +1,27 @@
 @font-face {
-    font-family: DFBSans-Bold;
-    src: url(/fonts/DFBSansWeb-Bold.ttf);
+	font-family: DFBSans-Bold;
+	src: url(/fonts/DFBSansWeb-Bold.ttf);
 }
 
 @font-face {
-    font-family: DFBSans-BoldItalic;
-    src: url(/fonts/DFBSansWeb-BoldItalic.ttf);
+	font-family: DFBSans-BoldItalic;
+	src: url(/fonts/DFBSansWeb-BoldItalic.ttf);
 }
 
 @font-face {
-    font-family: DFBSans-Italic;
-    src: url(/fonts/DFBSansWeb-RegularItalic.ttf);
+	font-family: DFBSans-Italic;
+	src: url(/fonts/DFBSansWeb-RegularItalic.ttf);
 }
 
 html {
-    font-family: DFBSans-BoldItalic, DFBSans-Bold, Anton, Oxygen, sans-serif;
-    color: white;
-    overflow: hidden;
+	font-family: DFBSans-BoldItalic, DFBSans-Bold, Anton, Oxygen, sans-serif;
+	color: white;
+	overflow: hidden;
 }
 
 :root {
-    --futsal-blue-1: #003246;
-    --futsal-blue-2: #1eb4c8;
-    --futsal-accent: #6edce6;
-    --futsal-grey: #ebf0f6;
+	--futsal-blue-1: #003246;
+	--futsal-blue-2: #1eb4c8;
+	--futsal-accent: #6edce6;
+	--futsal-grey: #ebf0f6;
 }

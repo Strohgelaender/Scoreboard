@@ -1,9 +1,8 @@
 {
-  "name": "Beton Boys",
-  "fullName": "Beton Boys München",
-  "shirtColor": "#ffffff",
-  "imagePath": "/images/Vereinlogo BB cut.png",
-  "coach": "Franjo Ereiz",
-  "players": {
-  }
+	"name": "Beton Boys",
+	"fullName": "Beton Boys München",
+	"shirtColor": "#ffffff",
+	"imagePath": "/images/Vereinlogo BB cut.png",
+	"coach": "Franjo Ereiz",
+	"players": {}
 }

@@ -1,29 +1,29 @@
 {
-  "name": "Beton Boys",
-  "fullName": "Beton Boys München",
-  "shirtColor": "#ffffff",
-  "imagePath": "/images/Vereinlogo BB cut.png",
-  "coach": "",
-  "players": {
-    "12": {
-      "firstname": "Petar",
-      "lastname": "Dzalto"
-    },
-    "2": {
-      "firstname": "Tino",
-      "lastname": "Pticar"
-    },
-    "3": {
-        "firstname": "Mirza",
-        "lastname": "Idrizovic"
-    },
-    "8": {
-        "firstname": "Burhan",
-        "lastname": "Mustafov"
-    },
-    "11": {
-        "firstname": "Andrej",
-        "lastname": "Skoro"
-    }
-  }
+	"name": "Beton Boys",
+	"fullName": "Beton Boys München",
+	"shirtColor": "#ffffff",
+	"imagePath": "/images/Vereinlogo BB cut.png",
+	"coach": "",
+	"players": {
+		"12": {
+			"firstname": "Petar",
+			"lastname": "Dzalto"
+		},
+		"2": {
+			"firstname": "Tino",
+			"lastname": "Pticar"
+		},
+		"3": {
+			"firstname": "Mirza",
+			"lastname": "Idrizovic"
+		},
+		"8": {
+			"firstname": "Burhan",
+			"lastname": "Mustafov"
+		},
+		"11": {
+			"firstname": "Andrej",
+			"lastname": "Skoro"
+		}
+	}
 }

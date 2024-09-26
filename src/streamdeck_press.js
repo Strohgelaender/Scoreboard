@@ -1,14 +1,14 @@
 //TODO really really bad idea, just copied
 //TODO DELTE THIS !!!!
-import {openStreamDeck} from "elgato-stream-deck";
-import path from "path";
-import sharp from "sharp";
-import readline from "readline";
-import {sendEvent} from "./index";
+import { openStreamDeck } from 'elgato-stream-deck';
+import path from 'path';
+import sharp from 'sharp';
+import readline from 'readline';
+import { sendEvent } from './index';
 
 const rl = readline.createInterface({
 	input: process.stdin,
-	output: process.stdout
+	output: process.stdout,
 });
 const streamDeck = openStreamDeck();
 
@@ -16,39 +16,39 @@ const SHOW_EDIN = 0;
 const SHOW_BERNHARD = 1;
 const SHOW_BOTH = 2;
 
-streamDeck.on('down', keyIndex => {
+streamDeck.on('down', (keyIndex) => {
 	console.log('key %d down', keyIndex);
-		switch (keyIndex) {
-			case SHOW_EDIN:
-				sendEvent({
-					eventType: 'SHOW_LEFT'
-				});
-				break;
-			case SHOW_BERNHARD:
-				sendEvent({
-					eventType: 'SHOW_RIGHT'
-				});
-				break;
-			case SHOW_BOTH:
-				sendEvent({
-					eventType: 'SHOW_NAMES'
-				});
-				break;
-		}
+	switch (keyIndex) {
+		case SHOW_EDIN:
+			sendEvent({
+				eventType: 'SHOW_LEFT',
+			});
+			break;
+		case SHOW_BERNHARD:
+			sendEvent({
+				eventType: 'SHOW_RIGHT',
+			});
+			break;
+		case SHOW_BOTH:
+			sendEvent({
+				eventType: 'SHOW_NAMES',
+			});
+			break;
+	}
 });
 
-streamDeck.on('up', keyIndex => {
+streamDeck.on('up', (keyIndex) => {
 	console.log('key %d up', keyIndex);
 });
 
-streamDeck.on('error', error => {
+streamDeck.on('error', (error) => {
 	console.error(error);
 });
 
-rl.on('line', input => {
+rl.on('line', (input) => {
 	sendEvent({
 		eventType: 'SHOW_EXTRA',
-		text: input
+		text: input,
 	});
 });
 

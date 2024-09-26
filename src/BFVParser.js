@@ -1,21 +1,21 @@
-import axios from "axios";
-import {parse} from "node-html-parser";
+import axios from 'axios';
+import { parse } from 'node-html-parser';
 
 //http://www.fussball.de/ajax.fixtures.tournament/-/action/OPEN/staffel/02C96CGFVK000001VS5489B4VSC3ER83-G
 const games = axios.create({
-	baseURL: 'https://www.bfv.de/partial/wettbewerb/spieltag/02C96CGFVK000001VS5489B4VSC3ER83-G'
+	baseURL: 'https://www.bfv.de/partial/wettbewerb/spieltag/02C96CGFVK000001VS5489B4VSC3ER83-G',
 });
 
 const table = axios.create({
-	baseURL: 'https://www.bfv.de/partial/wettbewerb/tabelle/02C96CGFVK000001VS5489B4VSC3ER83-G/tabelle'
+	baseURL: 'https://www.bfv.de/partial/wettbewerb/tabelle/02C96CGFVK000001VS5489B4VSC3ER83-G/tabelle',
 });
 
 const goalgetterTable = axios.create({
-	baseURL: 'https://apiwrapper.bfv.de/wettbewerb/02C96CGFVK000001VS5489B4VSC3ER83-G/torschuetzen'
+	baseURL: 'https://apiwrapper.bfv.de/wettbewerb/02C96CGFVK000001VS5489B4VSC3ER83-G/torschuetzen',
 });
 
 const gameDetails = axios.create({
-	baseURL: 'https://www.bfv.de/partial/spieldetail/aufstellung'
+	baseURL: 'https://www.bfv.de/partial/spieldetail/aufstellung',
 });
 
 //https://www.bfv.de/partial/spieldetail/aufstellung/02C96UVFTS000000VS5489B3VU44J0GP
@@ -85,15 +85,15 @@ export async function createTableData() {
 }
 
 export async function createGoalgetterTable() {
-    return (await goalgetterTable.get('')).data.results;
+	return (await goalgetterTable.get('')).data.results;
 }
 
 async function createPlayers(gameId) {
 	const result = {
 		homeTeam: {},
-		awayTeam: {}
+		awayTeam: {},
 	};
-	const response = (await gameDetails.get('/'+gameId)).data;
+	const response = (await gameDetails.get('/' + gameId)).data;
 	const data = parse(response);
 
 	for (const compositionPart of data.querySelectorAll('.bfv-composition__composition-wrapper')) {
@@ -136,8 +136,7 @@ async function createPlayers(gameId) {
 				}
 			}
 			const resultTeam = result[homeTeam ? 'homeTeam' : 'awayTeam'];
-			if (!resultTeam.name && teamName)
-				resultTeam.name = teamName;
+			if (!resultTeam.name && teamName) resultTeam.name = teamName;
 
 			resultTeam[attributeName] = players;
 			homeTeam = false;
