@@ -120,7 +120,7 @@ function toggleBigScoreboard() {
 
 function toggleLowerThird() {
 	if (!showingLowerThird) {
-		$('#lowerMainContent').css('animation', 'revealToRight 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#lowerMainContent').css('animation', 'revealCenter 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		$('#lowerMainText').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
 			$('#lowerSubAdditionalBackground').css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
@@ -132,7 +132,7 @@ function toggleLowerThird() {
 			$('#lowerSubAdditionalBackground').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		}, 200);
 		setTimeout(() => {
-			$('#lowerMainContent').css('animation', 'revealToRightOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			$('#lowerMainContent').css('animation', 'revealCenterOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 			$('#lowerMainText').css('animation', 'opacityOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		}, 600);
 	}
