@@ -9,9 +9,10 @@
 		<script src="/scripts/vendor/textFit.js" defer></script>
 		<script src="/scripts/eventSocket.js" defer></script>
 		<script src="/scripts/scoreboard.js" defer></script>
+		<script src="/scripts/timer.js" defer></script>
 	</head>
 	<body>
-		<div id="scoreboard">
+		<div id="scoreboard" style="display:none;">
 			<img id="scoreboardImage" src="/images/scoreboardBL2.png" alt="Spielstand_Background" />
 			<div id="homeImageBox" class="teamImageBox">
 				<img id="homeImage" class="teamImage" src="/image/home" alt="Home Team" />
@@ -32,6 +33,37 @@
 			</div>
 			<div id="awayFoulsBox" class="foulsBox" style="display: none">
 				<span id="awayFouls" class="fouls">0</span>
+			</div>
+		</div>
+
+		<div id="scoreboardTime">
+			<img id="scoreboardImageTime" src="/images/Scoreboard_Timer.png" alt="Spielstand_Background" />
+			<svg id="scoreboardSpielfeldCircle" width="120" height="100" viewBox="0 0 100 100">
+				<circle cx="100" cy="100" r="75" fill="none" stroke="#0088f7" stroke-width="4" transform="rotate(90 100 46)" />
+				<line x1="50" y1="0" x2="50" y2="100" stroke="#0088f7" stroke-width="4" />
+			</svg>
+			<div id="timeBox">
+				<span id="time" class="time">00:00</span>
+			</div>
+			<div id="homeTimeImageBox" class="teamImageBox">
+				<img id="homeTimeImage" class="teamImage" src="/image/home" alt="Home Team" />
+			</div>
+			<div id="homeTimeNameBox" class="teamNameBox">
+				<span id="homeTimeName" class="teamName">Home</span>
+			</div>
+			<span id="homeTimeScore" class="teamScore">0</span>
+			<span id="awayTimeScore" class="teamScore">0</span>
+			<div id="awayTimeNameBox" class="teamNameBox">
+				<span id="awayTimeName" class="teamName">Away</span>
+			</div>
+			<img id="awayTimeImage" class="teamImage" src="/image/away" alt="Away Team" />
+			<div id="homeTimeShirtLine" class="shirtLine"></div>
+			<div id="awayTimeShirtLine" class="shirtLine"></div>
+			<div id="homeTimeFoulsBox" class="foulsBox" style="display: none">
+				<span id="homeTimeFouls" class="fouls">0</span>
+			</div>
+			<div id="awayTimeFoulsBox" class="foulsBox" style="display: none">
+				<span id="awayTimeFouls" class="fouls">0</span>
 			</div>
 		</div>
 

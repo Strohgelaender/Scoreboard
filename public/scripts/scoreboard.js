@@ -8,6 +8,7 @@ let showingLowerThird = false;
 let fullNames;
 let teamImages;
 
+
 $(() => {
 	loadTeams();
 });
@@ -26,10 +27,18 @@ function loadTeams() {
 
 			$('#homeName').text(home.name);
 			$('#awayName').text(away.name);
+			$('#homeTimeName').text(home.name);
+			$('#awayTimeName').text(away.name);
+
 			$('#bigHomeName').text(home.fullName);
 			$('#bigAwayName').text(away.fullName);
+
 			$(`#homeShirtLine`).css('background-color', home.shirtColor);
 			$(`#awayShirtLine`).css('background-color', away.shirtColor);
+			$(`#homeTimeShirtLine`).css('background-color', home.shirtColor);
+			$(`#awayTimeShirtLine`).css('background-color', away.shirtColor);
+
+			startTimer();
 		})
 		.catch((error) => {
 			console.log(error);
@@ -81,13 +90,14 @@ function handleEventInternal(event) {
 			updateFouls();
 			break;
 	}
+	handleTimerEvent(event);
 }
 
 function toggleScoreboard() {
 	if (!showingSmallScoreboard) {
-		$('#scoreboard').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#scoreboardTime').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	} else {
-		$('#scoreboard').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#scoreboardTime').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	}
 	showingSmallScoreboard = !showingSmallScoreboard;
 }
@@ -148,16 +158,20 @@ function updateScoreboardInternal() {
 function updateScore() {
 	$('#bigHomeScore').text(scoreHome);
 	$('#bigAwayScore').text(scoreAway);
+	$('#homeTimeScore').text(scoreHome);
+	$('#awayTimeScore').text(scoreAway);
 }
 
 function doubleDigitAdjustments() {
 	if (scoreHome >= 10) {
 		$('#bigHomeScore').css('left', '600px');
 		$('#homeScore').css('left', '355px');
+		// TODO time score
 	}
 	if (scoreAway >= 10) {
 		$('#bigAwayScore').css('left', '695px');
 		$('#awayScore').css('left', '390px');
+		// TODO time score
 	}
 }
 
