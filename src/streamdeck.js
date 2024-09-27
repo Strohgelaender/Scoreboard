@@ -72,22 +72,24 @@ rl.on('line', (input) => {
 		case 'SCOREBOARD':
 		case 'TOGGLE_SCOREBOARD':
 		case 'TOGGLE':
-			sendEvent({
-				eventType: 'TOGGLE_SCOREBOARD',
-			});
+			sendStandaloneEvent('TOGGLE_SCOREBOARD');
 			return;
 		case 'BOTTOM':
 		case 'BOTTOM_SCOREBOARD':
 		case 'BIG':
-			sendEvent({
-				eventType: 'SHOW_BOTTOM_SCOREBOARD',
-			});
+			sendStandaloneEvent('SHOW_BOTTOM_SCOREBOARD');
 			return;
 		case 'CASTER':
 		case 'LOWER':
-			sendEvent({
-				eventType: 'CASTER',
-			});
+			sendStandaloneEvent('CASTER');
+			return;
+		case 'START':
+		case 'START_TIMER':
+			sendStandaloneEvent('START_TIMER');
+			return;
+		case 'RESET':
+		case 'RESET_TIMER':
+			sendStandaloneEvent('RESET_TIMER');
 			return;
 	}
 
@@ -198,8 +200,13 @@ function showLineup() {
 
 function showReferees() {
 	saveReferees().then(() => {
-		event.eventType = 'REFEREES';
-		sendAndReset(event);
+		sendStandaloneEvent('REFEREES');
+	});
+}
+
+function sendStandaloneEvent(type) {
+	sendEvent({
+		eventType: type,
 	});
 }
 
@@ -230,7 +237,7 @@ const numberImages = {
 	18: '9.png',
 	25: '0.png',
 	24: 'cancel.png',
-}
+};
 
 const IMAGES = {
 	[HOME_TEAM_KEY]: 'homeTeam.png',

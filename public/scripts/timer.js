@@ -1,17 +1,20 @@
-const defaultTime = (20 * 60) * 1000;
+const defaultTime = 20 * 60 * 1000;
 let endtime = null;
 let totaltime = null;
+let startDate = null;
 let stepper = null;
 
 function handleTimerEvent(event) {
 	switch (event.eventType) {
 		case 'START_TIMER':
-			startTimer();
+			if (stepper === null) {
+				startTimer();
+			} else {
+				pauseTimer();
+			}
 			break;
 		case 'RESET_TIMER':
-			resetTimer();
-			break;
-		case 'PAUSE_TIMER':
+			resetTimer(defaultTime, defaultTime);
 			break;
 		case 'ADD_TIME':
 			endtime += event.time;
@@ -20,7 +23,8 @@ function handleTimerEvent(event) {
 }
 
 function displayTime(d) {
-	let min = 0, sec = 0;
+	let min = 0,
+		sec = 0;
 
 	if (d > 0) {
 		const dd = d;
@@ -43,11 +47,13 @@ function displayTime(d) {
 	}
 }
 
-function startTimer(time = defaultTime, totalTime = defaultTime) {
-	totaltime = totalTime;
-	endtime = Date.now() + time;
-
-	stepper = setInterval(function() {
+function startTimer() {
+	if (totaltime === null) {
+		totaltime = defaultTime;
+	}
+	startDate = Date.now();
+	endtime = startDate + totaltime;
+	stepper = setInterval(function () {
 		displayTime(endtime - Date.now());
 	}, 100);
 }
@@ -57,6 +63,12 @@ function resetTimer(time, totalTime) {
 	displayTime(time);
 
 	clear();
+}
+
+function pauseTimer() {
+	totaltime = endtime - Date.now();
+	clearInterval(stepper);
+	stepper = null;
 }
 
 function clear() {

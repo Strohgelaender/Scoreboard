@@ -8,7 +8,6 @@ let showingLowerThird = false;
 let fullNames;
 let teamImages;
 
-
 $(() => {
 	loadTeams();
 });
@@ -37,8 +36,6 @@ function loadTeams() {
 			$(`#awayShirtLine`).css('background-color', away.shirtColor);
 			$(`#homeTimeShirtLine`).css('background-color', home.shirtColor);
 			$(`#awayTimeShirtLine`).css('background-color', away.shirtColor);
-
-			startTimer();
 		})
 		.catch((error) => {
 			console.log(error);
@@ -123,7 +120,6 @@ function toggleBigScoreboard() {
 		$('#bigHomeScore').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		$('#bigAwayScore').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottomOut 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-
 	}
 	showingBigScoreboard = !showingBigScoreboard;
 }

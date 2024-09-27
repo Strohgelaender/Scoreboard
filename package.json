@@ -8,7 +8,8 @@
 		"dev": "nodemon src/streamdeck.js",
 		"lineup": "node src/AufstellungParser.js",
 		"lineup:dev": "nodemon src/AufstellungParser.js",
-		"update": "ncu -i --format group"
+		"update": "ncu -i --format group",
+		"prettier": "npx prettier . --write"
 	},
 	"author": "Strohgelaender",
 	"type": "module",
