@@ -172,8 +172,8 @@ function doubleDigitAdjustments() {
 }
 
 function updateFouls() {
-	updateFoulsContent($('#homeFoulsBox'), $('#homeFouls'), foulsHome);
-	updateFoulsContent($('#awayFoulsBox'), $('#awayFouls'), foulsAway);
+	updateFoulsContent($('#homeTimeFoulsBox'), $('#homeTimeFouls'), foulsHome);
+	updateFoulsContent($('#awayTimeFoulsBox'), $('#awayTimeFouls'), foulsAway);
 }
 
 function updateFoulsContent(foulsBox, foulsText, fouls) {

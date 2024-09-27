@@ -198,6 +198,16 @@ html {
 	z-index: 5;
 }
 
+#homeTimeFoulsBox {
+    left: 300px;
+    background-color: #096780;
+}
+
+#awayTimeFoulsBox {
+    left: 600px;
+    background-color: #024359;
+}
+
 #timeBox {
 	width: 70px;
 	height: 55px;
