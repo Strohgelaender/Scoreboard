@@ -414,13 +414,13 @@ html {
 #bottomSpielfeldCircle {
 	width: 200px; /* Width of the circle */
 	height: 100px; /* Height of the circle */
-    stroke-dasharray: 1500;
-    stroke-dashoffset: 1500;
+    stroke-dasharray: 597;
+    stroke-dashoffset: 597;
 }
 
 @keyframes spielfeldBottom {
     0% {
-        stroke-dashoffset: 1500;
+        stroke-dashoffset: 597;
     }
     100% {
         stroke-dashoffset: 0;
@@ -432,7 +432,7 @@ html {
         stroke-dashoffset: 0;
     }
     100% {
-        stroke-dashoffset: 1500;
+        stroke-dashoffset: 597;
     }
 }
 
