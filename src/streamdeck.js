@@ -25,12 +25,18 @@ const OWN_GOAL_KEY = 27;
 const SCOREBOARD_VISIBILITY_KEY = 28;
 const CASTER_KEY = 29;
 
+const PAUSE_KEY = 0;
+const ADD_5_KEY = 1;
+const ADD_10_KEY = 2;
+const MINUS_5_KEY = 9;
+const MINUS_10_KEY = 10;
+
 //TODO public constants (wie hier und auch im Browser verwenden?)
 //TODO Paging?
 //TODO kominierte Keys Overlay + OBS (z.B. Replay mit eigenem Overlay)
 
 const DEFAULT_EVENT = {
-	number: '',
+	number: ''
 };
 
 let resetTime;
@@ -38,7 +44,7 @@ let event = { ...DEFAULT_EVENT };
 
 const rl = readline.createInterface({
 	input: process.stdin,
-	output: process.stdout,
+	output: process.stdout
 });
 
 rl.on('line', (input) => {
@@ -102,7 +108,7 @@ const EVENT_MAPPING = {
 	[GOAL_KEY]: 'GOAL',
 	[OWN_GOAL_KEY]: 'OWN_GOAL',
 	[FOUL_KEY]: 'FOUL',
-	[REMOVE_FOUL_KEY]: 'REMOVE_FOUL',
+	[REMOVE_FOUL_KEY]: 'REMOVE_FOUL'
 };
 
 async function main() {
@@ -152,24 +158,31 @@ async function main() {
 						showReferees();
 						return;
 					case SCOREBOARD_VISIBILITY_KEY:
-						sendEvent({
-							eventType: 'TOGGLE_SCOREBOARD',
-						});
+						sendStandaloneEvent('TOGGLE_SCOREBOARD');
 						return;
 					case SHOW_BOTTOM_SCOREBOARD_KEY:
-						sendEvent({
-							eventType: 'SHOW_BOTTOM_SCOREBOARD',
-						});
+						sendStandaloneEvent('SHOW_BOTTOM_SCOREBOARD');
 						return;
 					case CLEAR_FOULS_KEY:
-						sendEvent({
-							eventType: 'CLEAR_FOULS',
-						});
+						sendStandaloneEvent('CLEAR_FOULS');
 						return;
 					case CASTER_KEY:
-						sendEvent({
-							eventType: 'CASTER',
-						});
+						sendStandaloneEvent('CASTER');
+						return;
+					case PAUSE_KEY:
+						sendStandaloneEvent('START_TIMER');
+						return;
+					case ADD_5_KEY:
+						changeTime(5);
+						return;
+					case ADD_10_KEY:
+						changeTime(10);
+						return;
+					case MINUS_5_KEY:
+						changeTime(-5);
+						return;
+					case MINUS_10_KEY:
+						changeTime(-10);
 						return;
 				}
 			}
@@ -204,9 +217,16 @@ function showReferees() {
 	});
 }
 
+function changeTime(time) {
+	sendEvent({
+		eventType: 'ADD_TIME',
+		time
+	});
+}
+
 function sendStandaloneEvent(type) {
 	sendEvent({
-		eventType: type,
+		eventType: type
 	});
 }
 
@@ -236,7 +256,7 @@ const numberImages = {
 	17: '8.png',
 	18: '9.png',
 	25: '0.png',
-	24: 'cancel.png',
+	24: 'cancel.png'
 };
 
 const IMAGES = {
@@ -252,6 +272,7 @@ const IMAGES = {
 	[SHOW_REFEREES_KEY]: 'dfb-picto-schiriansetzung-rgb-white.png',
 	[SHOW_LINEUP_KEY]: 'lineup.png',
 	[CASTER_KEY]: 'microphone-342.png',
+	[PAUSE_KEY]: 'Basic_Element_15-30_(580).jpg'
 };
 
 async function loadKeyImages() {

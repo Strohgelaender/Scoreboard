@@ -17,7 +17,9 @@ function handleTimerEvent(event) {
 			resetTimer(defaultTime, defaultTime);
 			break;
 		case 'ADD_TIME':
-			endtime += event.time;
+			endtime += (event.time * 1000);
+			totaltime += (event.time * 1000);
+			displayTime(endtime - Date.now());
 			break;
 	}
 }
