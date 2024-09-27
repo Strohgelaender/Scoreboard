@@ -10,6 +10,8 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 
 let streamDeck;
 
+const showNumpad = false;
+
 const HOME_TEAM_KEY = 3;
 const AWAY_TEAM_KEY = 4;
 const FOUL_KEY = 11;
@@ -116,7 +118,7 @@ async function main() {
 			const keyIndex = control.index;
 			console.log('key %d down', keyIndex);
 
-			if (isNumberInput(keyIndex)) {
+			if (isNumberInput(keyIndex) && showNumpad) {
 				//Numpad Handler
 				const val = getNumberValue(keyIndex);
 				if (val !== -1) {
@@ -216,7 +218,7 @@ function getNumberValue(keyIndex) {
 	return Math.floor(keyIndex / 8) * 3 + (keyIndex % 8) + 1;
 }
 
-const IMAGES = {
+const numberImages = {
 	0: '1.png',
 	1: '2.png',
 	2: '3.png',
@@ -228,6 +230,9 @@ const IMAGES = {
 	18: '9.png',
 	25: '0.png',
 	24: 'cancel.png',
+}
+
+const IMAGES = {
 	[HOME_TEAM_KEY]: 'homeTeam.png',
 	[AWAY_TEAM_KEY]: 'awayTeam.png',
 	[FOUL_KEY]: 'whistle.png',
@@ -245,6 +250,11 @@ const IMAGES = {
 async function loadKeyImages() {
 	for (const key in IMAGES) {
 		loadImage(+key, IMAGES[key]);
+	}
+	if (showNumpad) {
+		for (const key in numberImages) {
+			loadImage(+key, numberImages[key]);
+		}
 	}
 }
 
