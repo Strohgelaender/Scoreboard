@@ -140,7 +140,7 @@ html {
 }
 
 #homeTimeImage {
-	left: 180px;
+	left: 183px;
 }
 
 #awayTimeImage {
@@ -196,6 +196,26 @@ html {
 	width: 90px;
 	height: 52px;
 	z-index: 5;
+    stroke-dasharray: 480;
+    stroke-dashoffset: 0;
+}
+
+@keyframes ScoreboardSpielfeldIn {
+    0% {
+        stroke-dashoffset: 480; /* Hidden */
+    }
+    100% {
+        stroke-dashoffset: 0; /* Fully visible */
+    }
+}
+
+@keyframes ScoreboardSpielfeldOut {
+    0% {
+        stroke-dashoffset: 0; /* Fully visible */
+    }
+    100% {
+        stroke-dashoffset: 480; /* Hidden */
+    }
 }
 
 #homeTimeFoulsBox {
