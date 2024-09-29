@@ -3,24 +3,44 @@ let endtime = null;
 let totaltime = null;
 let startDate = null;
 let stepper = null;
+let timeText = null;
+
+export default {
+	getTimeText,
+	handleTimerEvent,
+	resetTimer,
+	toggleTimer,
+	pauseTimer,
+	isRunning
+};
 
 function handleTimerEvent(event) {
 	switch (event.eventType) {
 		case 'START_TIMER':
-			if (stepper === null) {
-				startTimer();
-			} else {
-				pauseTimer();
-			}
-			break;
+			toggleTimer()
+			return true;
 		case 'RESET_TIMER':
-			resetTimer(defaultTime, defaultTime);
-			break;
+			resetTimer()
+			return true;
 		case 'ADD_TIME':
-			endtime += (event.time * 1000);
+			const now = Date.now();
 			totaltime += (event.time * 1000);
-			displayTime(endtime - Date.now());
-			break;
+			if (isRunning()) {
+				endtime += (event.time * 1000);
+			} else {
+				endtime = now + totaltime;
+			}
+			displayTime(endtime - now);
+			return true;
+	}
+	return false;
+}
+
+function toggleTimer() {
+	if (!isRunning()) {
+		startTimer();
+	} else {
+		pauseTimer();
 	}
 }
 
@@ -42,11 +62,15 @@ function displayTime(d) {
 	let text = '';
 	text = (min < 10 ? '0' : '') + min + ':';
 	text += (sec < 10 ? '0' : '') + sec;
-	$('#time').text(text);
+	timeText = text;
 
 	if (d <= 0) {
 		clear();
 	}
+}
+
+function getTimeText() {
+	return timeText;
 }
 
 function startTimer() {
@@ -60,10 +84,9 @@ function startTimer() {
 	}, 100);
 }
 
-function resetTimer(time, totalTime) {
+function resetTimer(time = defaultTime, totalTime = defaultTime) {
 	totaltime = totalTime;
 	displayTime(time);
-
 	clear();
 }
 
@@ -78,4 +101,8 @@ function clear() {
 	totaltime = null;
 	clearInterval(stepper);
 	stepper = null;
+}
+
+function isRunning() {
+	return stepper !== null;
 }

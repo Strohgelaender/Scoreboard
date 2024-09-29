@@ -4,6 +4,7 @@ import { tinyws } from 'tinyws';
 import fs from 'fs';
 import { OBSWebSocket } from 'obs-websocket-js';
 import { readLineup, readReferees } from './AufstellungParser.js';
+import timer from './timer.js';
 
 const debug = true;
 
@@ -104,6 +105,10 @@ app.get('/scores', (req, res) => {
 	res.send({ scoreHome, scoreAway, foulsHome, foulsAway });
 });
 
+app.get('/time', (req, res) => {
+	res.send(timer.getTimeText());
+});
+
 export async function updateLineup() {
 	if (!homeTeam.players?.length || !awayTeam.players?.length) {
 		const lineup = await readLineup();
@@ -123,6 +128,11 @@ export async function saveReferees() {
 export function sendEvent(event) {
 	const team = getTeam(event.team);
 	event.playerData = team?.players[event.number];
+
+	if (timer.handleTimerEvent(event)) {
+		// true if event got picked up by timer
+		return;
+	}
 
 	handleEventInternal(event);
 

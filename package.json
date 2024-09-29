@@ -23,7 +23,6 @@
 		"node-html-parser": "6.1.13",
 		"obs-websocket-js": "5.0.6",
 		"sharp": "0.33.5",
-		"timer-node": "^5.0.7",
 		"tinyws": "^0.1.0"
 	},
 	"devDependencies": {

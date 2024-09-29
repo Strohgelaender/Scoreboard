@@ -10,6 +10,9 @@ let teamImages;
 
 $(() => {
 	loadTeams();
+	setInterval(() => {
+		updateTimerFromServer();
+	}, 1000);
 });
 
 function loadTeams() {
@@ -40,6 +43,17 @@ function loadTeams() {
 		.catch((error) => {
 			console.log(error);
 		});
+}
+
+function updateTimerFromServer() {
+	$.ajax({
+		method: 'GET',
+		url: `/time`,
+	}).done((value) => {
+		$('#time').text(value.length ? value : '20:00');
+	}).catch((error) => {
+		console.log(error);
+	});
 }
 
 function handleEventInternal(event) {
@@ -87,7 +101,6 @@ function handleEventInternal(event) {
 			updateFouls();
 			break;
 	}
-	handleTimerEvent(event);
 }
 
 function toggleScoreboard() {
@@ -116,6 +129,7 @@ function toggleScoreboard() {
 }
 
 function toggleBigScoreboard() {
+	console.log('toggleBigScoreboard');
 	if (!showingBigScoreboard) {
 		$('#bottomScore').css('animation', 'revealCenter 2s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottom 2s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
