@@ -49,11 +49,13 @@ function updateTimerFromServer() {
 	$.ajax({
 		method: 'GET',
 		url: `/time`,
-	}).done((value) => {
-		$('#time').text(value.length ? value : '20:00');
-	}).catch((error) => {
-		console.log(error);
-	});
+	})
+		.done((value) => {
+			$('#time').text(value.length ? value : '20:00');
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 }
 
 function handleEventInternal(event) {

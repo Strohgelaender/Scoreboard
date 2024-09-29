@@ -11,22 +11,22 @@ export default {
 	resetTimer,
 	toggleTimer,
 	pauseTimer,
-	isRunning
+	isRunning,
 };
 
 function handleTimerEvent(event) {
 	switch (event.eventType) {
 		case 'START_TIMER':
-			toggleTimer()
+			toggleTimer();
 			return true;
 		case 'RESET_TIMER':
-			resetTimer()
+			resetTimer();
 			return true;
 		case 'ADD_TIME':
 			const now = Date.now();
-			totaltime += (event.time * 1000);
+			totaltime += event.time * 1000;
 			if (isRunning()) {
-				endtime += (event.time * 1000);
+				endtime += event.time * 1000;
 			} else {
 				endtime = now + totaltime;
 			}
