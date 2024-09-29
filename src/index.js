@@ -3,7 +3,7 @@ import express from 'express';
 import { tinyws } from 'tinyws';
 import fs from 'fs';
 import { OBSWebSocket } from 'obs-websocket-js';
-import { readLineup, readReferees } from './AufstellungParser.js';
+import { readLineup, readReferees, readTable } from './AufstellungParser.js';
 import timer from './timer.js';
 
 const debug = true;
@@ -18,6 +18,7 @@ const EVENT_FILE = `data/${new Date().toISOString().replace(/:/g, '-')}.json`;
 let homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
 let awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
 let referees = [];
+let table;
 
 let scoreHome = 0;
 let scoreAway = 0;
@@ -125,6 +126,12 @@ export async function saveReferees() {
 	}
 }
 
+export async function loadTable() {
+	if (!table) {
+		table = await readTable();
+	}
+}
+
 export function sendEvent(event) {
 	const team = getTeam(event.team);
 	event.playerData = team?.players[event.number];
@@ -135,12 +142,7 @@ export function sendEvent(event) {
 	}
 
 	handleEventInternal(event);
-
-	if (event.eventType === 'LINEUP') {
-		event.playerData = team.players;
-	} else if (event.eventType === 'REFEREES') {
-		event.playerData = referees;
-	}
+	addEventData(event, team);
 
 	if (eventWS.length === 0) {
 		console.log('Websocket not active yet');
@@ -155,6 +157,16 @@ export function sendEvent(event) {
 
 function getTeam(specifier) {
 	return specifier === 'HOME' ? homeTeam : awayTeam;
+}
+
+function addEventData(event, team) {
+	if (event.eventType === 'LINEUP') {
+		event.playerData = team.players;
+	} else if (event.eventType === 'REFEREES') {
+		event.playerData = referees;
+	} else if (event.eventType === 'TABLE') {
+		event.table = table;
+	}
 }
 
 function handleEventInternal(event) {

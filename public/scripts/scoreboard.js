@@ -5,6 +5,7 @@ let showingRefs = false;
 let showingSmallScoreboard = true;
 let showingBigScoreboard = false;
 let showingLowerThird = false;
+let showingTable = false;
 let fullNames;
 let teamImages;
 
@@ -101,6 +102,9 @@ function handleEventInternal(event) {
 		case 'REMOVE_FOUL':
 		case 'CLEAR_FOULS':
 			updateFouls();
+			break;
+		case 'TABLE':
+			showTable(event.table);
 			break;
 	}
 }
@@ -340,6 +344,35 @@ function showLowerThirds(selectorName) {
 	setTimeout(() => {
 		elems.fadeOut(1000);
 	}, 5000);
+}
+
+function showTable(table) {
+	// TODO animation
+	if (showingTable) {
+		$('.tableTeamRow').remove();
+	} else {
+		const tableContent = $('#tableTeams');
+		for (let i = 0; i < table.length; i++) {
+			createTableRow(table[i], tableContent, i);
+		}
+	}
+	showingTable = !showingTable;
+}
+
+function createTableRow(team, tableContent, i) {
+	const row = $('<tr class="tableTeamRow">');
+	const rank = $('<td>').text(team.rank);
+	if (i === 8) {
+		rank.addClass('relegation');
+	} else if (i === 9) {
+		rank.addClass('last');
+	}
+	row.append(rank);
+	row.append($('<td>').text(team.team));
+	row.append($('<td>').text(team.games));
+	row.append($('<td>').text(team.goalDiff));
+	row.append($('<td>').text(team.points));
+	tableContent.append(row);
 }
 
 const FONT_SIZE = 40;

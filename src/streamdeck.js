@@ -2,7 +2,7 @@ import { listStreamDecks, openStreamDeck } from '@elgato-stream-deck/node';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import { updateLineup, saveReferees, sendEvent } from './index.js';
+import { updateLineup, saveReferees, sendEvent, loadTable } from './index.js';
 import readline from 'readline';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -36,7 +36,7 @@ const MINUS_10_KEY = 10;
 //TODO kominierte Keys Overlay + OBS (z.B. Replay mit eigenem Overlay)
 
 const DEFAULT_EVENT = {
-	number: ''
+	number: '',
 };
 
 let resetTime;
@@ -96,6 +96,9 @@ rl.on('line', (input) => {
 		case 'RESET':
 		case 'RESET_TIMER':
 			sendStandaloneEvent('RESET_TIMER');
+			return;
+		case 'TABLE':
+			showTable();
 			return;
 	}
 
@@ -214,6 +217,12 @@ function showLineup() {
 function showReferees() {
 	saveReferees().then(() => {
 		sendStandaloneEvent('REFEREES');
+	});
+}
+
+function showTable() {
+	loadTable().then(() => {
+		sendStandaloneEvent('TABLE');
 	});
 }
 
