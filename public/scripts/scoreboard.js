@@ -12,7 +12,7 @@ $(() => {
 	loadTeams();
 	setInterval(() => {
 		updateTimerFromServer();
-	}, 1000);
+	}, 500);
 });
 
 function loadTeams() {
