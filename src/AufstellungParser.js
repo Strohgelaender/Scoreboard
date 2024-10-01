@@ -32,7 +32,7 @@ function parsePlayers(team) {
 			number: player.jersey_nr,
 			is_captain: player.is_captain,
 			is_keeper: player.is_keeper,
-			is_starting: player.is_starting,
+			is_starting: player.is_starting
 		};
 		players.push(result);
 	}
@@ -61,14 +61,41 @@ export async function readTable() {
 		const row = element;
 		const rank = row.querySelector('.column-rank').text.trim();
 		const team = row.querySelector('.club-name').text.trim();
+		const teamLogo = getTeamLogo(team);
 		const games = row
 			.querySelectorAll('td')
 			.filter((cell) => cell.classNames.length === 0)[0]
 			.text.trim();
 		const goalDiff = row.querySelector('.hidden-small').text.trim();
 		const points = row.querySelector('.column-points').text.trim();
-		result.push({ rank, team, games, goalDiff, points });
+		result.push({ rank, team, teamLogo, games, goalDiff, points });
 	}
 	console.log(result);
 	return result;
 }
+
+function getTeamLogo(teamName) {
+	switch (teamName) {
+		case 'Hamburger SV':
+			return "/images/HSV_Raute_4c-_1_.jpg";
+		case 'HOT 05 Futsal':
+			return "/images/VfL05 neues Logo 2019 - mehrfarbig - 1000x1000px.jpg";
+		case 'TSV Weilimdorf':
+			return "/images/TSV Weilimdorf_Original.gif";
+		case 'MCH Futsal Club Bielefeld':
+			return "/images/MCH-Wappen-Bielefeld.png";
+		case 'Futsal Panthers Köln':
+			return "/images/logo-futsal-panthers-black.png";
+		case 'FC Liria Futsal':
+			return "/images/liria.png";
+		case 'Beton Boys München':
+			return "/images/Vereinlogo BB cut.png";
+		case 'Fortuna Düsseldorf':
+			return "/images/F95_Logo_rgb_Standard.png";
+		case 'Jahn Regensburg Futsal':
+			return "/images/logo_jahn_futsal_weiss.png";
+		case 'SV Pars Neu-Isenburg':
+			return "/images/VereinslogoSV.png";
+	}
+}
+

@@ -629,8 +629,9 @@ html {
 
 #table {
 	position: absolute;
-	top: 200px;
+	top: 150px;
 	left: 500px;
+    clip-path: inset(0 0 0 100%);
 }
 
 #tableContent {
@@ -644,8 +645,35 @@ html {
 	font-size: 60px;
 	margin: 30px;
 	position: relative;
-	top: 50px;
 }
+
+#tableLogo {
+    position: relative;
+    width: auto;
+    height: 100px;
+    left: 200px;
+    top: 20px;
+    z-index: 2;
+}
+
+#tableStripes {
+    max-width: 300%;
+    max-height: 300%;
+    opacity: 0.8;
+    animation: stripes 30s linear infinite;
+    z-index: 0;
+}
+
+@keyframes stripes {
+    0% {
+        transform: translateX(50%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
 
 #tableBox {
 	position: fixed;
@@ -653,8 +681,9 @@ html {
 	height: 600px;
 	padding: 10px;
 	margin: 10px;
-	top: 300px;
+	top: 250px;
 	left: 520px;
+    overflow: hidden;
 }
 
 .tableTable {
@@ -680,6 +709,11 @@ html {
 
 .last {
 	background-color: red;
+}
+
+.tableTeamLogo {
+    width: auto;
+    height: 30px;
 }
 
 .lowerThird {
