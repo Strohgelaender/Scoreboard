@@ -353,7 +353,6 @@ function showLowerThirds(selectorName) {
 }
 
 function showTable(table) {
-	// TODO animation
 	if (showingTable) {
 		$('#tableLogo').css('animation', 'hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		$('#table').css('animation', 'revealToLeftOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
@@ -382,7 +381,7 @@ function createTableRow(team, tableContent, i) {
 		rank.addClass('last');
 	}
 	row.append(rank);
-	row.append($('<td>').append($(`<img src="${team.teamLogo}" class="tableTeamLogo">`)));
+	row.append($('<td style="text-align: center;">').append($(`<img src="${team.teamLogo}" class="tableTeamLogo">`)));
 	row.append($('<td>').append($('<span class="tableTeamName">').text(team.team)));
 	row.append($('<td>').text(team.games));
 	row.append($('<td>').text(team.goalDiff));
