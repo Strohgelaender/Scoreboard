@@ -2,7 +2,7 @@ import { listStreamDecks, openStreamDeck } from '@elgato-stream-deck/node';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import { updateLineup, saveReferees, sendEvent, loadTable } from './index.js';
+import { updateLineup, saveReferees, sendEvent, loadTable, loadMatchday } from './index.js';
 import readline from 'readline';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -100,6 +100,9 @@ rl.on('line', (input) => {
 		case 'TABLE':
 			showTable();
 			return;
+		case 'MATCHES':
+		case 'MATCHDAY':
+			showMatchday();
 	}
 
 	if (event.eventType && event.team) {
@@ -223,6 +226,12 @@ function showReferees() {
 function showTable() {
 	loadTable().then(() => {
 		sendStandaloneEvent('TABLE');
+	});
+}
+
+function showMatchday() {
+	loadMatchday().then(() => {
+		sendStandaloneEvent('MATCHDAY');
 	});
 }
 

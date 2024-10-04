@@ -3,7 +3,7 @@ import express from 'express';
 import { tinyws } from 'tinyws';
 import fs from 'fs';
 import { OBSWebSocket } from 'obs-websocket-js';
-import { readLineup, readReferees, readTable } from './AufstellungParser.js';
+import { readLineup, readReferees, readTable, readMatchday } from './AufstellungParser.js';
 import timer from './timer.js';
 
 const debug = true;
@@ -19,6 +19,7 @@ let homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
 let awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
 let referees = [];
 let table;
+let matchday;
 
 let scoreHome = 0;
 let scoreAway = 0;
@@ -132,6 +133,13 @@ export async function loadTable() {
 	}
 }
 
+export async function loadMatchday() {
+	if (!matchday) {
+		// TODO allow reloading for live scores
+		matchday = await readMatchday();
+	}
+}
+
 export function sendEvent(event) {
 	const team = getTeam(event.team);
 	event.playerData = team?.players[event.number];
@@ -166,6 +174,8 @@ function addEventData(event, team) {
 		event.playerData = referees;
 	} else if (event.eventType === 'TABLE') {
 		event.table = table;
+	} else if (event.eventType === 'MATCHDAY') {
+		event.matchday = matchday;
 	}
 }
 

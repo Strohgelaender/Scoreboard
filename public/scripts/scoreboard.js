@@ -6,6 +6,7 @@ let showingSmallScoreboard = true;
 let showingBigScoreboard = false;
 let showingLowerThird = false;
 let showingTable = false;
+let showingMatchday = false;
 let fullNames;
 let teamImages;
 
@@ -106,6 +107,9 @@ function handleEventInternal(event) {
 		case 'TABLE':
 			showTable(event.table);
 			break;
+		case 'MATCHDAY':
+			showMatchday(event.matchday);
+			break;
 	}
 }
 
@@ -137,18 +141,20 @@ function toggleScoreboard() {
 function toggleBigScoreboard() {
 	console.log('toggleBigScoreboard');
 	if (!showingBigScoreboard) {
-		$('#bottomAdditionalBackground').css('animation', 'revealCenter 0.7s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bottomScoreBackground').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bottomContent').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottom 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#bottomAdditionalBackground').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
-			$('#bigHomeImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#bigAwayImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#bigHomeName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#bigAwayName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#bigHomeScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#bigAwayScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 500);
+			$('#bottomScoreBackground').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			$('#bottomContent').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottom 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			setTimeout(() => {
+				$('#bigHomeImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				$('#bigAwayImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				$('#bigHomeName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				$('#bigAwayName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				$('#bigHomeScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				$('#bigAwayScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			}, 500);
+		}, 80);
 	} else {
 		$('#bottomScoreBackground').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		$('#bottomContent').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
@@ -161,7 +167,7 @@ function toggleBigScoreboard() {
 		$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottomOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
 			$('#bottomAdditionalBackground').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 100);
+		}, 80);
 	}
 	showingBigScoreboard = !showingBigScoreboard;
 }
@@ -382,9 +388,34 @@ function createTableRow(team, tableContent, i) {
 	}
 	row.append(rank);
 	row.append($('<td style="text-align: center;">').append($(`<img src="${team.teamLogo}" class="tableTeamLogo">`)));
-	row.append($('<td>').append($('<span class="tableTeamName">').text(team.team)));
+	row.append($('<td class="tableTeamName">').text(team.team));
 	row.append($('<td>').text(team.games));
 	row.append($('<td>').text(team.goalDiff));
 	row.append($('<td>').text(team.points));
 	tableContent.append(row);
+}
+
+function showMatchday(matchday) {
+	if (showingMatchday) {
+		$('#matchday').css('animation', 'revealToLeftOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	} else {
+		const table = $('#matches');
+		for (const match of matchday) {
+			createMatchdayRow(match, table);
+		}
+		setTimeout(() => {
+			$('#matchday').css('animation', 'revealToLeft 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		}, 1000);
+	}
+	showingMatchday = !showingMatchday;
+}
+
+function createMatchdayRow(match, table) {
+	const row = $('<tr class="matchdayMatchRow">');
+	row.append($('<td style="text-align: center;">').append($(`<img src="${match.homeImage}" class="tableTeamLogo">`)));
+	row.append($('<td class="tableTeamName">').text(match.homeTeam));
+	row.append($('<td>').text(match.score));
+	row.append($('<td class="tableTeamName">').text(match.awayTeam));
+	row.append($('<td style="text-align: center;">').append($(`<img src="${match.awayImage}" class="tableTeamLogo">`)));
+	table.append(row);
 }

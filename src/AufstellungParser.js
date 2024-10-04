@@ -7,11 +7,12 @@ const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/02Q0SKPL4K0000
 const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/beton-boys-muenchen-futsal-sv-pars-neu-isenburg-2388070';
 const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
-// TODO Coaches
+const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/4-spieltag';
 
 const game = axios.create({ baseURL: matchUrl });
 const overview = axios.create({ baseURL: overviewUrl });
 const table = axios.create({ baseURL: tableUrl });
+const matchday = axios.create({ baseURL: matchdayUrl });
 
 export async function readLineup() {
 	const response = await game.get('');
@@ -32,7 +33,7 @@ function parsePlayers(team) {
 			number: player.jersey_nr,
 			is_captain: player.is_captain,
 			is_keeper: player.is_keeper,
-			is_starting: player.is_starting
+			is_starting: player.is_starting,
 		};
 		players.push(result);
 	}
@@ -77,25 +78,57 @@ export async function readTable() {
 function getTeamLogo(teamName) {
 	switch (teamName) {
 		case 'Hamburger SV':
-			return "/images/HSV_Raute_4c-_1_.jpg";
+			return '/images/HSV_Raute_4c-_1_.jpg';
 		case 'HOT 05 Futsal':
-			return "/images/VfL05 neues Logo 2019 - mehrfarbig - 1000x1000px.jpg";
+			return '/images/VfL05 neues Logo 2019 - mehrfarbig - 1000x1000px.jpg';
 		case 'TSV Weilimdorf':
-			return "/images/TSV Weilimdorf_Original.gif";
+			return '/images/TSV Weilimdorf_Original.gif';
 		case 'MCH Futsal Club Bielefeld':
-			return "/images/MCH-Wappen-Bielefeld.png";
+			return '/images/MCH-Wappen-Bielefeld.png';
 		case 'Futsal Panthers Köln':
-			return "/images/logo-futsal-panthers-black.png";
+			return '/images/logo-futsal-panthers-black.png';
 		case 'FC Liria Futsal':
-			return "/images/liria.png";
+			return '/images/liria.png';
 		case 'Beton Boys München':
-			return "/images/Vereinlogo BB cut.png";
+			return '/images/Vereinlogo BB cut.png';
 		case 'Fortuna Düsseldorf':
-			return "/images/F95_Logo_rgb_Standard.png";
+			return '/images/F95_Logo_rgb_Standard.png';
 		case 'Jahn Regensburg Futsal':
-			return "/images/logo_jahn_futsal_weiss.png";
+			return '/images/logo_jahn_futsal_weiss.png';
 		case 'SV Pars Neu-Isenburg':
-			return "/images/VereinslogoSV.png";
+			return '/images/VereinslogoSV.png';
 	}
 }
 
+export async function readMatchday() {
+	const response = await matchday.get('');
+	const root = parse(response.data);
+	const matchdayHtml = root.querySelector('.c-MatchTable-body');
+	let result = [];
+	for (const match of matchdayHtml.querySelectorAll('.c-MatchTable-row')) {
+		let homeTeam = match.querySelector('.c-MatchTable-team--home').querySelector('a').text.trim();
+		homeTeam = convertToConsistentName(homeTeam);
+		const homeImage = getTeamLogo(homeTeam);
+		let awayTeam = match.querySelector('.c-MatchTable-team--away').querySelector('a').text.trim();
+		awayTeam = convertToConsistentName(awayTeam);
+		const awayImage = getTeamLogo(awayTeam);
+		const score = match.querySelector('.c-MatchTable-score').text.trim();
+		result.push({ homeTeam, homeImage, awayTeam, awayImage, score });
+	}
+	console.log(result);
+	return result;
+}
+
+function convertToConsistentName(team) {
+	switch (team) {
+		case 'Hamburger SV (Futsal)':
+			return 'Hamburger SV';
+		case 'TSV Weilimdorf (Futsal)':
+			return 'TSV Weilimdorf';
+		case 'FC Liria':
+			return 'FC Liria Futsal';
+		case 'Beton Boys München (Futsal)':
+			return 'Beton Boys München';
+	}
+	return team;
+}
