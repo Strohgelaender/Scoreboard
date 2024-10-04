@@ -398,6 +398,9 @@ function createTableRow(team, tableContent, i) {
 function showMatchday(matchday) {
 	if (showingMatchday) {
 		$('#matchday').css('animation', 'revealToLeftOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		setTimeout(() => {
+			$('#matchesTable').empty();
+		}, 1500);
 	} else {
 		const table = $('#matches');
 		for (const match of matchday) {
