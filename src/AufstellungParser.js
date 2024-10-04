@@ -112,8 +112,10 @@ export async function readMatchday() {
 		let awayTeam = match.querySelector('.c-MatchTable-team--away').querySelector('a').text.trim();
 		awayTeam = convertToConsistentName(awayTeam);
 		const awayImage = getTeamLogo(awayTeam);
-		const score = match.querySelector('.c-MatchTable-score').text.trim();
-		result.push({ homeTeam, homeImage, awayTeam, awayImage, score });
+		const score = match.querySelector('.c-MatchTable-score')?.text?.trim();
+		const isLive = !!match.querySelector('.c-MatchTable-live');
+		const date = match.querySelector('.c-MatchTable-description').querySelector('p').text.trim();
+		result.push({ homeTeam, homeImage, awayTeam, awayImage, score, date, isLive });
 	}
 	console.log(result);
 	return result;

@@ -415,9 +415,14 @@ function showMatchday(matchday) {
 
 function createMatchdayRow(match, table) {
 	const row = $('<tr class="matchdayMatchRow">');
+	// row.append($('<td>').text(match.time));
 	row.append($('<td style="text-align: center;">').append($(`<img src="${match.homeImage}" class="tableTeamLogo">`)));
 	row.append($('<td class="tableTeamName">').text(match.homeTeam));
-	row.append($('<td>').text(match.score));
+	if (match.isLive) {
+		row.append($('<td>').text('Live'));
+	} else {
+		row.append($('<td>').text(match.score));
+	}
 	row.append($('<td class="tableTeamName">').text(match.awayTeam));
 	row.append($('<td style="text-align: center;">').append($(`<img src="${match.awayImage}" class="tableTeamLogo">`)));
 	table.append(row);
