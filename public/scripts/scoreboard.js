@@ -73,31 +73,19 @@ function handleEventInternal(event) {
 			toggleScoreboard();
 			break;
 		case 'SHOW_BOTTOM_SCOREBOARD':
-			toggleBigScoreboard();
-			break;
-		case 'SHOW_NAMES':
-			showLowerThirds('.blendNames');
-			break;
-		case 'SHOW_RIGHT':
-			showLowerThirds('.blendRight');
-			break;
-		case 'SHOW_LEFT':
-			showLowerThirds('.blendLeft');
-			break;
-		case 'SHOW_EXTRA':
-			if (event.text) showExtra(event.text, 10000);
+			bigContentSafeguard(showingBigScoreboard, toggleBigScoreboard);
 			break;
 		case 'LINEUP':
-			animateLineup(event.team === 'HOME' ? 0 : 1, event.playerData);
+			bigContentSafeguard(showingLineup, () => animateLineup(event.team === 'HOME' ? 0 : 1, event.playerData));
 			break;
 		case 'REFEREES':
 			if (!showingRefs) {
 				updateRefText(event.playerData);
 			}
-			animateReferees();
+			bigContentSafeguard(showingRefs, animateReferees);
 			break;
 		case 'CASTER':
-			toggleLowerThird();
+			bigContentSafeguard(showingLowerThird, toggleLowerThird);
 			break;
 		case 'FOUL':
 		case 'REMOVE_FOUL':
@@ -105,11 +93,36 @@ function handleEventInternal(event) {
 			updateFouls();
 			break;
 		case 'TABLE':
-			showTable(event.table);
+			bigContentSafeguard(showingTable, () => showTable(event.table));
 			break;
 		case 'MATCHDAY':
-			showMatchday(event.matchday);
+			bigContentSafeguard(showingMatchday, () => showMatchday(event.matchday));
 			break;
+	}
+}
+
+function bigContentSafeguard(showingContent, callback) {
+	if (showingContent) {
+		// If the content is already visible use the callback to hide it
+		callback();
+		return;
+	}
+
+	// Else first check if there is another big content visible.
+	if (showingBigScoreboard) {
+		toggleBigScoreboard();
+	} else if (showingLowerThird) {
+		toggleLowerThird();
+	} else if (showingLineup) {
+		animateLineup(0, []);
+	} else if (showingRefs) {
+		animateReferees();
+	} else if (showingTable) {
+		showTable([]);
+	} else if (showingMatchday) {
+		showMatchday([]);
+	} else {
+		callback();
 	}
 }
 
@@ -139,7 +152,6 @@ function toggleScoreboard() {
 }
 
 function toggleBigScoreboard() {
-	console.log('toggleBigScoreboard');
 	if (!showingBigScoreboard) {
 		$('#bottomAdditionalBackground').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
@@ -347,15 +359,6 @@ function updateRefText(referees) {
 	for (let i = 1; i <= 4; i++) {
 		$(`#referee${i}Text`).text(referees[i - 1] || '');
 	}
-}
-
-function showLowerThirds(selectorName) {
-	const elems = $(selectorName);
-	blendWatermark(5000);
-	elems.fadeIn(1000);
-	setTimeout(() => {
-		elems.fadeOut(1000);
-	}, 5000);
 }
 
 function showTable(table) {
