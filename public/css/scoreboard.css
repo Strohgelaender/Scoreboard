@@ -669,7 +669,7 @@ html {
 
 @keyframes stripes {
 	0% {
-		transform: translateX(100%);
+		transform: translateX(80%);
 	}
 	100% {
 		transform: translateX(-100%);
@@ -685,16 +685,22 @@ html {
 	top: 280px;
 	left: 520px;
 	overflow: hidden;
+    border-collapse: collapse;
 }
 
 .tableTable {
 	font-size: 30px;
 	text-align: center;
-	border: solid thin;
 }
 
-.tableTable tr {
-	border: solid thin;
+.tableTeamRow {
+	border: solid;
+    border-width: 1px 0;
+    border-color: var(--futsal-accent);
+}
+
+.tableTeamRow:last-child {
+    border-bottom: none;
 }
 
 #tableTeams td {
