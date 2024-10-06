@@ -33,7 +33,6 @@ const MINUS_10_KEY = 10;
 
 //TODO public constants (wie hier und auch im Browser verwenden?)
 //TODO Paging?
-//TODO kominierte Keys Overlay + OBS (z.B. Replay mit eigenem Overlay)
 
 const DEFAULT_EVENT = {
 	number: '',
