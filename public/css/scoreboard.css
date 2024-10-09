@@ -875,3 +875,9 @@ html {
 #matchesTable td {
 	padding: 20px 5px;
 }
+
+.tableTable img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

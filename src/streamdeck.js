@@ -24,6 +24,8 @@ const GOAL_KEY = 26;
 const OWN_GOAL_KEY = 27;
 const SCOREBOARD_VISIBILITY_KEY = 28;
 const CASTER_KEY = 29;
+const TABLE_KEY = 18;
+const MATCHDAY_KEY = 17;
 
 const PAUSE_KEY = 0;
 const ADD_5_KEY = 1;
@@ -35,7 +37,7 @@ const MINUS_10_KEY = 10;
 //TODO Paging?
 
 const DEFAULT_EVENT = {
-	number: '',
+	number: ''
 };
 
 let resetTime;
@@ -43,7 +45,7 @@ let event = { ...DEFAULT_EVENT };
 
 const rl = readline.createInterface({
 	input: process.stdin,
-	output: process.stdout,
+	output: process.stdout
 });
 
 rl.on('line', (input) => {
@@ -113,7 +115,7 @@ const EVENT_MAPPING = {
 	[GOAL_KEY]: 'GOAL',
 	[OWN_GOAL_KEY]: 'OWN_GOAL',
 	[FOUL_KEY]: 'FOUL',
-	[REMOVE_FOUL_KEY]: 'REMOVE_FOUL',
+	[REMOVE_FOUL_KEY]: 'REMOVE_FOUL'
 };
 
 async function main() {
@@ -173,6 +175,12 @@ async function main() {
 						return;
 					case CASTER_KEY:
 						sendStandaloneEvent('CASTER');
+						return;
+					case TABLE_KEY:
+						showTable();
+						return;
+					case MATCHDAY_KEY:
+						showMatchday();
 						return;
 					case PAUSE_KEY:
 						sendStandaloneEvent('START_TIMER');
@@ -237,13 +245,13 @@ function showMatchday() {
 function changeTime(time) {
 	sendEvent({
 		eventType: 'ADD_TIME',
-		time,
+		time
 	});
 }
 
 function sendStandaloneEvent(type) {
 	sendEvent({
-		eventType: type,
+		eventType: type
 	});
 }
 
@@ -273,7 +281,7 @@ const numberImages = {
 	17: '8.png',
 	18: '9.png',
 	25: '0.png',
-	24: 'cancel.png',
+	24: 'cancel.png'
 };
 
 const IMAGES = {
@@ -290,6 +298,8 @@ const IMAGES = {
 	[SHOW_LINEUP_KEY]: 'lineup.png',
 	[CASTER_KEY]: 'microphone-342.png',
 	[PAUSE_KEY]: 'Basic_Element_15-30_(580).jpg',
+	[TABLE_KEY]: 'table.png',
+	[MATCHDAY_KEY]: 'calendar-249-256.png',
 };
 
 async function loadKeyImages() {
