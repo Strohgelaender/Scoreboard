@@ -685,7 +685,7 @@ html {
 	top: 280px;
 	left: 520px;
 	overflow: hidden;
-    border-collapse: collapse;
+	border-collapse: collapse;
 }
 
 .tableTable {
@@ -695,12 +695,12 @@ html {
 
 .tableTeamRow {
 	border: solid;
-    border-width: 1px 0;
-    border-color: var(--futsal-accent);
+	border-width: 1px 0;
+	border-color: var(--futsal-accent);
 }
 
 .tableTeamRow:last-child {
-    border-bottom: none;
+	border-bottom: none;
 }
 
 #tableTeams td {
@@ -877,7 +877,7 @@ html {
 }
 
 .tableTable img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }

@@ -37,7 +37,7 @@ const MINUS_10_KEY = 10;
 //TODO Paging?
 
 const DEFAULT_EVENT = {
-	number: ''
+	number: '',
 };
 
 let resetTime;
@@ -45,7 +45,7 @@ let event = { ...DEFAULT_EVENT };
 
 const rl = readline.createInterface({
 	input: process.stdin,
-	output: process.stdout
+	output: process.stdout,
 });
 
 rl.on('line', (input) => {
@@ -115,7 +115,7 @@ const EVENT_MAPPING = {
 	[GOAL_KEY]: 'GOAL',
 	[OWN_GOAL_KEY]: 'OWN_GOAL',
 	[FOUL_KEY]: 'FOUL',
-	[REMOVE_FOUL_KEY]: 'REMOVE_FOUL'
+	[REMOVE_FOUL_KEY]: 'REMOVE_FOUL',
 };
 
 async function main() {
@@ -245,13 +245,13 @@ function showMatchday() {
 function changeTime(time) {
 	sendEvent({
 		eventType: 'ADD_TIME',
-		time
+		time,
 	});
 }
 
 function sendStandaloneEvent(type) {
 	sendEvent({
-		eventType: type
+		eventType: type,
 	});
 }
 
@@ -281,7 +281,7 @@ const numberImages = {
 	17: '8.png',
 	18: '9.png',
 	25: '0.png',
-	24: 'cancel.png'
+	24: 'cancel.png',
 };
 
 const IMAGES = {
@@ -311,6 +311,14 @@ async function loadKeyImages() {
 			loadImage(+key, numberImages[key]);
 		}
 	}
+	fillText(ADD_5_KEY, '+5');
+	fillText(ADD_10_KEY, '+10');
+	fillText(MINUS_5_KEY, '-5');
+	fillText(MINUS_10_KEY, '-10');
+}
+
+async function fillText(index, text) {
+	streamDeck.fillKeyBuffer(index, await createText(1, text));
 }
 
 async function loadImage(index, imageName) {
@@ -319,6 +327,27 @@ async function loadImage(index, imageName) {
 
 function createImageBuffer(index, imageName) {
 	return sharp(path.resolve(__dirname, '..', 'icons', imageName))
+		.flatten() // Eliminate alpha channel, if any.
+		.resize(streamDeck.CONTROLS[index].pixelSize.width, streamDeck.CONTROLS[index].pixelSize.height) // Scale up/down to the right size, cropping if necessary.
+		.raw() // Give us uncompressed RGB.
+		.toBuffer();
+}
+
+function createText(index, text) {
+	const pixelSize = streamDeck.CONTROLS[index].pixelSize;
+	const svgData = `<svg viewBox="0 0 ${pixelSize.width} ${pixelSize.height}" version="1.1">
+                        <text
+                            font-family="'sans-serif'"
+                            font-size="30px"
+							font-weight="bold"
+                            x="${pixelSize.width / 2}"
+                            y="${pixelSize.height / 2}"
+                            fill="#fff"
+                            text-anchor="middle"
+							stroke="#666"
+                            >${text}</text>
+                    </svg>`;
+	return sharp(new Buffer.from(svgData))
 		.flatten() // Eliminate alpha channel, if any.
 		.resize(streamDeck.CONTROLS[index].pixelSize.width, streamDeck.CONTROLS[index].pixelSize.height) // Scale up/down to the right size, cropping if necessary.
 		.raw() // Give us uncompressed RGB.
