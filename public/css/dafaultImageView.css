@@ -20,3 +20,11 @@ html {
 #awayScore {
 	left: 1020px;
 }
+
+#timer {
+	position: absolute;
+	left: 800px;
+	top: 850px;
+	font-size: 120px;
+	font-family: DFBSans-Bold, sans-serif;
+}

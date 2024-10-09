@@ -23,17 +23,21 @@ function handleTimerEvent(event) {
 			resetTimer();
 			return true;
 		case 'ADD_TIME':
-			const now = Date.now();
-			totaltime += event.time * 1000;
-			if (isRunning()) {
-				endtime += event.time * 1000;
-			} else {
-				endtime = now + totaltime;
-			}
-			displayTime(endtime - now);
+			addTime(event.time);
 			return true;
 	}
 	return false;
+}
+
+function addTime(time) {
+	const now = Date.now();
+	totaltime += time * 1000;
+	if (isRunning()) {
+		endtime += time * 1000;
+	} else {
+		endtime = now + totaltime;
+	}
+	displayTime(endtime - now);
 }
 
 function toggleTimer() {
@@ -86,6 +90,7 @@ function startTimer() {
 
 function resetTimer(time = defaultTime, totalTime = defaultTime) {
 	totaltime = totalTime;
+	endtime = null;
 	displayTime(time);
 	clear();
 }

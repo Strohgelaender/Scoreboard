@@ -32,6 +32,7 @@ const ADD_5_KEY = 1;
 const ADD_10_KEY = 2;
 const MINUS_5_KEY = 9;
 const MINUS_10_KEY = 10;
+const HALFTIME_TIMER_KEY = 8;
 
 //TODO public constants (wie hier und auch im Browser verwenden?)
 //TODO Paging?
@@ -197,6 +198,11 @@ async function main() {
 					case MINUS_10_KEY:
 						changeTime(-10);
 						return;
+					case HALFTIME_TIMER_KEY:
+						sendStandaloneEvent('RESET_TIMER');
+						sendStandaloneEvent('START_TIMER');
+						changeTime(-5 * 60);
+						return;
 				}
 			}
 
@@ -302,6 +308,14 @@ const IMAGES = {
 	[MATCHDAY_KEY]: 'calendar-249-256.png',
 };
 
+const TEXTS = {
+	[ADD_5_KEY]: '+5',
+	[ADD_10_KEY]: '+10',
+	[MINUS_5_KEY]: '-5',
+	[MINUS_10_KEY]: '-10',
+	[HALFTIME_TIMER_KEY]: '15:00',
+};
+
 async function loadKeyImages() {
 	for (const key in IMAGES) {
 		loadImage(+key, IMAGES[key]);
@@ -311,10 +325,9 @@ async function loadKeyImages() {
 			loadImage(+key, numberImages[key]);
 		}
 	}
-	fillText(ADD_5_KEY, '+5');
-	fillText(ADD_10_KEY, '+10');
-	fillText(MINUS_5_KEY, '-5');
-	fillText(MINUS_10_KEY, '-10');
+	for (const key in TEXTS) {
+		fillText(+key, TEXTS[key]);
+	}
 }
 
 async function fillText(index, text) {
