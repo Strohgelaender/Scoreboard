@@ -26,6 +26,9 @@ let scoreAway = 0;
 let foulsHome = 0;
 let foulsAway = 0;
 
+// TODO: Keep this in sync with client
+let showingScoreboard = true;
+
 const eventWS = [];
 
 const app = express();
@@ -197,6 +200,8 @@ function handleEventInternal(event) {
 		reduceFoul(event.team === 'HOME');
 	} else if (event.eventType === 'CLEAR_FOULS') {
 		foulsHome = foulsAway = 0;
+	} else if (event.eventType === 'TOGGLE_SCOREBOARD') {
+		toggleScoreboardVideo();
 	}
 
 	if (event.playerData === undefined) {
@@ -297,6 +302,29 @@ async function getObsTimestamp() {
 		stream: streamStatus.outputTimecode,
 		recording: streamStatus.outputTimecode,
 	};
+}
+
+function toggleScoreboardVideo() {
+	if (showingScoreboard) {
+		obs.call('SetSceneItemEnabled', {
+			sceneName: 'Main',
+			sceneItemId: 12,
+			sceneItemEnabled: false,
+		}).catch(e => console.error(e));
+	} else {
+		obs.call('TriggerMediaInputAction', {
+			inputName: "Logo",
+			inputUuid: 12,
+			mediaAction: "OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART"
+		}).then(() => {
+			obs.call('SetSceneItemEnabled', {
+				sceneName: 'Main',
+				sceneItemId: 12,
+				sceneItemEnabled: true,
+			}).catch(e => console.error(e));
+		}).catch(e => console.error(e));
+	}
+	showingScoreboard = !showingScoreboard;
 }
 
 async function logEvent(event) {
