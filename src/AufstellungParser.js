@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { parse } from 'node-html-parser';
 
+// BFV overview page: https://www.bfv.de/spiele/02Q0SKPLG0000000VS5489B3VU5PPGUO
+// same id used as by fussball.de
+
 // IMPORTANT: Always update there two URLs before starting the prod server
 // Jahn Regensburg: 02Q0SKPLG0000000VS5489B3VU5PPGUO
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/02Q0SKPL4K000000VS5489B3VU5PPGUO/ticker-id/selectedTickerId';

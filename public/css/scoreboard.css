@@ -525,6 +525,7 @@ html {
 	width: 1400px;
 	border-radius: 15px 15px 15px 15px;
 	clip-path: inset(0 50% 0 50%);
+    background-color: var(--futsal-blue-2);
 }
 
 @keyframes spielfeldBottom {
