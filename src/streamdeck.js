@@ -2,7 +2,7 @@ import { listStreamDecks, openStreamDeck } from '@elgato-stream-deck/node';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import { updateLineup, saveReferees, sendEvent, loadTable, loadMatchday } from './index.js';
+import { updateLineup, saveReferees, sendEvent, loadTable, loadMatchday, reloadTeamFiles } from './index.js';
 import readline from 'readline';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -26,6 +26,7 @@ const SCOREBOARD_VISIBILITY_KEY = 28;
 const CASTER_KEY = 29;
 const TABLE_KEY = 18;
 const MATCHDAY_KEY = 17;
+const REFRESH_KEY = 25;
 
 const PAUSE_KEY = 0;
 const ADD_5_KEY = 1;
@@ -105,6 +106,10 @@ rl.on('line', (input) => {
 		case 'MATCHES':
 		case 'MATCHDAY':
 			showMatchday();
+			return;
+		case 'REFRESH':
+			refresh();
+			return;
 	}
 
 	if (event.eventType && event.team) {
@@ -183,6 +188,9 @@ async function main() {
 					case MATCHDAY_KEY:
 						showMatchday();
 						return;
+					case REFRESH_KEY:
+						refresh();
+						return;
 					case PAUSE_KEY:
 						sendStandaloneEvent('START_TIMER');
 						return;
@@ -248,6 +256,14 @@ function showMatchday() {
 	});
 }
 
+function refresh() {
+	reloadTeamFiles();
+	loadMatchday();
+	loadTable();
+	saveReferees();
+	updateLineup();
+}
+
 function changeTime(time) {
 	sendEvent({
 		eventType: 'ADD_TIME',
@@ -306,6 +322,7 @@ const IMAGES = {
 	[PAUSE_KEY]: 'Basic_Element_15-30_(580).jpg',
 	[TABLE_KEY]: 'table.png',
 	[MATCHDAY_KEY]: 'calendar-249-256.png',
+	[REFRESH_KEY]: 'cancel.png',
 };
 
 const TEXTS = {

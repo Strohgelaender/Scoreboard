@@ -135,9 +135,13 @@ export async function loadTable() {
 
 export async function loadMatchday() {
 	if (!matchday) {
-		// TODO allow reloading for live scores
 		matchday = await readMatchday();
 	}
+}
+
+export function reloadTeamFiles() {
+	homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
+	awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
 }
 
 export function sendEvent(event) {
