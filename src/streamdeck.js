@@ -209,7 +209,7 @@ async function main() {
 					case HALFTIME_TIMER_KEY:
 						sendStandaloneEvent('RESET_TIMER');
 						sendStandaloneEvent('START_TIMER');
-						changeTime(-5 * 60);
+						changeTime(-6 * 60);
 						return;
 				}
 			}
