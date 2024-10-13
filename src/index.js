@@ -330,7 +330,7 @@ function toggleScoreboardVideo() {
 async function logEvent(event) {
 	try {
 		const timestamp = await getObsTimestamp();
-		let eventString = `${event.eventType}:${event.team}\t${timestamp.stream}\t${timestamp.recording}`;
+		let eventString = `${event.eventType}:${event.team}\t${timestamp.stream}\t${timestamp.recording}\n`;
 		if (fs.existsSync(EVENT_FILE)) {
 			fs.appendFileSync(EVENT_FILE, eventString);
 		} else {
