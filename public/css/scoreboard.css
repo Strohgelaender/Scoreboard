@@ -331,9 +331,9 @@ html {
 #aufstellungLogo {
 	position: relative;
 	top: -750px;
-	left: 1100px;
-	width: auto;
-	height: 300px;
+	left: 1050px;
+	width: 300px;
+	height: auto;
 	transform: scale(0);
 	z-index: 10;
 }
@@ -366,12 +366,12 @@ html {
 	height: 600px;
 	padding: 10px;
 	margin: 0;
-	top: 350px;
+	top: 430px;
 	left: 600px;
 }
 
 .players {
-	font-size: 30px;
+	font-size: 25px;
 	margin: 50px;
 	padding: 5px;
 	display: inline-block;

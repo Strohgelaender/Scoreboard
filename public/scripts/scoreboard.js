@@ -266,7 +266,14 @@ function animateLineup(team, players) {
 		const logo = $('#aufstellungLogo');
 		logo.attr('src', teamImages[team]);
 
-		players = players.sort((a, b) => +a.number - +b.number);
+		players = players.sort((a, b) => {
+			if (a.is_keeper && !b.is_keeper) {
+				return -1;
+			} else if (!a.is_keeper && b.is_keeper) {
+				return 1;
+			}
+			return +a.number - +b.number;
+		});
 		for (const player of players) {
 			createPlayerRow(player, player.is_starting ? startingPlayersTable : substitutePlayersTable);
 		}
