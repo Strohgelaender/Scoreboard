@@ -20,7 +20,7 @@ html {
 .teamImage {
 	position: absolute;
 	width: auto;
-	height: 48px;
+	height: 45px;
 	z-index: 1;
 	top: 65px;
 }
@@ -53,7 +53,7 @@ html {
 
 .teamName {
 	z-index: 1;
-	font-size: 22px;
+	font-size: 24px;
 }
 
 .teamScore {
@@ -136,15 +136,15 @@ html {
 
 #homeTimeImage,
 #awayTimeImage {
-	top: 69px;
+	top: 70px;
 }
 
 #homeTimeImage {
-	left: 183px;
+	left: 185px;
 }
 
 #awayTimeImage {
-	left: 720px;
+	left: 695px;
 }
 
 #homeTimeNameBox {
@@ -152,7 +152,7 @@ html {
 }
 
 #awayTimeNameBox {
-	left: 520px;
+	left: 510px;
 }
 
 #homeTimeScore {
@@ -587,14 +587,14 @@ html {
 }
 
 #bigAwayImage {
-	left: 1240px;
+	left: 1210px;
 }
 
 .bigTeamName {
 	position: absolute;
 	height: 70px;
 	width: 480px;
-	font-size: 37px;
+	font-size: 40px;
 	text-align: center;
 	line-height: 70px;
 	vertical-align: middle;
@@ -722,7 +722,7 @@ html {
 }
 
 .tableTeamName {
-	width: 360px;
+	width: 355px;
 }
 
 .lowerThird {

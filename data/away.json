@@ -1,8 +1,8 @@
 {
-	"name": "Jahn Regensburg",
-	"fullName": "SSV Jahn Regensburg Futsal",
-	"shirtColor": "#ff0000",
-	"imagePath": "/images/logo_jahn_futsal_weiss.png",
-	"coach": "Thorsten Porkert",
+	"name": "Hamburger SV",
+	"fullName": "Hamburger SV",
+	"shirtColor": "#100cf5",
+	"imagePath": "/images/HSV_Raute_4c-_1_.jpg",
+	"coach": "Michael Meyer",
 	"players": {}
 }
