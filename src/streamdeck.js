@@ -258,10 +258,10 @@ function showMatchday() {
 
 function refresh() {
 	reloadTeamFiles();
-	loadMatchday();
-	loadTable();
-	saveReferees();
-	updateLineup();
+	loadMatchday(true);
+	loadTable(true);
+	saveReferees(true);
+	updateLineup(true);
 }
 
 function changeTime(time) {

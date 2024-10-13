@@ -114,8 +114,8 @@ app.get('/time', (req, res) => {
 	res.send(timer.getTimeText());
 });
 
-export async function updateLineup() {
-	if (!homeTeam.players?.length || !awayTeam.players?.length) {
+export async function updateLineup(force = false) {
+	if (force || !homeTeam.players?.length || !awayTeam.players?.length) {
 		const lineup = await readLineup();
 		homeTeam.players = lineup.home;
 		awayTeam.players = lineup.away;
@@ -124,20 +124,20 @@ export async function updateLineup() {
 	}
 }
 
-export async function saveReferees() {
-	if (!referees?.length) {
+export async function saveReferees(force = false) {
+	if (force || !referees?.length) {
 		referees = await readReferees();
 	}
 }
 
-export async function loadTable() {
-	if (!table) {
+export async function loadTable(force = false) {
+	if (force || !table) {
 		table = await readTable();
 	}
 }
 
-export async function loadMatchday() {
-	if (!matchday) {
+export async function loadMatchday(force = false) {
+	if (force || !matchday) {
 		matchday = await readMatchday();
 	}
 }
