@@ -24,6 +24,7 @@ let matchday;
 let matchTimer = new Timer(20 * 60 * 1000, () => {
 	setTimeout(() => {
 		sendEvent({ eventType: 'SECOND_HALF' });
+		matchTimer.resetTimer();
 	}, 10000);
 });
 
