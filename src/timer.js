@@ -4,6 +4,10 @@ let totaltime = null;
 let startDate = null;
 let stepper = null;
 let timeText = null;
+let firstHalfDone = false;
+
+// TODO make this a class, allow multipe timers (red card)
+// Then add callback on timer end -> upate half event for main timer
 
 export default {
 	getTimeText,
@@ -69,6 +73,8 @@ function displayTime(d) {
 	timeText = text;
 
 	if (d <= 0) {
+		// TODO only after 20min timer
+		firstHalfDone = true;
 		clear();
 	}
 }

@@ -45,7 +45,7 @@ const obs = new OBSWebSocket();
 
 process.on('SIGTERM', cleanup);
 process.on('SIGINT', cleanup);
-process.on('SIGKILL', cleanup);
+//process.on('SIGKILL', cleanup);
 
 async function cleanup() {
 	console.log('cleanup');

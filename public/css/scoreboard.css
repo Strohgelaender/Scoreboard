@@ -134,6 +134,20 @@ html {
 	z-index: -1;
 }
 
+#halfIndicatorBox {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    left: 90px;
+    top: 118px;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    vertical-align: center;
+    line-height: 20px;
+    z-index: -5;
+    background: var(--futsal-accent);
+}
+
 #homeTimeImage,
 #awayTimeImage {
 	top: 70px;

@@ -98,7 +98,15 @@ function handleEventInternal(event) {
 		case 'MATCHDAY':
 			bigContentSafeguard(showingMatchday, () => showMatchday(event.matchday));
 			break;
+		case 'SECOND_HALF':
+			updateHalfIndicator();
+			break;
 	}
+}
+
+function updateHalfIndicator() {
+	$('#halfIndicator').text('2');
+	$('#halfSup').text('nd');
 }
 
 function bigContentSafeguard(showingContent, callback) {
