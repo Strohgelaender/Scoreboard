@@ -11,7 +11,7 @@ function updateScoreboardInternal() {
 function updateTimerFromServer() {
 	$.ajax({
 		method: 'GET',
-		url: `/time`,
+		url: `/time/half`,
 	})
 		.done((value) => {
 			if (value === '00:00') {

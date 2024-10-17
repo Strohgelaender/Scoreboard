@@ -25,7 +25,6 @@ function loadInitialScores() {
 		url: `/scores`,
 	})
 		.done((value) => {
-			console.log(value);
 			scoreHome = value.scoreHome;
 			scoreAway = value.scoreAway;
 			foulsHome = value.foulsHome;
@@ -107,7 +106,6 @@ function decreaseFoul(homeTeam) {
 }
 
 function updateScoreboard() {
-	//TODO animations
 	$('#homeScore').text(scoreHome);
 	$('#awayScore').text(scoreAway);
 	if (updateScoreboardInternal) {

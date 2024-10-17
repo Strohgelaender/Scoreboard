@@ -207,9 +207,7 @@ async function main() {
 						changeTime(-10);
 						return;
 					case HALFTIME_TIMER_KEY:
-						sendStandaloneEvent('RESET_TIMER');
-						sendStandaloneEvent('START_TIMER');
-						changeTime(-6 * 60);
+						sendStandaloneEvent('HALFTIME_TIMER');
 						return;
 				}
 			}

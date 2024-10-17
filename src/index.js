@@ -4,7 +4,7 @@ import { tinyws } from 'tinyws';
 import fs from 'fs';
 import { OBSWebSocket } from 'obs-websocket-js';
 import { readLineup, readReferees, readTable, readMatchday } from './AufstellungParser.js';
-import timer from './timer.js';
+import { Timer } from './timer.js';
 
 const debug = true;
 
@@ -20,6 +20,14 @@ let awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
 let referees = [];
 let table;
 let matchday;
+
+let matchTimer = new Timer(20 * 60 * 1000, () => {
+	setTimeout(() => {
+		sendEvent({ eventType: 'SECOND_HALF' });
+	}, 10000);
+});
+
+let halftimeTimer = new Timer(14 * 60 * 1000);
 
 let scoreHome = 0;
 let scoreAway = 0;
@@ -102,6 +110,7 @@ app.get('/data/info', (req, res) => {
 	const data = {
 		home: homeTeam,
 		away: awayTeam,
+		firstHalfDone: matchTimer.isFirstHalfDone(),
 	};
 	res.send(data);
 });
@@ -110,8 +119,12 @@ app.get('/scores', (req, res) => {
 	res.send({ scoreHome, scoreAway, foulsHome, foulsAway });
 });
 
-app.get('/time', (req, res) => {
-	res.send(timer.getTimeText());
+app.get('/time/game', (req, res) => {
+	res.send(matchTimer.getTimeText());
+});
+
+app.get('/time/half', (req, res) => {
+	res.send(halftimeTimer.getTimeText());
 });
 
 export async function updateLineup(force = false) {
@@ -151,8 +164,11 @@ export function sendEvent(event) {
 	const team = getTeam(event.team);
 	event.playerData = team?.players[event.number];
 
-	if (timer.handleTimerEvent(event)) {
+	if (matchTimer.handleTimerEvent(event)) {
 		// true if event got picked up by timer
+		return;
+	} else if (event.eventType === 'HALFTIME_TIMER') {
+		halftimeTimer.startTimer();
 		return;
 	}
 

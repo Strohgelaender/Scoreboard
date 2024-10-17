@@ -41,6 +41,10 @@ function loadTeams() {
 			$(`#awayShirtLine`).css('background-color', away.shirtColor);
 			$(`#homeTimeShirtLine`).css('background-color', home.shirtColor);
 			$(`#awayTimeShirtLine`).css('background-color', away.shirtColor);
+
+			if (value.firstHalfDone) {
+				updateHalfIndicator();
+			}
 		})
 		.catch((error) => {
 			console.log(error);
@@ -50,7 +54,7 @@ function loadTeams() {
 function updateTimerFromServer() {
 	$.ajax({
 		method: 'GET',
-		url: `/time`,
+		url: `/time/game`,
 	})
 		.done((value) => {
 			$('#time').text(value.length ? value : '20:00');
