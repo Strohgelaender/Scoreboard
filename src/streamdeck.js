@@ -260,6 +260,7 @@ function refresh() {
 	loadTable(true);
 	saveReferees(true);
 	updateLineup(true);
+	sendStandaloneEvent('REFRESH');
 }
 
 function changeTime(time) {

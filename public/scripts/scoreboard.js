@@ -105,6 +105,9 @@ function handleEventInternal(event) {
 		case 'SECOND_HALF':
 			updateHalfIndicator();
 			break;
+		case 'REFRESH':
+			loadTeams();
+			break;
 	}
 }
 
