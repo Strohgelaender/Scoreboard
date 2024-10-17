@@ -326,7 +326,7 @@ function toggleScoreboardVideo() {
 			sceneName: 'Main',
 			sceneItemId: 12,
 			sceneItemEnabled: false,
-		}).catch(e => console.error(e));
+		}).catch(e => console.error(e.message));
 	} else {
 		obs.call('TriggerMediaInputAction', {
 			inputName: "Logo",
@@ -338,7 +338,7 @@ function toggleScoreboardVideo() {
 				sceneItemId: 12,
 				sceneItemEnabled: true,
 			}).catch(e => console.error(e));
-		}).catch(e => console.error(e));
+		}).catch(e => console.error(e.message));
 	}
 	showingScoreboard = !showingScoreboard;
 }
