@@ -7,6 +7,7 @@ let showingBigScoreboard = false;
 let showingLowerThird = false;
 let showingTable = false;
 let showingMatchday = false;
+let foulsTimeout;
 let fullNames;
 let teamImages;
 
@@ -45,7 +46,7 @@ function loadTeams() {
 			if (value.firstHalfDone) {
 				updateHalfIndicator();
 			}
-			updateScoreboardInternal();
+			updateFouls();
 		})
 		.catch((error) => {
 			console.log(error);
@@ -223,7 +224,6 @@ function toggleLowerThird() {
 
 function updateScoreboardInternal() {
 	updateScore();
-	updateFouls();
 	doubleDigitAdjustments();
 }
 
@@ -257,8 +257,21 @@ function updateFoulsBox() {
 	const foulsBox = $('#allFoulsBox');
 	if (foulsHome > 0 || foulsAway > 0) {
 		foulsBox.css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		if (foulsTimeout) {
+			clearTimeout(foulsTimeout);
+		}
+		// Keep fouls box visible if one team has 5 or more fouls
+		if (foulsHome < 5 && foulsAway < 5) {
+			// Otherwise hide it after 30 seconds
+			foulsTimeout = setTimeout(() => {
+				foulsBox.css('animation', 'revealDownOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			}, 30_000);
+		}
 	} else if (foulsBox.css('animation-name') === 'revealDown') {
 		foulsBox.css('animation', 'revealDownOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		if (foulsTimeout) {
+			clearTimeout(foulsTimeout);
+		}
 	}
 }
 
