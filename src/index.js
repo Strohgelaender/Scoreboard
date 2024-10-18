@@ -21,14 +21,18 @@ let referees = [];
 let table;
 let matchday;
 
-let matchTimer = new Timer(20 * 60 * 1000, () => {
+let matchTimer = new Timer(20 * 60 * 1000, (text) => {
+	sendWS(timerWS.game, text);
+}, () => {
 	setTimeout(() => {
 		sendEvent({ eventType: 'SECOND_HALF' });
 		matchTimer.resetTimer();
 	}, 10000);
 });
 
-let halftimeTimer = new Timer(14 * 60 * 1000);
+let halftimeTimer = new Timer(14 * 60 * 1000, (text) => {
+	sendWS(timerWS.half, text);
+});
 
 let redCardTimers = [];
 
@@ -41,6 +45,12 @@ let foulsAway = 0;
 let showingScoreboard = true;
 
 const eventWS = [];
+const timerWS = {
+	game: [],
+	half: [],
+	redhome: [],
+	redaway: [],
+};
 
 const app = express();
 const obs = new OBSWebSocket();
@@ -122,22 +132,30 @@ app.get('/scores', (req, res) => {
 	res.send({ scoreHome, scoreAway, foulsHome, foulsAway });
 });
 
-app.get('/time/game', (req, res) => {
-	res.send(matchTimer.getTimeText());
+app.get('/time/game',  tinyws(), async (req) => {
+	if (req.ws) {
+		const ws = await req.ws();
+		timerWS.game.push(ws);
+	}
 });
 
-app.get('/time/half', (req, res) => {
-	res.send(halftimeTimer.getTimeText());
+app.get('/time/half', tinyws(), async (req) => {
+	if (req.ws) {
+		const ws = await req.ws();
+		timerWS.half.push(ws);
+	}
 });
 
 // TODO: Should we support multiple red card timers per team?
 // This should be super super rare and I don't think it's worth the effort
-app.get('/time/red/:team', (req, res) => {
-	for (const timer of redCardTimers) {
-		if (timer.getTeam() === req.params.team.toUpperCase()) {
-			res.send(timer.getTimeText());
-			return;
-		}
+app.get('/time/red/:team', tinyws(), async (req) => {
+	const team = req.params.team.toLowerCase();
+	if (team !== 'home' && team !== 'away') {
+		return;
+	}
+	if (req.ws) {
+		const ws = await req.ws();
+		timerWS[`red${req.params.team.toLowerCase()}`].push(ws);
 	}
 });
 
@@ -196,9 +214,13 @@ export function sendEvent(event) {
 		console.log('Websocket not active yet');
 		return;
 	}
-	for (const ws of eventWS) {
+	sendWS(eventWS, JSON.stringify(event));
+}
+
+function sendWS(sockets, data) {
+	for (const ws of sockets) {
 		if (ws.readyState === ws.OPEN) {
-			ws.send(JSON.stringify(event));
+			ws.send(data);
 		}
 	}
 }
@@ -254,6 +276,9 @@ function handleEventInternal(event) {
 	if (event.eventType === 'RED_CARD') {
 		const timer = new Timer(
 			3 * 60 * 1000,
+			(text) => {
+				sendWS(timerWS[`red${event.team.toLowerCase()}`], text);
+			},
 			() => {
 				// remove timer from list on finish
 				redCardTimers.splice(redCardTimers.indexOf(timer), 1);

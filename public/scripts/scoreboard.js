@@ -1,5 +1,7 @@
 'use strict';
 
+let gameTimeSocket;
+
 let showingLineup = false;
 let showingRefs = false;
 let showingSmallScoreboard = true;
@@ -13,9 +15,7 @@ let teamImages;
 
 $(() => {
 	loadTeams();
-	setInterval(() => {
-		updateTimerFromServer();
-	}, 500);
+	updateTimerFromServer();
 });
 
 function loadTeams() {
@@ -54,18 +54,19 @@ function loadTeams() {
 }
 
 function updateTimerFromServer() {
-	updateTime('/time/game', (value) => $('#time').text(value.length ? value : '20:00'));
+	gameTimeSocket = updateTime('time/game', (value) => {
+		return $('#time').text(value?.data?.length ? value.data : '20:00');
+	});
 }
 
 function updateTime(endpoint, callback) {
-	$.ajax({
-		method: 'GET',
-		url: endpoint,
-	})
-		.done(callback)
-		.catch((error) => {
-			console.log(error);
-		});
+	const loc = window.location;
+	const protocol = loc.protocol === 'https:' ? 'wss:' : 'ws:';
+	const new_uri = `${protocol}//${loc.host}/${endpoint}`;
+
+	const socket = new WebSocket(new_uri);
+	socket.onmessage = callback;
+	return socket;
 }
 
 function handleEventInternal(event) {
@@ -297,16 +298,16 @@ function foulsToText(fouls) {
 	return result;
 }
 
-let redCardIntervals = {};
+let redCardSockets = {};
 
 function showRedCardTimer(team) {
 	team = team.toLowerCase();
 	const redCardTimer = $(`#${team}RedCardBox`);
 	redCardTimer.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-	let interval = setInterval(() => {
-		updateTime(`/time/red/${team}`, (value) => {
-			if (value === '00:00') {
-				clearInterval(interval);
+		let socket = updateTime(`time/red/${team}`, (value) => {
+			const time = value?.data;
+			if (time === '00:00') {
+				socket.close();
 				setTimeout(() => {
 					redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 					setTimeout(() => {
@@ -314,17 +315,16 @@ function showRedCardTimer(team) {
 					}, 1000);
 				}, 500);
 			}
-			$(`#${team}RedCardTimer`).text(value.length ? value.slice(1) : '3:00');
+			$(`#${team}RedCardTimer`).text(time?.length ? time.slice(1) : '3:00');
 		});
-		redCardIntervals[team] = interval;
-	}, 500);
+	redCardSockets[team] = socket;
 }
 
 function clearRedCardTimer(team) {
 	team = team.toLowerCase();
-	if (redCardIntervals[team]) {
-		clearInterval(redCardIntervals[team]);
-		delete redCardIntervals[team];
+	if (redCardSockets[team]) {
+		redCardSockets[team].close();
+		delete redCardSockets[team];
 		const redCardTimer = $(`#${team}RedCardBox`);
 		redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {

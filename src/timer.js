@@ -1,5 +1,5 @@
 export class Timer {
-	constructor(defaultTime = 20 * 60 * 1000, callback = undefined, team = undefined) {
+	constructor(defaultTime = 20 * 60 * 1000, stepFunction = undefined, callback = undefined, team = undefined) {
 		this.defaultTime = defaultTime;
 		this.endtime = null;
 		this.totaltime = null;
@@ -9,6 +9,7 @@ export class Timer {
 		this.firstHalfDone = false;
 		this.team = team;
 		this.callback = callback;
+		this.stepFunction = stepFunction;
 	}
 
 	handleTimerEvent(event) {
@@ -63,7 +64,11 @@ export class Timer {
 		let text = '';
 		text = (min < 10 ? '0' : '') + min + ':';
 		text += (sec < 10 ? '0' : '') + sec;
-		this.timeText = text;
+
+		if (this.timeText !== text) {
+			this.timeText = text;
+			this.stepFunction?.(text);
+		}
 
 		if (d <= 0) {
 			this.firstHalfDone = true;
