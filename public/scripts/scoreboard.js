@@ -254,9 +254,8 @@ function updateFouls() {
 
 function updateFoulsBox() {
 	const foulsBox = $('#foulsContent');
-	const background = $('#foulsAdditionalBackground');
 	if (foulsHome > 0 || foulsAway > 0) {
-		background.css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#foulsAdditionalBackground').css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
 			foulsBox.css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		}, 200);
@@ -266,19 +265,21 @@ function updateFoulsBox() {
 		// Keep fouls box visible if one team has 5 or more fouls
 		if (foulsHome < 5 && foulsAway < 5) {
 			// Otherwise hide it after 30 seconds
-			foulsTimeout = setTimeout(() => {
-				foulsBox.css('animation', 'revealDownOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-				setTimeout(() => {
-					background.css('animation', 'revealDownOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-				}, 500);
-			}, 30_000);
+			foulsTimeout = setTimeout(animateFoulsBoxOut, 30_000);
 		}
 	} else if (foulsBox.css('animation-name') === 'revealDown') {
-		foulsBox.css('animation', 'revealDownOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animateFoulsBoxOut();
 		if (foulsTimeout) {
 			clearTimeout(foulsTimeout);
 		}
 	}
+}
+
+function animateFoulsBoxOut() {
+	$('#foulsContent').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	setTimeout(() => {
+		$('#foulsAdditionalBackground').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	}, 200);
 }
 
 function updateFoulsContent(foulsText, fouls) {
