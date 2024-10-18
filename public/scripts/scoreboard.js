@@ -54,19 +54,9 @@ function loadTeams() {
 }
 
 function updateTimerFromServer() {
-	gameTimeSocket = updateTime('time/game', (value) => {
+	gameTimeSocket = createWebsocket('time/game', (value) => {
 		return $('#time').text(value?.data?.length ? value.data : '20:00');
 	});
-}
-
-function updateTime(endpoint, callback) {
-	const loc = window.location;
-	const protocol = loc.protocol === 'https:' ? 'wss:' : 'ws:';
-	const new_uri = `${protocol}//${loc.host}/${endpoint}`;
-
-	const socket = new WebSocket(new_uri);
-	socket.onmessage = callback;
-	return socket;
 }
 
 function handleEventInternal(event) {
@@ -311,7 +301,7 @@ function showRedCardTimer(team) {
 	team = team.toLowerCase();
 	const redCardTimer = $(`#${team}RedCardBox`);
 	redCardTimer.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-	let socket = updateTime(`time/red/${team}`, (value) => {
+	let socket = createWebsocket(`time/red/${team}`, (value) => {
 		const time = value?.data;
 		if (time === '00:00') {
 			socket.close();

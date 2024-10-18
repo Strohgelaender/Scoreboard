@@ -8,16 +8,18 @@ let foulsAway = 0;
 let socket;
 
 $(() => {
-	const loc = window.location;
-	const new_uri = `${loc.protocol === 'https:' ? 'wss:' : 'ws:'}//${loc.host}/events`;
-
-	console.log(new_uri);
-
-	socket = new WebSocket(new_uri);
-	socket.onmessage = handleWebsocketMessageCommon;
-
+	socket = createWebsocket('events', handleWebsocketMessageCommon);
 	loadInitialScores();
 });
+
+function createWebsocket(endpoint, handler) {
+	const loc = window.location;
+	const new_uri = `${loc.protocol === 'https:' ? 'wss:' : 'ws:'}//${loc.host}/${endpoint}`;
+
+	let socket = new WebSocket(new_uri);
+	socket.onmessage = handler;
+	return socket;
+}
 
 function loadInitialScores() {
 	$.ajax({

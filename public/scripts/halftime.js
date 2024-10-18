@@ -9,24 +9,16 @@ function updateScoreboardInternal() {
 }
 
 function updateTimerFromServer() {
-	$.ajax({
-		method: 'GET',
-		url: `/time/half`,
-	})
-		.done((value) => {
-			if (value === '00:00') {
-				$('#time').text('');
-			} else {
-				$('#time').text(value.length ? value : '');
-			}
-		})
-		.catch((error) => {
-			console.log(error);
-		});
+	createWebsocket('time/half', (value) => {
+		const time = value.data;
+		if (time === '00:00') {
+			$('#time').text('');
+		} else {
+			$('#time').text(time.length ? time : '');
+		}
+	});
 }
 
 $(() => {
-	setInterval(() => {
-		updateTimerFromServer();
-	}, 500);
+	updateTimerFromServer();
 });
