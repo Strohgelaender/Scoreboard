@@ -167,6 +167,43 @@ html {
 	font-family: DFBSans-Bold, sans-serif;
 }
 
+.redCardBox {
+	position: absolute;
+	width: 65px;
+	height: 30px;
+	top: 36px;
+	border-radius: 10px 10px 0 0;
+	vertical-align: center;
+	z-index: -5;
+	background: var(--futsal-blue-2);
+	font-family: 'DFB Sans Ofc', sans-serif;
+	display: flex;
+	align-items: center;
+	padding: 0 10px 0 10px;
+	clip-path: inset(100% 0 0 0);
+}
+
+#homeRedCardBox {
+	left: 190px;
+}
+
+#awayRedCardBox {
+	left: 665px;
+}
+
+.redCard {
+	position: relative;
+	margin: 5px;
+	width: 15px;
+	height: 20px;
+	background-color: red;
+}
+
+.redCardTimer {
+	padding: 0 5px 0 5px;
+	font-size: 14px;
+}
+
 #homeTimeImage,
 #awayTimeImage {
 	top: 70px;
@@ -272,6 +309,9 @@ html {
 
 #time {
 	font-size: 20px;
+}
+
+.time {
 	font-family: 'DFB Sans Ofc';
 }
 

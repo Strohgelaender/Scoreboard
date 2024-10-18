@@ -54,13 +54,15 @@ function loadTeams() {
 }
 
 function updateTimerFromServer() {
+	updateTime('/time/game', (value) => $('#time').text(value.length ? value : '20:00'));
+}
+
+function updateTime(endpoint, callback) {
 	$.ajax({
 		method: 'GET',
-		url: `/time/game`,
+		url: endpoint,
 	})
-		.done((value) => {
-			$('#time').text(value.length ? value : '20:00');
-		})
+		.done(callback)
 		.catch((error) => {
 			console.log(error);
 		});
@@ -109,6 +111,12 @@ function handleEventInternal(event) {
 			break;
 		case 'REFRESH':
 			loadTeams();
+			break;
+		case 'RED_CARD':
+			showRedCardTimer(event.team);
+			break;
+		case 'CLEAR_RED_CARD':
+			clearRedCardTimer(event.team);
 			break;
 	}
 }
@@ -287,6 +295,42 @@ function foulsToText(fouls) {
 	}
 	result += '|'.repeat(fouls);
 	return result;
+}
+
+let redCardIntervals = {};
+
+function showRedCardTimer(team) {
+	team = team.toLowerCase();
+	const redCardTimer = $(`#${team}RedCardBox`);
+	redCardTimer.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	let interval = setInterval(() => {
+		updateTime(`/time/red/${team}`, (value) => {
+			if (value === '00:00') {
+				clearInterval(interval);
+				setTimeout(() => {
+					redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+					setTimeout(() => {
+						$(`#${team}RedCardTimer`).text('3:00');
+					}, 1000);
+				}, 500);
+			}
+			$(`#${team}RedCardTimer`).text(value.length ? value.slice(1) : '3:00');
+		});
+		redCardIntervals[team] = interval;
+	}, 500);
+}
+
+function clearRedCardTimer(team) {
+	team = team.toLowerCase();
+	if (redCardIntervals[team]) {
+		clearInterval(redCardIntervals[team]);
+		delete redCardIntervals[team];
+		const redCardTimer = $(`#${team}RedCardBox`);
+		redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		setTimeout(() => {
+			$(`#${team}RedCardTimer`).text('3:00');
+		}, 1000);
+	}
 }
 
 function animateLineup(team, players) {

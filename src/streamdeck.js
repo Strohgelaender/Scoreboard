@@ -27,6 +27,7 @@ const CASTER_KEY = 29;
 const TABLE_KEY = 18;
 const MATCHDAY_KEY = 17;
 const REFRESH_KEY = 25;
+const RED_CARD_KEY = 16;
 
 const PAUSE_KEY = 0;
 const ADD_5_KEY = 1;
@@ -74,6 +75,11 @@ rl.on('line', (input) => {
 		case 'REMOVE FOUL':
 		case 'REMOVE_FOUL':
 			event.eventType = 'REMOVE_FOUL';
+			break;
+		case 'RED':
+		case 'RED_CARD':
+		case 'RED CARD':
+			event.eventType = 'RED_CARD';
 			break;
 		case 'CLEAR':
 		case 'CLEAR_FOULS':
@@ -131,6 +137,7 @@ const EVENT_MAPPING = {
 	[OWN_GOAL_KEY]: 'OWN_GOAL',
 	[FOUL_KEY]: 'FOUL',
 	[REMOVE_FOUL_KEY]: 'REMOVE_FOUL',
+	[RED_CARD_KEY]: 'RED_CARD',
 };
 
 async function main() {
@@ -331,6 +338,7 @@ const IMAGES = {
 	[TABLE_KEY]: 'table.png',
 	[MATCHDAY_KEY]: 'calendar-249-256.png',
 	[REFRESH_KEY]: 'cancel.png',
+	[RED_CARD_KEY]: 'red.png',
 };
 
 const TEXTS = {

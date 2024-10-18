@@ -30,6 +30,8 @@ let matchTimer = new Timer(20 * 60 * 1000, () => {
 
 let halftimeTimer = new Timer(14 * 60 * 1000);
 
+let redCardTimers = [];
+
 let scoreHome = 0;
 let scoreAway = 0;
 let foulsHome = 0;
@@ -128,6 +130,17 @@ app.get('/time/half', (req, res) => {
 	res.send(halftimeTimer.getTimeText());
 });
 
+// TODO: Should we support multiple red card timers per team?
+// This should be super super rare and I don't think it's worth the effort
+app.get('/time/red/:team', (req, res) => {
+	for (const timer of redCardTimers) {
+		if (timer.getTeam() === req.params.team.toUpperCase()) {
+			res.send(timer.getTimeText());
+			return;
+		}
+	}
+});
+
 export async function updateLineup(force = false) {
 	if (force || !homeTeam.players?.length || !awayTeam.players?.length) {
 		const lineup = await readLineup();
@@ -167,6 +180,9 @@ export function sendEvent(event) {
 
 	if (matchTimer.handleTimerEvent(event)) {
 		// true if event got picked up by timer
+		for (const timer of redCardTimers) {
+			timer.handleTimerEvent(event);
+		}
 		return;
 	} else if (event.eventType === 'HALFTIME_TIMER') {
 		halftimeTimer.startTimer();
@@ -207,6 +223,20 @@ function handleEventInternal(event) {
 	if (event.eventType === 'GOAL') {
 		addScore(event.team === 'HOME');
 		logEvent(event);
+		if (redCardTimers.length === 1) {
+			// We do not support multiple red cards per team yet.
+			// 1 timer means only one team with a red card -> goal could change that
+			// 2 timers -> both teams with red card -> goal does not change anything
+			const timer = redCardTimers[0];
+			if (timer.getTeam() !== event.team) {
+				sendEvent({
+					eventType: 'CLEAR_RED_CARD',
+					team: timer.getTeam(),
+				});
+				timer.resetTimer();
+				redCardTimers = [];
+			}
+		}
 	} else if (event.eventType === 'OWN_GOAL') {
 		reduceScore(event.team === 'HOME');
 	}
@@ -219,6 +249,21 @@ function handleEventInternal(event) {
 		foulsHome = foulsAway = 0;
 	} else if (event.eventType === 'TOGGLE_SCOREBOARD') {
 		toggleScoreboardVideo();
+	}
+
+	if (event.eventType === 'RED_CARD') {
+		const timer = new Timer(
+			3 * 60 * 1000,
+			() => {
+				// remove timer from list on finish
+				redCardTimers.splice(redCardTimers.indexOf(timer), 1);
+			},
+			event.team,
+		);
+		if (matchTimer.isRunning()) {
+			timer.startTimer();
+		}
+		redCardTimers.push(timer);
 	}
 
 	if (event.playerData === undefined) {

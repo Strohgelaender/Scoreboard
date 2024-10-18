@@ -1,6 +1,5 @@
 export class Timer {
-
-	constructor(defaultTime = 20 * 60 * 1000, callback = undefined) {
+	constructor(defaultTime = 20 * 60 * 1000, callback = undefined, team = undefined) {
 		this.defaultTime = defaultTime;
 		this.endtime = null;
 		this.totaltime = null;
@@ -8,6 +7,7 @@ export class Timer {
 		this.stepper = null;
 		this.timeText = null;
 		this.firstHalfDone = false;
+		this.team = team;
 		this.callback = callback;
 	}
 
@@ -82,6 +82,10 @@ export class Timer {
 		return this.firstHalfDone;
 	}
 
+	getTeam() {
+		return this.team;
+	}
+
 	startTimer() {
 		if (this.totaltime === null) {
 			this.totaltime = this.defaultTime;
@@ -117,5 +121,3 @@ export class Timer {
 		return this.stepper !== null;
 	}
 }
-
-
