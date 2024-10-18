@@ -21,14 +21,18 @@ let referees = [];
 let table;
 let matchday;
 
-let matchTimer = new Timer(20 * 60 * 1000, (text) => {
-	sendWS(timerWS.game, text);
-}, () => {
-	setTimeout(() => {
-		sendEvent({ eventType: 'SECOND_HALF' });
-		matchTimer.resetTimer();
-	}, 10000);
-});
+let matchTimer = new Timer(
+	20 * 60 * 1000,
+	(text) => {
+		sendWS(timerWS.game, text);
+	},
+	() => {
+		setTimeout(() => {
+			sendEvent({ eventType: 'SECOND_HALF' });
+			matchTimer.resetTimer();
+		}, 10000);
+	},
+);
 
 let halftimeTimer = new Timer(14 * 60 * 1000, (text) => {
 	sendWS(timerWS.half, text);
@@ -132,7 +136,7 @@ app.get('/scores', (req, res) => {
 	res.send({ scoreHome, scoreAway, foulsHome, foulsAway });
 });
 
-app.get('/time/game',  tinyws(), async (req) => {
+app.get('/time/game', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
 		timerWS.game.push(ws);

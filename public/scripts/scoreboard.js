@@ -263,9 +263,13 @@ function updateFouls() {
 }
 
 function updateFoulsBox() {
-	const foulsBox = $('#allFoulsBox');
+	const foulsBox = $('#foulsContent');
+	const background = $('#foulsAdditionalBackground');
 	if (foulsHome > 0 || foulsAway > 0) {
-		foulsBox.css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		background.css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		setTimeout(() => {
+			foulsBox.css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		}, 200);
 		if (foulsTimeout) {
 			clearTimeout(foulsTimeout);
 		}
@@ -274,6 +278,9 @@ function updateFoulsBox() {
 			// Otherwise hide it after 30 seconds
 			foulsTimeout = setTimeout(() => {
 				foulsBox.css('animation', 'revealDownOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				setTimeout(() => {
+					background.css('animation', 'revealDownOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				}, 500);
 			}, 30_000);
 		}
 	} else if (foulsBox.css('animation-name') === 'revealDown') {
@@ -304,19 +311,19 @@ function showRedCardTimer(team) {
 	team = team.toLowerCase();
 	const redCardTimer = $(`#${team}RedCardBox`);
 	redCardTimer.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		let socket = updateTime(`time/red/${team}`, (value) => {
-			const time = value?.data;
-			if (time === '00:00') {
-				socket.close();
+	let socket = updateTime(`time/red/${team}`, (value) => {
+		const time = value?.data;
+		if (time === '00:00') {
+			socket.close();
+			setTimeout(() => {
+				redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 				setTimeout(() => {
-					redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-					setTimeout(() => {
-						$(`#${team}RedCardTimer`).text('3:00');
-					}, 1000);
-				}, 500);
-			}
-			$(`#${team}RedCardTimer`).text(time?.length ? time.slice(1) : '3:00');
-		});
+					$(`#${team}RedCardTimer`).text('3:00');
+				}, 1000);
+			}, 500);
+		}
+		$(`#${team}RedCardTimer`).text(time?.length ? time.slice(1) : '3:00');
+	});
 	redCardSockets[team] = socket;
 }
 
