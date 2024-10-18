@@ -45,6 +45,7 @@ function loadTeams() {
 			if (value.firstHalfDone) {
 				updateHalfIndicator();
 			}
+			updateScoreboardInternal();
 		})
 		.catch((error) => {
 			console.log(error);
@@ -247,19 +248,22 @@ function doubleDigitAdjustments() {
 }
 
 function updateFouls() {
-	updateFoulsContent($('#homeTimeFoulsBox'), $('#homeTimeFouls'), foulsHome);
-	updateFoulsContent($('#awayTimeFoulsBox'), $('#awayTimeFouls'), foulsAway);
+	updateFoulsBox();
+	updateFoulsContent($('#homeTimeFouls'), foulsHome);
+	updateFoulsContent($('#awayTimeFouls'), foulsAway);
 }
 
-function updateFoulsContent(foulsBox, foulsText, fouls) {
-	if (fouls > 0 && foulsBox.css('display') === 'none') {
-		foulsBox.fadeIn(1000);
-		foulsText?.text(foulsToText(fouls));
-	} else if (fouls === 0) {
-		foulsBox.fadeOut(1000, () => foulsText?.text(''));
-	} else {
-		foulsText?.text(foulsToText(fouls));
+function updateFoulsBox() {
+	const foulsBox = $('#allFoulsBox');
+	if (foulsHome > 0 || foulsAway > 0) {
+		foulsBox.css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	} else if (foulsBox.css('animation-name') === 'revealDown') {
+		foulsBox.css('animation', 'revealDownOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	}
+}
+
+function updateFoulsContent(foulsText, fouls) {
+	foulsText?.text(fouls);
 }
 
 function foulsToText(fouls) {

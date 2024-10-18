@@ -13,7 +13,6 @@ const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
 const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/7-spieltag';
 
-
 const game = axios.create({ baseURL: matchUrl });
 const overview = axios.create({ baseURL: overviewUrl });
 const table = axios.create({ baseURL: tableUrl });

@@ -102,6 +102,23 @@ html {
 	border-top: 2px solid #6edce6;
 }
 
+#allFoulsBox {
+	position: absolute;
+	width: 570px;
+	height: 30px;
+	top: 119px;
+	left: 190px;
+	border-radius: 0 0 10px 10px;
+	text-align: center;
+	vertical-align: center;
+	z-index: -5;
+	background-color: var(--futsal-blue-2);
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	clip-path: inset(0 0 100% 0);
+}
+
 .fouls {
 	z-index: 1;
 	font-size: 20px;
@@ -135,19 +152,19 @@ html {
 }
 
 #halfIndicatorBox {
-    position: absolute;
-    width: 50px;
-    height: 30px;
-    left: 90px;
-    top: 118px;
-    border-radius: 0 0 10px 10px;
-    text-align: center;
-    vertical-align: center;
-    line-height: 20px;
-    z-index: -5;
-    background: var(--futsal-blue-2);
-    font-size: 20px;
-    font-family: DFBSans-Bold, sans-serif;
+	position: absolute;
+	width: 50px;
+	height: 30px;
+	left: 90px;
+	top: 118px;
+	border-radius: 0 0 10px 10px;
+	text-align: center;
+	vertical-align: center;
+	line-height: 20px;
+	z-index: -5;
+	background: var(--futsal-blue-2);
+	font-size: 20px;
+	font-family: DFBSans-Bold, sans-serif;
 }
 
 #homeTimeImage,
@@ -234,14 +251,12 @@ html {
 	}
 }
 
-#homeTimeFoulsBox {
+#homeTimeFouls {
 	left: 300px;
-	background-color: #096780;
 }
 
-#awayTimeFoulsBox {
+#awayTimeFouls {
 	left: 600px;
-	background-color: #024359;
 }
 
 #timeBox {
@@ -541,7 +556,7 @@ html {
 	width: 1400px;
 	border-radius: 15px 15px 15px 15px;
 	clip-path: inset(0 50% 0 50%);
-    background-color: var(--futsal-blue-2);
+	background-color: var(--futsal-blue-2);
 }
 
 @keyframes spielfeldBottom {

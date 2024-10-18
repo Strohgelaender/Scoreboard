@@ -13,7 +13,7 @@ const OBS_PASSWORD = process.env.OBS_PASSWORD || '';
 
 const HOME_PATH = 'data/home.json';
 const AWAY_PATH = 'data/away.json';
-const EVENT_FILE = `data/${new Date().toISOString().replace(/:/g, '-')}.json`;
+const EVENT_FILE = `data/${new Date().toISOString().replace(/:/g, '-')}.txt`;
 
 let homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
 let awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
@@ -327,19 +327,21 @@ function toggleScoreboardVideo() {
 			sceneName: 'Main',
 			sceneItemId: 12,
 			sceneItemEnabled: false,
-		}).catch(e => console.error(e.message));
+		}).catch((e) => console.error(e.message));
 	} else {
 		obs.call('TriggerMediaInputAction', {
-			inputName: "Logo",
+			inputName: 'Logo',
 			inputUuid: 12,
-			mediaAction: "OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART"
-		}).then(() => {
-			obs.call('SetSceneItemEnabled', {
-				sceneName: 'Main',
-				sceneItemId: 12,
-				sceneItemEnabled: true,
-			}).catch(e => console.error(e));
-		}).catch(e => console.error(e.message));
+			mediaAction: 'OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART',
+		})
+			.then(() => {
+				obs.call('SetSceneItemEnabled', {
+					sceneName: 'Main',
+					sceneItemId: 12,
+					sceneItemEnabled: true,
+				}).catch((e) => console.error(e));
+			})
+			.catch((e) => console.error(e.message));
 	}
 	showingScoreboard = !showingScoreboard;
 }

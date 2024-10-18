@@ -71,6 +71,15 @@ rl.on('line', (input) => {
 		case 'FOUL':
 			event.eventType = 'FOUL';
 			break;
+		case 'REMOVE FOUL':
+		case 'REMOVE_FOUL':
+			event.eventType = 'REMOVE_FOUL';
+			break;
+		case 'CLEAR':
+		case 'CLEAR_FOULS':
+		case 'CLEAR FOULS':
+			sendStandaloneEvent('CLEAR_FOULS');
+			return;
 		case 'LINEUP':
 			showLineup();
 			return;
