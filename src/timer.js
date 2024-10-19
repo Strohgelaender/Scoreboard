@@ -111,6 +111,9 @@ export class Timer {
 		this.endtime = null;
 		this.displayTime(time);
 		this.clear();
+		if (this.onPause) {
+			this.onPause(this.isRunning());
+		}
 	}
 
 	pauseTimer() {
