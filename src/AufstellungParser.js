@@ -89,7 +89,6 @@ export async function readTable() {
 		const points = row.querySelector('.column-points').text.trim();
 		result.push({ rank, team, teamLogo, games, goalDiff, points });
 	}
-	console.log(result);
 	return result;
 }
 
@@ -136,6 +135,7 @@ export async function readMatchday() {
 		if (match) {
 			match.score = score;
 			match.isLive = root.live;
+			console.log('Match found:', homeTeam, guestTeam, score, match.isLive);
 		} else {
 			console.warn('Match not found:', homeTeam, guestTeam);
 		}

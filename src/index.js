@@ -194,7 +194,6 @@ export async function updateLineup(force = false) {
 		homeTeam.players = lineup.home;
 		awayTeam.players = lineup.away;
 		console.log('Lineup updated');
-		console.log(homeTeam.players);
 	}
 }
 
