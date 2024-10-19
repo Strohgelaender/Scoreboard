@@ -2,7 +2,15 @@ import { listStreamDecks, openStreamDeck } from '@elgato-stream-deck/node';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import { updateLineup, saveReferees, sendEvent, loadTable, loadMatchday, reloadTeamFiles } from './index.js';
+import {
+	updateLineup,
+	saveReferees,
+	sendEvent,
+	loadTable,
+	loadMatchday,
+	reloadTeamFiles,
+	getMatchTimer
+} from './index.js';
 import readline from 'readline';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -148,6 +156,11 @@ async function main() {
 			return;
 		}
 		streamDeck = await openStreamDeck(devices[0].path);
+
+		getMatchTimer().onPause = updateTimerImage;
+		playImageBuffer = await createImageBuffer(PAUSE_KEY, 'play.png');
+		pauseImageBuffer = await createImageBuffer(PAUSE_KEY, 'Basic_Element_15-30_(580).jpg');
+
 		streamDeck.on('down', (control) => {
 			if (control.type !== 'button') {
 				return;
@@ -334,12 +347,15 @@ const IMAGES = {
 	[SHOW_REFEREES_KEY]: 'dfb-picto-schiriansetzung-rgb-white.png',
 	[SHOW_LINEUP_KEY]: 'lineup.png',
 	[CASTER_KEY]: 'microphone-342.png',
-	[PAUSE_KEY]: 'Basic_Element_15-30_(580).jpg',
+	[PAUSE_KEY]: 'play.png',
 	[TABLE_KEY]: 'table.png',
 	[MATCHDAY_KEY]: 'calendar-249-256.png',
 	[REFRESH_KEY]: 'cancel.png',
 	[RED_CARD_KEY]: 'red.png',
 };
+
+let playImageBuffer;
+let pauseImageBuffer;
 
 const TEXTS = {
 	[ADD_5_KEY]: '+5',
@@ -348,6 +364,14 @@ const TEXTS = {
 	[MINUS_10_KEY]: '-10',
 	[HALFTIME_TIMER_KEY]: '15:00',
 };
+
+function updateTimerImage(running) {
+	if (running) {
+		streamDeck.fillKeyBuffer(PAUSE_KEY, pauseImageBuffer);
+	} else {
+		streamDeck.fillKeyBuffer(PAUSE_KEY, playImageBuffer);
+	}
+}
 
 async function loadKeyImages() {
 	for (const key in IMAGES) {

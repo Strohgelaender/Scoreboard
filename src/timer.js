@@ -10,6 +10,7 @@ export class Timer {
 		this.team = team;
 		this.callback = callback;
 		this.stepFunction = stepFunction;
+		this.onPause = null;
 	}
 
 	handleTimerEvent(event) {
@@ -100,6 +101,9 @@ export class Timer {
 		this.stepper = setInterval(() => {
 			this.displayTime(this.endtime - Date.now());
 		}, 100);
+		if (this.onPause) {
+			this.onPause(this.isRunning());
+		}
 	}
 
 	resetTimer(time = this.defaultTime, totalTime = this.defaultTime) {
@@ -113,6 +117,9 @@ export class Timer {
 		this.totaltime = this.endtime - Date.now();
 		clearInterval(this.stepper);
 		this.stepper = null;
+		if (this.onPause) {
+			this.onPause(this.isRunning());
+		}
 	}
 
 	clear() {

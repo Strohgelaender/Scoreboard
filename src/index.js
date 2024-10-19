@@ -33,6 +33,7 @@ let matchTimer = new Timer(
 			timer.resetTimer();
 		}
 		redCardTimers = [];*/
+
 		setTimeout(() => {
 			sendEvent({ eventType: 'SECOND_HALF' });
 			sendEvent({ eventType: 'CLEAR_FOULS' });
@@ -88,10 +89,14 @@ async function cleanup() {
 	process.exit(0);
 }
 
+export function getMatchTimer() {
+	return matchTimer;
+}
+
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
 
 app.use(express.static('public'));
-app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.json({ limit: '50mb' }));
 
 app.get('/', (req, res) => {
 	res.send('The Server is up and running');
