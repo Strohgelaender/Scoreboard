@@ -17,6 +17,7 @@
 		"@elgato-stream-deck/node": "7.0.2",
 		"@julusian/jpeg-turbo": "2.2.0",
 		"axios": "1.7.7",
+		"body-parser": "1.20.3",
 		"canvas": "2.11.2",
 		"dotenv": "16.4.5",
 		"express": "4.21.1",

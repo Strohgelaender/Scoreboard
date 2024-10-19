@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import bodyParser from 'body-parser';
 import { tinyws } from 'tinyws';
 import fs from 'fs';
 import { OBSWebSocket } from 'obs-websocket-js';
@@ -84,6 +85,7 @@ async function cleanup() {
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
 
 app.use(express.static('public'));
+app.use(bodyParser.json({limit: '50mb'}))
 
 app.get('/', (req, res) => {
 	res.send('The Server is up and running');
@@ -165,6 +167,14 @@ app.get('/time/red/:team', tinyws(), async (req) => {
 		timerWS[`red${team}`].push(ws);
 		ws.send(redCardTimers.find((timer) => timer.getTeam() === team).getTimeText());
 	}
+});
+
+app.post('/saveScoreboard', express.json(), (req, res) => {
+	let body = req.body.dataUrl;
+	body = body.replace(/^data:image\/png;base64,/, "");
+	fs.writeFileSync(`data/scorboard-${scoreHome}-${scoreAway}.png`, body, 'base64');
+	console.log('Scoreboard saved');
+	res.status(200).send('OK');
 });
 
 export async function updateLineup(force = false) {
@@ -253,20 +263,7 @@ function handleEventInternal(event) {
 	if (event.eventType === 'GOAL') {
 		addScore(event.team === 'HOME');
 		logEvent(event);
-		if (redCardTimers.length === 1) {
-			// We do not support multiple red cards per team yet.
-			// 1 timer means only one team with a red card -> goal could change that
-			// 2 timers -> both teams with red card -> goal does not change anything
-			const timer = redCardTimers[0];
-			if (timer.getTeam() !== event.team) {
-				sendEvent({
-					eventType: 'CLEAR_RED_CARD',
-					team: timer.getTeam(),
-				});
-				timer.resetTimer();
-				redCardTimers = [];
-			}
-		}
+		handleRedCardGoal(event);
 	} else if (event.eventType === 'OWN_GOAL') {
 		reduceScore(event.team === 'HOME');
 	}
@@ -282,21 +279,7 @@ function handleEventInternal(event) {
 	}
 
 	if (event.eventType === 'RED_CARD') {
-		const timer = new Timer(
-			3 * 60 * 1000,
-			(text) => {
-				sendWS(timerWS[`red${event.team.toLowerCase()}`], text);
-			},
-			() => {
-				// remove timer from list on finish
-				redCardTimers.splice(redCardTimers.indexOf(timer), 1);
-			},
-			event.team,
-		);
-		if (matchTimer.isRunning()) {
-			timer.startTimer();
-		}
-		redCardTimers.push(timer);
+		addRedCardTimer(event);
 	}
 
 	if (event.playerData === undefined) {
@@ -325,6 +308,41 @@ function handleEventInternal(event) {
 	} else {
 		saveData();
 	}
+}
+
+function handleRedCardGoal(event) {
+	if (redCardTimers.length === 1) {
+		// We do not support multiple red cards per team yet.
+		// 1 timer means only one team with a red card -> goal could change that
+		// 2 timers -> both teams with red card -> goal does not change anything
+		const timer = redCardTimers[0];
+		if (timer.getTeam() !== event.team) {
+			sendEvent({
+				eventType: 'CLEAR_RED_CARD',
+				team: timer.getTeam(),
+			});
+			timer.resetTimer();
+			redCardTimers = [];
+		}
+	}
+}
+
+function addRedCardTimer(event) {
+	const timer = new Timer(
+		3 * 60 * 1000,
+		(text) => {
+			sendWS(timerWS[`red${event.team.toLowerCase()}`], text);
+		},
+		() => {
+			// remove timer from list on finish
+			redCardTimers.splice(redCardTimers.indexOf(timer), 1);
+		},
+		event.team,
+	);
+	if (matchTimer.isRunning()) {
+		timer.startTimer();
+	}
+	redCardTimers.push(timer);
 }
 
 function updatePlayerProperty(player, property) {
