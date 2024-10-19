@@ -125,7 +125,7 @@ export async function readMatchday() {
 	for (const matchId of otherMatches) {
 		const response = await game.get(matchId + '/ticker-id/selectedTickerId');
 		const root = response.data;
-		if (!root || !root.live) {
+		if (!root || root.live === undefined) {
 			continue;
 		}
 		const score = root.score;
@@ -135,7 +135,7 @@ export async function readMatchday() {
 		const match = result.find((m) => m.homeTeam === homeTeam || m.awayTeam === guestTeam);
 		if (match) {
 			match.score = score;
-			match.isLive = true;
+			match.isLive = root.live;
 		} else {
 			console.warn('Match not found:', homeTeam, guestTeam);
 		}

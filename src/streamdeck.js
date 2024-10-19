@@ -381,7 +381,7 @@ function createImageBuffer(index, imageName) {
 
 function createText(index, text) {
 	const pixelSize = streamDeck.CONTROLS[index].pixelSize;
-	const svgData = `<svg viewBox="0 0 ${pixelSize.width} ${pixelSize.height}" version="1.1">
+	const svgData = `<svg viewBox="0 0 ${pixelSize.width} ${pixelSize.height}">
                         <text
                             font-family="'sans-serif'"
                             font-size="30px"

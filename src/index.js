@@ -177,7 +177,7 @@ app.get('/time/red/:team', tinyws(), async (req) => {
 
 app.post('/saveScoreboard', express.json(), (req, res) => {
 	let body = req.body.dataUrl;
-	body = body.replace(/^data:image\/png;base64,/, "");
+	body = body.replace(/^data:image\/png;base64,/, '');
 	fs.writeFileSync(`data/scorboard-${scoreHome}-${scoreAway}.png`, body, 'base64');
 	console.log('Scoreboard saved');
 	res.status(200).send('OK');
