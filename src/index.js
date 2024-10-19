@@ -28,12 +28,14 @@ let matchTimer = new Timer(
 		sendWS(timerWS.game, text);
 	},
 	() => {
-		for (const timer of redCardTimers) {
+		// TODO is this true?
+		/*for (const timer of redCardTimers) {
 			timer.resetTimer();
 		}
-		redCardTimers = [];
+		redCardTimers = [];*/
 		setTimeout(() => {
 			sendEvent({ eventType: 'SECOND_HALF' });
+			sendEvent({ eventType: 'CLEAR_FOULS' });
 			matchTimer.resetTimer();
 		}, 10000);
 	},
