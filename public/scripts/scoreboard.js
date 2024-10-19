@@ -309,11 +309,11 @@ function showRedCardTimer(team) {
 			setTimeout(() => {
 				redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 				setTimeout(() => {
-					$(`#${team}RedCardTimer`).text('3:00');
+					$(`#${team}RedCardTimer`).text('2:00');
 				}, 1000);
 			}, 500);
 		}
-		$(`#${team}RedCardTimer`).text(time?.length ? time.slice(1) : '3:00');
+		$(`#${team}RedCardTimer`).text(time?.length ? time.slice(1) : '2:00');
 	});
 	redCardSockets[team] = socket;
 }
@@ -326,7 +326,7 @@ function clearRedCardTimer(team) {
 		const redCardTimer = $(`#${team}RedCardBox`);
 		redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
-			$(`#${team}RedCardTimer`).text('3:00');
+			$(`#${team}RedCardTimer`).text('2:00');
 		}, 1000);
 	}
 }

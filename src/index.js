@@ -28,6 +28,10 @@ let matchTimer = new Timer(
 		sendWS(timerWS.game, text);
 	},
 	() => {
+		for (const timer of redCardTimers) {
+			timer.resetTimer();
+		}
+		redCardTimers = [];
 		setTimeout(() => {
 			sendEvent({ eventType: 'SECOND_HALF' });
 			matchTimer.resetTimer();
@@ -329,7 +333,7 @@ function handleRedCardGoal(event) {
 
 function addRedCardTimer(event) {
 	const timer = new Timer(
-		3 * 60 * 1000,
+		2 * 60 * 1000,
 		(text) => {
 			sendWS(timerWS[`red${event.team.toLowerCase()}`], text);
 		},
