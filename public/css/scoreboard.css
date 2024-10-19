@@ -953,12 +953,16 @@ html {
 	top: 50px;
 	left: 50px;
 	font-size: 18px;
-    font-font: DFBSans-Bold, sans-serif;
+	font-family: DFBSans-Bold, sans-serif;
 }
 
 #matchdayTitle {
 	font-size: 60px;
 	margin: 30px;
+}
+
+#matchesTable {
+    font-size: 29px;
 }
 
 #matchesTable td {

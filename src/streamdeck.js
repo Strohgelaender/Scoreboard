@@ -2,15 +2,7 @@ import { listStreamDecks, openStreamDeck } from '@elgato-stream-deck/node';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import {
-	updateLineup,
-	saveReferees,
-	sendEvent,
-	loadTable,
-	loadMatchday,
-	reloadTeamFiles,
-	getMatchTimer
-} from './index.js';
+import { updateLineup, saveReferees, sendEvent, loadTable, loadMatchday, reloadTeamFiles, getMatchTimer } from './index.js';
 import readline from 'readline';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
