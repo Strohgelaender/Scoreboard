@@ -7,14 +7,13 @@ import { parse } from 'node-html-parser';
 // IMPORTANT: Always update there two URLs before starting the prod server
 // Jahn Regensburg: 02Q0SKPLG0000000VS5489B3VU5PPGUO
 
-const matchId = '02Q0SKPLPC000000VS5489B3VU5PPGUO';
+const matchId = '02Q0SKPM3K000000VS5489B3VU5PPGUO';
 
 const otherMatches = [
-	'02Q0SKPLPC000000VS5489B3VU5PPGUO',
-	'02Q0SKPLM4000000VS5489B3VU5PPGUO',
-	'02Q0SKPLN4000000VS5489B3VU5PPGUO',
-	'02Q0SKPLO8000000VS5489B3VU5PPGUO',
-	'02Q0SKPLQG000000VS5489B3VU5PPGUO',
+	'02Q0SKPM6O000000VS5489B3VU5PPGUO',
+	'02Q0SKPM24000000VS5489B3VU5PPGUO',
+	'02Q0SKPM58000000VS5489B3VU5PPGUO',
+	'02Q0SKPM88000000VS5489B3VU5PPGUO',
 ];
 
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
@@ -22,7 +21,7 @@ const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
 const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/2388080';
 const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
-const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/5-spieltag';
+const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/7-spieltag';
 
 const game = axios.create({ baseURL: matchUrl });
 const overview = axios.create({ baseURL: overviewUrl });
