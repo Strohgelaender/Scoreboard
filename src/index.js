@@ -140,6 +140,7 @@ app.get('/time/game', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
 		timerWS.game.push(ws);
+		ws.send(matchTimer.getTimeText());
 	}
 });
 
@@ -147,6 +148,7 @@ app.get('/time/half', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
 		timerWS.half.push(ws);
+		ws.send(halftimeTimer.getTimeText());
 	}
 });
 
@@ -159,7 +161,9 @@ app.get('/time/red/:team', tinyws(), async (req) => {
 	}
 	if (req.ws) {
 		const ws = await req.ws();
-		timerWS[`red${req.params.team.toLowerCase()}`].push(ws);
+		const team = req.params.team.toLowerCase();
+		timerWS[`red${team}`].push(ws);
+		ws.send(redCardTimers.find((timer) => timer.getTeam() === team).getTimeText());
 	}
 });
 
