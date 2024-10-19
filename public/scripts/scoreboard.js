@@ -503,7 +503,11 @@ function createMatchdayRow(match, table) {
 	row.append($('<td style="text-align: center;">').append($(`<img src="${match.homeImage}" class="tableTeamLogo">`)));
 	row.append($('<td class="tableTeamName">').text(match.homeTeam));
 	if (match.isLive) {
-		row.append($('<td>').text('Live'));
+		if (match.score) {
+			row.append($('<td class="live">').text(match.score));
+		} else {
+			row.append($('<td class="live">').text('Live'));
+		}
 	} else {
 		row.append($('<td>').text(match.score));
 	}

@@ -6,12 +6,23 @@ import { parse } from 'node-html-parser';
 
 // IMPORTANT: Always update there two URLs before starting the prod server
 // Jahn Regensburg: 02Q0SKPLG0000000VS5489B3VU5PPGUO
-const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/02Q0SKPLG0000000VS5489B3VU5PPGUO/ticker-id/selectedTickerId';
+
+const matchId = '02Q0SKPLPC000000VS5489B3VU5PPGUO';
+
+const otherMatches = [
+	'02Q0SKPLPC000000VS5489B3VU5PPGUO',
+	'02Q0SKPLM4000000VS5489B3VU5PPGUO',
+	'02Q0SKPLN4000000VS5489B3VU5PPGUO',
+	'02Q0SKPLO8000000VS5489B3VU5PPGUO',
+	'02Q0SKPLQG000000VS5489B3VU5PPGUO',
+];
+
+const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
 // const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/beton-boys-muenchen-futsal-sv-pars-neu-isenburg-2388070';
 const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/2388080';
 const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
-const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/7-spieltag';
+const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/5-spieltag';
 
 const game = axios.create({ baseURL: matchUrl });
 const overview = axios.create({ baseURL: overviewUrl });
@@ -19,7 +30,7 @@ const table = axios.create({ baseURL: tableUrl });
 const matchday = axios.create({ baseURL: matchdayUrl });
 
 export async function readLineup() {
-	const response = await game.get('');
+	const response = await game.get(matchId + '/ticker-id/selectedTickerId');
 	const root = response.data;
 	const home = parsePlayers(root.home_team);
 	const away = parsePlayers(root.guest_team);
@@ -108,6 +119,33 @@ function getTeamLogo(teamName) {
 }
 
 export async function readMatchday() {
+	const result = await parseDFBMatchdayOverview();
+
+	// Use ticker by fussball.de for live scores if available:
+	for (const matchId of otherMatches) {
+		const response = await game.get(matchId + '/ticker-id/selectedTickerId');
+		const root = response.data;
+		if (!root || !root.live) {
+			continue;
+		}
+		const score = root.score;
+		const homeTeam = convertToConsistentName(root.home_team.name);
+		const guestTeam = convertToConsistentName(root.guest_team.name);
+		// use or to reduce potential error sources, as the team names are not always consistent
+		const match = result.find((m) => m.homeTeam === homeTeam || m.awayTeam === guestTeam);
+		if (match) {
+			match.score = score;
+			match.isLive = true;
+		} else {
+			console.warn('Match not found:', homeTeam, guestTeam);
+		}
+	}
+
+	// console.log(result);
+	return result;
+}
+
+async function parseDFBMatchdayOverview() {
 	const response = await matchday.get('');
 	const root = parse(response.data);
 	const matchdayHtml = root.querySelector('.c-MatchTable-body');
@@ -124,7 +162,6 @@ export async function readMatchday() {
 		const date = match.querySelector('.c-MatchTable-description').querySelector('p').text.trim();
 		result.push({ homeTeam, homeImage, awayTeam, awayImage, score, date, isLive });
 	}
-	console.log(result);
 	return result;
 }
 
@@ -135,6 +172,7 @@ function convertToConsistentName(team) {
 		case 'TSV Weilimdorf (Futsal)':
 			return 'TSV Weilimdorf';
 		case 'FC Liria':
+		case 'FC Liria  Berlin':
 			return 'FC Liria Futsal';
 		case 'Beton Boys München (Futsal)':
 			return 'Beton Boys München';

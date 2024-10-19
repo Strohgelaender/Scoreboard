@@ -969,3 +969,7 @@ html {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.live {
+	color: #ff2323;
+}

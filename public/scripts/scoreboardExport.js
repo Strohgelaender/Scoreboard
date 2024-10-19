@@ -19,7 +19,7 @@ function loadTeams() {
 			$(`#homeShirtLine`).css('background-color', home.shirtColor);
 			$(`#awayShirtLine`).css('background-color', away.shirtColor);
 		})
-		.catch(error => console.log(error));
+		.catch((error) => console.log(error));
 }
 
 function handleEventInternal(event) {
@@ -32,19 +32,22 @@ function handleEventInternal(event) {
 }
 
 function saveScoreboardScreenshot() {
-	const scoreboard = document.getElementById("scoreboard");
+	const scoreboard = document.getElementById('scoreboard');
 	const scale = 4;
-	domtoimage.toPng(scoreboard, {
-		width: scoreboard.clientWidth * scale,
-		height: scoreboard.clientHeight * scale,
-		style: {
-			display: 'inherit',
-			transform: 'scale('+scale+')',
-			transformOrigin: 'top left'
-		}}).then(dataUrl => {
-		saveImageOnServer(dataUrl);
-	})
-		.catch(error => console.error('oops, something went wrong!', error));
+	domtoimage
+		.toPng(scoreboard, {
+			width: scoreboard.clientWidth * scale,
+			height: scoreboard.clientHeight * scale,
+			style: {
+				display: 'inherit',
+				transform: 'scale(' + scale + ')',
+				transformOrigin: 'top left',
+			},
+		})
+		.then((dataUrl) => {
+			saveImageOnServer(dataUrl);
+		})
+		.catch((error) => console.error('oops, something went wrong!', error));
 }
 
 function saveImageOnServer(dataUrl) {
@@ -52,7 +55,7 @@ function saveImageOnServer(dataUrl) {
 		method: 'POST',
 		url: `/saveScoreboard`,
 		contentType: 'application/json',
-		data: JSON.stringify({dataUrl}),
+		data: JSON.stringify({ dataUrl }),
 	})
 		.done(console.log)
 		.catch((error) => {
