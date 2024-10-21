@@ -188,11 +188,28 @@ app.post('/saveScoreboard', express.json(), (req, res) => {
 	res.status(200).send('OK');
 });
 
+app.post('/lineup', express.json(), (req, res) => {
+	let body = req.body;
+	let home = body.home;
+	let away = body.away;
+	if (home) {
+		homeTeam.players = home;
+	}
+	if (away) {
+		awayTeam.players = away;
+	}
+	res.status(200).send();
+})
+
 export async function updateLineup(force = false) {
 	if (force || !homeTeam.players?.length || !awayTeam.players?.length) {
 		const lineup = await readLineup();
-		homeTeam.players = lineup.home;
-		awayTeam.players = lineup.away;
+		if (lineup.home) {
+			homeTeam.players = lineup.home;
+		}
+		if (lineup.away) {
+			awayTeam.players = lineup.away;
+		}
 		console.log('Lineup updated');
 	}
 }
@@ -222,7 +239,9 @@ export function reloadTeamFiles() {
 
 export function sendEvent(event) {
 	const team = getTeam(event.team);
-	event.playerData = team?.players[event.number];
+	if (team?.players && team.players[event.number]) {
+		event.playerData = team?.players[event.number];
+	}
 
 	if (matchTimer.handleTimerEvent(event)) {
 		// true if event got picked up by timer

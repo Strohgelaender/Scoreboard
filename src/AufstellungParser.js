@@ -24,11 +24,16 @@ const table = axios.create({ baseURL: tableUrl });
 const matchday = axios.create({ baseURL: matchdayUrl });
 
 export async function readLineup() {
-	const response = await game.get(matchId + '/ticker-id/selectedTickerId');
-	const root = response.data;
-	const home = parsePlayers(root.home_team);
-	const away = parsePlayers(root.guest_team);
-	return { home, away };
+	try {
+		const response = await game.get(matchId + '/ticker-id/selectedTickerId');
+		const root = response.data;
+		const home = parsePlayers(root.home_team);
+		const away = parsePlayers(root.guest_team);
+		return { home, away };
+	} catch (e) {
+		console.error(e);
+		return {};
+	}
 }
 
 function parsePlayers(team) {
@@ -50,40 +55,50 @@ function parsePlayers(team) {
 }
 
 export async function readReferees() {
-	const response = await overview.get('');
-	const root = parse(response.data);
-	let result = [];
-	for (const table of root.querySelectorAll('.m-MatchDetails-referees-list')) {
-		const referees = table.querySelectorAll('a');
-		result = referees.map((referee) => referee.text);
+	try {
+		const response = await overview.get('');
+		const root = parse(response.data);
+		let result = [];
+		for (const table of root.querySelectorAll('.m-MatchDetails-referees-list')) {
+			const referees = table.querySelectorAll('a');
+			result = referees.map((referee) => referee.text);
+		}
+		if (result.length === 0) {
+			result = ['Tobias Szombati', 'Alexander Schkarlat', 'Marijo Kraljic', 'Farras Fathi'];
+		}
+		return result;
+	} catch (e) {
+		console.error(e);
+		return [];
 	}
-	if (result.length === 0) {
-		result = ['Tobias Szombati', 'Alexander Schkarlat', 'Marijo Kraljic', 'Farras Fathi'];
-	}
-	return result;
 }
 
 export async function readTable() {
-	const response = await table.get('');
-	const root = parse(response.data);
-	let result = [];
-	const htmlTable = root.querySelector('.fixtures-matchplan-tournaments-group-table');
-	const body = htmlTable.querySelector('tbody');
-	const rows = body.querySelectorAll('tr');
-	for (const element of rows) {
-		const row = element;
-		const rank = row.querySelector('.column-rank').text.trim();
-		const team = row.querySelector('.club-name').text.trim();
-		const teamLogo = getTeamLogo(team);
-		const games = row
-			.querySelectorAll('td')
-			.filter((cell) => cell.classNames.length === 0)[0]
-			.text.trim();
-		const goalDiff = row.querySelector('.hidden-small').text.trim();
-		const points = row.querySelector('.column-points').text.trim();
-		result.push({ rank, team, teamLogo, games, goalDiff, points });
+	try {
+		const response = await table.get('');
+		const root = parse(response.data);
+		let result = [];
+		const htmlTable = root.querySelector('.fixtures-matchplan-tournaments-group-table');
+		const body = htmlTable.querySelector('tbody');
+		const rows = body.querySelectorAll('tr');
+		for (const element of rows) {
+			const row = element;
+			const rank = row.querySelector('.column-rank').text.trim();
+			const team = row.querySelector('.club-name').text.trim();
+			const teamLogo = getTeamLogo(team);
+			const games = row
+				.querySelectorAll('td')
+				.filter((cell) => cell.classNames.length === 0)[0]
+				.text.trim();
+			const goalDiff = row.querySelector('.hidden-small').text.trim();
+			const points = row.querySelector('.column-points').text.trim();
+			result.push({ rank, team, teamLogo, games, goalDiff, points });
+		}
+		return result;
+	} catch (e) {
+		console.error(e);
+		return [];
 	}
-	return result;
 }
 
 function getTeamLogo(teamName) {
@@ -112,7 +127,13 @@ function getTeamLogo(teamName) {
 }
 
 export async function readMatchday() {
-	const result = await parseDFBMatchdayOverview();
+	let result;
+	try {
+		result = await parseDFBMatchdayOverview();
+	} catch (e) {
+		console.error(e);
+		return [];
+	}
 
 	// Use ticker by fussball.de for live scores if available:
 	for (const matchId of otherMatches) {
