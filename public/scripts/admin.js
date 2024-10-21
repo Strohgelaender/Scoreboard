@@ -45,9 +45,6 @@ function postLineup() {
 		contentType: 'application/json',
 		data: JSON.stringify(result),
 	})
-		.done((value) => {
-			console.log('lineup updated');
-		})
 		.catch((error) => console.log(error));
 }
 
@@ -56,9 +53,11 @@ function collectPlayers(table, result) {
 		const player = {};
 		for (const td of tr.children) {
 			const input = td.children[0];
-			console.log(input.name, input);
-			// TODO how to deal with boolean inputs (always "on")
-			player[input.name] = input.value;
+			if (input.type === 'checkbox') {
+				player[input.name] = input.checked;
+			} else {
+				player[input.name] = input.value;
+			}
 		}
 		result.push(player);
 	}
