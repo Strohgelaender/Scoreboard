@@ -363,6 +363,14 @@ html {
 	z-index: 5;
 }
 
+#aufstellungCoachBox {
+    position: absolute;
+    left: 0;
+    top: 450px;
+    font-size: 25px;
+    margin: 50px;
+}
+
 @keyframes drawCircleIn {
 	0% {
 		stroke-dashoffset: 1257; /* Hidden */

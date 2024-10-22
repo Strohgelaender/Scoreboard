@@ -14,6 +14,7 @@ let foulsTimeout;
 
 let fullNames;
 let teamImages;
+let coaches;
 
 $(() => {
 	loadTeams();
@@ -31,6 +32,7 @@ function loadTeams() {
 
 			fullNames = [home.fullName, away.fullName];
 			teamImages = [home.imagePath, away.imagePath];
+			coaches = [home.coach, away.coach];
 
 			$('#homeName').text(home.name);
 			$('#awayName').text(away.name);
@@ -348,7 +350,7 @@ function animateLineup(team, players) {
 		const logo = $('#aufstellungLogo');
 		logo.attr('src', teamImages[team]);
 
-		if (players) {
+		if (players?.length) {
 			players = players.sort((a, b) => {
 				if (a.is_keeper && !b.is_keeper) {
 					return -1;
@@ -358,9 +360,13 @@ function animateLineup(team, players) {
 				return +a.number - +b.number;
 			});
 			for (const player of players) {
+				if (!player.number) {
+					continue
+				}
 				createPlayerRow(player, player.is_starting ? startingPlayersTable : substitutePlayersTable);
 			}
 		}
+		$('#aufstellungCoach').text(coaches[team]);
 
 		showingLineup = true;
 		$('#aufstellungSpielfeldCircle').css('animation', 'drawCircleIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
