@@ -470,10 +470,8 @@ function showTable(table) {
 		for (let i = 0; i < table.length; i++) {
 			createTableRow(table[i], tableContent, i);
 		}
-		setTimeout(() => {
-			$('#tableLogo').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#table').css('animation', 'revealToLeft 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 1000);
+		$('#tableLogo').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#table').css('animation', 'revealToLeft 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	}
 	showingTable = !showingTable;
 }
@@ -587,9 +585,7 @@ function showMatchday(matchday) {
 		for (const match of matchday) {
 			createMatchdayRow(match, table);
 		}
-		setTimeout(() => {
-			$('#matchday').css('animation', 'revealToLeft 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 1000);
+		$('#matchday').css('animation', 'revealToLeft 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	}
 	showingMatchday = !showingMatchday;
 }
