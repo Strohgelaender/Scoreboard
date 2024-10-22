@@ -16,7 +16,7 @@ const HOME_TEAM_KEY = 3;
 const AWAY_TEAM_KEY = 4;
 const FOUL_KEY = 11;
 const REMOVE_FOUL_KEY = 12;
-const CLEAR_FOULS_KEY = 13;
+const SHOW_FOULS_KEY = 13;
 const SHOW_LINEUP_KEY = 19;
 const SHOW_REFEREES_KEY = 20;
 const SHOW_BOTTOM_SCOREBOARD_KEY = 21;
@@ -85,6 +85,10 @@ rl.on('line', (input) => {
 		case 'CLEAR_FOULS':
 		case 'CLEAR FOULS':
 			sendStandaloneEvent('CLEAR_FOULS');
+			return;
+		case 'SHOW FOULS':
+		case 'SHOW_FOULS':
+			sendStandaloneEvent('SHOW_FOULS');
 			return;
 		case 'LINEUP':
 			showLineup();
@@ -201,8 +205,8 @@ async function main() {
 					case SHOW_BOTTOM_SCOREBOARD_KEY:
 						sendStandaloneEvent('SHOW_BOTTOM_SCOREBOARD');
 						return;
-					case CLEAR_FOULS_KEY:
-						sendStandaloneEvent('CLEAR_FOULS');
+					case SHOW_FOULS_KEY:
+						sendStandaloneEvent('SHOW_FOULS');
 						return;
 					case CASTER_KEY:
 						sendStandaloneEvent('CASTER');
@@ -335,7 +339,7 @@ const IMAGES = {
 	[AWAY_TEAM_KEY]: 'awayTeam.png',
 	[FOUL_KEY]: 'whistle.png',
 	[REMOVE_FOUL_KEY]: 'whistle_red.png',
-	[CLEAR_FOULS_KEY]: 'whistle_all.png',
+	[SHOW_FOULS_KEY]: 'whistle_down.png',
 	[GOAL_KEY]: 'football.webp',
 	[OWN_GOAL_KEY]: 'owngoal.png',
 	[SCOREBOARD_VISIBILITY_KEY]: 'eye.png',
@@ -371,7 +375,9 @@ function updateTimerImage(running) {
 
 async function loadKeyImages() {
 	for (const key in IMAGES) {
-		loadImage(+key, IMAGES[key]);
+		if (+key >= 0) {
+			loadImage(+key, IMAGES[key]);
+		}
 	}
 	if (showNumpad) {
 		for (const key in numberImages) {
@@ -379,7 +385,9 @@ async function loadKeyImages() {
 		}
 	}
 	for (const key in TEXTS) {
-		fillText(+key, TEXTS[key]);
+		if (+key >= 0) {
+			fillText(+key, TEXTS[key]);
+		}
 	}
 }
 

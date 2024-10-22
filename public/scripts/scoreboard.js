@@ -91,6 +91,7 @@ function handleEventInternal(event) {
 		case 'FOUL':
 		case 'REMOVE_FOUL':
 		case 'CLEAR_FOULS':
+		case 'SHOW_FOULS':
 			updateFouls();
 			break;
 		case 'TABLE':
