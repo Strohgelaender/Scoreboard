@@ -257,10 +257,10 @@ async function main() {
 main().then();
 
 function showLineup() {
-	updateLineup().then(() => {
-		event.eventType = 'LINEUP';
-		sendAndReset(event);
-	});
+	// updateLineup().then(() => {
+	event.eventType = 'LINEUP';
+	sendAndReset(event);
+	// });
 }
 
 function showReferees() {
@@ -286,7 +286,7 @@ function refresh() {
 	loadMatchday(true);
 	loadTable(true);
 	saveReferees(true);
-	updateLineup(true);
+	// updateLineup(true);
 	sendStandaloneEvent('REFRESH');
 }
 
