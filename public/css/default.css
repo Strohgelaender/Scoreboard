@@ -19,13 +19,13 @@
 }
 
 @font-face {
-    font-family: DFBSans-Condensed-Bold;
-    src: url(/fonts/DFBSansCondensedWeb-Bold.ttf);
+	font-family: DFBSans-Condensed-Bold;
+	src: url(/fonts/DFBSansCondensedWeb-Bold.ttf);
 }
 
 @font-face {
-    font-family: DFBSans-Condensed-Regular;
-    src: url(/fonts/DFBSansCondensedWeb-Regular.ttf);
+	font-family: DFBSans-Condensed-Regular;
+	src: url(/fonts/DFBSansCondensedWeb-Regular.ttf);
 }
 
 html {
