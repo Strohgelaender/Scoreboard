@@ -364,11 +364,11 @@ html {
 }
 
 #aufstellungCoachBox {
-    position: absolute;
-    left: 0;
-    top: 450px;
-    font-size: 25px;
-    margin: 50px;
+	position: absolute;
+	left: 0;
+	top: 450px;
+	font-size: 25px;
+	margin: 50px;
 }
 
 @keyframes drawCircleIn {
@@ -736,7 +736,7 @@ html {
 #tableContent {
 	height: 850px;
 	width: 1000px;
-	background: linear-gradient(to right, rgba(30, 180, 200, 1) 25%, rgba(2, 67, 89, 1));
+	background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
 	z-index: 3;
 }
 
@@ -793,11 +793,11 @@ html {
 	border: solid;
 	border-width: 1px 0;
 	border-color: var(--futsal-accent);
-    font-family: DFBSans-Regular, sans-serif;
+	font-family: DFBSans-Regular, sans-serif;
 }
 
 .tableTeamPoints {
-    font-family: DFBSans-Bold, sans-serif;
+	font-family: DFBSans-Bold, sans-serif;
 }
 
 .tableTeamRow:last-child {
@@ -823,7 +823,7 @@ html {
 
 .tableTeamName {
 	width: 360px;
-    font-family: DFBSans-BoldItalic, sans-serif;
+	font-family: DFBSans-BoldItalic, sans-serif;
 }
 
 .lowerThird {
@@ -949,7 +949,7 @@ html {
 #matchday {
 	height: 700px;
 	width: 1000px;
-	background: linear-gradient(to right, rgba(30, 180, 200, 1) 25%, rgba(2, 67, 89, 1));
+	background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
 	z-index: 3;
 	overflow: hidden;
 	clip-path: inset(0 0 0 100%);
@@ -994,28 +994,28 @@ html {
 }
 
 #liveTable {
-    position: absolute;
-    top: 550px;
-    height: 530px;
-    width: 600px;
-    left: 0;
-    overflow: hidden;
-    background: linear-gradient(to right, rgba(30, 180, 200, 1) 25%, rgba(2, 67, 89, 1));
-    clip-path: inset(100% 0 0 0);
-    border-radius: 0 40px 0 0;
+	position: absolute;
+	top: 550px;
+	height: 530px;
+	width: 600px;
+	left: 0;
+	overflow: hidden;
+	background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
+	clip-path: inset(100% 0 0 0);
+	border-radius: 0 40px 0 0;
 }
 
 #liveTableTitle {
-    font-size: 50px;
-    margin: 30px;
-    top: 20px;
-    position: relative;
+	font-size: 50px;
+	margin: 30px;
+	top: 20px;
+	position: relative;
 }
 
 #liveTableTeams {
-    position: relative;
-    top: 50px;
-    height: 300px;
-    width: 400px;
-    overflow: hidden;
+	position: relative;
+	top: 50px;
+	height: 300px;
+	width: 400px;
+	overflow: hidden;
 }

@@ -14,8 +14,8 @@
 }
 
 @font-face {
-    font-family: DFBSans-Regular;
-    src: url(/fonts/DFBSansWeb-Regular.ttf);
+	font-family: DFBSans-Regular;
+	src: url(/fonts/DFBSansWeb-Regular.ttf);
 }
 
 html {

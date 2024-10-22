@@ -361,7 +361,7 @@ function animateLineup(team, players) {
 			});
 			for (const player of players) {
 				if (!player.number) {
-					continue
+					continue;
 				}
 				createPlayerRow(player, player.is_starting ? startingPlayersTable : substitutePlayersTable);
 			}
@@ -480,7 +480,7 @@ function calculateLiveTable(table, matches) {
 	// Assumption: table contains all scores where live == false
 	// This might not be correct if a match just ended and the table is not updated yet
 	// Important: Only use that during the match where other matches are not finished yet
-	if(!table || !matches) {
+	if (!table || !matches) {
 		return table;
 	}
 	table = [...table];
@@ -552,7 +552,7 @@ function sortTable(table) {
 
 	// update rank
 	for (let i = 0; i < table.length; i++) {
-		table[i].rank = (i + 1) + '.';
+		table[i].rank = i + 1 + '.';
 	}
 	return table;
 }
