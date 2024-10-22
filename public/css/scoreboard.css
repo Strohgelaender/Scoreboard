@@ -989,6 +989,7 @@ html {
     background-color: var(--futsal-blue-1);
     clip-path: inset(100% 0 0 0);
     border-radius: 0 40px 0 0;
+    will-change: clip-path;
 }
 
 #liveTableTitle {

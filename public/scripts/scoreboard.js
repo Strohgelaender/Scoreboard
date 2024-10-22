@@ -555,7 +555,8 @@ function createTableRow(team, tableContent, i) {
 		rank.addClass('last');
 	}
 	row.append(rank);
-	row.append($('<td style="text-align: center;">').append($(`<img src="${team.teamLogo}" class="tableTeamLogo">`)));
+	// row.append($('<td style="text-align: center;">').append($(`<img src="${team.teamLogo}" class="tableTeamLogo">`)));
+	row.append($('<td style="text-align: center;">').append($(`<div class="tableTeamLogo" style="background-image: ${team.teamLogo}">`)));
 	row.append($('<td class="tableTeamName">').text(team.team));
 	row.append($('<td>').text(team.games));
 	row.append($('<td>').text(team.goalDiff));
