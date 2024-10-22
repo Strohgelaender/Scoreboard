@@ -125,6 +125,10 @@ rl.on('line', (input) => {
 		case 'REFRESH':
 			refresh();
 			return;
+		case 'LIVE_TABLE':
+		case 'LIVE TABLE':
+			sendStandaloneEvent('LIVE_TABLE');
+			return;
 	}
 
 	if (event.eventType && event.team) {

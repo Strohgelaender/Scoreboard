@@ -9,7 +9,9 @@ let showingBigScoreboard = false;
 let showingLowerThird = false;
 let showingTable = false;
 let showingMatchday = false;
+let showingLiveTable = false;
 let foulsTimeout;
+
 let fullNames;
 let teamImages;
 
@@ -94,6 +96,9 @@ function handleEventInternal(event) {
 		case 'TABLE':
 			bigContentSafeguard(showingTable, () => showTable(event.table));
 			break;
+		case 'LIVE_TABLE':
+			bigContentSafeguard(showingLiveTable, () => showLiveTable(calculateLiveTable(event.table, event.matchday)));
+			break;
 		case 'MATCHDAY':
 			bigContentSafeguard(showingMatchday, () => showMatchday(event.matchday));
 			break;
@@ -135,6 +140,8 @@ function bigContentSafeguard(showingContent, callback) {
 		animateReferees();
 	} else if (showingTable) {
 		showTable([]);
+	} else if (showingLiveTable) {
+		showLiveTable([]);
 	} else if (showingMatchday) {
 		showMatchday([]);
 	} else {
@@ -462,6 +469,81 @@ function showTable(table) {
 		}, 1000);
 	}
 	showingTable = !showingTable;
+}
+
+function calculateLiveTable(table, matches) {
+	// Assumption: table contains all scores where live == false
+	// This might not be correct if a match just ended and the table is not updated yet
+	// Important: Only use that during the match where other matches are not finished yet
+	if(!table || !matches) {
+		return table;
+	}
+	table = [...table];
+	for (const match of matches) {
+		if (!match.isLive) {
+			continue;
+		}
+		updateTeamInTable(match, table);
+	}
+	updateTeamInTable({ homeTeam: fullNames[0], awayTeam: fullNames[1], homeScore: scoreHome, awayScore: scoreAway }, table);
+	table = sortTable(table);
+	return table;
+}
+
+function updateTeamInTable(match, table) {
+	const home = table.find((team) => team.team === match.homeTeam);
+	const away = table.find((team) => team.team === match.awayTeam);
+	if (!home || !away) {
+		console.warn('Could not find teams in table', match.homeTeam, match.awayTeam);
+		return;
+	}
+	home.games = +home.games + 1;
+	away.games = +away.games + 1;
+	home.goalDiff = +home.goalDiff + +match.homeScore - +match.awayScore;
+	away.goalDiff = +away.goalDiff + +match.awayScore - +match.homeScore;
+	if (+match.homeScore > +match.awayScore) {
+		home.points = +home.points + 3;
+	} else if (+match.homeScore < +match.awayScore) {
+		away.points = +away.points + 3;
+	} else {
+		home.points = +home.points + 1;
+		away.points = +away.points + 1;
+	}
+}
+
+function showLiveTable(table) {
+	if (showingLiveTable) {
+		$('#liveTable').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		setTimeout(() => {
+			$('.tableTeamRow').remove();
+		}, 1500);
+	} else {
+		const tableContent = $('#liveTableTeams');
+		for (let i = 0; i < table.length; i++) {
+			createTableRow(table[i], tableContent, i);
+		}
+		$('#liveTable').css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	}
+	showingLiveTable = !showingLiveTable;
+}
+
+function sortTable(table) {
+	console.log(table);
+	table = table.sort((teamA, teamB) => {
+		if (+teamA.points !== +teamB.points) {
+			return +teamB.points - +teamA.points;
+		}
+		if (+teamA.goalDiff !== +teamB.goalDiff) {
+			return +teamB.goalDiff - +teamA.goalDiff;
+		}
+		return +teamA.games - +teamB.games;
+	});
+
+	// update rank
+	for (let i = 0; i < table.length; i++) {
+		table[i].rank = (i + 1) + '.';
+	}
+	return table;
 }
 
 function createTableRow(team, tableContent, i) {

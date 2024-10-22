@@ -288,6 +288,9 @@ function addEventData(event, team) {
 		event.table = table;
 	} else if (event.eventType === 'MATCHDAY') {
 		event.matchday = matchday;
+	} else if (event.eventType === 'LIVE_TABLE') {
+		event.table = table;
+		event.matchday = matchday;
 	}
 }
 
