@@ -104,25 +104,25 @@ export async function readTable() {
 function getTeamLogo(teamName) {
 	switch (teamName) {
 		case 'Hamburger SV':
-			return '/images/HSV_Raute_4c-_1_.jpg';
+			return '/images/small/HSV.png';
 		case 'HOT 05 Futsal':
-			return '/images/VfL05 neues Logo 2019 - mehrfarbig - 1000x1000px.jpg';
+			return '/images/small/HOT 05.png';
 		case 'TSV Weilimdorf':
-			return '/images/TSV Weilimdorf_Original.gif';
+			return '/images/small/TSV Weilimdorf.png';
 		case 'MCH Futsal Club Bielefeld':
-			return '/images/MCH-Wappen-Bielefeld.png';
+			return '/images/small/MCH-Wappen-Bielefeld.png';
 		case 'Futsal Panthers Köln':
-			return '/images/logo-futsal-panthers-black.png';
+			return '/images/small/futsal-panthers.png';
 		case 'FC Liria Futsal':
-			return '/images/liria.png';
+			return '/images/small/liria.png';
 		case 'Beton Boys München':
-			return '/images/Vereinlogo BB cut.png';
+			return '/images/small/BB.png';
 		case 'Fortuna Düsseldorf':
-			return '/images/F95_Logo_rgb_Standard.png';
+			return '/images/small/F95.png';
 		case 'Jahn Regensburg Futsal':
-			return '/images/logo_jahn_futsal_weiss.png';
+			return '/images/small/jahn_futsal.png';
 		case 'SV Pars Neu-Isenburg':
-			return '/images/VereinslogoSV.png';
+			return '/images/small/SV.png';
 	}
 }
 
