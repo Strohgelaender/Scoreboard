@@ -192,22 +192,25 @@ app.post('/lineup', express.json(), (req, res) => {
 	let body = req.body;
 	let home = body.home;
 	let away = body.away;
-	if (home) {
+	if (home?.length) {
+		console.log('Home:', home);
 		homeTeam.players = home;
 	}
-	if (away) {
+	if (away?.length) {
+		console.log('Away:', away);
 		awayTeam.players = away;
 	}
+	console.log('Lineup saved from admin view');
 	res.status(200).send();
-})
+});
 
 export async function updateLineup(force = false) {
 	if (force || !homeTeam.players?.length || !awayTeam.players?.length) {
 		const lineup = await readLineup();
-		if (lineup.home) {
+		if (lineup.home?.length) {
 			homeTeam.players = lineup.home;
 		}
-		if (lineup.away) {
+		if (lineup.away?.length) {
 			awayTeam.players = lineup.away;
 		}
 		console.log('Lineup updated');

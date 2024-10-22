@@ -5,6 +5,13 @@ $(() => {
 	document.getElementById('saveBtn').addEventListener('click', postLineup);
 });
 
+document.addEventListener('keydown', (e) => {
+	if (e.key === 'Enter' && e.target.type === 'checkbox') {
+		//e.target.checked = !e.target.checked;
+		e.target.click();
+	}
+});
+
 function loadTeams() {
 	$.ajax({
 		method: 'GET',
@@ -23,21 +30,22 @@ function loadTeams() {
 function addPlayerRow(tbody) {
 	const table = $(tbody);
 	const row = $('<tr>');
-	row.append($('<td>').append('<input type="number" min="1" name="number">'))
-	row.append($('<td>').append('<input type="text" name="firstName">'))
-	row.append($('<td>').append('<input type="text" name="lastName">'))
-	row.append($('<td>').append('<input type="checkbox" name="is_keeper">'))
-	row.append($('<td>').append('<input type="checkbox" name="is_starting">'))
+	row.append($('<td>').append('<input type="number" min="1" name="number" class="form-control">'));
+	row.append($('<td>').append('<input type="text" name="firstName" class="form-control">'));
+	row.append($('<td>').append('<input type="text" name="lastName" class="form-control">'));
+	row.append($('<td>').append('<input type="checkbox" name="is_keeper" class="form-check-input">'));
+	row.append($('<td>').append('<input type="checkbox" name="is_captain" class="form-check-input">'));
+	row.append($('<td>').append('<input type="checkbox" name="is_starting" class="form-check-input">'));
 	table.append(row);
 }
 
 function postLineup() {
 	const result = {
 		home: [],
-		away: []
+		away: [],
 	};
 	collectPlayers($('#homeBody'), result.home);
-	collectPlayers($('#awyBody'), result.away);
+	collectPlayers($('#awayBody'), result.away);
 
 	$.ajax({
 		method: 'POST',
@@ -45,6 +53,7 @@ function postLineup() {
 		contentType: 'application/json',
 		data: JSON.stringify(result),
 	})
+		.done(() => console.log('Lineup saved'))
 		.catch((error) => console.log(error));
 }
 
