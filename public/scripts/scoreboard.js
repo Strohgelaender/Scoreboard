@@ -464,7 +464,7 @@ function showTable(table) {
 		$('#table').css('animation', 'revealToLeftOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
 			$('.tableTeamRow').remove();
-		}, 1500);
+		}, 1100);
 	} else {
 		const tableContent = $('#tableTeams');
 		for (let i = 0; i < table.length; i++) {
@@ -524,7 +524,7 @@ function showLiveTable(table) {
 		$('#liveTable').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		setTimeout(() => {
 			$('.tableTeamRow').remove();
-		}, 1500);
+		}, 1100);
 	} else {
 		if (!table) {
 			return;
@@ -570,7 +570,7 @@ function createTableRow(team, tableContent, i) {
 	row.append($('<td class="tableTeamName">').text(team.team));
 	row.append($('<td>').text(team.games));
 	row.append($('<td>').text(team.goalDiff));
-	row.append($('<td>').text(team.points));
+	row.append($('<td class="tableTeamPoints">').text(team.points));
 	tableContent.append(row);
 }
 

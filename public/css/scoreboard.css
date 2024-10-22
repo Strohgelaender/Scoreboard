@@ -793,6 +793,11 @@ html {
 	border: solid;
 	border-width: 1px 0;
 	border-color: var(--futsal-accent);
+    font-family: DFBSans-Regular, sans-serif;
+}
+
+.tableTeamPoints {
+    font-family: DFBSans-Bold, sans-serif;
 }
 
 .tableTeamRow:last-child {
@@ -817,7 +822,8 @@ html {
 }
 
 .tableTeamName {
-	width: 355px;
+	width: 360px;
+    font-family: DFBSans-BoldItalic, sans-serif;
 }
 
 .lowerThird {

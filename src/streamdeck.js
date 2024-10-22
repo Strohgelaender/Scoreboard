@@ -28,6 +28,7 @@ const TABLE_KEY = 18;
 const MATCHDAY_KEY = 17;
 const REFRESH_KEY = 25;
 const RED_CARD_KEY = 16;
+const LIVE_TABLE_KEY = 24;
 
 const PAUSE_KEY = 0;
 const ADD_5_KEY = 1;
@@ -148,6 +149,16 @@ const EVENT_MAPPING = {
 	[RED_CARD_KEY]: 'RED_CARD',
 };
 
+const STANDALONE_EVENT_MAPPING = {
+	[SCOREBOARD_VISIBILITY_KEY]: 'TOGGLE_SCOREBOARD',
+	[SHOW_BOTTOM_SCOREBOARD_KEY]: 'SHOW_BOTTOM_SCOREBOARD',
+	[SHOW_FOULS_KEY]: 'SHOW_FOULS',
+	[CASTER_KEY]: 'CASTER',
+	[PAUSE_KEY]: 'START_TIMER',
+	[HALFTIME_TIMER_KEY]: 'HALFTIME_TIMER',
+	[LIVE_TABLE_KEY]: 'LIVE_TABLE',
+};
+
 async function main() {
 	try {
 		const devices = await listStreamDecks();
@@ -186,6 +197,11 @@ async function main() {
 					event.eventType = EVENT_MAPPING[keyIndex];
 				}
 
+				if (keyIndex in STANDALONE_EVENT_MAPPING) {
+					sendStandaloneEvent(STANDALONE_EVENT_MAPPING[keyIndex]);
+					return;
+				}
+
 				switch (keyIndex) {
 					case HOME_TEAM_KEY:
 						event.team = 'HOME';
@@ -199,18 +215,6 @@ async function main() {
 					case SHOW_REFEREES_KEY:
 						showReferees();
 						return;
-					case SCOREBOARD_VISIBILITY_KEY:
-						sendStandaloneEvent('TOGGLE_SCOREBOARD');
-						return;
-					case SHOW_BOTTOM_SCOREBOARD_KEY:
-						sendStandaloneEvent('SHOW_BOTTOM_SCOREBOARD');
-						return;
-					case SHOW_FOULS_KEY:
-						sendStandaloneEvent('SHOW_FOULS');
-						return;
-					case CASTER_KEY:
-						sendStandaloneEvent('CASTER');
-						return;
 					case TABLE_KEY:
 						showTable();
 						return;
@@ -219,9 +223,6 @@ async function main() {
 						return;
 					case REFRESH_KEY:
 						refresh();
-						return;
-					case PAUSE_KEY:
-						sendStandaloneEvent('START_TIMER');
 						return;
 					case ADD_5_KEY:
 						changeTime(5);
@@ -234,9 +235,6 @@ async function main() {
 						return;
 					case MINUS_10_KEY:
 						changeTime(-10);
-						return;
-					case HALFTIME_TIMER_KEY:
-						sendStandaloneEvent('HALFTIME_TIMER');
 						return;
 				}
 			}
@@ -363,6 +361,7 @@ const TEXTS = {
 	[MINUS_5_KEY]: '-5',
 	[MINUS_10_KEY]: '-10',
 	[HALFTIME_TIMER_KEY]: '15:00',
+	[LIVE_TABLE_KEY]: 'Blitztabelle'
 };
 
 function updateTimerImage(running) {
