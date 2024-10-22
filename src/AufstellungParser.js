@@ -147,6 +147,7 @@ export async function readMatchday() {
 		// use or to reduce potential error sources, as the team names are not always consistent
 		const match = result.find((m) => m.homeTeam === homeTeam || m.awayTeam === guestTeam);
 		if (match) {
+			match.originalScore = match.score;
 			match.score = score;
 			match.isLive = root.live;
 			console.log('Match found:', homeTeam, guestTeam, score, match.isLive);

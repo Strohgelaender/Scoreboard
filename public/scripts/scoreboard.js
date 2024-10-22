@@ -481,11 +481,14 @@ function calculateLiveTable(table, matches) {
 	}
 	table = [...table];
 	for (const match of matches) {
-		if (!match.isLive) {
+		if (match.originalScore !== '-:-') {
+			// If the original score is present on the DFB page (not -:-)
+			// We then assume the result to be already included in the table
 			continue;
 		}
 		updateTeamInTable(match, table);
 	}
+	// Include own result in the live table
 	updateTeamInTable({ homeTeam: fullNames[0], awayTeam: fullNames[1], homeScore: scoreHome, awayScore: scoreAway }, table);
 	table = sortTable(table);
 	return table;
