@@ -528,6 +528,9 @@ function showLiveTable(table) {
 			$('.tableTeamRow').remove();
 		}, 1500);
 	} else {
+		if (!table) {
+			return;
+		}
 		const tableContent = $('#liveTableTeams');
 		for (let i = 0; i < table.length; i++) {
 			createTableRow(table[i], tableContent, i);
