@@ -54,7 +54,7 @@ function parsePlayers(team) {
 }
 
 export async function readReferees() {
-	try {
+	/*try {
 		const response = await overview.get('');
 		const root = parse(response.data);
 		let result = [];
@@ -62,14 +62,14 @@ export async function readReferees() {
 			const referees = table.querySelectorAll('a');
 			result = referees.map((referee) => referee.text);
 		}
-		if (result.length >= 0) {
+		if (result.length > 0) {
 			return result;
 		}
 		return result;
 	} catch (e) {
 		console.error(e);
-	}
-	return ['Tobias Szombati', 'Alexander Schkarlat', 'Marijo Kraljic', 'Farras Fathi'];
+	}*/
+	return ['Andreas Link', 'Andreas Grübel', 'Marijo Kraljic', 'Martin Horne'];
 }
 
 export async function readTable() {
