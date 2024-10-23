@@ -62,14 +62,14 @@ export async function readReferees() {
 			const referees = table.querySelectorAll('a');
 			result = referees.map((referee) => referee.text);
 		}
-		if (result.length === 0) {
-			result = ['Tobias Szombati', 'Alexander Schkarlat', 'Marijo Kraljic', 'Farras Fathi'];
+		if (result.length >= 0) {
+			return result;
 		}
 		return result;
 	} catch (e) {
 		console.error(e);
-		return [];
 	}
+	return ['Tobias Szombati', 'Alexander Schkarlat', 'Marijo Kraljic', 'Farras Fathi'];
 }
 
 export async function readTable() {

@@ -96,6 +96,7 @@ rl.on('line', (input) => {
 			return;
 		case 'REFEREES':
 		case 'REF':
+		case 'REFS':
 			showReferees();
 			return;
 		case 'SCOREBOARD':
