@@ -4,5 +4,50 @@
 	"shirtColor": "#ffffff",
 	"imagePath": "/images/Vereinlogo BB cut.png",
 	"coach": " Ilija Krajinovic",
-	"players": {}
+	"players": [
+      {
+        "number": 1,
+        "firstName": "Petar",
+        "lastName": "Dzalto",
+        "is_keeper": true
+      },
+      {
+        "firstName": "Mirza",
+        "lastName": "Idizovic"
+      },{
+        "firstName": "Andrej",
+        "lastName": "Skoro",
+        "is_captain": true
+      }, {
+        "firstName": " Mirza",
+        "lastName": "Idrizovic"
+      }, {
+        "firstName": "Fikret",
+        "lastName": "Jahic"
+      }, {
+        "firstName": "Omer",
+        "lastName": "Jahic"
+      }, {
+        "firstName": "",
+        "lastName": ""
+      }, {
+        "firstName": "",
+        "lastName": ""
+      }, {
+        "firstName": "",
+        "lastName": ""
+      }, {
+        "firstName": "",
+        "lastName": ""
+      }, {
+        "firstName": "",
+        "lastName": ""
+      }, {
+        "firstName": "",
+        "lastName": ""
+      }, {
+        "firstName": "",
+        "lastName": ""
+      }
+    ]
 }

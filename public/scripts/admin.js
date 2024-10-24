@@ -1,5 +1,7 @@
+let createdPlayers = 0;
 $(() => {
 	loadTeams();
+	loadPlayers();
 	document.getElementById('addHome').addEventListener('click', addPlayerRow.bind(this, '#homeBody'));
 	document.getElementById('addAway').addEventListener('click', addPlayerRow.bind(this, '#awayBody'));
 	document.getElementById('saveBtn').addEventListener('click', postLineup);
@@ -27,17 +29,44 @@ function loadTeams() {
 		.catch((error) => console.log(error));
 }
 
-function addPlayerRow(tbody) {
+function loadPlayers() {
+	$.ajax({
+		method: 'GET',
+		url: `/players`,
+	})
+		.done((value) => {
+			if (value.home?.length) {
+				const homeBody = $('#homeBody');
+				for (const player of value.home) {
+					addPlayerRow(homeBody, player);
+				}
+			}
+			if (value.away?.length) {
+				const awayBody = $('#awayBody');
+				for (const player of value.away) {
+					addPlayerRow(awayBody, player);
+				}
+			}
+		})
+		.catch((error) => console.log(error));
+}
+function addPlayerRow(tbody, player) {
 	const table = $(tbody);
 	const players = table.children()?.length;
-	const starting = players < 5;
-	const row = $('<tr>');
-	row.append($('<td>').append('<input type="number" min="1" name="number" class="form-control">'));
-	row.append($('<td>').append('<input type="text" name="firstName" class="form-control">'));
-	row.append($('<td>').append('<input type="text" name="lastName" class="form-control">'));
-	row.append($('<td>').append('<input type="checkbox" name="is_keeper" class="form-check-input">'));
-	row.append($('<td>').append('<input type="checkbox" name="is_captain" class="form-check-input">'));
+	const starting = players < 5 && !player;
+	const id = 'player' + ++createdPlayers;
+	const row = $(`<tr id="${id}">`);
+	row.append($('<td>').append(`<input type="number" min="1" name="number" class="form-control" ${player?.number ? 'value="'+player.number+'"' : ''}>`));
+	row.append($('<td>').append(`<input type="text" name="firstName" class="form-control" ${player?.firstName ? 'value="'+player.firstName+'"' : ''}>`));
+	row.append($('<td>').append(`<input type="text" name="lastName" class="form-control" ${player?.lastName ? 'value="'+player.lastName+'"' : ''}>`));
+	row.append($('<td>').append(`<input type="checkbox" name="is_keeper" class="form-check-input" ${player?.is_keeper ? 'checked' : ''}>`));
+	row.append($('<td>').append(`<input type="checkbox" name="is_captain" class="form-check-input" ${player?.is_captain ? 'checked' : ''}>`));
 	row.append($('<td>').append(`<input type="checkbox" name="is_starting" class="form-check-input" ${starting ? 'checked' : ''}>`));
+	row.append($('<td>').append($(`<button class="btn btn-secondary">`).text('-').on('click', () => {
+		console.log('remove', id);
+		table.remove('#' + id);
+	})));
+	// TODO add minus button to remove the row.
 	table.append(row);
 }
 

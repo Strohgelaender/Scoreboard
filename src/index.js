@@ -149,6 +149,10 @@ app.get('/scores', (req, res) => {
 	res.send({ scoreHome, scoreAway, foulsHome, foulsAway });
 });
 
+app.get('/players', (req, res) => {
+	res.send({home: homeTeam.players, away: awayTeam.players});
+});
+
 app.get('/time/game', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
