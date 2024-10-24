@@ -29,13 +29,13 @@
 }
 
 @font-face {
-    font-family: DFBSans-Condesed-Regular-Ofc;
-    src: url(/fonts/DFBSansCondensedOfc-Regular.ttf);
+	font-family: DFBSans-Condesed-Regular-Ofc;
+	src: url(/fonts/DFBSansCondensedOfc-Regular.ttf);
 }
 
 @font-face {
-    font-family: DFBSans-Regular-Ofc;
-    src: url(/fonts/DFBSansOfc-Regular.ttf);
+	font-family: DFBSans-Regular-Ofc;
+	src: url(/fonts/DFBSansOfc-Regular.ttf);
 }
 
 html {

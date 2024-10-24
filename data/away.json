@@ -4,5 +4,19 @@
 	"shirtColor": "#100cf5",
 	"imagePath": "/images/HSV_Raute_4c-_1_.jpg",
 	"coach": "Michael Meyer",
-	"players": {}
+	"players": [
+		{ "firstName": "Boris", "lastName": "Lastro", "is_keeper": true, "is_captain": true, "number": 22 },
+		{ "firstName": "Pavlos", "lastName": "Wiegels", "is_keeper": true },
+		{ "firstName": "Joao", "lastName": "Neves" },
+		{ "firstName": "Maximilian", "lastName": "Grünberg" },
+		{ "firstName": "Mohamed", "lastName": "Labiadh" },
+		{ "firstName": "Bilal", "lastName": "Mirzayi" },
+		{ "firstName": "Jure", "lastName": "Pusic" },
+		{ "firstName": "Onur", "lastName": "Saglam" },
+		{ "firstName": "Nikola", "lastName": "Stankovic" },
+		{ "firstName": "Eike Joschka", "lastName": "Thiemann" },
+		{ "firstName": "Leon", "lastName": "Hämling" },
+		{ "firstName": "Komeil", "lastName": "Heideri" },
+		{ "firstName": "Albert", "lastName": "Nikolla" }
+	]
 }

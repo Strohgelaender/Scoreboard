@@ -56,17 +56,22 @@ function addPlayerRow(tbody, player) {
 	const starting = players < 5 && !player;
 	const id = 'player' + ++createdPlayers;
 	const row = $(`<tr id="${id}">`);
-	row.append($('<td>').append(`<input type="number" min="1" name="number" class="form-control" ${player?.number ? 'value="'+player.number+'"' : ''}>`));
-	row.append($('<td>').append(`<input type="text" name="firstName" class="form-control" ${player?.firstName ? 'value="'+player.firstName+'"' : ''}>`));
-	row.append($('<td>').append(`<input type="text" name="lastName" class="form-control" ${player?.lastName ? 'value="'+player.lastName+'"' : ''}>`));
+	row.append($('<td>').append(`<input type="number" min="1" name="number" class="form-control" ${player?.number ? 'value="' + player.number + '"' : ''}>`));
+	row.append($('<td>').append(`<input type="text" name="firstName" class="form-control" ${player?.firstName ? 'value="' + player.firstName + '"' : ''}>`));
+	row.append($('<td>').append(`<input type="text" name="lastName" class="form-control" ${player?.lastName ? 'value="' + player.lastName + '"' : ''}>`));
 	row.append($('<td>').append(`<input type="checkbox" name="is_keeper" class="form-check-input" ${player?.is_keeper ? 'checked' : ''}>`));
 	row.append($('<td>').append(`<input type="checkbox" name="is_captain" class="form-check-input" ${player?.is_captain ? 'checked' : ''}>`));
 	row.append($('<td>').append(`<input type="checkbox" name="is_starting" class="form-check-input" ${starting ? 'checked' : ''}>`));
-	row.append($('<td>').append($(`<button class="btn btn-secondary">`).text('-').on('click', () => {
-		console.log('remove', id);
-		table.remove('#' + id);
-	})));
-	// TODO add minus button to remove the row.
+	row.append(
+		$('<td>').append(
+			$(`<button class="btn btn-secondary">`)
+				.text('-')
+				.on('click', () => {
+					console.log('remove', id);
+					table.children(`#${id}`).remove();
+				}),
+		),
+	);
 	table.append(row);
 }
 

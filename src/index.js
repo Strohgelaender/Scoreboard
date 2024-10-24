@@ -150,7 +150,7 @@ app.get('/scores', (req, res) => {
 });
 
 app.get('/players', (req, res) => {
-	res.send({home: homeTeam.players, away: awayTeam.players});
+	res.send({ home: homeTeam.players, away: awayTeam.players });
 });
 
 app.get('/time/game', tinyws(), async (req) => {
