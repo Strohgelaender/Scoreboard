@@ -15,7 +15,7 @@ const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
 const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/2388080';
 const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
-const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/6-spieltag';
+const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/7-spieltag';
 const awayTeamPlayersUrl = 'https://datencenter.dfb.de/competitions/futsal-bundesliga/seasons/2024-2025/teams/hamburger-sv-futsal';
 
 const game = axios.create({ baseURL: matchUrl });
