@@ -6,17 +6,19 @@
 	"coach": "Michael Meyer",
 	"players": [
 		{ "firstName": "Boris", "lastName": "Lastro", "is_keeper": true, "is_captain": true, "number": 22 },
-		{ "firstName": "Pavlos", "lastName": "Wiegels", "is_keeper": true },
+		{ "firstName": "Pavlos", "lastName": "Wiegels", "is_keeper": true, "number": 1 },
 		{ "firstName": "Joao", "lastName": "Neves" },
-		{ "firstName": "Maximilian", "lastName": "Grünberg" },
-		{ "firstName": "Mohamed", "lastName": "Labiadh" },
-		{ "firstName": "Bilal", "lastName": "Mirzayi" },
-		{ "firstName": "Jure", "lastName": "Pusic" },
-		{ "firstName": "Onur", "lastName": "Saglam" },
+		{ "firstName": "Maximilian", "lastName": "Grünberg", "number": 27 },
+		{ "firstName": "Mohamed", "lastName": "Labiadh", "number": 5 },
+		{ "firstName": "Bilal", "lastName": "Mirzayi", "number": 12 },
+		{ "firstName": "Jure", "lastName": "Pusic", "number": 23 },
+		{ "firstName": "Onur", "lastName": "Saglam", "number": 10 },
 		{ "firstName": "Nikola", "lastName": "Stankovic" },
-		{ "firstName": "Eike Joschka", "lastName": "Thiemann" },
-		{ "firstName": "Leon", "lastName": "Hämling" },
-		{ "firstName": "Komeil", "lastName": "Heideri" },
-		{ "firstName": "Albert", "lastName": "Nikolla" }
+		{ "firstName": "Eike Joschka", "lastName": "Thiemann", "number": 14 },
+		{ "firstName": "Leon", "lastName": "Hämling", "number": 15 },
+		{ "firstName": "Komeil", "lastName": "Heideri", "number": 17 },
+		{ "firstName": "Albert", "lastName": "Nikolla" },
+		{ "firstName": "Michael", "lastName": "Meyer", "number": 7 },
+		{ "firstName": "Vassilios", "lastName": "Siopis", "number": 19 }
 	]
 }

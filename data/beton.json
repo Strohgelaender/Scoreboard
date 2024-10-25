@@ -5,67 +5,67 @@
 	"imagePath": "/images/Vereinlogo BB cut.png",
 	"coach": " Ilija Krajinovic",
 	"players": [
-      {
-        "firstName": "Petar",
-        "lastName": "Dzalto",
-        "is_keeper": true
-      },
-      {
-        "firstName": "Mirza",
-        "lastName": "Idizovic"
-      },
-      {
-        "firstName": "Andrej",
-        "lastName": "Skoro",
-        "is_captain": true
-      },
-      {
-        "firstName": "Fikret",
-        "lastName": "Jahic"
-      },
-      {
-        "firstName": "Omer",
-        "lastName": "Jahic"
-      },
-      {
-        "firstName": "Tino",
-        "lastName": "Pticar"
-      },
-      {
-        "firstName": "Ensar",
-        "lastName": "Skrijelj"
-      },
-      {
-        "firstName": "Marko",
-        "lastName": "Stjepanovic"
-      },
-      {
-        "firstName": "Ante",
-        "lastName": "Vicic"
-      },
-      {
-        "firstName": "Burhan",
-        "lastName": "Mustafov"
-      },
-      {
-        "firstName": "Arijanit",
-        "lastName": "Kelmendi"
-      },
-      {
-        "firstName": "Karlo",
-        "lastName": "Lujic"
-      },
-      {
-        "firstName": "Srecko",
-        "lastName": "Miskovic"
-      },
-      {
-        "firstName": "Azur",
-        "lastName": "Velagić"
-      },
-      {
-        "firstName": "Marko",
-        "lastName": "Ereiz"
-      }
-    ]
+		{
+			"firstName": "Petar",
+			"lastName": "Dzalto",
+			"is_keeper": true
+		},
+		{
+			"firstName": "Mirza",
+			"lastName": "Idizovic"
+		},
+		{
+			"firstName": "Andrej",
+			"lastName": "Skoro",
+			"is_captain": true
+		},
+		{
+			"firstName": "Fikret",
+			"lastName": "Jahic"
+		},
+		{
+			"firstName": "Omer",
+			"lastName": "Jahic"
+		},
+		{
+			"firstName": "Tino",
+			"lastName": "Pticar"
+		},
+		{
+			"firstName": "Ensar",
+			"lastName": "Skrijelj"
+		},
+		{
+			"firstName": "Marko",
+			"lastName": "Stjepanovic"
+		},
+		{
+			"firstName": "Ante",
+			"lastName": "Vicic"
+		},
+		{
+			"firstName": "Burhan",
+			"lastName": "Mustafov"
+		},
+		{
+			"firstName": "Arijanit",
+			"lastName": "Kelmendi"
+		},
+		{
+			"firstName": "Karlo",
+			"lastName": "Lujic"
+		},
+		{
+			"firstName": "Srecko",
+			"lastName": "Miskovic"
+		},
+		{
+			"firstName": "Azur",
+			"lastName": "Velagić"
+		},
+		{
+			"firstName": "Marko",
+			"lastName": "Ereiz"
+		}
+	]
 }

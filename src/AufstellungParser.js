@@ -22,7 +22,7 @@ const game = axios.create({ baseURL: matchUrl });
 const overview = axios.create({ baseURL: overviewUrl });
 const table = axios.create({ baseURL: tableUrl });
 const matchday = axios.create({ baseURL: matchdayUrl });
-const awayTeamPlayers = axios.create({baseURL: awayTeamPlayersUrl});
+const awayTeamPlayers = axios.create({ baseURL: awayTeamPlayersUrl });
 
 export async function readLineup() {
 	try {
