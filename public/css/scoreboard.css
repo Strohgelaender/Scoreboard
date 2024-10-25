@@ -1007,7 +1007,7 @@ html {
 	border-radius: 0 40px 0 0;
 }
 
-#liveTable {
+#liveTableContent {
 	top: 550px;
 	height: 530px;
 	width: 450px;
@@ -1038,7 +1038,7 @@ html {
 	height: 240px;
 }
 
-#liveMatches {
+#liveMatchesContent {
 	top: 700px;
 	height: 380px;
 	width: 300px;
@@ -1046,4 +1046,27 @@ html {
 
 #liveMatchesBox {
 	margin: 0 auto;
+}
+
+.cornerAdditionalBackground {
+    background-color: var(--futsal-blue-2);
+    position: absolute;
+    z-index: -10;
+    border-radius: 0 40px 0 0;
+}
+
+#liveMatchesAdditionalBackground {
+    top: 700px;
+    height: 380px;
+    width: 300px;
+    left: 0;
+    clip-path: inset(100% 0 0 0);
+}
+
+#liveTableAdditionalBackground {
+    top: 550px;
+    height: 530px;
+    width: 450px;
+    left: 0;
+    clip-path: inset(100% 0 0 0);
 }

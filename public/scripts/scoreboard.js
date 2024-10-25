@@ -527,7 +527,10 @@ function updateTeamInTable(match, table) {
 
 function showLiveTable(table) {
 	if (showingLiveTable) {
-		$('#liveTable').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#liveTableContent').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		setTimeout(() => {
+			$('#liveTableAdditionalBackground').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		}, 80);
 		setTimeout(() => {
 			$('.tableTeamRow').remove();
 		}, 1100);
@@ -539,7 +542,8 @@ function showLiveTable(table) {
 		for (let i = 0; i < table.length; i++) {
 			createTableRow(table[i], tableContent, i, true);
 		}
-		$('#liveTable').css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#liveTableAdditionalBackground').css('animation', 'revealUp 0.7s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		$('#liveTableContent').css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	}
 	showingLiveTable = !showingLiveTable;
 }
@@ -652,9 +656,12 @@ function showLiveMatchday(matches) {
 	if (!matches) {
 		return;
 	}
-	const liveMatchesWrapper = $('#liveMatches');
+	const liveMatchesWrapper = $('#liveMatchesContent');
 	if (showingLiveMatches) {
 		liveMatchesWrapper.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		setTimeout(() => {
+			$('#liveMatchesAdditionalBackground').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		}, 80);
 		setTimeout(() => {
 			$('#liveMatchesTable').empty();
 		}, 1100);
@@ -667,6 +674,7 @@ function showLiveMatchday(matches) {
 			}
 			createMatchdayRow(match, table, true);
 		}
+		$('#liveMatchesAdditionalBackground').css('animation', 'revealUp 0.7s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 		liveMatchesWrapper.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	}
 	showingLiveMatches = !showingLiveMatches;
