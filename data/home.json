@@ -8,16 +8,19 @@
 		{
 			"firstName": "Petar",
 			"lastName": "Dzalto",
-			"is_keeper": true
+			"is_keeper": true,
+			"number": 12
 		},
 		{
-			"firstName": "Mirza",
-			"lastName": "Idizovic"
+			"firstName": "Vahid",
+			"lastName": "Idizovic",
+			"number": 6
 		},
 		{
 			"firstName": "Andrej",
 			"lastName": "Skoro",
-			"is_captain": true
+			"is_captain": true,
+			"number": 11
 		},
 		{
 			"firstName": "Fikret",
@@ -33,11 +36,13 @@
 		},
 		{
 			"firstName": "Ensar",
-			"lastName": "Skrijelj"
+			"lastName": "Skrijelj",
+			"number": 10
 		},
 		{
 			"firstName": "Marko",
-			"lastName": "Stjepanovic"
+			"lastName": "Stjepanovic",
+			"number": 15
 		},
 		{
 			"firstName": "Ante",
@@ -45,15 +50,18 @@
 		},
 		{
 			"firstName": "Burhan",
-			"lastName": "Mustafov"
+			"lastName": "Mustafov",
+			"number": 8
 		},
 		{
 			"firstName": "Arijanit",
-			"lastName": "Kelmendi"
+			"lastName": "Kelmendi",
+			"number": 19
 		},
 		{
 			"firstName": "Karlo",
-			"lastName": "Lujic"
+			"lastName": "Lujic",
+			"number": 9
 		},
 		{
 			"firstName": "Srecko",
@@ -61,11 +69,13 @@
 		},
 		{
 			"firstName": "Azur",
-			"lastName": "Velagić"
+			"lastName": "Velagić",
+			"number": 5
 		},
 		{
 			"firstName": "Marko",
-			"lastName": "Ereiz"
+			"lastName": "Ereiz",
+			"number": 13
 		}
 	]
 }
