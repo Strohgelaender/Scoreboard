@@ -10,6 +10,7 @@ let showingLowerThird = false;
 let showingTable = false;
 let showingMatchday = false;
 let showingLiveTable = false;
+let showingLiveMatches = false;
 let foulsTimeout;
 
 let fullNames;
@@ -147,6 +148,8 @@ function bigContentSafeguard(showingContent, callback) {
 		showLiveTable([]);
 	} else if (showingMatchday) {
 		showMatchday([]);
+	} else if (showingLiveMatches) {
+		showLiveMatchday([]);
 	} else {
 		callback();
 	}
@@ -607,4 +610,21 @@ function createMatchdayRow(match, table) {
 	row.append($('<td class="tableTeamName">').text(match.awayTeam));
 	row.append($('<td style="text-align: center;">').append($(`<img src="${match.awayImage}" class="tableTeamLogo">`)));
 	table.append(row);
+}
+
+function showLiveMatchday(matches) {
+	const liveMatchesWrapper = $('#liveMatches');
+	if (showingLiveMatches) {
+		liveMatchesWrapper.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	} else {
+		const table = $('#liveMatchesTable');
+		// TODO short format (only images?)
+		// TODO filter out only live matches
+		for (const match of matches) {
+			createMatchdayRow(match, table);
+		}
+		liveMatchesWrapper.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+
+	}
+	showingLiveMatches = !showingLiveMatches;
 }

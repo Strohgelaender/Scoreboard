@@ -993,29 +993,42 @@ html {
 	color: #ff2323;
 }
 
+.liveWrapper {
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
+    clip-path: inset(100% 0 0 0);
+    border-radius: 0 40px 0 0;
+}
+
 #liveTable {
-	position: absolute;
 	top: 550px;
 	height: 530px;
 	width: 600px;
-	left: 0;
-	overflow: hidden;
-	background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
-	clip-path: inset(100% 0 0 0);
-	border-radius: 0 40px 0 0;
 }
 
-#liveTableTitle {
+.liveTitle {
 	font-size: 50px;
 	margin: 30px;
 	top: 20px;
 	position: relative;
 }
 
+.liveTable {
+    position: relative;
+    top: 50px;
+    height: 300px;
+    width: 400px;
+    overflow: hidden;
+}
+
 #liveTableTeams {
-	position: relative;
-	top: 50px;
-	height: 300px;
-	width: 400px;
-	overflow: hidden;
+
+}
+
+#liveMatches {
+    top: 600px;
+    height: 480px;
+    width: 500px;
 }
