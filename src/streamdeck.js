@@ -68,6 +68,10 @@ rl.on('line', (input) => {
 			break;
 		case 'OWN GOAL':
 		case 'OWN_GOAL':
+		case 'REMOVE GOAL':
+		case 'REMOVE_GOAL':
+		case 'DELETE GOAL':
+		case 'DELETE_GOAL':
 			event.eventType = 'OWN_GOAL';
 			break;
 		case 'FOUL':
