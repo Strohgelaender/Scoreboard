@@ -16,11 +16,13 @@ const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/20
 const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
 const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/6-spieltag';
+const awayTeamPlayersUrl = 'https://datencenter.dfb.de/competitions/futsal-bundesliga/seasons/2024-2025/teams/hamburger-sv-futsal';
 
 const game = axios.create({ baseURL: matchUrl });
 const overview = axios.create({ baseURL: overviewUrl });
 const table = axios.create({ baseURL: tableUrl });
 const matchday = axios.create({ baseURL: matchdayUrl });
+const awayTeamPlayers = axios.create({baseURL: awayTeamPlayersUrl});
 
 export async function readLineup() {
 	try {
@@ -193,4 +195,37 @@ function convertToConsistentName(team) {
 			return 'Beton Boys München';
 	}
 	return team;
+}
+
+export async function parseKaderList() {
+	try {
+		const response = await awayTeamPlayers.get('');
+		const root = parse(response.data);
+		const playersTable = root.querySelector('.dfb-Table-tableContainer');
+		if (!playersTable) {
+			return [];
+		}
+		const result = [];
+		const nested = playersTable.querySelector('.c-Table-nested').querySelectorAll('table');
+		// Skip first table (coach)
+		for (let i = 1; i < nested.length; i++) {
+			const table = nested[i];
+			const title = table.querySelector('th')?.text?.trim();
+			const is_keeper = title === 'Torwart';
+			const rows = table.querySelector('tbody').querySelectorAll('.c-Table-body-row');
+			for (const player of rows) {
+				const nameLink = player.querySelector('a');
+				let name = nameLink ? nameLink.text : player.querySelectorAll('td')[1]?.text;
+				name = name.trim();
+				const sep = name.lastIndexOf(' ');
+				const firstName = name.substring(0, sep);
+				const lastName = name.substring(sep + 1);
+				result.push({ firstName, lastName, is_keeper });
+			}
+		}
+		return result;
+	} catch (e) {
+		console.error(e);
+		return [];
+	}
 }
