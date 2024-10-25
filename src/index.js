@@ -246,9 +246,6 @@ export function reloadTeamFiles() {
 
 export function sendEvent(event) {
 	const team = getTeam(event.team);
-	if (team?.players && team.players[event.number]) {
-		event.playerData = team?.players[event.number];
-	}
 
 	if (matchTimer.handleTimerEvent(event)) {
 		// true if event got picked up by timer
