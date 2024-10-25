@@ -53,7 +53,7 @@ function loadPlayers() {
 function addPlayerRow(tbody, player) {
 	const table = $(tbody);
 	const players = table.children()?.length;
-	const starting = players < 5 && !player;
+	const starting = (players < 5 && !player) || player.is_starting;
 	const id = 'player' + ++createdPlayers;
 	const row = $(`<tr id="${id}">`);
 	row.append($('<td>').append(`<input type="number" min="1" name="number" class="form-control" ${player?.number ? 'value="' + player.number + '"' : ''}>`));
