@@ -106,6 +106,9 @@ function handleEventInternal(event) {
 		case 'MATCHDAY':
 			bigContentSafeguard(showingMatchday, () => showMatchday(event.matchday));
 			break;
+		case 'LIVE_MATCHDAY':
+			bigContentSafeguard(showingLiveMatches, () => showLiveMatchday(event.matchday));
+			break;
 		case 'SECOND_HALF':
 			updateHalfIndicator();
 			break;
@@ -568,13 +571,13 @@ function getShortTeamName(team) {
 		case 'TSV Weilimdorf':
 			return 'Weilimdorf';
 		case 'MCH Futsal Club Bielefeld':
-			return 'MCH Bielefeld';
+			return 'Bielefeld';
 		case 'FC Liria Futsal':
 			return 'FC Liria';
 		case 'Jahn Regensburg Futsal':
 			return 'Regensburg';
 		case 'Futsal Panthers Köln':
-			return 'Panthers Köln'; // ?
+			return 'Köln';
 		case 'Fortuna Düsseldorf':
 			return 'Düsseldorf';
 		case 'Beton Boys München':
@@ -622,11 +625,13 @@ function showMatchday(matchday) {
 	showingMatchday = !showingMatchday;
 }
 
-function createMatchdayRow(match, table) {
+function createMatchdayRow(match, table, short = false) {
 	const row = $('<tr class="matchdayMatchRow">');
 	// row.append($('<td>').text(match.time));
 	row.append($('<td style="text-align: center;">').append($(`<img src="${match.homeImage}" class="tableTeamLogo">`)));
-	row.append($('<td class="tableTeamName">').text(match.homeTeam));
+	if (!short) {
+		row.append($('<td class="tableTeamName">').text(match.homeTeam));
+	}
 	if (match.isLive) {
 		if (match.score) {
 			row.append($('<td class="live">').text(match.score));
@@ -636,24 +641,33 @@ function createMatchdayRow(match, table) {
 	} else {
 		row.append($('<td>').text(match.score));
 	}
-	row.append($('<td class="tableTeamName">').text(match.awayTeam));
+	if (!short) {
+		row.append($('<td class="tableTeamName">').text(match.awayTeam));
+	}
 	row.append($('<td style="text-align: center;">').append($(`<img src="${match.awayImage}" class="tableTeamLogo">`)));
 	table.append(row);
 }
 
 function showLiveMatchday(matches) {
+	if (!matches) {
+		return;
+	}
 	const liveMatchesWrapper = $('#liveMatches');
 	if (showingLiveMatches) {
 		liveMatchesWrapper.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		setTimeout(() => {
+			$('#liveMatchesTable').empty();
+		}, 1100);
 	} else {
 		const table = $('#liveMatchesTable');
-		// TODO short format (only images?)
 		// TODO filter out only live matches
 		for (const match of matches) {
-			createMatchdayRow(match, table);
+			if (match.homeTeam === fullNames[0] || match.awayTeam === fullNames[0]) {
+				continue;
+			}
+			createMatchdayRow(match, table, true);
 		}
 		liveMatchesWrapper.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-
 	}
 	showingLiveMatches = !showingLiveMatches;
 }

@@ -287,7 +287,7 @@ function addEventData(event, team) {
 		event.playerData = referees;
 	} else if (event.eventType === 'TABLE') {
 		event.table = table;
-	} else if (event.eventType === 'MATCHDAY') {
+	} else if (event.eventType === 'MATCHDAY' || event.eventType === 'LIVE_MATCHDAY') {
 		event.matchday = matchday;
 	} else if (event.eventType === 'LIVE_TABLE') {
 		event.table = table;

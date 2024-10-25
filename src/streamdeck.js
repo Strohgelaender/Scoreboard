@@ -135,6 +135,12 @@ rl.on('line', (input) => {
 		case 'LIVE TABLE':
 			sendStandaloneEvent('LIVE_TABLE');
 			return;
+		case 'LIVE MATCHES':
+		case 'LIVE MATCHDAY':
+		case 'LIVE_MATCHES':
+		case 'LIVE_MATCHDAY':
+			sendStandaloneEvent('LIVE_MATCHDAY');
+			return;
 	}
 
 	if (event.eventType && event.team) {
