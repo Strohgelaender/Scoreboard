@@ -534,7 +534,7 @@ function showLiveTable(table) {
 		}
 		const tableContent = $('#liveTableTeams');
 		for (let i = 0; i < table.length; i++) {
-			createTableRow(table[i], tableContent, i);
+			createTableRow(table[i], tableContent, i, true);
 		}
 		$('#liveTable').css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	}
@@ -542,7 +542,6 @@ function showLiveTable(table) {
 }
 
 function sortTable(table) {
-	console.log(table);
 	table = table.sort((teamA, teamB) => {
 		if (+teamA.points !== +teamB.points) {
 			return +teamB.points - +teamA.points;
@@ -560,7 +559,33 @@ function sortTable(table) {
 	return table;
 }
 
-function createTableRow(team, tableContent, i) {
+function getShortTeamName(team) {
+	switch (team) {
+		case 'HOT 05 Futsal':
+			return 'HOT 05';
+		case 'Hamburger SV':
+			return 'HSV';
+		case 'TSV Weilimdorf':
+			return 'Weilimdorf';
+		case 'MCH Futsal Club Bielefeld':
+			return 'MCH Bielefeld';
+		case 'FC Liria Futsal':
+			return 'FC Liria';
+		case 'Jahn Regensburg Futsal':
+			return 'Regensburg';
+		case 'Futsal Panthers Köln':
+			return 'Panthers Köln'; // ?
+		case 'Fortuna Düsseldorf':
+			return 'Düsseldorf';
+		case 'Beton Boys München':
+			return 'Beton Boys';
+		case 'SV Pars Neu-Isenburg':
+			return 'SV Pars';
+	}
+	return team;
+}
+
+function createTableRow(team, tableContent, i, short = false) {
 	const row = $('<tr class="tableTeamRow">');
 	const rank = $('<td>').text(team.rank);
 	if (i === 8) {
@@ -570,7 +595,11 @@ function createTableRow(team, tableContent, i) {
 	}
 	row.append(rank);
 	row.append($('<td style="text-align: center;">').append($(`<img src="${team.teamLogo}" class="tableTeamLogo">`)));
-	row.append($('<td class="tableTeamName">').text(team.team));
+	if (short) {
+		row.append($('<td class="tableShortTeamName">').text(getShortTeamName(team.team)));
+	} else {
+		row.append($('<td class="tableTeamName">').text(team.team));
+	}
 	row.append($('<td>').text(team.games));
 	row.append($('<td>').text(team.goalDiff));
 	row.append($('<td class="tableTeamPoints">').text(team.points));

@@ -826,6 +826,11 @@ html {
 	font-family: DFBSans-BoldItalic, sans-serif;
 }
 
+.tableShortTeamName {
+	width: 200px;
+	font-family: DFBSans-BoldItalic, sans-serif;
+}
+
 .lowerThird {
 	position: absolute;
 	top: 900px;
@@ -1005,7 +1010,7 @@ html {
 #liveTable {
 	top: 550px;
 	height: 530px;
-	width: 600px;
+	width: 450px;
 }
 
 .liveTitle {
@@ -1019,8 +1024,8 @@ html {
     position: relative;
     top: 50px;
     height: 300px;
-    width: 400px;
     overflow: hidden;
+    left: 10px;
 }
 
 #liveTableTeams {
