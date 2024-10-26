@@ -491,7 +491,7 @@ function calculateLiveTable(table, matches) {
 	}
 	table = [...table];
 	for (const match of matches) {
-		if (match.originalScore !== '-:-') {
+		if (match.originalScore !== '- : -') {
 			// If the original score is present on the DFB page (not -:-)
 			// We then assume the result to be already included in the table
 			continue;
@@ -510,6 +510,11 @@ function updateTeamInTable(match, table) {
 	if (!home || !away) {
 		console.warn('Could not find teams in table', match.homeTeam, match.awayTeam);
 		return;
+	}
+	if (match.homeScore === undefined || match.awayScore === undefined) {
+		const split = match.score.split(':');
+		match.homeScore = +split[0];
+		match.awayScore = +split[1];
 	}
 	home.games = +home.games + 1;
 	away.games = +away.games + 1;
@@ -669,7 +674,7 @@ function showLiveMatchday(matches) {
 		const table = $('#liveMatchesTable');
 		// TODO filter out only live matches
 		for (const match of matches) {
-			if (match.homeTeam === fullNames[0] || match.awayTeam === fullNames[0]) {
+			if (match.homeTeam === fullNames[0] || match.awayTeam === fullNames[1]) {
 				continue;
 			}
 			createMatchdayRow(match, table, true);

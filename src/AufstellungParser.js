@@ -6,6 +6,8 @@ import { parse } from 'node-html-parser';
 
 // IMPORTANT: Always update there two URLs before starting the prod server
 
+const matchdayNumber = 6;
+
 const matchId = '02Q0SKPLUC000000VS5489B3VU5PPGUO';
 
 const otherMatches = ['02Q0SKPLRS000000VS5489B3VU5PPGUO', '02Q0SKPLT4000000VS5489B3VU5PPGUO', '02Q0SKPLVK000000VS5489B3VU5PPGUO', '02Q0SKPM0S000000VS5489B3VU5PPGUO'];
@@ -15,7 +17,7 @@ const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
 const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/2388080';
 const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
-const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/7-spieltag';
+const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/';
 const awayTeamPlayersUrl = 'https://datencenter.dfb.de/competitions/futsal-bundesliga/seasons/2024-2025/teams/hamburger-sv-futsal';
 
 const game = axios.create({ baseURL: matchUrl });
@@ -163,7 +165,7 @@ export async function readMatchday() {
 }
 
 async function parseDFBMatchdayOverview() {
-	const response = await matchday.get('');
+	const response = await matchday.get(matchdayNumber + '-spieltag');
 	const root = parse(response.data);
 	const matchdayHtml = root.querySelector('.c-MatchTable-body');
 	let result = [];
