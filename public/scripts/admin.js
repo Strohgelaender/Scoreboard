@@ -1,3 +1,5 @@
+'use strict';
+
 let createdPlayers = 0;
 
 addEventListener('DOMContentLoaded', () => {

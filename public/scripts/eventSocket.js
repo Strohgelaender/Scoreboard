@@ -7,7 +7,7 @@ let foulsAway = 0;
 
 let socket;
 
-$(() => {
+document.addEventListener("DOMContentLoaded", () => {
 	socket = createWebsocket('events', handleWebsocketMessageCommon);
 	loadInitialScores();
 });
@@ -22,11 +22,9 @@ function createWebsocket(endpoint, handler) {
 }
 
 function loadInitialScores() {
-	$.ajax({
-		method: 'GET',
-		url: `/scores`,
-	})
-		.done((value) => {
+	fetch('/scores', { method: 'GET' })
+		.then((response) => response.json())
+		.then((value) => {
 			scoreHome = value.scoreHome;
 			scoreAway = value.scoreAway;
 			foulsHome = value.foulsHome;
@@ -108,9 +106,9 @@ function decreaseFoul(homeTeam) {
 }
 
 function updateScoreboard() {
-	$('#homeScore').text(scoreHome);
-	$('#awayScore').text(scoreAway);
-	if (updateScoreboardInternal) {
+	document.getElementById("homeScore").textContent = scoreHome;
+	document.getElementById("awayScore").textContent = scoreAway;
+	if (typeof updateScoreboardInternal === 'function') {
 		updateScoreboardInternal();
 	}
 }

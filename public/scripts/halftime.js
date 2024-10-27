@@ -4,21 +4,22 @@ function handleEventInternal(event) {}
 
 function updateScoreboardInternal() {
 	if (scoreHome >= 10) {
-		$('#homeScore').css('left', '580px');
+		document.getElementById("homeScore").style.left = "580px";
 	}
 }
 
 function updateTimerFromServer() {
 	createWebsocket('time/half', (value) => {
 		const time = value.data;
+		const timeElement = document.getElementById("time");
 		if (time === '00:00') {
-			$('#time').text('');
+			timeElement.textContent = '';
 		} else {
-			$('#time').text(time.length ? time : '');
+			timeElement.textContent = time.length ? time : '';
 		}
 	});
 }
 
-$(() => {
+document.addEventListener("DOMContentLoaded", () => {
 	updateTimerFromServer();
 });
