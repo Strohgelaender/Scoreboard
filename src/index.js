@@ -181,7 +181,10 @@ app.get('/time/red/:team', tinyws(), async (req) => {
 		const ws = await req.ws();
 		const team = req.params.team.toLowerCase();
 		timerWS[`red${team}`].push(ws);
-		ws.send(redCardTimers.find((timer) => timer.getTeam() === team).getTimeText());
+		const timer = redCardTimers.find((timer) => timer.getTeam() === team);
+		if (timer) {
+			ws.send(timer.getTimeText());
+		}
 	}
 });
 

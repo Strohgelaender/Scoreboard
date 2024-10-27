@@ -7,7 +7,7 @@ let foulsAway = 0;
 
 let socket;
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
 	socket = createWebsocket('events', handleWebsocketMessageCommon);
 	loadInitialScores();
 });
@@ -106,8 +106,8 @@ function decreaseFoul(homeTeam) {
 }
 
 function updateScoreboard() {
-	setText("homeScore", scoreHome);
-	setText("awayScore", scoreAway);
+	setText('homeScore', scoreHome);
+	setText('awayScore', scoreAway);
 	if (typeof updateScoreboardInternal === 'function') {
 		updateScoreboardInternal();
 	}

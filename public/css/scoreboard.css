@@ -1021,10 +1021,10 @@ html {
 }
 
 .liveSubTitle {
-    font-size: 35px;
-    margin: 30px;
-    top: 35px;
-    position: relative;
+	font-size: 35px;
+	margin: 30px;
+	top: 35px;
+	position: relative;
 }
 
 .liveTable {
@@ -1049,11 +1049,11 @@ html {
 
 .centeredTable {
 	margin: 0 auto;
-    height: 240px;
+	height: 240px;
 }
 
 #liveTableBox {
-    padding-right: 15px;
+	padding-right: 15px;
 }
 
 .cornerAdditionalBackground {
@@ -1080,17 +1080,15 @@ html {
 }
 
 #nextMatchesContent {
-    top: 650px;
-    height: 430px;
-    width: 400px;
+	top: 650px;
+	height: 430px;
+	width: 400px;
 }
 
 #nextMatchesAdditionalBackground {
-    top: 700px;
-    height: 380px;
-    width: 400px;
-    left: 0;
-    clip-path: inset(100% 0 0 0);
+	top: 700px;
+	height: 380px;
+	width: 400px;
+	left: 0;
+	clip-path: inset(100% 0 0 0);
 }
-
-

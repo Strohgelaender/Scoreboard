@@ -49,14 +49,14 @@ function loadTeams() {
 			teamImages = [home.imagePath, away.imagePath];
 			coaches = [home.coach, away.coach];
 
-			setText("homeTimeName", home.name);
-			setText("awayTimeName", away.name);
+			setText('homeTimeName', home.name);
+			setText('awayTimeName', away.name);
 
-			setText("bigHomeName", home.fullName);
-			setText("bigAwayName", away.fullName);
+			setText('bigHomeName', home.fullName);
+			setText('bigAwayName', away.fullName);
 
-			document.getElementById("homeTimeShirtLine").style.backgroundColor = home.shirtColor;
-			document.getElementById("awayTimeShirtLine").style.backgroundColor = away.shirtColor;
+			document.getElementById('homeTimeShirtLine').style.backgroundColor = home.shirtColor;
+			document.getElementById('awayTimeShirtLine').style.backgroundColor = away.shirtColor;
 
 			if (value.firstHalfDone) {
 				updateHalfIndicator();
@@ -68,7 +68,7 @@ function loadTeams() {
 
 function updateTimerFromServer() {
 	gameTimeSocket = createWebsocket('time/game', (value) => {
-		document.getElementById("time").textContent = value?.data?.length ? value.data : '20:00';
+		document.getElementById('time').textContent = value?.data?.length ? value.data : '20:00';
 	});
 }
 
@@ -136,13 +136,13 @@ function handleEventInternal(event) {
 }
 
 function updateHalfIndicator() {
-	$('#halfIndicator').text('2');
-	$('#halfSup').text('nd');
+	setText('halfIndicator', '2');
+	setText('halfSup', 'nd');
 }
 
 function bigContentSafeguard(nextContent, callback) {
 	if (currentContent === nextContent) {
-		// If the content is already visible use the callback to hide it
+		// If the content is already visible, use the callback to hide it
 		callback();
 		return;
 	}
@@ -155,60 +155,69 @@ function bigContentSafeguard(nextContent, callback) {
 	}
 }
 
+function animate(id, animation, duration = '1s', curve = 'cubic-bezier(0.16, 0, 0.12, 1)') {
+	const element = document.getElementById(id);
+	if (element) {
+		element.style.animation = `${animation} ${duration} ${curve} 1 normal forwards`;
+	}
+}
+
 function toggleScoreboard() {
 	if (!showingSmallScoreboard) {
-		$('#scoreboardTime').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#scoreboardSpielfeldCircle').css('animation', 'ScoreboardSpielfeldIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#homeTimeImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#awayTimeImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#time').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#homeTimeName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#awayTimeName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#homeTimeScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#awayTimeScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('scoreboardTime', 'revealCenter');
+		animate('scoreboardSpielfeldCircle', 'ScoreboardSpielfeldIn');
+		setTimeout(() => {
+			animate('homeTimeImage', 'growImage');
+			animate('awayTimeImage', 'growImage');
+			animate('time', 'opacityIn');
+			animate('homeTimeName', 'opacityIn');
+			animate('awayTimeName', 'opacityIn');
+			animate('homeTimeScore', 'opacityIn');
+			animate('awayTimeScore', 'opacityIn');
+		}, 100);
 	} else {
-		$('#scoreboardTime').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#scoreboardSpielfeldCircle').css('animation', 'ScoreboardSpielfeldOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#homeTimeImage').css('animation', 'hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#awayTimeImage').css('animation', 'hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#time').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#homeTimeName').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#awayTimeName').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#homeTimeScore').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#awayTimeScore').css('animation', 'opacityOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('scoreboardTime', 'revealCenterOut');
+		animate('scoreboardSpielfeldCircle', 'ScoreboardSpielfeldOut');
+		animate('homeTimeImage', 'hideImage');
+		animate('awayTimeImage', 'hideImage');
+		animate('time', 'opacityOut');
+		animate('homeTimeName', 'opacityOut');
+		animate('awayTimeName', 'opacityOut');
+		animate('homeTimeScore', 'opacityOut');
+		animate('awayTimeScore', 'opacityOut');
 	}
 	showingSmallScoreboard = !showingSmallScoreboard;
 }
 
 function toggleBigScoreboard() {
 	if (!currentContent) {
-		$('#bottomAdditionalBackground').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('bottomAdditionalBackground', 'revealCenter');
 		setTimeout(() => {
-			$('#bottomScoreBackground').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#bottomContent').css('animation', 'revealCenter 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottom 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('bottomScoreBackground', 'revealCenter');
+			animate('bottomContent', 'revealCenter');
+			animate('bottomSpielfeldCircle', 'spielfeldBottom');
 			setTimeout(() => {
-				$('#bigHomeImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-				$('#bigAwayImage').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-				$('#bigHomeName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-				$('#bigAwayName').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-				$('#bigHomeScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-				$('#bigAwayScore').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				animate('bigHomeImage', 'growImage');
+				animate('bigAwayImage', 'growImage');
+				animate('bigHomeName', 'opacityIn');
+				animate('bigAwayName', 'opacityIn');
+				animate('bigHomeScore', 'opacityIn');
+				animate('bigAwayScore', 'opacityIn');
 			}, 200);
 		}, 80);
 		currentContent = BIG_SCOREBOARD;
 	} else {
-		$('#bottomScoreBackground').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bottomContent').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bigHomeImage').css('animation', 'hideImage 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bigAwayImage').css('animation', 'hideImage 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bigHomeName').css('animation', 'opacityOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bigAwayName').css('animation', 'opacityOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bigHomeScore').css('animation', 'opacityOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bigAwayScore').css('animation', 'opacityOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#bottomSpielfeldCircle').css('animation', 'spielfeldBottomOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('bottomScoreBackground', 'revealCenterOut');
+		animate('bottomContent', 'revealCenterOut');
+		animate('bigHomeImage', 'hideImage', '0.5s');
+		animate('bigAwayImage', 'hideImage', '0.5s');
+		animate('bigHomeName', 'opacityOut', '0.5s');
+		animate('bigAwayName', 'opacityOut', '0.5s');
+		animate('bigHomeScore', 'opacityOut', '0.5s');
+		animate('bigAwayScore', 'opacityOut', '0.5s');
+		animate('bottomSpielfeldCircle', 'spielfeldBottomOut');
 		setTimeout(() => {
-			$('#bottomAdditionalBackground').css('animation', 'revealCenterOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('bottomAdditionalBackground', 'revealCenterOut');
 		}, 80);
 		currentContent = undefined;
 	}
@@ -216,22 +225,22 @@ function toggleBigScoreboard() {
 
 function toggleLowerThird() {
 	if (!currentContent) {
-		$('#lowerMainContent').css('animation', 'revealCenter 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#lowerMainText').css('animation', 'opacityIn 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('lowerMainContent', 'revealCenter', '0.5s');
+		animate('lowerMainText', 'opacityIn');
 		setTimeout(() => {
-			$('#lowerSubAdditionalBackground').css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#lowerSubContent').css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('lowerSubAdditionalBackground', 'revealDown', '0.5s');
+			animate('lowerSubContent', 'revealDown');
 		}, 500);
 		currentContent = CASTER;
 	} else {
-		$('#lowerSubContent').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('lowerSubContent', 'revealDownOut', '0.5s');
 		setTimeout(() => {
-			$('#lowerSubAdditionalBackground').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('lowerSubAdditionalBackground', 'revealDownOut', '0.5s');
 		}, 200);
 		setTimeout(() => {
-			$('#lowerMainContent').css('animation', 'revealCenterOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#lowerMainText').css('animation', 'opacityOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		}, 600);
+			animate('lowerMainContent', 'revealCenterOut', '0.5s');
+			animate('lowerMainText', 'opacityOut', '0.4s');
+		}, 500);
 		currentContent = undefined;
 	}
 }
@@ -242,37 +251,35 @@ function updateScoreboardInternal() {
 }
 
 function updateScore() {
-	$('#bigHomeScore').text(scoreHome);
-	$('#bigAwayScore').text(scoreAway);
-	$('#homeTimeScore').text(scoreHome);
-	$('#awayTimeScore').text(scoreAway);
+	setText('bigHomeScore', scoreHome);
+	setText('bigAwayScore', scoreAway);
+	setText('homeTimeScore', scoreHome);
+	setText('awayTimeScore', scoreAway);
 }
 
 function doubleDigitAdjustments() {
 	if (scoreHome >= 10) {
-		$('#bigHomeScore').css('left', '600px');
-		$('#homeScore').css('left', '355px');
-		$('#homeTimeScore').css('left', '432px');
+		document.getElementById('bigHomeScore').style.left = '600px';
+		document.getElementById('homeTimeScore').style.left = '432px';
 	}
 	if (scoreAway >= 10) {
-		$('#bigAwayScore').css('left', '695px');
-		$('#awayScore').css('left', '390px');
-		$('#awayTimeScore').css('left', '470px');
+		document.getElementById('bigAwayScore').style.left = '695px';
+		document.getElementById('awayTimeScore').style.left = '470px';
 	}
 }
 
 function updateFouls() {
 	updateFoulsBox();
-	updateFoulsContent($('#homeTimeFouls'), foulsHome);
-	updateFoulsContent($('#awayTimeFouls'), foulsAway);
+	updateFoulsContent('homeTimeFouls', foulsHome);
+	updateFoulsContent('awayTimeFouls', foulsAway);
 }
 
 function updateFoulsBox() {
-	const foulsBox = $('#foulsContent');
+	const foulsBox = document.getElementById('foulsContent');
 	if (foulsHome > 0 || foulsAway > 0) {
-		$('#foulsAdditionalBackground').css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('foulsAdditionalBackground', 'revealDown', '0.5s');
 		setTimeout(() => {
-			foulsBox.css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('foulsContent', 'revealDown', '1s');
 		}, 200);
 		if (foulsTimeout) {
 			clearTimeout(foulsTimeout);
@@ -282,7 +289,7 @@ function updateFoulsBox() {
 			// Otherwise hide it after 30 seconds
 			foulsTimeout = setTimeout(animateFoulsBoxOut, 30_000);
 		}
-	} else if (foulsBox.css('animation-name') === 'revealDown') {
+	} else if (foulsBox.animationName === 'revealDown') {
 		animateFoulsBoxOut();
 		if (foulsTimeout) {
 			clearTimeout(foulsTimeout);
@@ -291,34 +298,33 @@ function updateFoulsBox() {
 }
 
 function animateFoulsBoxOut() {
-	$('#foulsContent').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	animate('foulsContent', 'revealDownOut', '0.5s');
 	setTimeout(() => {
-		$('#foulsAdditionalBackground').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('foulsAdditionalBackground', 'revealDownOut', '0.5s');
 	}, 200);
 }
 
 function updateFoulsContent(foulsText, fouls) {
-	foulsText?.text(fouls);
+	setText(foulsText, fouls);
 }
 
 let redCardSockets = {};
 
 function showRedCardTimer(team) {
 	team = team.toLowerCase();
-	const redCardTimer = $(`#${team}RedCardBox`);
-	redCardTimer.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	animate(`${team}RedCardBox`, 'revealUp');
 	let socket = createWebsocket(`time/red/${team}`, (value) => {
 		const time = value?.data;
 		if (time === '00:00') {
 			socket.close();
 			setTimeout(() => {
-				redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+				animate(`${team}RedCardBox`, 'revealUpOut');
 				setTimeout(() => {
-					$(`#${team}RedCardTimer`).text('2:00');
+					setText(`${team}RedCardTimer`, '2:00');
 				}, 1000);
 			}, 500);
 		}
-		$(`#${team}RedCardTimer`).text(time?.length ? time.slice(1) : '2:00');
+		setText(`${team}RedCardTimer`, time?.length ? time.slice(1) : '2:00');
 	});
 	redCardSockets[team] = socket;
 }
@@ -328,11 +334,10 @@ function clearRedCardTimer(team) {
 	if (redCardSockets[team]) {
 		redCardSockets[team].close();
 		delete redCardSockets[team];
-		const redCardTimer = $(`#${team}RedCardBox`);
-		redCardTimer.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate(`${team}RedCardBox`, 'revealUpOut');
 		setTimeout(() => {
-			$(`#${team}RedCardTimer`).text('2:00');
-		}, 1000);
+			setText(`${team}RedCardTimer`, '2:00');
+		}, 1100);
 	}
 }
 

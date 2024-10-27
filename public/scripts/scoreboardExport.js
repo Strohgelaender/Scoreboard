@@ -1,6 +1,6 @@
 'use strict';
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
 	loadTeams();
 });
 
@@ -16,7 +16,8 @@ function loadTeams() {
 
 			document.getElementById('homeShirtLine').style.backgroundColor = home.shirtColor;
 			document.getElementById('awayShirtLine').style.backgroundColor = away.shirtColor;
-		}).catch((console.error));
+		})
+		.catch(console.error);
 }
 
 function handleEventInternal(event) {
@@ -64,6 +65,6 @@ function saveImageOnServer(dataUrl) {
 
 function updateScoreboardInternal() {
 	if (scoreHome >= 10) {
-		document.getElementById("homeScore").style.left = "380px";
+		document.getElementById('homeScore').style.left = '380px';
 	}
 }
