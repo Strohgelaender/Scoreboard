@@ -382,7 +382,7 @@ const TEXTS = {
 	[MINUS_5_KEY]: '-5',
 	[MINUS_10_KEY]: '-10',
 	[HALFTIME_TIMER_KEY]: '15:00',
-	[LIVE_TABLE_KEY]: 'Blitztabelle',
+	[LIVE_TABLE_KEY]: '⚡tbl',
 };
 
 function updateTimerImage(running) {

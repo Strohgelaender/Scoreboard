@@ -57,6 +57,8 @@ let foulsAway = 0;
 // TODO: Keep this in sync with client
 let showingScoreboard = true;
 
+let companionEvent = {};
+
 const eventWS = [];
 const timerWS = {
 	game: [],
@@ -123,6 +125,26 @@ app.use('/events', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
 		eventWS.push(ws);
+	}
+});
+
+app.use('/companion', tinyws(), async (req) => {
+	if (req.ws) {
+		const ws = await req.ws();
+		ws.on('message', (msg) => {
+			const message = msg.toString().toUpperCase();
+			if (message === 'HOME') {
+				companionEvent.team = 'HOME';
+			} else if (message === 'AWAY') {
+				companionEvent.team = 'AWAY';
+			} else {
+				companionEvent.eventType = message;
+			}
+			sendEvent(companionEvent);
+			if (companionEvent.eventType && companionEvent.team) {
+				companionEvent = {};
+			}
+		});
 	}
 });
 
