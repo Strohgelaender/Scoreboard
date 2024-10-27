@@ -253,12 +253,12 @@ function doubleDigitAdjustments() {
 	if (scoreHome >= 10) {
 		$('#bigHomeScore').css('left', '600px');
 		$('#homeScore').css('left', '355px');
-		// TODO time score
+		$('#homeTimeScore').css('left', '432px');
 	}
 	if (scoreAway >= 10) {
 		$('#bigAwayScore').css('left', '695px');
 		$('#awayScore').css('left', '390px');
-		// TODO time score
+		$('#awayTimeScore').css('left', '470px');
 	}
 }
 
