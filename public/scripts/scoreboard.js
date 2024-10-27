@@ -342,13 +342,13 @@ function clearRedCardTimer(team) {
 }
 
 function animateLineup(team, players) {
-	const startingPlayersTable = $('#startingPlayers');
-	const substitutePlayersTable = $('#substitutePlayers');
+	const duration = '1.5s';
+	const startingPlayersTable = document.getElementById('startingPlayers');
+	const substitutePlayersTable = document.getElementById('substitutePlayers');
 
 	if (!currentContent) {
-		$('#aufstellungTeamname').text(fullNames[team]);
-		const logo = $('#aufstellungLogo');
-		logo.attr('src', teamImages[team]);
+		setText('aufstellungTeamname', fullNames[team]);
+		document.getElementById('aufstellungLogo').src = teamImages[team];
 
 		if (players?.length) {
 			players = players.sort((a, b) => {
@@ -366,48 +366,47 @@ function animateLineup(team, players) {
 				createPlayerRow(player, player.is_starting ? startingPlayersTable : substitutePlayersTable);
 			}
 		}
-		$('#aufstellungCoach').text(coaches[team]);
+		setText('aufstellungCoach', coaches[team]);
 
 		currentContent = LINEUP;
-		$('#aufstellungSpielfeldCircle').css('animation', 'drawCircleIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#aufstellungSpielfeldLine').css('animation', 'drawLineIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#aufstellungGoalline').css('animation', 'drawLineIn 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#aufstellungBox').css('animation', 'revealToLeft 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		logo.css('animation', 'growImage 1.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		setTimeout(() => {
-			$('#aufstellungSpielfeld').css('object-position', '0 0').css('animation', 'none');
-			$('#aufstellungSpielfeldCircle').css('stroke-dashoffset', '0').css('animation', 'none');
-			$('#aufstellungGoalline').css('stroke-dashoffset', '0').css('animation', 'none');
-			$('#aufstellungSpielfeldLine').css('stroke-dashoffset', '0').css('animation', 'none');
-			$('#aufstellungLogo').css('transform', 'scale(1)').css('opacity', '1').css('animation', 'none');
-		}, 2000);
+		animate('aufstellungSpielfeldCircle', 'drawCircleIn', duration);
+		animate('aufstellungSpielfeldLine', 'drawLineIn', duration);
+		animate('aufstellungGoalline', 'drawLineIn', duration);
+		animate('aufstellungBox', 'revealToLeft', duration);
+		animate('aufstellungLogo', 'growImage', duration);
 	} else {
 		currentContent = undefined;
 
 		// Reversed bezier curve via https://codepen.io/michellebarker/pen/jQpwKq
-		$('#aufstellungSpielfeldLine').css('animation', 'drawLineOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
-		$('#aufstellungGoalline').css('animation', 'drawLineOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
-		$('#aufstellungSpielfeldCircle').css('animation', 'drawCircleOut 1.5s  cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
-		$('#aufstellungBox').css('animation', 'revealToLeftOut 1.5s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
-		$('#aufstellungLogo').css('animation', 'hideImage 1s cubic-bezier(0.88, 0.00, 0.84, 1.00) 1 normal forwards');
+		const curve = 'cubic-bezier(0.88, 0.00, 0.84, 1.00)';
+		animate('aufstellungSpielfeldLine', 'drawLineOut', duration, curve);
+		animate('aufstellungGoalline', 'drawLineOut', duration, curve);
+		animate('aufstellungSpielfeldCircle', 'drawCircleOut', duration, curve);
+		animate('aufstellungBox', 'revealToLeftOut', duration, curve);
+		animate('aufstellungLogo', 'hideImage', '1s', curve);
 		setTimeout(() => {
-			$('#aufstellungSpielfeldCircle').css('stroke-dashoffset', '1257').css('animation', 'none');
-			$('#aufstellungSpielfeldLine').css('stroke-dashoffset', '1200').css('animation', 'none');
-			$('#aufstellungGoalline').css('stroke-dashoffset', '1200').css('animation', 'none');
-			$('#aufstellungLogo').css('transform', 'scale(0)').css('opacity', '0').css('animation', 'none');
-			startingPlayersTable.empty();
-			substitutePlayersTable.empty();
+			startingPlayersTable.replaceChildren();
+			substitutePlayersTable.replaceChildren();
 		}, 2000);
 	}
 }
 
 function createPlayerRow(player, table) {
-	const row = $('<tr>');
-	row.append($('<td>').text(getPlayerRoleText(player)));
-	row.append($('<td>').text(player.number));
-	row.append($('<td>').text(player.firstName).addClass('playerFirstName'));
-	row.append($('<td>').text(player.lastName).addClass('playerLastName'));
-	table.append(row);
+	const row = document.createElement('tr');
+	row.appendChild(createElement('td', getPlayerRoleText(player)));
+	row.appendChild(createElement('td', player.number));
+	row.appendChild(createElement('td', player.firstName, 'playerFirstName'));
+	row.appendChild(createElement('td', player.lastName, 'playerLastName'));
+	table.appendChild(row);
+}
+
+function createElement(tag, text, cls) {
+	const element = document.createElement(tag);
+	element.textContent = text;
+	if (cls) {
+		element.classList.add(cls);
+	}
+	return element;
 }
 
 function getPlayerRoleText(player) {
@@ -427,27 +426,28 @@ function getPlayerRoleText(player) {
 	return result.trim();
 }
 
+// TODO make animation similar to caster (opacity, timing)
 function animateReferees() {
 	if (currentContent === REFEREES) {
-		$('#refSubContent').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#refAdditionalContent').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('refSubContent', 'revealDownOut', '0.5s');
+		animate('refAdditionalContent', 'revealUpOut');
 		setTimeout(() => {
-			$('#lowerRefAdditionalBackground').css('animation', 'revealDownOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#refUpAdditionalBackground').css('animation', 'revealUpOut 0.8s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('lowerRefAdditionalBackground', 'revealDownOut', '0.5s');
+			animate('refUpAdditionalBackground', 'revealUpOut', '0.8s');
 		}, 250);
 		setTimeout(() => {
-			$('#referee1Box').css('animation', 'revealCenterOut 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('referee1Box', 'revealCenterOut', '0.5s');
 		}, 1000);
 		currentContent = undefined;
 	} else {
-		$('#referee1Box').css('animation', 'revealCenter 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('referee1Box', 'revealCenter', '0.5s');
 		setTimeout(() => {
-			$('#lowerRefAdditionalBackground').css('animation', 'revealDown 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#refSubContent').css('animation', 'revealDown 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('lowerRefAdditionalBackground', 'revealDown', '0.5s');
+			animate('refSubContent', 'revealDown');
 		}, 300);
 		setTimeout(() => {
-			$('#refUpAdditionalBackground').css('animation', 'revealUp 0.5s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-			$('#refAdditionalContent').css('animation', 'revealUp 0.8s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('refUpAdditionalBackground', 'revealUp', '0.5s');
+			animate('refAdditionalContent', 'revealUp', '0.8s');
 		}, 700);
 		currentContent = REFEREES;
 	}
@@ -455,25 +455,27 @@ function animateReferees() {
 
 function updateRefText(referees) {
 	for (let i = 1; i <= 4; i++) {
-		$(`#referee${i}Text`).text(referees[i - 1] || '');
+		setText(`referee${i}Text`, referees[i - 1] || '');
 	}
 }
 
 function showTable(table) {
 	if (currentContent === TABLE) {
-		$('#tableLogo').css('animation', 'hideImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#table').css('animation', 'revealToLeftOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('tableLogo', 'hideImage');
+		animate('table', 'revealToLeftOut');
 		setTimeout(() => {
-			$('.tableTeamRow').remove();
+			const table = document.getElementById('tableTeams');
+			const header = table.firstElementChild;
+			table.replaceChildren(header);
 		}, 1100);
 		currentContent = undefined;
 	} else {
-		const tableContent = $('#tableTeams');
+		const tableContent = document.getElementById('tableTeams');
 		for (let i = 0; i < table.length; i++) {
 			createTableRow(table[i], tableContent, i);
 		}
-		$('#tableLogo').css('animation', 'growImage 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#table').css('animation', 'revealToLeft 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('tableLogo', 'growImage');
+		animate('table', 'revealToLeft');
 		currentContent = TABLE;
 	}
 }
@@ -595,98 +597,124 @@ function getShortTeamName(team) {
 }
 
 function createTableRow(team, tableContent, i, short = false) {
-	const row = $('<tr class="tableTeamRow">');
-	const rank = $('<td>').text(team.rank);
+	const row = document.createElement('tr');
+	row.classList.add('tableTeamRow');
+
+	const rank = createElement('td', team.rank);
 	if (i === 8) {
-		rank.addClass('relegation');
+		rank.classList.add('relegation');
 	} else if (i === 9) {
-		rank.addClass('last');
+		rank.classList.add('last');
 	}
-	row.append(rank);
-	row.append($('<td style="text-align: center;">').append($(`<img src="${team.teamLogo}" class="tableTeamLogo">`)));
+	row.appendChild(rank);
+
+	const logoTd = document.createElement('td');
+	logoTd.style.textAlign = 'center';
+	const logoImage = document.createElement('img');
+	logoImage.src = team.teamLogo;
+	logoImage.classList.add('tableTeamLogo');
+
+	logoTd.appendChild(logoImage);
+	row.appendChild(logoTd);
+
 	if (short) {
-		row.append($('<td class="tableShortTeamName">').text(getShortTeamName(team.team)));
+		row.appendChild(createElement('td', getShortTeamName(team.team), 'tableShortTeamName'));
 	} else {
-		row.append($('<td class="tableTeamName">').text(team.team));
+		row.appendChild(createElement('td', team.team, 'tableTeamName'));
 	}
-	row.append($('<td>').text(team.games));
-	row.append($('<td>').text(team.goalDiff));
-	row.append($('<td class="tableTeamPoints">').text(team.points));
-	tableContent.append(row);
+	row.appendChild(createElement('td', team.games));
+	row.appendChild(createElement('td', team.goalDiff));
+	row.appendChild(createElement('td', team.points, 'tableTeamPoints'));
+	tableContent.appendChild(row);
 }
 
 function showMatchday(matchday) {
 	if (currentContent === MATCHDAY) {
-		$('#matchday').css('animation', 'revealToLeftOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('matchday', 'revealToLeftOut');
 		setTimeout(() => {
-			$('#matchesTable').empty();
-		}, 1500);
+			document.getElementById('matchesTable').replaceChildren();
+		}, 1300);
 		currentContent = undefined;
 	} else {
-		const table = $('#matches');
+		const table = document.getElementById('matchesTable');
 		for (const match of matchday) {
 			createMatchdayRow(match, table);
 		}
-		$('#matchday').css('animation', 'revealToLeft 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('matchday', 'revealToLeft');
 		currentContent = MATCHDAY;
 	}
 }
 
 function createMatchdayRow(match, table, short = false, time = false, date = false) {
-	const row = $('<tr class="matchdayMatchRow">');
-	// row.append($('<td>').text(match.time));
-	row.append($('<td style="text-align: center;">').append($(`<img src="${match.homeImage}" class="tableTeamLogo">`)));
+	const row = document.createElement('tr');
+	row.classList.add('matchdayMatchRow');
+
+	const homeLogoTd = document.createElement('td');
+	homeLogoTd.style.textAlign = 'center';
+	const homeLogoImage = document.createElement('img');
+	homeLogoImage.src = match.homeImage;
+	homeLogoImage.classList.add('tableTeamLogo');
+	homeLogoTd.appendChild(homeLogoImage);
+	row.appendChild(homeLogoTd);
+
 	if (!short) {
-		row.append($('<td class="tableTeamName">').text(match.homeTeam));
+		row.appendChild(createElement('td', match.homeTeam, 'tableTeamName'));
 	}
 	if (match.isLive) {
 		if (match.score) {
-			row.append($('<td class="live">').text(match.score));
+			row.appendChild(createElement('td', match.score, 'live'));
 		} else {
-			row.append($('<td class="live">').text('Live'));
+			row.appendChild(createElement('td', 'Live', 'live'));
 		}
 	} else if (time) {
-		const td = $('<td>');
+		const td = document.createElement('td');
 		if (date) {
-			td.text(`${match.date.trim().substring(0, match.date.length - 4)} ${match.time}`);
+			td.textContent = `${match.date.trim().substring(0, match.date.length - 4)} ${match.time}`;
 		} else {
-			td.text(match.time);
+			td.textContent = match.time;
 		}
-		row.append(td);
+		row.appendChild(td);
 	} else {
-		row.append($('<td>').text(match.score));
+		row.appendChild(createElement('td', match.score));
 	}
 	if (!short) {
-		row.append($('<td class="tableTeamName">').text(match.awayTeam));
+		row.appendChild(createElement('td', match.awayTeam, 'tableTeamName'));
 	}
-	row.append($('<td style="text-align: center;">').append($(`<img src="${match.awayImage}" class="tableTeamLogo">`)));
-	table.append(row);
+
+	const awayLogoTd = document.createElement('td');
+	awayLogoTd.style.textAlign = 'center';
+	const awayLogoImage = document.createElement('img');
+	awayLogoImage.src = match.awayImage;
+	awayLogoImage.classList.add('tableTeamLogo');
+	awayLogoTd.appendChild(awayLogoImage);
+	row.appendChild(awayLogoTd);
+
+	table.appendChild(row);
 }
 
 function showLiveMatchday(matches) {
 	if (!matches) {
 		return;
 	}
-	const liveMatchesWrapper = $('#liveMatchesContent');
 	if (currentContent === LIVE_MATCHDAY) {
-		liveMatchesWrapper.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('liveMatchesContent', 'revealUpOut');
 		setTimeout(() => {
-			$('#liveMatchesAdditionalBackground').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('liveMatchesAdditionalBackground', 'revealUpOut');
 		}, 80);
 		setTimeout(() => {
-			$('#liveMatchesTable').empty();
+			document.getElementById('liveMatchesTable').replaceChildren();
 		}, 1100);
 		currentContent = undefined;
 	} else {
-		const table = $('#liveMatchesTable');
+		const table = document.getElementById('liveMatchesTable');
 		for (const match of matches) {
 			if (match.homeTeam === fullNames[0] || match.awayTeam === fullNames[1]) {
 				continue;
 			}
 			createMatchdayRow(match, table, true);
 		}
-		$('#liveMatchesAdditionalBackground').css('animation', 'revealUp 0.7s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		liveMatchesWrapper.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('liveMatchesAdditionalBackground', 'revealUp', '0.7s');
+		animate('liveMatchesContent', 'revealUp', '1s');
 		currentContent = LIVE_MATCHDAY;
 	}
 }
@@ -695,14 +723,13 @@ function showNextMatchday(matchday) {
 	if (!matches) {
 		return;
 	}
-	const nextMatchesWrapper = $('#nextMatchesContent');
 	if (currentContent === NEXT_MATCHDAY) {
-		nextMatchesWrapper.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('nextMatchesContent', 'revealUpOut');
 		setTimeout(() => {
-			$('#nextMatchesAdditionalBackground').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('nextMatchesAdditionalBackground', 'revealUpOut');
 		}, 80);
 		setTimeout(() => {
-			$('#nextMatchesTable').empty();
+			document.getElementById('nextMatchesTable').replaceChildren();
 		}, 1100);
 		currentContent = undefined;
 	} else {
@@ -716,17 +743,19 @@ function showNextMatchday(matchday) {
 		// 2) Use big title if all matches on same day
 		const sameDay = matchday.matches.every((match, i, arr) => i === 0 || match.date === arr[i - 1].date);
 		if (sameDay) {
-			$('#nextMatchesDate').text(matchday.matches[0].date);
+			setText('nextMatchesDate', matchday.matches[0].date);
 		} else {
-			$('#nextMatchesDate').text('').css('display', 'none');
+			setText('nextMatchesDate', '');
+			document.getElementById('nextMatchesDate').style.display = 'none';
 		}
 
-		const table = $('#nextMatchesTable');
+		const table = document.getElementById('nextMatchesTable');
 		for (const match of matchday.matches) {
 			createMatchdayRow(match, table, true, true, !sameDay);
 		}
-		$('#nextMatchesAdditionalBackground').css('animation', 'revealUp 0.7s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		nextMatchesWrapper.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+
+		animate('nextMatchesAdditionalBackground', 'revealUp', '0.7s');
+		animate('nextMatchesContent', 'revealUp', '1s');
 		currentContent = NEXT_MATCHDAY;
 	}
 }
