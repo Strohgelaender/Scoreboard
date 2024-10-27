@@ -25,6 +25,9 @@ function handleEventInternal(event) {
 		case 'OWN_GOAL':
 			saveScoreboardScreenshot();
 			break;
+		case 'REFRESH':
+			loadTeams();
+			break;
 	}
 }
 
