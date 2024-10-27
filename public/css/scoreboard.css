@@ -1010,7 +1010,7 @@ html {
 #liveTableContent {
 	top: 550px;
 	height: 530px;
-	width: 450px;
+	width: 500px;
 }
 
 .liveTitle {
@@ -1041,10 +1041,6 @@ html {
 	left: 10px;
 }
 
-.centeredTable {
-	height: 240px;
-}
-
 #liveMatchesContent {
 	top: 700px;
 	height: 380px;
@@ -1053,6 +1049,11 @@ html {
 
 .centeredTable {
 	margin: 0 auto;
+    height: 240px;
+}
+
+#liveTableBox {
+    padding-right: 15px;
 }
 
 .cornerAdditionalBackground {
@@ -1073,7 +1074,7 @@ html {
 #liveTableAdditionalBackground {
 	top: 550px;
 	height: 530px;
-	width: 450px;
+	width: 500px;
 	left: 0;
 	clip-path: inset(100% 0 0 0);
 }
