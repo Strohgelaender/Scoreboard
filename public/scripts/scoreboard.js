@@ -236,11 +236,11 @@ function toggleLowerThird() {
 		animate('lowerSubContent', 'revealDownOut', '0.5s');
 		setTimeout(() => {
 			animate('lowerSubAdditionalBackground', 'revealDownOut', '0.5s');
-		}, 200);
+		}, 100);
 		setTimeout(() => {
 			animate('lowerMainContent', 'revealCenterOut', '0.5s');
 			animate('lowerMainText', 'opacityOut', '0.4s');
-		}, 500);
+		}, 600);
 		currentContent = undefined;
 	}
 }
@@ -530,24 +530,24 @@ function updateTeamInTable(match, table) {
 
 function showLiveTable(table) {
 	if (currentContent === LIVE_TABLE) {
-		$('#liveTableContent').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('liveTableContent', 'revealUpOut');
 		setTimeout(() => {
-			$('#liveTableAdditionalBackground').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+			animate('liveTableAdditionalBackground', 'revealUpOut');
 		}, 80);
 		setTimeout(() => {
-			$('.tableTeamRow').remove();
+			document.getElementById('liveTableTeams').replaceChildren();
 		}, 1100);
 		currentContent = undefined;
 	} else {
 		if (!table) {
 			return;
 		}
-		const tableContent = $('#liveTableTeams');
+		const tableContent = document.getElementById('liveTableTeams');
 		for (let i = 0; i < table.length; i++) {
 			createTableRow(table[i], tableContent, i, true);
 		}
-		$('#liveTableAdditionalBackground').css('animation', 'revealUp 0.7s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
-		$('#liveTableContent').css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		animate('liveTableAdditionalBackground', 'revealUp', '0.7s');
+		animate('liveTableContent', 'revealUp', '1s');
 		currentContent = LIVE_TABLE;
 	}
 }
