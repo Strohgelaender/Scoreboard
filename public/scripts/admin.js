@@ -1,9 +1,10 @@
 let createdPlayers = 0;
-$(() => {
+
+addEventListener('DOMContentLoaded', () => {
 	loadTeams();
 	loadPlayers();
-	document.getElementById('addHome').addEventListener('click', addPlayerRow.bind(this, '#homeBody'));
-	document.getElementById('addAway').addEventListener('click', addPlayerRow.bind(this, '#awayBody'));
+	document.getElementById('addHome').addEventListener('click', addPlayerRow.bind(this, 'homeBody'));
+	document.getElementById('addAway').addEventListener('click', addPlayerRow.bind(this, 'awayBody'));
 	document.getElementById('saveBtn').addEventListener('click', postLineup);
 });
 
@@ -15,64 +16,63 @@ document.addEventListener('keydown', (e) => {
 });
 
 function loadTeams() {
-	$.ajax({
-		method: 'GET',
-		url: `/data/info`,
-	})
-		.done((value) => {
+	fetch('/data/info', { method: 'GET' })
+		.then((response) => response.json())
+		.then((value) => {
 			const home = value.home;
 			const away = value.away;
 
-			$('#homeName').text(home.name);
-			$('#awayName').text(away.name);
-		})
-		.catch((error) => console.log(error));
+			document.getElementById('homeName').textContent = home.name;
+			document.getElementById('awayName').textContent = away.name;
+		}).catch((console.error));
 }
 
 function loadPlayers() {
-	$.ajax({
-		method: 'GET',
-		url: `/players`,
-	})
-		.done((value) => {
+	fetch('/players', { method: 'GET' })
+		.then((response) => response.json())
+		.then((value) => {
 			if (value.home?.length) {
-				const homeBody = $('#homeBody');
+				const homeBody = document.getElementById('homeBody');
 				for (const player of value.home) {
-					addPlayerRow(homeBody, player);
+					addPlayerRowToTable(homeBody, player);
 				}
 			}
 			if (value.away?.length) {
-				const awayBody = $('#awayBody');
+				const awayBody = document.getElementById('awayBody');
 				for (const player of value.away) {
-					addPlayerRow(awayBody, player);
+					addPlayerRowToTable(awayBody, player);
 				}
 			}
-		})
-		.catch((error) => console.log(error));
+		}).catch((console.error));
 }
-function addPlayerRow(tbody, player) {
-	const table = $(tbody);
-	const players = table.children()?.length;
+
+function addPlayerRow(tableId, player) {
+	const table = document.getElementById(tableId);
+	addPlayerRowToTable(table, player);
+}
+
+function addPlayerRowToTable(table, player) {
+	const players = table.children?.length;
 	const starting = (players < 5 && !player) || player.is_starting;
 	const id = 'player' + ++createdPlayers;
-	const row = $(`<tr id="${id}">`);
-	row.append($('<td>').append(`<input type="number" min="1" name="number" class="form-control" ${player?.number ? 'value="' + player.number + '"' : ''}>`));
-	row.append($('<td>').append(`<input type="text" name="firstName" class="form-control" ${player?.firstName ? 'value="' + player.firstName + '"' : ''}>`));
-	row.append($('<td>').append(`<input type="text" name="lastName" class="form-control" ${player?.lastName ? 'value="' + player.lastName + '"' : ''}>`));
-	row.append($('<td>').append(`<input type="checkbox" name="is_keeper" class="form-check-input" ${player?.is_keeper ? 'checked' : ''}>`));
-	row.append($('<td>').append(`<input type="checkbox" name="is_captain" class="form-check-input" ${player?.is_captain ? 'checked' : ''}>`));
-	row.append($('<td>').append(`<input type="checkbox" name="is_starting" class="form-check-input" ${starting ? 'checked' : ''}>`));
-	row.append(
-		$('<td>').append(
-			$(`<button class="btn btn-secondary">`)
-				.text('-')
-				.on('click', () => {
-					console.log('remove', id);
-					table.children(`#${id}`).remove();
-				}),
-		),
-	);
-	table.append(row);
+	const row =  document.createElement("tr");
+	row.id = id;
+
+	row.innerHTML = `
+        <td><input type="number" min="1" name="number" class="form-control" ${player?.number ? `value="${player.number}"` : ""}></td>
+        <td><input type="text" name="firstName" class="form-control" ${player?.firstName ? `value="${player.firstName}"` : ""}></td>
+        <td><input type="text" name="lastName" class="form-control" ${player?.lastName ? `value="${player.lastName}"` : ""}></td>
+        <td><input type="checkbox" name="is_keeper" class="form-check-input" ${player?.is_keeper ? "checked" : ""}></td>
+        <td><input type="checkbox" name="is_captain" class="form-check-input" ${player?.is_captain ? "checked" : ""}></td>
+        <td><input type="checkbox" name="is_starting" class="form-check-input" ${starting ? "checked" : ""}></td>
+        <td><button class="btn btn-secondary">-</button></td>
+    `;
+
+	row.querySelector("button").addEventListener("click", () => {
+		console.log("remove", id);
+		table.removeChild(row);
+	});
+	table.appendChild(row);
 }
 
 function postLineup() {
@@ -80,21 +80,22 @@ function postLineup() {
 		home: [],
 		away: [],
 	};
-	collectPlayers($('#homeBody'), result.home);
-	collectPlayers($('#awayBody'), result.away);
+	collectPlayers(document.getElementById('homeBody'), result.home);
+	collectPlayers(document.getElementById('awayBody'), result.away);
 
-	$.ajax({
+	fetch('/lineup', {
 		method: 'POST',
-		url: `/lineup`,
-		contentType: 'application/json',
-		data: JSON.stringify(result),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(result),
 	})
-		.done(() => console.log('Lineup saved'))
-		.catch((error) => console.log(error));
+		.then(() => console.log('Lineup saved'))
+		.catch(console.error);
 }
 
 function collectPlayers(table, result) {
-	for (const tr of table.children()) {
+	for (const tr of table.children) {
 		const player = {};
 		for (const td of tr.children) {
 			const input = td.children[0];
