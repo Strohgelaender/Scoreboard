@@ -16,7 +16,7 @@ const HOME_TEAM_KEY = 3;
 const AWAY_TEAM_KEY = 4;
 const FOUL_KEY = 11;
 const REMOVE_FOUL_KEY = 12;
-const SHOW_FOULS_KEY = 13;
+const SHOW_FOULS_KEY = -1;
 const SHOW_LINEUP_KEY = 19;
 const SHOW_REFEREES_KEY = 20;
 const SHOW_BOTTOM_SCOREBOARD_KEY = 21;
@@ -27,7 +27,8 @@ const CASTER_KEY = 29;
 const TABLE_KEY = 18;
 const MATCHDAY_KEY = 17;
 const REFRESH_KEY = 25;
-const RED_CARD_KEY = 16;
+const RED_CARD_KEY = 13;
+const LIVE_MATCHES_KEY = 16;
 const LIVE_TABLE_KEY = 24;
 
 const PAUSE_KEY = 0;
@@ -172,6 +173,7 @@ const STANDALONE_EVENT_MAPPING = {
 	[PAUSE_KEY]: 'START_TIMER',
 	[HALFTIME_TIMER_KEY]: 'HALFTIME_TIMER',
 	[LIVE_TABLE_KEY]: 'LIVE_TABLE',
+	[LIVE_MATCHES_KEY]: 'LIVE_MATCHDAY',
 };
 
 async function main() {
@@ -383,6 +385,7 @@ const TEXTS = {
 	[MINUS_10_KEY]: '-10',
 	[HALFTIME_TIMER_KEY]: '15:00',
 	[LIVE_TABLE_KEY]: '⚡tbl',
+	[LIVE_MATCHES_KEY]: '⚡mtch',
 };
 
 function updateTimerImage(running) {
