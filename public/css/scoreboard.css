@@ -1020,13 +1020,20 @@ html {
 	position: relative;
 }
 
+.liveSubTitle {
+    font-size: 35px;
+    margin: 30px;
+    top: 35px;
+    position: relative;
+}
+
 .liveTable {
 	position: relative;
 	top: 50px;
 	overflow: hidden;
 }
 
-#liveMatchesTable td {
+.liveTable td {
 	padding: 0 10px;
 }
 
@@ -1034,7 +1041,7 @@ html {
 	left: 10px;
 }
 
-#liveMatchesTable {
+.centeredTable {
 	height: 240px;
 }
 
@@ -1044,7 +1051,7 @@ html {
 	width: 300px;
 }
 
-#liveMatchesBox {
+.centeredTable {
 	margin: 0 auto;
 }
 
@@ -1070,3 +1077,19 @@ html {
 	left: 0;
 	clip-path: inset(100% 0 0 0);
 }
+
+#nextMatchesContent {
+    top: 650px;
+    height: 430px;
+    width: 400px;
+}
+
+#nextMatchesAdditionalBackground {
+    top: 700px;
+    height: 380px;
+    width: 400px;
+    left: 0;
+    clip-path: inset(100% 0 0 0);
+}
+
+

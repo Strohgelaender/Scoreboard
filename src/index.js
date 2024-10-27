@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { tinyws } from 'tinyws';
 import fs from 'fs';
 import { OBSWebSocket } from 'obs-websocket-js';
-import { readLineup, readReferees, readTable, readMatchday } from './AufstellungParser.js';
+import { readLineup, readReferees, readTable, readMatchday, readNextMatchday } from './AufstellungParser.js';
 import { Timer } from './timer.js';
 
 const debug = true;
@@ -21,6 +21,7 @@ let awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
 let referees = [];
 let table;
 let matchday;
+let nextMatchday;
 
 let matchTimer = new Timer(
 	20 * 60 * 1000,
@@ -221,6 +222,8 @@ export async function updateLineup(force = false) {
 	}
 }
 
+// TODO improve this API
+
 export async function saveReferees(force = false) {
 	if (force || !referees?.length) {
 		referees = await readReferees();
@@ -236,6 +239,12 @@ export async function loadTable(force = false) {
 export async function loadMatchday(force = false) {
 	if (force || !matchday) {
 		matchday = await readMatchday();
+	}
+}
+
+export async function loadNextMatchday(force = false) {
+	if (force || !nextMatchday) {
+		nextMatchday = await readNextMatchday();
 	}
 }
 
@@ -292,6 +301,8 @@ function addEventData(event, team) {
 	} else if (event.eventType === 'LIVE_TABLE') {
 		event.table = table;
 		event.matchday = matchday;
+	} else if (event.eventType === 'NEXT_MATCHDAY') {
+		event.matchday = nextMatchday;
 	}
 }
 

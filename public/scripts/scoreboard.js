@@ -11,6 +11,7 @@ let showingTable = false;
 let showingMatchday = false;
 let showingLiveTable = false;
 let showingLiveMatches = false;
+let showingNextMatchday = false;
 let foulsTimeout;
 
 let fullNames;
@@ -109,6 +110,9 @@ function handleEventInternal(event) {
 		case 'LIVE_MATCHDAY':
 			bigContentSafeguard(showingLiveMatches, () => showLiveMatchday(event.matchday));
 			break;
+		case 'NEXT_MATCHDAY':
+			bigContentSafeguard(showingNextMatchday, () => showNextMatchday(event.matchday));
+			break;
 		case 'SECOND_HALF':
 			updateHalfIndicator();
 			break;
@@ -153,6 +157,8 @@ function bigContentSafeguard(showingContent, callback) {
 		showMatchday([]);
 	} else if (showingLiveMatches) {
 		showLiveMatchday([]);
+	} else if (showingNextMatchday) {
+		showNextMatchday({});
 	} else {
 		callback();
 	}
@@ -634,7 +640,7 @@ function showMatchday(matchday) {
 	showingMatchday = !showingMatchday;
 }
 
-function createMatchdayRow(match, table, short = false) {
+function createMatchdayRow(match, table, short = false, time = false, date = false) {
 	const row = $('<tr class="matchdayMatchRow">');
 	// row.append($('<td>').text(match.time));
 	row.append($('<td style="text-align: center;">').append($(`<img src="${match.homeImage}" class="tableTeamLogo">`)));
@@ -647,6 +653,14 @@ function createMatchdayRow(match, table, short = false) {
 		} else {
 			row.append($('<td class="live">').text('Live'));
 		}
+	} else if (time) {
+		const td = $('<td>');
+		if (date) {
+			td.text(`${match.date.trim().substring(0, match.date.length - 4)} ${match.time}`);
+		} else {
+			td.text(match.time);
+		}
+		row.append(td);
 	} else {
 		row.append($('<td>').text(match.score));
 	}
@@ -672,7 +686,6 @@ function showLiveMatchday(matches) {
 		}, 1100);
 	} else {
 		const table = $('#liveMatchesTable');
-		// TODO filter out only live matches
 		for (const match of matches) {
 			if (match.homeTeam === fullNames[0] || match.awayTeam === fullNames[1]) {
 				continue;
@@ -683,4 +696,43 @@ function showLiveMatchday(matches) {
 		liveMatchesWrapper.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
 	}
 	showingLiveMatches = !showingLiveMatches;
+}
+
+function showNextMatchday(matchday) {
+	if (!matches) {
+		return;
+	}
+	const nextMatchesWrapper = $('#nextMatchesContent');
+	if (showingNextMatchday) {
+		nextMatchesWrapper.css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		setTimeout(() => {
+			$('#nextMatchesAdditionalBackground').css('animation', 'revealUpOut 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		}, 80);
+		setTimeout(() => {
+			$('#nextMatchesTable').empty();
+		}, 1100);
+	} else {
+		// 1) Split time into date and time
+		for (const match of matchday.matches) {
+			const split = match.date.split(',')[1].trim().split(' ');
+			match.date = split[0];
+			match.time = split[1];
+		}
+
+		// 2) Use big title if all matches on same day
+		const sameDay = matchday.matches.every((match, i, arr) => i === 0 || match.date === arr[i - 1].date);
+		if (sameDay) {
+			$('#nextMatchesDate').text(matchday.matches[0].date);
+		} else {
+			$('#nextMatchesDate').text('').css('display', 'none');
+		}
+
+		const table = $('#nextMatchesTable');
+		for (const match of matchday.matches) {
+			createMatchdayRow(match, table, true, true, !sameDay);
+		}
+		$('#nextMatchesAdditionalBackground').css('animation', 'revealUp 0.7s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+		nextMatchesWrapper.css('animation', 'revealUp 1s cubic-bezier(0.16, 0, 0.12, 1) 1 normal forwards');
+	}
+	showingNextMatchday = !showingNextMatchday;
 }

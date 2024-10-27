@@ -2,7 +2,7 @@ import { listStreamDecks, openStreamDeck } from '@elgato-stream-deck/node';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import { updateLineup, saveReferees, sendEvent, loadTable, loadMatchday, reloadTeamFiles, getMatchTimer } from './index.js';
+import { updateLineup, saveReferees, sendEvent, loadTable, loadMatchday, reloadTeamFiles, getMatchTimer, loadNextMatchday } from './index.js';
 import readline from 'readline';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -40,9 +40,7 @@ const HALFTIME_TIMER_KEY = 8;
 //TODO public constants (wie hier und auch im Browser verwenden?)
 //TODO Paging?
 
-const DEFAULT_EVENT = {
-	number: '',
-};
+const DEFAULT_EVENT = {};
 
 let resetTime;
 let event = { ...DEFAULT_EVENT };
@@ -131,6 +129,12 @@ rl.on('line', (input) => {
 		case 'MATCHES':
 		case 'MATCHDAY':
 			showMatchday();
+			return;
+		case 'NEXT MATCHES':
+		case 'NEXT MATCHDAY':
+		case 'NEXT_MATCHES':
+		case 'NEXT_MATCHDAY':
+			showNextMatchday();
 			return;
 		case 'REFRESH':
 			refresh();
@@ -289,6 +293,12 @@ function showTable() {
 function showMatchday() {
 	loadMatchday().then(() => {
 		sendStandaloneEvent('MATCHDAY');
+	});
+}
+
+function showNextMatchday() {
+	loadNextMatchday().then(() => {
+		sendStandaloneEvent('NEXT_MATCHDAY');
 	});
 }
 

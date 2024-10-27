@@ -130,14 +130,50 @@ function getTeamLogo(teamName) {
 }
 
 export async function readMatchday() {
+	return await parseMatchday(matchdayNumber, true);
+}
+
+export async function readNextMatchday() {
+	const matches = await parseMatchday(matchdayNumber + 1);
+	return { matches, number: matchdayNumber + 1 };
+}
+
+async function parseMatchday(number, addLiveScores = false) {
 	let result;
 	try {
-		result = await parseDFBMatchdayOverview();
+		result = await parseDFBMatchdayOverview(number);
 	} catch (e) {
 		console.error(e);
 		return [];
 	}
 
+	if (addLiveScores) {
+		await addLiveScoresToMatchday(result);
+	}
+	return result;
+}
+
+async function parseDFBMatchdayOverview(number) {
+	const response = await matchday.get(number + '-spieltag');
+	const root = parse(response.data);
+	const matchdayHtml = root.querySelector('.c-MatchTable-body');
+	let result = [];
+	for (const match of matchdayHtml.querySelectorAll('.c-MatchTable-row')) {
+		let homeTeam = match.querySelector('.c-MatchTable-team--home').querySelector('a').text.trim();
+		homeTeam = convertToConsistentName(homeTeam);
+		const homeImage = getTeamLogo(homeTeam);
+		let awayTeam = match.querySelector('.c-MatchTable-team--away').querySelector('a').text.trim();
+		awayTeam = convertToConsistentName(awayTeam);
+		const awayImage = getTeamLogo(awayTeam);
+		const score = match.querySelector('.c-MatchTable-score')?.text?.trim();
+		const isLive = !!match.querySelector('.c-MatchTable-live');
+		const date = match.querySelector('.c-MatchTable-description').querySelector('p').text.trim();
+		result.push({ homeTeam, homeImage, awayTeam, awayImage, score, date, isLive });
+	}
+	return result;
+}
+
+async function addLiveScoresToMatchday(result) {
 	// Use ticker by fussball.de for live scores if available:
 	for (const matchId of otherMatches) {
 		const response = await game.get(matchId + '/ticker-id/selectedTickerId');
@@ -159,29 +195,6 @@ export async function readMatchday() {
 			console.warn('Match not found:', homeTeam, guestTeam);
 		}
 	}
-
-	// console.log(result);
-	return result;
-}
-
-async function parseDFBMatchdayOverview() {
-	const response = await matchday.get(matchdayNumber + '-spieltag');
-	const root = parse(response.data);
-	const matchdayHtml = root.querySelector('.c-MatchTable-body');
-	let result = [];
-	for (const match of matchdayHtml.querySelectorAll('.c-MatchTable-row')) {
-		let homeTeam = match.querySelector('.c-MatchTable-team--home').querySelector('a').text.trim();
-		homeTeam = convertToConsistentName(homeTeam);
-		const homeImage = getTeamLogo(homeTeam);
-		let awayTeam = match.querySelector('.c-MatchTable-team--away').querySelector('a').text.trim();
-		awayTeam = convertToConsistentName(awayTeam);
-		const awayImage = getTeamLogo(awayTeam);
-		const score = match.querySelector('.c-MatchTable-score')?.text?.trim();
-		const isLive = !!match.querySelector('.c-MatchTable-live');
-		const date = match.querySelector('.c-MatchTable-description').querySelector('p').text.trim();
-		result.push({ homeTeam, homeImage, awayTeam, awayImage, score, date, isLive });
-	}
-	return result;
 }
 
 function convertToConsistentName(team) {
