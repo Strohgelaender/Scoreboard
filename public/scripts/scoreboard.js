@@ -33,7 +33,7 @@ let fullNames;
 let teamImages;
 let coaches;
 
-$(() => {
+document.addEventListener('DOMContentLoaded', () => {
 	loadTeams();
 	updateTimerFromServer();
 });
