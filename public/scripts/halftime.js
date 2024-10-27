@@ -11,11 +11,10 @@ function updateScoreboardInternal() {
 function updateTimerFromServer() {
 	createWebsocket('time/half', (value) => {
 		const time = value.data;
-		const timeElement = document.getElementById("time");
 		if (time === '00:00') {
-			timeElement.textContent = '';
+			setText("time", '');
 		} else {
-			timeElement.textContent = time.length ? time : '';
+			setText("time", time.length ? time : '');
 		}
 	});
 }

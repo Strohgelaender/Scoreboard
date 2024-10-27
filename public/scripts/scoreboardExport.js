@@ -1,25 +1,22 @@
 'use strict';
 
-$(() => {
+document.addEventListener("DOMContentLoaded", () => {
 	loadTeams();
 });
 
 function loadTeams() {
-	$.ajax({
-		method: 'GET',
-		url: `/data/info`,
-	})
-		.done((value) => {
+	fetch('/data/info', { method: 'GET' })
+		.then((response) => response.json())
+		.then((value) => {
 			const home = value.home;
 			const away = value.away;
 
-			$('#homeName').text(home.name);
-			$('#awayName').text(away.name);
+			setText('homeName', home.name);
+			setText('awayName', away.name);
 
-			$(`#homeShirtLine`).css('background-color', home.shirtColor);
-			$(`#awayShirtLine`).css('background-color', away.shirtColor);
-		})
-		.catch((error) => console.log(error));
+			document.getElementById('homeShirtLine').style.backgroundColor = home.shirtColor;
+			document.getElementById('awayShirtLine').style.backgroundColor = away.shirtColor;
+		}).catch((console.error));
 }
 
 function handleEventInternal(event) {
@@ -51,21 +48,19 @@ function saveScoreboardScreenshot() {
 }
 
 function saveImageOnServer(dataUrl) {
-	$.ajax({
+	fetch('/saveScoreboard', {
 		method: 'POST',
-		url: `/saveScoreboard`,
-		contentType: 'application/json',
-		data: JSON.stringify({ dataUrl }),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ dataUrl }),
 	})
-		.done(console.log)
-		.catch((error) => {
-			console.log(error);
-		});
+		.then(console.log)
+		.catch(console.error);
 }
 
 function updateScoreboardInternal() {
 	if (scoreHome >= 10) {
-		// TODO
-		// $('#homeScore').css('left', '580px');
+		document.getElementById("homeScore").style.left = "380px";
 	}
 }

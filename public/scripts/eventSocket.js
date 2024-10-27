@@ -106,9 +106,16 @@ function decreaseFoul(homeTeam) {
 }
 
 function updateScoreboard() {
-	document.getElementById("homeScore").textContent = scoreHome;
-	document.getElementById("awayScore").textContent = scoreAway;
+	setText("homeScore", scoreHome);
+	setText("awayScore", scoreAway);
 	if (typeof updateScoreboardInternal === 'function') {
 		updateScoreboardInternal();
+	}
+}
+
+function setText(id, text) {
+	const element = document.getElementById(id);
+	if (element) {
+		element.textContent = text;
 	}
 }

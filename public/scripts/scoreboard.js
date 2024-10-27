@@ -39,11 +39,9 @@ $(() => {
 });
 
 function loadTeams() {
-	$.ajax({
-		method: 'GET',
-		url: `/data/info`,
-	})
-		.done((value) => {
+	fetch('/data/info', { method: 'GET' })
+		.then((response) => response.json())
+		.then((value) => {
 			const home = value.home;
 			const away = value.away;
 
@@ -51,32 +49,26 @@ function loadTeams() {
 			teamImages = [home.imagePath, away.imagePath];
 			coaches = [home.coach, away.coach];
 
-			$('#homeName').text(home.name);
-			$('#awayName').text(away.name);
-			$('#homeTimeName').text(home.name);
-			$('#awayTimeName').text(away.name);
+			setText("homeTimeName", home.name);
+			setText("awayTimeName", away.name);
 
-			$('#bigHomeName').text(home.fullName);
-			$('#bigAwayName').text(away.fullName);
+			setText("bigHomeName", home.fullName);
+			setText("bigAwayName", away.fullName);
 
-			$(`#homeShirtLine`).css('background-color', home.shirtColor);
-			$(`#awayShirtLine`).css('background-color', away.shirtColor);
-			$(`#homeTimeShirtLine`).css('background-color', home.shirtColor);
-			$(`#awayTimeShirtLine`).css('background-color', away.shirtColor);
+			document.getElementById("homeTimeShirtLine").style.backgroundColor = home.shirtColor;
+			document.getElementById("awayTimeShirtLine").style.backgroundColor = away.shirtColor;
 
 			if (value.firstHalfDone) {
 				updateHalfIndicator();
 			}
 			updateFouls();
 		})
-		.catch((error) => {
-			console.log(error);
-		});
+		.catch(console.log);
 }
 
 function updateTimerFromServer() {
 	gameTimeSocket = createWebsocket('time/game', (value) => {
-		return $('#time').text(value?.data?.length ? value.data : '20:00');
+		document.getElementById("time").textContent = value?.data?.length ? value.data : '20:00';
 	});
 }
 
