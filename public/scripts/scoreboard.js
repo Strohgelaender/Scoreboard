@@ -575,19 +575,19 @@ function getShortTeamName(team) {
 		case 'HOT 05 Futsal':
 			return 'HOT 05';
 		case 'Hamburger SV':
-			return 'HSV';
+			return 'HSV-Futsal';
 		case 'TSV Weilimdorf':
 			return 'Weilimdorf';
 		case 'MCH Futsal Club Bielefeld':
-			return 'Bielefeld';
+			return 'MHC Bielefeld';
 		case 'FC Liria Futsal':
 			return 'FC Liria';
 		case 'Jahn Regensburg Futsal':
-			return 'Regensburg';
+			return 'Jahn Futsal';
 		case 'Futsal Panthers Köln':
-			return 'Köln';
+			return 'Panthers Köln';
 		case 'Fortuna Düsseldorf':
-			return 'Düsseldorf';
+			return 'F95 Futsal';
 		case 'Beton Boys München':
 			return 'Beton Boys';
 		case 'SV Pars Neu-Isenburg':
