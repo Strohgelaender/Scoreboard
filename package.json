@@ -4,8 +4,8 @@
 	"description": "Small Helper Program that generates Stream-Overlay-Scoreboards",
 	"main": "src/index.js",
 	"scripts": {
-		"start": "node src/streamdeck.js",
-		"dev": "nodemon src/streamdeck.js",
+		"start": "node src/main.js",
+		"dev": "nodemon src/main.js",
 		"lineup": "node src/AufstellungParser.js",
 		"lineup:dev": "nodemon src/AufstellungParser.js",
 		"update": "ncu -i --format group",
