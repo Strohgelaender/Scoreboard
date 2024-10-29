@@ -193,6 +193,8 @@ function toggleScoreboard() {
 	showingSmallScoreboard = !showingSmallScoreboard;
 }
 
+let showingExtraText = false;
+
 function toggleBigScoreboard() {
 	if (!currentContent) {
 		let showExtraText = true;
@@ -200,12 +202,13 @@ function toggleBigScoreboard() {
 			setText('bigAdditionalText', 'Endstand');
 		} else if (!firstHalfDone && time === '20:00') {
 			setText('bigAdditionalText', '7. Spieltag | Sportpark Freiham');
-		} else if (!firstHalfDone && time === '00:00') {
+		} else if ((!firstHalfDone && time === '00:00') || (firstHalfDone && time === '20:00')) {
 			setText('bigAdditionalText', 'Halbzeitstand');
 		} else {
 			setText('bigAdditionalText', '');
 			showExtraText = false;
 		}
+		showingExtraText = showExtraText;
 		animate('bottomAdditionalBackground', 'revealCenter');
 		setTimeout(() => {
 			animate('bottomScoreBackground', 'revealCenter');
@@ -222,26 +225,36 @@ function toggleBigScoreboard() {
 					setTimeout(() => {
 						animate('bigAdditionalText', 'opacityIn');
 						animate('bottomMoreInfoBackground', 'revealUp');
-					}, 1000);
+					}, 500);
 				}
 			}, 200);
 		}, 80);
 		currentContent = BIG_SCOREBOARD;
 	} else {
-		animate('bottomScoreBackground', 'revealCenterOut');
-		animate('bottomContent', 'revealCenterOut');
-		animate('bigHomeImage', 'hideImage', '0.5s');
-		animate('bigAwayImage', 'hideImage', '0.5s');
-		animate('bigHomeName', 'opacityOut', '0.5s');
-		animate('bigAwayName', 'opacityOut', '0.5s');
-		animate('bigHomeScore', 'opacityOut', '0.5s');
-		animate('bigAwayScore', 'opacityOut', '0.5s');
-		animate('bottomSpielfeldCircle', 'spielfeldBottomOut');
-		setTimeout(() => {
-			animate('bottomAdditionalBackground', 'revealCenterOut');
-		}, 80);
-		currentContent = undefined;
+		if (showingExtraText) {
+			animate('bigAdditionalText', 'opacityOut', '0.5s');
+			animate('bottomMoreInfoBackground', 'revealUpOut');
+			setTimeout(animateBigScoreboardOut, 800);
+		} else {
+			animateBigScoreboardOut();
+		}
 	}
+}
+
+function animateBigScoreboardOut() {
+	animate('bottomScoreBackground', 'revealCenterOut');
+	animate('bottomContent', 'revealCenterOut');
+	animate('bigHomeImage', 'hideImage', '0.5s');
+	animate('bigAwayImage', 'hideImage', '0.5s');
+	animate('bigHomeName', 'opacityOut', '0.5s');
+	animate('bigAwayName', 'opacityOut', '0.5s');
+	animate('bigHomeScore', 'opacityOut', '0.5s');
+	animate('bigAwayScore', 'opacityOut', '0.5s');
+	animate('bottomSpielfeldCircle', 'spielfeldBottomOut');
+	setTimeout(() => {
+		animate('bottomAdditionalBackground', 'revealCenterOut');
+	}, 80);
+	currentContent = undefined;
 }
 
 function toggleLowerThird() {
