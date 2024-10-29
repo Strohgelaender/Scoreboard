@@ -35,6 +35,7 @@ let coaches;
 
 let time;
 let firstHalfDone = false;
+let secondHalfDone = false;
 
 document.addEventListener('DOMContentLoaded', () => {
 	loadTeams();
@@ -124,6 +125,9 @@ function handleEventInternal(event) {
 			bigContentSafeguard(NEXT_MATCHDAY, () => showNextMatchday(event.matchday));
 			break;
 		case 'SECOND_HALF':
+			if (firstHalfDone) {
+				secondHalfDone = true;
+			}
 			firstHalfDone = true;
 			updateHalfIndicator();
 			break;
@@ -197,18 +201,7 @@ let showingExtraText = false;
 
 function toggleBigScoreboard() {
 	if (!currentContent) {
-		let showExtraText = true;
-		if (firstHalfDone && time === '00:00') {
-			setText('bigAdditionalText', 'Endstand');
-		} else if (!firstHalfDone && time === '20:00') {
-			setText('bigAdditionalText', '7. Spieltag | Sportpark Freiham');
-		} else if ((!firstHalfDone && time === '00:00') || (firstHalfDone && time === '20:00')) {
-			setText('bigAdditionalText', 'Halbzeitstand');
-		} else {
-			setText('bigAdditionalText', '');
-			showExtraText = false;
-		}
-		showingExtraText = showExtraText;
+		showingExtraText = setBigExtraText();
 		animate('bottomAdditionalBackground', 'revealCenter');
 		setTimeout(() => {
 			animate('bottomScoreBackground', 'revealCenter');
@@ -221,7 +214,7 @@ function toggleBigScoreboard() {
 				animate('bigAwayName', 'opacityIn');
 				animate('bigHomeScore', 'opacityIn');
 				animate('bigAwayScore', 'opacityIn');
-				if (showExtraText) {
+				if (showingExtraText) {
 					setTimeout(() => {
 						animate('bigAdditionalText', 'opacityIn');
 						animate('bottomMoreInfoBackground', 'revealUp');
@@ -239,6 +232,20 @@ function toggleBigScoreboard() {
 			animateBigScoreboardOut();
 		}
 	}
+}
+
+function setBigExtraText() {
+	if (secondHalfDone || (firstHalfDone && time === '00:00')) {
+		setText('bigAdditionalText', 'Endstand');
+	} else if (!firstHalfDone && time === '20:00') {
+		setText('bigAdditionalText', '7. Spieltag | Sportpark Freiham');
+	} else if ((!firstHalfDone && time === '00:00') || (firstHalfDone && time === '20:00')) {
+		setText('bigAdditionalText', 'Halbzeitstand');
+	} else {
+		setText('bigAdditionalText', '');
+		return false;
+	}
+	return true;
 }
 
 function animateBigScoreboardOut() {

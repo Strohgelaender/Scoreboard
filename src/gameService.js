@@ -32,7 +32,6 @@ export class GameService {
 					timer.resetTimer();
 				}
 				redCardTimers = [];*/
-
 				setTimeout(() => {
 					this.sendEvent({ eventType: 'SECOND_HALF' });
 					this.sendEvent({ eventType: 'CLEAR_FOULS' });
