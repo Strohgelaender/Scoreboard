@@ -18,21 +18,26 @@ const STANDALONE_EVENTS = [
 	'CASTER',
 	'START_TIMER',
 	'HALFTIME_TIMER',
+	'TABLE',
 	'LIVE_TABLE',
 	'LIVE_MATCHDAY',
-	'LINEUP',
 	'NEXT_MATCHDAY',
+	'MATCHDAY',
+	'LINEUP',
+	'REFEREES',
 ];
 
 const EVENT_ACTIONS = {
-	['TABLE']: showTable,
-	['SHOW_REFEREES']: showReferees,
-	['MATCHDAY']: showMatchday,
-	['NEXT_MATCHDAY']: showNextMatchday,
+	['SHOW_REFEREES']: saveReferees,
+	['TABLE']: loadTable,
+	['LIVE_TABLE']: loadTable,
+	['MATCHDAY']: loadMatchday,
+	['LIVE_MATCHDAY']: loadMatchday,
+	['NEXT_MATCHDAY']: loadNextMatchday,
 	['REFRESH']: refresh,
 };
 
-export function onInput(input, options) {
+export async function onInput(input, options) {
 	input = input.toUpperCase().trim();
 
 	if (input === 'ADD_TIME') {
@@ -49,8 +54,7 @@ export function onInput(input, options) {
 	}
 
 	if (EVENT_ACTIONS[input]) {
-		EVENT_ACTIONS[input]();
-		return;
+		await EVENT_ACTIONS[input]();
 	}
 
 	if (STANDALONE_EVENTS.includes(input)) {
@@ -84,31 +88,7 @@ function addEventData(event) {
 	}
 }
 
-function showTable() {
-	loadTable().then(() => {
-		sendStandaloneEvent('TABLE');
-	});
-}
-
-function showReferees() {
-	saveReferees().then(() => {
-		sendStandaloneEvent('REFEREES');
-	});
-}
-
-function showMatchday() {
-	loadMatchday().then(() => {
-		sendStandaloneEvent('MATCHDAY');
-	});
-}
-
-function showNextMatchday() {
-	loadNextMatchday().then(() => {
-		sendStandaloneEvent('NEXT_MATCHDAY');
-	});
-}
-
-function refresh() {
+async function refresh() {
 	loadMatchday(true);
 	loadTable(true);
 	saveReferees(true);
