@@ -623,6 +623,27 @@ html {
 	background-color: var(--futsal-blue-2);
 }
 
+#bottomMoreInfoBackground {
+    position: absolute;
+    height: 50px;
+    top: -50px;
+    width: 1300px;
+    border-radius: 15px 15px 0px 0px;
+    background-color: var(--futsal-blue-2);
+    z-index: -10;
+}
+
+#bigAdditionalText {
+    position: absolute;
+    left: 50px;
+    height: 50px;
+    top: -50px;
+    width: 1300px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 30px;
+}
+
 @keyframes spielfeldBottom {
 	0% {
 		stroke-dashoffset: 597;
@@ -665,6 +686,7 @@ html {
 	height: 80px;
 	width: 1400px;
 	clip-path: inset(0 50% 0 50%);
+    overflow: visible;
 }
 
 .bigTeamImage {

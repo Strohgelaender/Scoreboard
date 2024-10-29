@@ -33,6 +33,9 @@ let fullNames;
 let teamImages;
 let coaches;
 
+let time;
+let firstHalfDone = false;
+
 document.addEventListener('DOMContentLoaded', () => {
 	loadTeams();
 	updateTimerFromServer();
@@ -58,7 +61,8 @@ function loadTeams() {
 			document.getElementById('homeTimeShirtLine').style.backgroundColor = home.shirtColor;
 			document.getElementById('awayTimeShirtLine').style.backgroundColor = away.shirtColor;
 
-			if (value.firstHalfDone) {
+			firstHalfDone = value.firstHalfDone;
+			if (firstHalfDone) {
 				updateHalfIndicator();
 			}
 			updateFouls();
@@ -68,7 +72,9 @@ function loadTeams() {
 
 function updateTimerFromServer() {
 	gameTimeSocket = createWebsocket('time/game', (value) => {
-		document.getElementById('time').textContent = value?.data?.length ? value.data : '20:00';
+		const newTime = value?.data?.length ? value.data : '20:00';
+		document.getElementById('time').textContent = newTime;
+		time = newTime;
 	});
 }
 
@@ -118,6 +124,7 @@ function handleEventInternal(event) {
 			bigContentSafeguard(NEXT_MATCHDAY, () => showNextMatchday(event.matchday));
 			break;
 		case 'SECOND_HALF':
+			firstHalfDone = true;
 			updateHalfIndicator();
 			break;
 		case 'REFRESH':
@@ -188,6 +195,17 @@ function toggleScoreboard() {
 
 function toggleBigScoreboard() {
 	if (!currentContent) {
+		let showExtraText = true;
+		if (firstHalfDone && time === '00:00') {
+			setText('bigAdditionalText', 'Endstand');
+		} else if (!firstHalfDone && time === '20:00') {
+			setText('bigAdditionalText', '7. Spieltag | Sportpark Freiham');
+		} else if (!firstHalfDone && time === '00:00') {
+			setText('bigAdditionalText', 'Halbzeitstand');
+		} else {
+			setText('bigAdditionalText', '');
+			showExtraText = false;
+		}
 		animate('bottomAdditionalBackground', 'revealCenter');
 		setTimeout(() => {
 			animate('bottomScoreBackground', 'revealCenter');
@@ -200,6 +218,12 @@ function toggleBigScoreboard() {
 				animate('bigAwayName', 'opacityIn');
 				animate('bigHomeScore', 'opacityIn');
 				animate('bigAwayScore', 'opacityIn');
+				if (showExtraText) {
+					setTimeout(() => {
+						animate('bigAdditionalText', 'opacityIn');
+						animate('bottomMoreInfoBackground', 'revealUp');
+					}, 1000);
+				}
 			}, 200);
 		}, 80);
 		currentContent = BIG_SCOREBOARD;
