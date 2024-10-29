@@ -26,6 +26,7 @@ export class Keyboard {
 				this.eventEmitter('AWAY');
 				break;
 			case 'GOAL':
+			case 'SCORE':
 				this.eventEmitter('GOAL');
 				break;
 			case 'OWN GOAL':
@@ -98,6 +99,7 @@ export class Keyboard {
 			case 'NEXT MATCHDAY':
 			case 'NEXT_MATCHES':
 			case 'NEXT_MATCHDAY':
+			case 'NEXT':
 				this.eventEmitter('NEXT_MATCHDAY');
 				return;
 			case 'REFRESH':

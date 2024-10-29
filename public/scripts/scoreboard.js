@@ -76,9 +76,6 @@ function handleEventInternal(event) {
 	switch (event.eventType) {
 		case 'GOAL':
 		case 'OWN_GOAL':
-			if (event.hasOwnProperty('playerData')) {
-				//showLowerThirds(event);
-			}
 			updateScoreboardInternal();
 			break;
 		case 'TOGGLE_SCOREBOARD':
@@ -88,11 +85,11 @@ function handleEventInternal(event) {
 			bigContentSafeguard(BIG_SCOREBOARD, toggleBigScoreboard);
 			break;
 		case 'LINEUP':
-			bigContentSafeguard(LINEUP, () => animateLineup(event.team === 'HOME' ? 0 : 1, event.playerData));
+			bigContentSafeguard(LINEUP, () => animateLineup(event.team === 'HOME' ? 0 : 1, event.players));
 			break;
 		case 'REFEREES':
 			if (!currentContent) {
-				updateRefText(event.playerData);
+				updateRefText(event.referees);
 			}
 			bigContentSafeguard(REFEREES, animateReferees);
 			break;

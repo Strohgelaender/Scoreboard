@@ -1,9 +1,15 @@
 // This file is supposed to be the middle point between input devices (e.g. streamdeck, keyboard, comapanion)
 // and the index.js server. It handles event creation, resets, and loading data.
 
-import { loadMatchday, loadNextMatchday, loadTable, reloadTeamFiles, saveReferees, sendEvent } from './index.js';
+import { sendEvent } from './index.js';
+import { readMatchday, readNextMatchday, readReferees, readTable } from './AufstellungParser.js';
 
 let event = {};
+
+let referees = [];
+let table;
+let matchday;
+let nextMatchday;
 
 const STANDALONE_EVENTS = [
 	'TOGGLE_SCOREBOARD',
@@ -48,14 +54,33 @@ export function onInput(input, options) {
 	}
 
 	if (STANDALONE_EVENTS.includes(input)) {
-		sendEvent(event);
-		event = {};
+		sendAndReset();
 		return;
 	}
 
 	if (event.eventType && event.team) {
-		sendEvent(event);
-		event = {};
+		sendAndReset();
+	}
+}
+
+function sendAndReset() {
+	addEventData(event);
+	sendEvent(event);
+	event = {};
+}
+
+function addEventData(event) {
+	if (event.eventType === 'REFEREES') {
+		event.referees = referees;
+	} else if (event.eventType === 'TABLE') {
+		event.table = table;
+	} else if (event.eventType === 'MATCHDAY' || event.eventType === 'LIVE_MATCHDAY') {
+		event.matchday = matchday;
+	} else if (event.eventType === 'LIVE_TABLE') {
+		event.table = table;
+		event.matchday = matchday;
+	} else if (event.eventType === 'NEXT_MATCHDAY') {
+		event.matchday = nextMatchday;
 	}
 }
 
@@ -84,7 +109,6 @@ function showNextMatchday() {
 }
 
 function refresh() {
-	reloadTeamFiles();
 	loadMatchday(true);
 	loadTable(true);
 	saveReferees(true);
@@ -100,7 +124,31 @@ function changeTime(time) {
 }
 
 function sendStandaloneEvent(type) {
-	sendEvent({
-		eventType: type,
-	});
+	event = { eventType: type };
+	addEventData(event);
+	sendAndReset();
+}
+
+async function saveReferees(force = false) {
+	if (force || !referees?.length) {
+		referees = await readReferees();
+	}
+}
+
+async function loadTable(force = false) {
+	if (force || !table) {
+		table = await readTable();
+	}
+}
+
+async function loadMatchday(force = false) {
+	if (force || !matchday) {
+		matchday = await readMatchday();
+	}
+}
+
+async function loadNextMatchday(force = false) {
+	if (force || !nextMatchday) {
+		nextMatchday = await readNextMatchday();
+	}
 }

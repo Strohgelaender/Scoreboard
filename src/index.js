@@ -3,59 +3,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { tinyws } from 'tinyws';
 import fs from 'fs';
-import { OBSWebSocket } from 'obs-websocket-js';
-import { readLineup, readReferees, readTable, readMatchday, readNextMatchday } from './AufstellungParser.js';
-import { Timer } from './timer.js';
-
-const debug = true;
+import { readLineup } from './AufstellungParser.js';
+import { GameService } from './gameService.js';
+import { ObsService } from './obsService.js';
 
 const PORT = process.env.PORT || 1860;
-const OBS_PASSWORD = process.env.OBS_PASSWORD || '';
-
-const HOME_PATH = 'data/home.json';
-const AWAY_PATH = 'data/away.json';
-const EVENT_FILE = `data/${new Date().toISOString().replace(/:/g, '-')}.txt`;
-
-let homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
-let awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
-let referees = [];
-let table;
-let matchday;
-let nextMatchday;
-
-let matchTimer = new Timer(
-	20 * 60 * 1000,
-	(text) => {
-		sendWS(timerWS.game, text);
-	},
-	() => {
-		// TODO is this true?
-		/*for (const timer of redCardTimers) {
-			timer.resetTimer();
-		}
-		redCardTimers = [];*/
-
-		setTimeout(() => {
-			sendEvent({ eventType: 'SECOND_HALF' });
-			sendEvent({ eventType: 'CLEAR_FOULS' });
-			matchTimer.resetTimer();
-		}, 10000);
-	},
-);
-
-let halftimeTimer = new Timer(14 * 60 * 1000, (text) => {
-	sendWS(timerWS.half, text);
-});
-
-let redCardTimers = [];
-
-let scoreHome = 0;
-let scoreAway = 0;
-let foulsHome = 0;
-let foulsAway = 0;
-
-// TODO: Keep this in sync with client
-let showingScoreboard = true;
 
 const eventWS = [];
 const timerWS = {
@@ -65,17 +17,10 @@ const timerWS = {
 	redaway: [],
 };
 
-const app = express();
-const obs = new OBSWebSocket();
+let game = new GameService(sendEvent, sendTime);
+let obs = new ObsService();
 
-(async () => {
-	try {
-		await obs.connect('ws://localhost:4455', OBS_PASSWORD);
-		console.log('OBS connected');
-	} catch {
-		console.error('OBS not connected');
-	}
-})().then();
+const app = express();
 
 process.on('SIGTERM', cleanup);
 process.on('SIGINT', cleanup);
@@ -91,7 +36,7 @@ async function cleanup() {
 }
 
 export function getMatchTimer() {
-	return matchTimer;
+	return game.matchTimer;
 }
 
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
@@ -128,37 +73,38 @@ app.use('/events', tinyws(), async (req) => {
 
 //Data Endpoints
 app.get('/image/:team', (req, res) => {
-	const team = getTeam(req.params.team.toUpperCase());
+	const team = game.getTeam(req.params.team.toUpperCase());
 	res.redirect(team.imagePath);
 });
 
+// TODO deprecated, is this used anywhere?
 app.get('/data/:team/:param', (req, res) => {
-	const team = getTeam(req.params.team.toUpperCase());
+	const team = game.getTeam(req.params.team.toUpperCase());
 	res.send(team[req.params.param]);
 });
 
 app.get('/data/info', (req, res) => {
 	const data = {
-		home: homeTeam,
-		away: awayTeam,
-		firstHalfDone: matchTimer.isFirstHalfDone(),
+		home: game.homeTeam,
+		away: game.awayTeam,
+		firstHalfDone: game.matchTimer.isFirstHalfDone(),
 	};
 	res.send(data);
 });
 
 app.get('/scores', (req, res) => {
-	res.send({ scoreHome, scoreAway, foulsHome, foulsAway });
+	res.send({ scoreHome: game.scoreHome, scoreAway: game.scoreAway, foulsHome: game.foulsHome, foulsAway: game.foulsAway });
 });
 
 app.get('/players', (req, res) => {
-	res.send({ home: homeTeam.players, away: awayTeam.players });
+	res.send({ home: game.homeTeam.players, away: game.awayTeam.players });
 });
 
 app.get('/time/game', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
 		timerWS.game.push(ws);
-		ws.send(matchTimer.getTimeText());
+		ws.send(game.matchTimer.getTimeText());
 	}
 });
 
@@ -166,7 +112,7 @@ app.get('/time/half', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
 		timerWS.half.push(ws);
-		ws.send(halftimeTimer.getTimeText());
+		ws.send(game.halftimeTimer.getTimeText());
 	}
 });
 
@@ -181,7 +127,7 @@ app.get('/time/red/:team', tinyws(), async (req) => {
 		const ws = await req.ws();
 		const team = req.params.team.toLowerCase();
 		timerWS[`red${team}`].push(ws);
-		const timer = redCardTimers.find((timer) => timer.getTeam() === team);
+		const timer = game.redCardTimers.find((timer) => timer.getTeam() === team);
 		if (timer) {
 			ws.send(timer.getTimeText());
 		}
@@ -202,75 +148,40 @@ app.post('/lineup', express.json(), (req, res) => {
 	let away = body.away;
 	if (home?.length) {
 		console.log('Home:', home);
-		homeTeam.players = home;
+		game.homeTeam.players = home;
 	}
 	if (away?.length) {
 		console.log('Away:', away);
-		awayTeam.players = away;
+		game.awayTeam.players = away;
 	}
 	console.log('Lineup saved from admin view');
 	res.status(200).send();
 });
 
-export async function updateLineup(force = false) {
-	if (force || !homeTeam.players?.length || !awayTeam.players?.length) {
+// TODO improve location of this function
+async function updateLineup(force = false) {
+	if (force || !game.homeTeam.players?.length || !game.awayTeam.players?.length) {
 		const lineup = await readLineup();
 		if (lineup.home?.length) {
-			homeTeam.players = lineup.home;
+			game.homeTeam.players = lineup.home;
 		}
 		if (lineup.away?.length) {
-			awayTeam.players = lineup.away;
+			game.awayTeam.players = lineup.away;
 		}
 		console.log('Lineup updated');
 	}
 }
 
-// TODO improve this API
-
-export async function saveReferees(force = false) {
-	if (force || !referees?.length) {
-		referees = await readReferees();
-	}
-}
-
-export async function loadTable(force = false) {
-	if (force || !table) {
-		table = await readTable();
-	}
-}
-
-export async function loadMatchday(force = false) {
-	if (force || !matchday) {
-		matchday = await readMatchday();
-	}
-}
-
-export async function loadNextMatchday(force = false) {
-	if (force || !nextMatchday) {
-		nextMatchday = await readNextMatchday();
-	}
-}
-
-export function reloadTeamFiles() {
-	homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
-	awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
-}
-
 export function sendEvent(event) {
-	const team = getTeam(event.team);
+	const team = game.getTeam(event.team);
 
-	if (matchTimer.handleTimerEvent(event)) {
-		// true if event got picked up by timer
-		for (const timer of redCardTimers) {
-			timer.handleTimerEvent(event);
-		}
-		return;
-	} else if (event.eventType === 'HALFTIME_TIMER') {
-		halftimeTimer.startTimer();
+	if (game.handleEvent(event)) {
+		// returns true if the event got handled completely (timer)
+		// and should not be further send to other clients
 		return;
 	}
+	obs.handleEvent(event);
 
-	handleEventInternal(event);
 	addEventData(event, team);
 
 	if (eventWS.length === 0) {
@@ -278,6 +189,10 @@ export function sendEvent(event) {
 		return;
 	}
 	sendWS(eventWS, JSON.stringify(event));
+}
+
+function sendTime(type, data) {
+	sendWS(timerWS[type], data);
 }
 
 function sendWS(sockets, data) {
@@ -288,226 +203,9 @@ function sendWS(sockets, data) {
 	}
 }
 
-function getTeam(specifier) {
-	return specifier === 'HOME' ? homeTeam : awayTeam;
-}
-
+// TODO remove this
 function addEventData(event, team) {
 	if (event.eventType === 'LINEUP') {
-		event.playerData = team.players;
-	} else if (event.eventType === 'REFEREES') {
-		event.playerData = referees;
-	} else if (event.eventType === 'TABLE') {
-		event.table = table;
-	} else if (event.eventType === 'MATCHDAY' || event.eventType === 'LIVE_MATCHDAY') {
-		event.matchday = matchday;
-	} else if (event.eventType === 'LIVE_TABLE') {
-		event.table = table;
-		event.matchday = matchday;
-	} else if (event.eventType === 'NEXT_MATCHDAY') {
-		event.matchday = nextMatchday;
+		event.players = team.players;
 	}
-}
-
-function handleEventInternal(event) {
-	if (event.eventType === 'GOAL') {
-		addScore(event.team === 'HOME');
-		logEvent(event);
-		handleRedCardGoal(event);
-	} else if (event.eventType === 'OWN_GOAL') {
-		reduceScore(event.team === 'HOME');
-	}
-
-	if (event.eventType === 'FOUL') {
-		addFoul(event.team === 'HOME');
-	} else if (event.eventType === 'REMOVE_FOUL') {
-		reduceFoul(event.team === 'HOME');
-	} else if (event.eventType === 'CLEAR_FOULS') {
-		foulsHome = foulsAway = 0;
-	} else if (event.eventType === 'TOGGLE_SCOREBOARD') {
-		toggleScoreboardVideo();
-	}
-
-	if (event.eventType === 'RED_CARD') {
-		addRedCardTimer(event);
-	}
-
-	if (event.playerData === undefined) {
-		//Player Input wrong or not included
-		//still handle event (e.g update score on goal)
-		//but no lower thirds
-		// console.log('Player not found. Please update Event Data manually:', event);
-	} else {
-		const property = getPropertyOfEvent(event);
-		updatePlayerProperty(event.playerData, property);
-
-		if (event.eventType === 'YELLOW_CARD') {
-			if (!('gameYellowCard' in event.playerData)) {
-				event.playerData.gameYellowCard = true;
-			} else {
-				//Gelb-Rote Karte
-				event.eventType = 'YELLOW_RED_CARD';
-				//redCards = Platzverweise (Rote Karten + Gelb-Rot)
-				updatePlayerProperty(event.playerData, 'redCards');
-			}
-		}
-	}
-
-	if (debug) {
-		console.log(event);
-	} else {
-		saveData();
-	}
-}
-
-function handleRedCardGoal(event) {
-	if (redCardTimers.length === 1) {
-		// We do not support multiple red cards per team yet.
-		// 1 timer means only one team with a red card -> goal could change that
-		// 2 timers -> both teams with red card -> goal does not change anything
-		const timer = redCardTimers[0];
-		if (timer.getTeam() !== event.team) {
-			sendEvent({
-				eventType: 'CLEAR_RED_CARD',
-				team: timer.getTeam(),
-			});
-			timer.resetTimer();
-			redCardTimers = [];
-		}
-	}
-}
-
-function addRedCardTimer(event) {
-	const timer = new Timer(
-		2 * 60 * 1000,
-		(text) => {
-			sendWS(timerWS[`red${event.team.toLowerCase()}`], text);
-		},
-		() => {
-			// remove timer from list on finish
-			redCardTimers.splice(redCardTimers.indexOf(timer), 1);
-		},
-		event.team,
-	);
-	if (matchTimer.isRunning()) {
-		timer.startTimer();
-	}
-	redCardTimers.push(timer);
-}
-
-function updatePlayerProperty(player, property) {
-	if (property in player) {
-		player[property] += 1;
-	} else {
-		player[property] = 1;
-	}
-}
-
-function addScore(homeTeam) {
-	if (homeTeam) {
-		scoreHome += 1;
-	} else {
-		scoreAway += 1;
-	}
-}
-
-function reduceScore(homeTeam) {
-	if (homeTeam) {
-		if (scoreHome > 0) {
-			scoreHome -= 1;
-		}
-	} else {
-		if (scoreAway > 0) {
-			scoreAway -= 1;
-		}
-	}
-}
-
-function addFoul(homeTeam) {
-	if (homeTeam) {
-		foulsHome += 1;
-	} else {
-		foulsAway += 1;
-	}
-}
-
-function reduceFoul(homeTeam) {
-	if (homeTeam) {
-		if (foulsHome > 0) {
-			foulsHome -= 1;
-		}
-	} else {
-		if (foulsAway > 0) {
-			foulsAway -= 1;
-		}
-	}
-}
-
-function getPropertyOfEvent(event) {
-	switch (event.eventType) {
-		case 'GOAL':
-			return 'goals';
-		case 'OWN_GOAL':
-			return 'ownGoals';
-		case 'RED_CARD':
-			return 'redCards';
-		case 'YELLOW_CARD':
-			return 'yellowCards';
-	}
-}
-
-async function getObsTimestamp() {
-	const streamStatus = await obs.call('GetStreamStatus');
-	console.log(streamStatus);
-	const recordingStatus = await obs.call('GetRecordStatus');
-	console.log(recordingStatus);
-	return {
-		stream: streamStatus.outputTimecode,
-		recording: streamStatus.outputTimecode,
-	};
-}
-
-function toggleScoreboardVideo() {
-	if (showingScoreboard) {
-		obs.call('SetSceneItemEnabled', {
-			sceneName: 'Main',
-			sceneItemId: 12,
-			sceneItemEnabled: false,
-		}).catch((e) => console.error(e.message));
-	} else {
-		obs.call('TriggerMediaInputAction', {
-			inputName: 'Logo',
-			inputUuid: 12,
-			mediaAction: 'OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART',
-		})
-			.then(() => {
-				obs.call('SetSceneItemEnabled', {
-					sceneName: 'Main',
-					sceneItemId: 12,
-					sceneItemEnabled: true,
-				}).catch((e) => console.error(e));
-			})
-			.catch((e) => console.error(e.message));
-	}
-	showingScoreboard = !showingScoreboard;
-}
-
-async function logEvent(event) {
-	try {
-		const timestamp = await getObsTimestamp();
-		let eventString = `${event.eventType}:${event.team}\t${timestamp.stream}\t${timestamp.recording}\n`;
-		if (fs.existsSync(EVENT_FILE)) {
-			fs.appendFileSync(EVENT_FILE, eventString);
-		} else {
-			eventString = 'Event\tStream\tRecording\n' + eventString;
-			fs.writeFileSync(EVENT_FILE, eventString);
-		}
-	} catch (e) {
-		console.error(e.message);
-	}
-}
-
-function saveData() {
-	// fs.writeFile(HOME_PATH, JSON.stringify(homeTeam));
-	// fs.writeFile(AWAY_PATH, JSON.stringify(awayTeam));
 }

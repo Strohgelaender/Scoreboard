@@ -221,6 +221,10 @@ export class Streamdeck {
 	}
 
 	updateTimerImage(running) {
+		if (!this.streamDeck) {
+			// No active streamdeck connection
+			return;
+		}
 		if (running) {
 			this.streamDeck.fillKeyBuffer(PAUSE_KEY, pauseImageBuffer);
 		} else {
