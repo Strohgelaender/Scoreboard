@@ -36,6 +36,7 @@ let coaches;
 let time;
 let firstHalfDone = false;
 let secondHalfDone = false;
+let matchdayNumber;
 
 document.addEventListener('DOMContentLoaded', () => {
 	loadTeams();
@@ -62,6 +63,7 @@ function loadTeams() {
 			document.getElementById('homeTimeShirtLine').style.backgroundColor = home.shirtColor;
 			document.getElementById('awayTimeShirtLine').style.backgroundColor = away.shirtColor;
 
+			matchdayNumber = value.matchday;
 			firstHalfDone = value.firstHalfDone;
 			if (firstHalfDone) {
 				updateHalfIndicator();
@@ -238,7 +240,7 @@ function setBigExtraText() {
 	if (secondHalfDone || (firstHalfDone && time === '00:00')) {
 		setText('bigAdditionalText', 'Endstand');
 	} else if (!firstHalfDone && time === '20:00') {
-		setText('bigAdditionalText', '7. Spieltag | Sportpark Freiham');
+		setText('bigAdditionalText', matchdayNumber + '. Spieltag | Sportpark Freiham');
 	} else if ((!firstHalfDone && time === '00:00') || (firstHalfDone && time === '20:00')) {
 		setText('bigAdditionalText', 'Halbzeitstand');
 	} else {
@@ -681,6 +683,7 @@ function showMatchday(matchday) {
 		for (const match of matchday) {
 			createMatchdayRow(match, table);
 		}
+		setText('matchdayTitle', matchdayNumber + '. Spieltag');
 		animate('matchday', 'revealToLeft');
 		currentContent = MATCHDAY;
 	}
@@ -747,6 +750,7 @@ function showLiveMatchday(matches) {
 		}, 1100);
 		currentContent = undefined;
 	} else {
+		setText('liveMatchesTitle', matchdayNumber + '. Spieltag');
 		const table = document.getElementById('liveMatchesTable');
 		for (const match of matches) {
 			if (match.homeTeam === fullNames[0] || match.awayTeam === fullNames[1]) {

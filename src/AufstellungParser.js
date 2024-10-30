@@ -6,7 +6,7 @@ import { parse } from 'node-html-parser';
 
 // IMPORTANT: Always update there two URLs before starting the prod server
 
-const matchdayNumber = 7;
+const matchdayNumber = +process.env.MATCHDAY || 7;
 
 const matchId = '02Q0SKPM3K000000VS5489B3VU5PPGUO';
 

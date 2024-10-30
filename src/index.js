@@ -88,6 +88,7 @@ app.get('/data/info', (req, res) => {
 		home: game.homeTeam,
 		away: game.awayTeam,
 		firstHalfDone: game.matchTimer.isFirstHalfDone(),
+		matchday: process.env.MATCHDAY,
 	};
 	res.send(data);
 });
