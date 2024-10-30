@@ -13,6 +13,9 @@
 	},
 	"author": "Strohgelaender",
 	"type": "module",
+	"engines": {
+		"node": ">=22.10.0"
+	},
 	"dependencies": {
 		"@elgato-stream-deck/node": "7.0.2",
 		"@julusian/jpeg-turbo": "2.2.0",
