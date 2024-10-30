@@ -96,7 +96,7 @@ function handleEventInternal(event) {
 		case 'LINEUP':
 			bigContentSafeguard(LINEUP, () => animateLineup(event.team === 'HOME' ? 0 : 1, event.players));
 			break;
-		case 'REFEREES':
+		case 'SHOW_REFEREES':
 			if (!currentContent) {
 				updateRefText(event.referees);
 			}

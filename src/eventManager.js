@@ -11,6 +11,8 @@ let table;
 let matchday;
 let nextMatchday;
 
+let listeners = [];
+
 const STANDALONE_EVENTS = [
 	'TOGGLE_SCOREBOARD',
 	'SHOW_BOTTOM_SCOREBOARD',
@@ -24,7 +26,8 @@ const STANDALONE_EVENTS = [
 	'NEXT_MATCHDAY',
 	'MATCHDAY',
 	'LINEUP',
-	'REFEREES',
+	'SHOW_REFEREES',
+	'CLEAR_FOULS'
 ];
 
 const EVENT_ACTIONS = {
@@ -36,6 +39,10 @@ const EVENT_ACTIONS = {
 	['NEXT_MATCHDAY']: loadNextMatchday,
 	['REFRESH']: refresh,
 };
+
+export function addListener(listener) {
+	listeners.push(listener);
+}
 
 export async function onInput(input, options) {
 	input = input.toUpperCase().trim();
@@ -51,6 +58,10 @@ export async function onInput(input, options) {
 		event.team = 'AWAY';
 	} else {
 		event.eventType = input;
+	}
+
+	for (const listener of listeners) {
+		listener(event.team ?? '');
 	}
 
 	if (EVENT_ACTIONS[input]) {
@@ -71,10 +82,13 @@ function sendAndReset() {
 	addEventData(event);
 	sendEvent(event);
 	event = {};
+	for (const listener of listeners) {
+		listener('');
+	}
 }
 
 function addEventData(event) {
-	if (event.eventType === 'REFEREES') {
+	if (event.eventType === 'SHOW_REFEREES') {
 		event.referees = referees;
 	} else if (event.eventType === 'TABLE') {
 		event.table = table;

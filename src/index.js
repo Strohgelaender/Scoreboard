@@ -39,6 +39,10 @@ export function getMatchTimer() {
 	return game.matchTimer;
 }
 
+export function getApp() {
+	return app;
+}
+
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
 
 app.use(express.static('public'));
