@@ -71,6 +71,7 @@ app.get('/matchday/:day', (req, res) => {
 app.use('/events', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
+		setupCloseListener(ws, eventWS);
 		eventWS.push(ws);
 	}
 });
@@ -108,6 +109,7 @@ app.get('/players', (req, res) => {
 app.get('/time/game', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
+		setupCloseListener(ws, timerWS.game);
 		timerWS.game.push(ws);
 		ws.send(game.matchTimer.getTimeText());
 	}
@@ -116,6 +118,7 @@ app.get('/time/game', tinyws(), async (req) => {
 app.get('/time/half', tinyws(), async (req) => {
 	if (req.ws) {
 		const ws = await req.ws();
+		setupCloseListener(ws, timerWS.half);
 		timerWS.half.push(ws);
 		ws.send(game.halftimeTimer.getTimeText());
 	}
@@ -132,6 +135,7 @@ app.get('/time/red/:team', tinyws(), async (req) => {
 		const ws = await req.ws();
 		const team = req.params.team.toLowerCase();
 		timerWS[`red${team}`].push(ws);
+		setupCloseListener(ws, timerWS[`red${team}`]);
 		const timer = game.redCardTimers.find((timer) => timer.getTeam() === team);
 		if (timer) {
 			ws.send(timer.getTimeText());
@@ -206,6 +210,13 @@ function sendWS(sockets, data) {
 			ws.send(data);
 		}
 	}
+}
+
+function setupCloseListener(ws, wsArray) {
+	ws.on('close', () => {
+		const index = wsArray.indexOf(ws);
+		wsArray.splice(index, 1);
+	});
 }
 
 // TODO remove this

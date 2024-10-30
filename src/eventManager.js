@@ -52,16 +52,17 @@ export async function onInput(input, options) {
 		return;
 	}
 
-	if (input === 'HOME') {
-		event.team = 'HOME';
-	} else if (input === 'AWAY') {
-		event.team = 'AWAY';
+	if (input === 'HOME' || input === 'AWAY') {
+		if (input === 'HOME') {
+			event.team = 'HOME';
+		} else {
+			event.team = 'AWAY';
+		}
+		for (const listener of listeners) {
+			listener(event.team ?? '');
+		}
 	} else {
 		event.eventType = input;
-	}
-
-	for (const listener of listeners) {
-		listener(event.team ?? '');
 	}
 
 	if (EVENT_ACTIONS[input]) {

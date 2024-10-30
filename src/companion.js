@@ -4,7 +4,9 @@ export class Companion {
 	constructor(eventEmitter, app) {
 		this.eventEmitter = eventEmitter;
 		this.sockets = [];
-		app.use('/companion', tinyws(), async (req) => {
+		app.use('/companion', tinyws({
+			perMessageDeflate: false,
+		}), async (req) => {
 			if (req.ws) {
 				const ws = await req.ws();
 				this.sockets.push(ws);
@@ -18,19 +20,32 @@ export class Companion {
 						this.eventEmitter(message);
 					}
 				});
+
+				ws.on('close', () => {
+					console.log('Connection closed');
+					this.sockets = this.sockets.filter((s) => s !== ws);
+				});
+
+				ws.on('error', (err) => {
+					console.error(err);
+				});
 			}
 		});
 	}
 
 	sendFeedback(team) {
-		for (const socket of this.sockets) {
-			socket.send(JSON.stringify({ team }));
-		}
+		this.send(JSON.stringify({ team }));
 	}
 
 	sendPause(isTimerRunning) {
-		for (const socket of this.sockets) {
-			socket.send(JSON.stringify({ isTimerRunning }));
+		this.send(JSON.stringify({ isTimerRunning }));
+	}
+
+	send(data) {
+		for (const ws of this.sockets) {
+			if (ws.readyState === ws.OPEN) {
+				ws.send(data);
+			}
 		}
 	}
 }
