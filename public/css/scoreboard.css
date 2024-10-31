@@ -646,6 +646,7 @@ html {
 	font-size: 30px;
 	opacity: 0;
 	display: inline-block;
+    font-family: DFBSans-Regular;
 }
 
 @keyframes spielfeldBottom {
