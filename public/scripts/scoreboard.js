@@ -344,7 +344,7 @@ function updateFoulsBox() {
 			// Otherwise hide it after 30 seconds
 			foulsTimeout = setTimeout(animateFoulsBoxOut, 30_000);
 		}
-	} else if (foulsBox.animationName === 'revealDown') {
+	} else if (foulsBox.style.animationName === 'revealDown') {
 		animateFoulsBoxOut();
 		if (foulsTimeout) {
 			clearTimeout(foulsTimeout);
