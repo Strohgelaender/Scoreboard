@@ -104,15 +104,15 @@ html {
 
 #allFoulsBox {
 	position: absolute;
-	width: 560px;
+	width: 565px;
 	height: 35px;
 	top: 119px;
-	left: 193px;
+	left: 190px;
 	z-index: -10;
 }
 
 #foulsContent {
-	width: 560px;
+	width: 565px;
 	height: 35px;
 	display: flex;
 	justify-content: space-evenly;
@@ -126,13 +126,13 @@ html {
 
 #foulsAdditionalBackground {
 	position: absolute;
-	width: 560px;
+	width: 565px;
 	height: 35px;
 	border-radius: 0 0 10px 10px;
 	z-index: -10;
 	clip-path: inset(0 0 100% 0);
 	background-color: white;
-	top: 0px;
+	top: 0;
 }
 
 .fouls {
