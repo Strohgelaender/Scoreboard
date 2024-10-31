@@ -752,6 +752,17 @@ html {
 	left: 717px;
 }
 
+#bigVersus {
+    position: absolute;
+    font-size: 80px;
+    font-family: DFBSans-Bold, sans-serif;
+    height: 70px;
+    width: auto;
+    line-height: 80px;
+    left: 647px;
+    opacity: 0;
+}
+
 #table {
 	position: absolute;
 	top: 150px;

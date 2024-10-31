@@ -200,22 +200,30 @@ function toggleScoreboard() {
 }
 
 let showingExtraText = false;
+let showingVersus = false;
 
 function toggleBigScoreboard() {
 	if (!currentContent) {
 		showingExtraText = setBigExtraText();
+		showingVersus = !firstHalfDone && time === '20:00';
 		animate('bottomAdditionalBackground', 'revealCenter');
 		setTimeout(() => {
 			animate('bottomScoreBackground', 'revealCenter');
 			animate('bottomContent', 'revealCenter');
-			animate('bottomSpielfeldCircle', 'spielfeldBottom');
+			if (!showingVersus) {
+				animate('bottomSpielfeldCircle', 'spielfeldBottom');
+			}
 			setTimeout(() => {
 				animate('bigHomeImage', 'growImage');
 				animate('bigAwayImage', 'growImage');
 				animate('bigHomeName', 'opacityIn');
 				animate('bigAwayName', 'opacityIn');
-				animate('bigHomeScore', 'opacityIn');
-				animate('bigAwayScore', 'opacityIn');
+				if (showingVersus) {
+					animate('bigVersus', 'opacityIn');
+				} else {
+					animate('bigHomeScore', 'opacityIn');
+					animate('bigAwayScore', 'opacityIn');
+				}
 				if (showingExtraText) {
 					setTimeout(() => {
 						animate('bigAdditionalText', 'opacityIn');
@@ -257,9 +265,13 @@ function animateBigScoreboardOut() {
 	animate('bigAwayImage', 'hideImage', '0.5s');
 	animate('bigHomeName', 'opacityOut', '0.5s');
 	animate('bigAwayName', 'opacityOut', '0.5s');
-	animate('bigHomeScore', 'opacityOut', '0.5s');
-	animate('bigAwayScore', 'opacityOut', '0.5s');
-	animate('bottomSpielfeldCircle', 'spielfeldBottomOut');
+	if (showingVersus) {
+		animate('bigVersus', 'opacityOut', '0.5s');
+	} else {
+		animate('bigHomeScore', 'opacityOut', '0.5s');
+		animate('bigAwayScore', 'opacityOut', '0.5s');
+		animate('bottomSpielfeldCircle', 'spielfeldBottomOut');
+	}
 	setTimeout(() => {
 		animate('bottomAdditionalBackground', 'revealCenterOut');
 	}, 80);
