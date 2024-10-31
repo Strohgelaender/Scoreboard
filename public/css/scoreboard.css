@@ -278,9 +278,9 @@ html {
 #scoreboardSpielfeldCircle {
 	position: absolute;
 	left: 430px;
-	top: 67px;
+	top: 66px;
 	width: 90px;
-	height: 52px;
+	height: 53px;
 	z-index: 5;
 	stroke-dasharray: 480;
 	stroke-dashoffset: 0;
