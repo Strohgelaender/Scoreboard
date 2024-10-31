@@ -4,12 +4,18 @@ export class Companion {
 	constructor(eventEmitter, app) {
 		this.eventEmitter = eventEmitter;
 		this.sockets = [];
+		this.pingTimers = [];
 		app.use('/companion', tinyws({
 			perMessageDeflate: false,
 		}), async (req) => {
 			if (req.ws) {
+				console.log('Connection established');
 				const ws = await req.ws();
 				this.sockets.push(ws);
+				this.pingTimers.push(setInterval(() => {
+					ws.ping();
+				}, 10_000));
+
 				ws.on('message', (msg) => {
 					const message = msg.toString().toUpperCase();
 					console.log('Received message:', message);
@@ -23,7 +29,10 @@ export class Companion {
 
 				ws.on('close', () => {
 					console.log('Connection closed');
-					this.sockets = this.sockets.filter((s) => s !== ws);
+					const index = this.sockets.indexOf(ws);
+					this.sockets.splice(index, 1);
+					clearInterval(this.pingTimers[index]);
+					this.pingTimers.splice(index, 1);
 				});
 
 				ws.on('error', (err) => {
