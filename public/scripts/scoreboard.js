@@ -6,6 +6,7 @@ const LINEUP = 'LINEUP';
 const REFEREES = 'REFEREES';
 const BIG_SCOREBOARD = 'BIG_SCOREBOARD';
 const CASTER = 'CASTER';
+const LOWER_THIRD = 'LOWER_THIRD';
 const TABLE = 'TABLE';
 const MATCHDAY = 'MATCHDAY';
 const LIVE_TABLE = 'LIVE_TABLE';
@@ -17,6 +18,7 @@ const transitions = {
 	[REFEREES]: animateReferees,
 	[BIG_SCOREBOARD]: toggleBigScoreboard,
 	[CASTER]: showCaster,
+	[LOWER_THIRD]: toggleLowerThird,
 	[TABLE]: showTable.bind(this, []),
 	[MATCHDAY]: showMatchday.bind(this, []),
 	[LIVE_TABLE]: showLiveTable.bind(this, []),
@@ -88,13 +90,16 @@ function handleEventInternal(event) {
 			updateScoreboardInternal();
 			break;
 		case 'SHOW_GOAL':
-			showGoalScorer(event);
+			bigContentSafeguard(LOWER_THIRD, () => showGoalScorer(event));
 			break;
 		case 'SHOW_COACH':
-			showCoach(event);
+			bigContentSafeguard(LOWER_THIRD, () => showCoach(event));
 			break;
 		case 'SHOW_YELLOW_CARD':
-			showYellowCard(event);
+			bigContentSafeguard(LOWER_THIRD, () => showYellowCard(event));
+			break;
+		case 'SHOW_RED_CARD':
+			bigContentSafeguard(LOWER_THIRD, () => showRedCard(event));
 			break;
 		case 'TOGGLE_SCOREBOARD':
 			toggleScoreboard();
@@ -344,8 +349,21 @@ function showYellowCard(event) {
 		if (player.yellowCards !== undefined) {
 			setText('lowerSubText', player.yellowCards + '. GELBE KARTE');
 		} else {
-			setText('lowerSubText', 'TOR');
+			setText('lowerSubText', 'GELBE KARTE');
 		}
+	}
+	toggleLowerThird();
+}
+
+function showRedCard(event) {
+	if (!currentContent) {
+		const player = event.player;
+		if (!player) {
+			return;
+		}
+		setAnimationAndImage(event);
+		setText('lowerMainText', player.firstName + ' ' + player.lastName);
+		setText('lowerSubText', 'ROTE KARTE');
 	}
 	toggleLowerThird();
 }

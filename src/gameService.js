@@ -102,6 +102,8 @@ export class GameService {
 			this.increasePlayerProperty(team, event, 'goals');
 		} else if (event.eventType === 'SHOW_YELLOW_CARD') {
 			this.increasePlayerProperty(team, event, 'yellowCards');
+		} else if (event.eventType === 'SHOW_RED_CARD') {
+			event.player = team.players.find((player) => player.number == event.number);
 		}
 	}
 
