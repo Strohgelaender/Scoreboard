@@ -90,6 +90,9 @@ function handleEventInternal(event) {
 		case 'SHOW_GOAL':
 			showGoalScorer(event);
 			break;
+		case 'SHOW_COACH':
+			showCoach(event);
+			break;
 		case 'TOGGLE_SCOREBOARD':
 			toggleScoreboard();
 			break;
@@ -299,14 +302,30 @@ function showGoalScorer(event) {
 		if (!player) {
 			return;
 		}
-		lowerThirdImage = event.team === 'HOME' ? 'lowerThirdHome' : 'lowerThirdAway';
-		lowerThirdAnimation = event.team === 'HOME' ? 'revealToRight' : 'revealToLeft';
+		setAnimationAndImage(event);
 		setText('lowerMainText', player.firstName + ' ' + player.lastName);
 		if (player.goals !== undefined) {
 			setText('lowerSubText', player.goals + '. SAISONTOR');
 		} else {
 			setText('lowerSubText', 'TOR');
 		}
+	}
+	toggleLowerThird();
+}
+
+function setAnimationAndImage(event) {
+	lowerThirdImage = event.team === 'HOME' ? 'lowerThirdHome' : 'lowerThirdAway';
+	lowerThirdAnimation = event.team === 'HOME' ? 'revealToRight' : 'revealToLeft';
+}
+
+function showCoach(event) {
+	if (!currentContent) {
+		if (!event.coach) {
+			return;
+		}
+		setAnimationAndImage(event);
+		setText('lowerMainText', event.coach);
+		setText('lowerSubText', 'TRAINER');
 	}
 	toggleLowerThird();
 }
