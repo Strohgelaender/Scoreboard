@@ -219,5 +219,19 @@ function setupCloseListener(ws, wsArray) {
 function addEventData(event, team) {
 	if (event.eventType === 'LINEUP') {
 		event.players = team.players;
+	} else if (event.eventType === 'SHOW_COACH') {
+		event.coach = game.getTeam(event.team).coach;
+	} else if (event.eventType === 'SHOW_GOAL') {
+		const players = game.getTeam(event.team).players;
+		event.player = players.find((player) => player.number == event.number);
+		if (!event.player) {
+			console.warn('Player not found:', event.number);
+			return;
+		}
+		if (event.player.goals) {
+			event.player.goals++;
+		} else {
+			event.player.goals = 1;
+		}
 	}
 }

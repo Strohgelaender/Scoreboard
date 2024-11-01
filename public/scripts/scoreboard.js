@@ -16,7 +16,7 @@ const transitions = {
 	[LINEUP]: animateLineup.bind(this, 0, []),
 	[REFEREES]: animateReferees,
 	[BIG_SCOREBOARD]: toggleBigScoreboard,
-	[CASTER]: toggleLowerThird,
+	[CASTER]: showCaster,
 	[TABLE]: showTable.bind(this, []),
 	[MATCHDAY]: showMatchday.bind(this, []),
 	[LIVE_TABLE]: showLiveTable.bind(this, []),
@@ -87,6 +87,9 @@ function handleEventInternal(event) {
 		case 'OWN_GOAL':
 			updateScoreboardInternal();
 			break;
+		case 'SHOW_GOAL':
+			showGoalScorer(event);
+			break;
 		case 'TOGGLE_SCOREBOARD':
 			toggleScoreboard();
 			break;
@@ -103,7 +106,7 @@ function handleEventInternal(event) {
 			bigContentSafeguard(REFEREES, animateReferees);
 			break;
 		case 'CASTER':
-			bigContentSafeguard(CASTER, toggleLowerThird);
+			bigContentSafeguard(CASTER, showCaster);
 			break;
 		case 'FOUL':
 		case 'REMOVE_FOUL':
@@ -278,22 +281,59 @@ function animateBigScoreboardOut() {
 	currentContent = undefined;
 }
 
+function showCaster() {
+	if (!currentContent) {
+		setText('lowerMainText', 'Gilbert Kalb');
+		setText('lowerSubText', 'KOMMENTATOR');
+		lowerThirdAnimation = 'revealCenter';
+	}
+	toggleLowerThird();
+}
+
+let lowerThirdAnimation;
+let lowerThirdImage;
+
+function showGoalScorer(event) {
+	if (!currentContent) {
+		const player = event.player;
+		if (!player) {
+			return;
+		}
+		lowerThirdImage = event.team === 'HOME' ? 'lowerThirdHome' : 'lowerThirdAway';
+		lowerThirdAnimation = event.team === 'HOME' ? 'revealToRight' : 'revealToLeft';
+		setText('lowerMainText', player.firstName + ' ' + player.lastName);
+		if (player.goals !== undefined) {
+			setText('lowerSubText', player.goals + '. SAISONTOR');
+		} else {
+			setText('lowerSubText', 'TOR');
+		}
+	}
+	toggleLowerThird();
+}
+
 function toggleLowerThird() {
 	if (!currentContent) {
-		animate('lowerMainContent', 'revealCenter', '0.5s');
+		animate('lowerMainContent', lowerThirdAnimation, '0.5s');
 		animate('lowerMainText', 'opacityIn');
+		if (lowerThirdImage) {
+			animate(lowerThirdImage, 'growImage');
+		}
 		setTimeout(() => {
 			animate('lowerSubAdditionalBackground', 'revealDown', '0.5s');
 			animate('lowerSubContent', 'revealDown');
 		}, 500);
 		currentContent = CASTER;
 	} else {
+		if (lowerThirdImage) {
+			animate(lowerThirdImage, 'hideImage');
+			lowerThirdImage = undefined;
+		}
 		animate('lowerSubContent', 'revealDownOut', '0.5s');
 		setTimeout(() => {
 			animate('lowerSubAdditionalBackground', 'revealDownOut', '0.5s');
 		}, 100);
 		setTimeout(() => {
-			animate('lowerMainContent', 'revealCenterOut', '0.5s');
+			animate('lowerMainContent', lowerThirdAnimation + 'Out', '0.5s');
 			animate('lowerMainText', 'opacityOut', '0.4s');
 		}, 600);
 		currentContent = undefined;

@@ -1,10 +1,9 @@
 import WebSocket from 'ws';
 
-const PORT = (+process.env.PORT + 1) || 1861;
+const PORT = +process.env.PORT + 1 || 1861;
 const wss = new WebSocket.Server({ port: PORT });
 
 export class Companion {
-
 	constructor(eventEmitter) {
 		this.eventEmitter = eventEmitter;
 		this.sockets = [];
@@ -12,16 +11,18 @@ export class Companion {
 		wss.on('connection', (ws) => {
 			console.log('Connection established');
 			this.sockets.push(ws);
-			this.pingTimers.push(setInterval(() => {
+			const pingInterval = setInterval(() => {
 				ws.ping();
-			}, 10_000));
+			}, 10_000);
+			this.pingTimers.push(pingInterval);
 
 			ws.on('message', (msg) => {
 				const message = msg.toString().toUpperCase();
 				console.log('Received message:', message);
-				if (message.startsWith('ADD_TIME')) {
-					const time = parseInt(message.split(' ')[1]);
-					this.eventEmitter('ADD_TIME', time);
+				if (message.startsWith('ADD_TIME') || message.startsWith('NUMBER')) {
+					const parts = message.split(' ');
+					const time = parseInt(parts[1]);
+					this.eventEmitter(parts[0], time);
 				} else {
 					this.eventEmitter(message);
 				}
@@ -41,8 +42,8 @@ export class Companion {
 		});
 	}
 
-	sendFeedback(team) {
-		this.send(JSON.stringify({ team }));
+	sendFeedback(feedback) {
+		this.send(JSON.stringify(feedback));
 	}
 
 	sendPause(isTimerRunning) {

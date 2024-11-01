@@ -4,7 +4,9 @@
 import { sendEvent } from './index.js';
 import { readMatchday, readNextMatchday, readReferees, readTable } from './AufstellungParser.js';
 
-let event = {};
+const DEFAULT_EVENT = { number: '' };
+
+let event = { ...DEFAULT_EVENT };
 
 let referees = [];
 let table;
@@ -59,8 +61,20 @@ export async function onInput(input, options) {
 			event.team = 'AWAY';
 		}
 		for (const listener of listeners) {
-			listener(event.team ?? '');
+			listener({ team: event.team ?? '' });
 		}
+	} else if (input === 'NUMBER') {
+		event.number += options;
+		for (const listener of listeners) {
+			listener({ number: event.number ?? '' });
+		}
+		return;
+	} else if (input === 'CLEAR_NUMBER') {
+		event.number = '';
+		for (const listener of listeners) {
+			listener({ number: event.number ?? '' });
+		}
+		return;
 	} else {
 		event.eventType = input;
 	}
@@ -82,9 +96,9 @@ export async function onInput(input, options) {
 function sendAndReset() {
 	addEventData(event);
 	sendEvent(event);
-	event = {};
+	event = { ...DEFAULT_EVENT };
 	for (const listener of listeners) {
-		listener('');
+		listener({ team: '', number: '' });
 	}
 }
 
