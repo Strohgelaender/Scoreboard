@@ -7,18 +7,18 @@
 	"players": [
 		{ "firstName": "Boris", "lastName": "Lastro", "is_keeper": true, "is_captain": true, "number": 22 },
 		{ "firstName": "Pavlos", "lastName": "Wiegels", "is_keeper": true, "number": 1, "goals": 2 },
-		{ "firstName": "Joao", "lastName": "Neves", "goals": 6 },
-		{ "firstName": "Maximilian", "lastName": "Grünberg", "number": 27, "goals": 3 },
+		{ "firstName": "Joao", "lastName": "Neves", "goals": 6, "yellowCards": 1 },
+		{ "firstName": "Maximilian", "lastName": "Grünberg", "number": 27, "goals": 3, "yellowCards": 2 },
 		{ "firstName": "Mohamed", "lastName": "Labiadh", "number": 5, "goals": 3 },
 		{ "firstName": "Bilal", "lastName": "Mirzayi", "number": 12, "goals": 1 },
-		{ "firstName": "Jure", "lastName": "Pusic", "number": 23, "goals": 2 },
-		{ "firstName": "Onur", "lastName": "Saglam", "number": 10, "goals": 2 },
+		{ "firstName": "Jure", "lastName": "Pusic", "number": 23, "goals": 2, "yellowCards": 1 },
+		{ "firstName": "Onur", "lastName": "Saglam", "number": 10, "goals": 2, "yellowCards": 3 },
 		{ "firstName": "Nikola", "lastName": "Stankovic", "goals": 1 },
-		{ "firstName": "Eike Joschka", "lastName": "Thiemann", "number": 14, "goals": 3 },
+		{ "firstName": "Eike Joschka", "lastName": "Thiemann", "number": 14, "goals": 3, "yellowCards": 1 },
 		{ "firstName": "Leon", "lastName": "Hämling", "number": 15 },
-		{ "firstName": "Komeil", "lastName": "Heideri", "number": 17, "goals": 2 },
+		{ "firstName": "Komeil", "lastName": "Heideri", "number": 17, "goals": 2, "yellowCards": 2 },
 		{ "firstName": "Albert", "lastName": "Nikolla" },
-		{ "firstName": "Michael", "lastName": "Meyer", "number": 7, "goals": 6 },
+		{ "firstName": "Michael", "lastName": "Meyer", "number": 7, "goals": 6, "yellowCards": 1 },
 		{ "firstName": "Vassilios", "lastName": "Siopis", "number": 19 }
 	]
 }

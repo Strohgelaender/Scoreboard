@@ -187,8 +187,6 @@ export function sendEvent(event) {
 	}
 	obs.handleEvent(event);
 
-	addEventData(event, team);
-
 	if (eventWS.length === 0) {
 		console.log('Websocket not active yet');
 		return;
@@ -213,25 +211,4 @@ function setupCloseListener(ws, wsArray) {
 		const index = wsArray.indexOf(ws);
 		wsArray.splice(index, 1);
 	});
-}
-
-// TODO remove this
-function addEventData(event, team) {
-	if (event.eventType === 'LINEUP') {
-		event.players = team.players;
-	} else if (event.eventType === 'SHOW_COACH') {
-		event.coach = game.getTeam(event.team).coach;
-	} else if (event.eventType === 'SHOW_GOAL') {
-		const players = game.getTeam(event.team).players;
-		event.player = players.find((player) => player.number == event.number);
-		if (!event.player) {
-			console.warn('Player not found:', event.number);
-			return;
-		}
-		if (event.player.goals) {
-			event.player.goals++;
-		} else {
-			event.player.goals = 1;
-		}
-	}
 }

@@ -93,6 +93,9 @@ function handleEventInternal(event) {
 		case 'SHOW_COACH':
 			showCoach(event);
 			break;
+		case 'SHOW_YELLOW_CARD':
+			showYellowCard(event);
+			break;
 		case 'TOGGLE_SCOREBOARD':
 			toggleScoreboard();
 			break;
@@ -326,6 +329,23 @@ function showCoach(event) {
 		setAnimationAndImage(event);
 		setText('lowerMainText', event.coach);
 		setText('lowerSubText', 'TRAINER');
+	}
+	toggleLowerThird();
+}
+
+function showYellowCard(event) {
+	if (!currentContent) {
+		const player = event.player;
+		if (!player) {
+			return;
+		}
+		setAnimationAndImage(event);
+		setText('lowerMainText', player.firstName + ' ' + player.lastName);
+		if (player.yellowCards !== undefined) {
+			setText('lowerSubText', player.yellowCards + '. GELBE KARTE');
+		} else {
+			setText('lowerSubText', 'TOR');
+		}
 	}
 	toggleLowerThird();
 }

@@ -85,10 +85,38 @@ export class GameService {
 			this.reloadTeamFiles();
 		}
 
+		this.addEventData(event, this.getTeam(event.team));
+
 		if (debug) {
 			console.log(event);
 		}
 		return false;
+	}
+
+	addEventData(event, team) {
+		if (event.eventType === 'LINEUP') {
+			event.players = team.players;
+		} else if (event.eventType === 'SHOW_COACH') {
+			event.coach = team.coach;
+		} else if (event.eventType === 'SHOW_GOAL') {
+			this.increasePlayerProperty(team, event, 'goals');
+		} else if (event.eventType === 'SHOW_YELLOW_CARD') {
+			this.increasePlayerProperty(team, event, 'yellowCards');
+		}
+	}
+
+	increasePlayerProperty(team, event, property) {
+		const players = team.players;
+		event.player = players.find((player) => player.number == event.number);
+		if (!event.player) {
+			console.warn('Player not found:', event.number);
+			return;
+		}
+		if (event.player[property]) {
+			event.player[property]++;
+		} else {
+			event.player[property] = 1;
+		}
 	}
 
 	handleRedCardGoal(event) {
