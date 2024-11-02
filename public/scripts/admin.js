@@ -69,6 +69,8 @@ function addPlayerRowToTable(table, player) {
         <td><input type="checkbox" name="is_keeper" class="form-check-input" ${player?.is_keeper ? 'checked' : ''}></td>
         <td><input type="checkbox" name="is_captain" class="form-check-input" ${player?.is_captain ? 'checked' : ''}></td>
         <td><input type="checkbox" name="is_starting" class="form-check-input" ${starting ? 'checked' : ''}></td>
+        <td><input type="text" name="goals" class="form-control form-control-sm" disabled value="${player?.goals ? player.goals : 0}"></td>
+        <td><input type="text" name="yellowCards" class="form-control form-control-sm" disabled value="${player?.yellowCards ? player.yellowCards : 0}"></td>
         <td><button class="btn btn-secondary">-</button></td>
     `;
 
@@ -103,6 +105,9 @@ function collectPlayers(table, result) {
 		const player = {};
 		for (const td of tr.children) {
 			const input = td.children[0];
+			if (!input?.name) {
+				continue;
+			}
 			if (input.type === 'checkbox') {
 				player[input.name] = input.checked;
 			} else {
