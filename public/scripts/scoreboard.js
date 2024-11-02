@@ -315,7 +315,7 @@ function showGoalScorer(event) {
 		if (player.goals !== undefined) {
 			setText('lowerSubText', player.goals + '. SAISONTOR');
 		} else {
-			setText('lowerSubText', 'TOR');
+			setText('lowerSubText', 'TORSCHÜTZE');
 		}
 	}
 	toggleLowerThird();
