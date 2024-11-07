@@ -18,6 +18,12 @@ export class Keyboard {
 			return;
 		}
 
+		if (input.startsWith('NUMBER')) {
+			const parts = input.split(' ');
+			const time = parseInt(parts[1]);
+			this.eventEmitter(parts[0], time);
+		}
+
 		switch (input) {
 			case 'HOME':
 				this.eventEmitter('HOME');
@@ -114,6 +120,14 @@ export class Keyboard {
 			case 'LIVE_MATCHES':
 			case 'LIVE_MATCHDAY':
 				this.eventEmitter('LIVE_MATCHDAY');
+				return;
+			case 'SHOW_COACH':
+			case 'SHOW COACH':
+				this.eventEmitter('SHOW_COACH');
+				return;
+			case 'SHOW GOAL':
+			case 'SHOW_GOAL':
+				this.eventEmitter('SHOW_GOAL');
 				return;
 		}
 	}

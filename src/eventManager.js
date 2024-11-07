@@ -96,7 +96,12 @@ export async function onInput(input, options) {
 function sendAndReset() {
 	addEventData(event);
 	sendEvent(event);
-	event = { ...DEFAULT_EVENT };
+	const number = event.number;
+	if (!event.eventType.startsWith('SHOW')) {
+		event = { ...DEFAULT_EVENT, number };
+	} else {
+		event = { ...DEFAULT_EVENT };
+	}
 	for (const listener of listeners) {
 		listener({ team: '', number: '' });
 	}

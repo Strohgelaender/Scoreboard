@@ -381,15 +381,15 @@ function toggleLowerThird() {
 		}, 500);
 		currentContent = CASTER;
 	} else {
-		if (lowerThirdImage) {
-			animate(lowerThirdImage, 'hideImage');
-			lowerThirdImage = undefined;
-		}
 		animate('lowerSubContent', 'revealDownOut', '0.5s');
 		setTimeout(() => {
 			animate('lowerSubAdditionalBackground', 'revealDownOut', '0.5s');
 		}, 100);
 		setTimeout(() => {
+			if (lowerThirdImage) {
+				animate(lowerThirdImage, 'hideImage');
+				lowerThirdImage = undefined;
+			}
 			animate('lowerMainContent', lowerThirdAnimation + 'Out', '0.5s');
 			animate('lowerMainText', 'opacityOut', '0.4s');
 		}, 600);
