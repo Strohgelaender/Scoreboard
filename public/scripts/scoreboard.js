@@ -294,7 +294,8 @@ function animateBigScoreboardOut() {
 
 function showCaster() {
 	if (!currentContent) {
-		setText('lowerMainText', 'Gilbert Kalb');
+		const element = document.getElementById('lowerMainText');
+		element.innerHTML = 'Gilbert Kalb';
 		setText('lowerSubText', 'KOMMENTATOR');
 		lowerThirdAnimation = 'revealCenter';
 	}
@@ -311,7 +312,7 @@ function showGoalScorer(event) {
 			return;
 		}
 		setAnimationAndImage(event);
-		setText('lowerMainText', player.firstName + ' ' + player.lastName);
+		setPlayerName(player);
 		if (player.goals !== undefined) {
 			setText('lowerSubText', player.goals + '. SAISONTOR');
 		} else {
@@ -319,6 +320,11 @@ function showGoalScorer(event) {
 		}
 	}
 	toggleLowerThird();
+}
+
+function setPlayerName(player) {
+	const element = document.getElementById('lowerMainText');
+	element.innerHTML = player.number + '&nbsp;&nbsp;&nbsp;<span style="font-family: DFBSans-Italic, sans-serif">' + player.firstName + '</span> ' + player.lastName;
 }
 
 function setAnimationAndImage(event) {
@@ -332,7 +338,8 @@ function showCoach(event) {
 			return;
 		}
 		setAnimationAndImage(event);
-		setText('lowerMainText', event.coach);
+		const element = document.getElementById('lowerMainText');
+		element.innerHTML = event.coach;
 		setText('lowerSubText', 'TRAINER');
 	}
 	toggleLowerThird();
@@ -345,7 +352,7 @@ function showYellowCard(event) {
 			return;
 		}
 		setAnimationAndImage(event);
-		setText('lowerMainText', player.firstName + ' ' + player.lastName);
+		setPlayerName(player);
 		if (player.yellowCards !== undefined) {
 			setText('lowerSubText', player.yellowCards + '. GELBE KARTE');
 		} else {
@@ -362,7 +369,7 @@ function showRedCard(event) {
 			return;
 		}
 		setAnimationAndImage(event);
-		setText('lowerMainText', player.firstName + ' ' + player.lastName);
+		setPlayerName(player);
 		setText('lowerSubText', 'ROTE KARTE');
 	}
 	toggleLowerThird();
