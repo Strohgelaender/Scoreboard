@@ -42,6 +42,8 @@ const EVENT_ACTIONS = {
 	['REFRESH']: refresh,
 };
 
+const NUMBER_EVENTS = ['SHOW_GOAL', 'SHOW_YELLOW_CARD', 'SHOW_RED_CARD'];
+
 export function addListener(listener) {
 	listeners.push(listener);
 }
@@ -68,6 +70,7 @@ export async function onInput(input, options) {
 		for (const listener of listeners) {
 			listener({ number: event.number ?? '' });
 		}
+		// This return is needed to prevent sending events too early with double-digint numbers
 		return;
 	} else if (input === 'CLEAR_NUMBER') {
 		event.number = '';
@@ -88,7 +91,11 @@ export async function onInput(input, options) {
 		return;
 	}
 
+	// For events that need numbers (goal, cards) wait until team + number is there
 	if (event.eventType && event.team) {
+		if (NUMBER_EVENTS.includes(event.eventType) && !event.number) {
+			return;
+		}
 		sendAndReset();
 	}
 }
