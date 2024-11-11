@@ -36,18 +36,30 @@ function loadPlayers() {
 		.then((value) => {
 			if (value.home?.length) {
 				const homeBody = document.getElementById('homeBody');
-				for (const player of value.home) {
-					addPlayerRowToTable(homeBody, player);
-				}
+				addAllPlayers(homeBody, value.home);
 			}
 			if (value.away?.length) {
 				const awayBody = document.getElementById('awayBody');
-				for (const player of value.away) {
-					addPlayerRowToTable(awayBody, player);
-				}
+				addAllPlayers(awayBody, value.away);
 			}
 		})
 		.catch(console.error);
+}
+
+function addAllPlayers(body, players) {
+	players = players.sort((p1, p2) => {
+		if (p1.number && p2.number) {
+			return +p1.number - +p2.number;
+		} else if (p1.number) {
+			return -1;
+		} else if (p2.number) {
+			return 1;
+		}
+		return 0;
+	});
+	for (const player of players) {
+		addPlayerRowToTable(body, player);
+	}
 }
 
 function addPlayerRow(tableId, player) {
