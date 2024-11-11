@@ -105,7 +105,7 @@ function handleEventInternal(event) {
 			toggleScoreboard();
 			break;
 		case 'SHOW_BOTTOM_SCOREBOARD':
-			bigContentSafeguard(BIG_SCOREBOARD, toggleBigScoreboard);
+			bigContentSafeguard(BIG_SCOREBOARD, () => toggleBigScoreboard(event.goalEvents));
 			break;
 		case 'LINEUP':
 			bigContentSafeguard(LINEUP, () => animateLineup(event.team === 'HOME' ? 0 : 1, event.players));
@@ -216,9 +216,9 @@ function toggleScoreboard() {
 let showingExtraText = false;
 let showingVersus = false;
 
-function toggleBigScoreboard() {
+function toggleBigScoreboard(goalEvents) {
 	if (!currentContent) {
-		showingExtraText = setBigExtraText();
+		showingExtraText = setBigExtraText(goalEvents);
 		showingVersus = !firstHalfDone && time === '20:00';
 		animate('bottomAdditionalBackground', 'revealCenter');
 		setTimeout(() => {
@@ -258,7 +258,8 @@ function toggleBigScoreboard() {
 	}
 }
 
-function setBigExtraText() {
+function setBigExtraText(goalEvents) {
+	let showingText = true;
 	if (secondHalfDone || (firstHalfDone && time === '00:00')) {
 		setText('bigAdditionalText', 'Endstand');
 	} else if (!firstHalfDone && time === '20:00') {
@@ -267,8 +268,60 @@ function setBigExtraText() {
 		setText('bigAdditionalText', 'Halbzeitstand');
 	} else {
 		setText('bigAdditionalText', '');
-		return false;
+		showingText = false;
 	}
+	if (!goalEvents) {
+		return showingText;
+	}
+
+	const homeGoals = goalEvents.filter((e) => e.team === 'HOME');
+	const awayGoals = goalEvents.filter((e) => e.team === 'AWAY');
+
+	// We should prob limit this to 1-2 lines
+	// So this below should create a string with all information which then gets broken in the middle.
+
+	let homePlayerToGoals = {};
+	for (const goal of homeGoals) {
+		if (homePlayerToGoals[goal.player.number]) {
+			homePlayerToGoals[goal.player.number].push(goal);
+		} else {
+			homePlayerToGoals[goal.player.number] = [goal];
+		}
+	}
+
+	// TODO does not work, how to get number of properties?
+	const divider = homePlayerToGoals.length / 2;
+	let homeText = '';
+	let i = 1;
+	for (const number in homePlayerToGoals) {
+		if (i === divider) {
+			homeText += '\n';
+		} else if (i > 1) {
+			homeText += ', ';
+		}
+		const player = homePlayerToGoals[number][0].player;
+		homeText += player.lastName + ' (';
+		for (const goal of homePlayerToGoals[number]) {
+			homeText += `${goal.minute}', `;
+		}
+		homeText = homeText.slice(0, homeText.length - 2);
+		homeText += ')';
+		i++;
+	}
+
+	console.log(homeText);
+
+	document.getElementById('bigHomeGoalscorers').textContent = homeText;
+
+	let awayPlayerToGoals = {};
+	for (const goal of homeGoals) {
+		if (awayPlayerToGoals[goal.player.number]) {
+			awayPlayerToGoals[goal.player.number].push(goal);
+		} else {
+			awayPlayerToGoals[goal.player.number] = [goal];
+		}
+	}
+
 	return true;
 }
 

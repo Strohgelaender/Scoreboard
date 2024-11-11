@@ -649,6 +649,14 @@ html {
 	font-family: DFBSans-Regular;
 }
 
+.bigGoalscorers {
+    position: relative;
+    height: 50px;
+    max-width: 150px;
+    font-size: 15px;
+    font-family: DFBSans-Regular;
+}
+
 @keyframes spielfeldBottom {
 	0% {
 		stroke-dashoffset: 597;

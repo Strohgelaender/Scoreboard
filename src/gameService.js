@@ -17,6 +17,7 @@ export class GameService {
 		});
 
 		this.redCardTimers = [];
+		this.goalEvents = [];
 		this.scoreHome = 0;
 		this.scoreAway = 0;
 		this.foulsHome = 0;
@@ -85,6 +86,26 @@ export class GameService {
 			this.reloadTeamFiles();
 		}
 
+		if (event.eventType === 'SHOW_GOAL') {
+			// Save when and who the goal was socred to show in a summary
+			const player = this.findPlayer(this.getTeam(event.team).players, event.number);
+			if (player) {
+				// 18:43
+				const time = this.matchTimer.getTimeText();
+				// 18
+				const timerMinute = +time.split(':')[0];
+				// 2
+				const gameMinute = 20 - timerMinute + (this.matchTimer.firstHalfDone ? 20 : 0);
+				this.goalEvents.push({
+					player: player,
+					minute: gameMinute,
+					team: event.team,
+					scoreHome: this.scoreHome,
+					scoreAway: this.scoreAway,
+				});
+			}
+		}
+
 		this.addEventData(event, this.getTeam(event.team));
 
 		if (debug) {
@@ -103,13 +124,14 @@ export class GameService {
 		} else if (event.eventType === 'SHOW_YELLOW_CARD') {
 			this.increasePlayerProperty(team, event, 'yellowCards');
 		} else if (event.eventType === 'SHOW_RED_CARD') {
-			event.player = team.players.find((player) => player.number == event.number);
+			event.player = this.findPlayer(team.players, event.number);
+		} else if (event.eventType === 'SHOW_BOTTOM_SCOREBOARD') {
+			event.goalEvents = this.goalEvents;
 		}
 	}
 
 	increasePlayerProperty(team, event, property) {
-		const players = team.players;
-		event.player = players.find((player) => player.number == event.number);
+		event.player = this.findPlayer(team.players, event.number);
 		if (!event.player) {
 			console.warn('Player not found:', event.number);
 			return;
@@ -119,6 +141,10 @@ export class GameService {
 		} else {
 			event.player[property] = 1;
 		}
+	}
+
+	findPlayer(players, number) {
+		return players.find((player) => player.number == number);
 	}
 
 	handleRedCardGoal(event) {
