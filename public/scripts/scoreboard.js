@@ -274,6 +274,12 @@ function setBigExtraText(goalEvents) {
 		return showingText;
 	}
 
+	const expectedGoals = scoreHome + scoreAway;
+	if (expectedGoals !== goalEvents.length) {
+		console.warn('Expected goals', expectedGoals, 'but got', goalEvents.length);
+		return showingText;
+	}
+
 	const homeGoals = goalEvents.filter((e) => e.team === 'HOME');
 	const awayGoals = goalEvents.filter((e) => e.team === 'AWAY');
 	setGoalScorersText(homeGoals, 'bigHomeGoalscorers');
