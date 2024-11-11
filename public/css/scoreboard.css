@@ -647,14 +647,29 @@ html {
 	opacity: 0;
 	display: inline-block;
 	font-family: DFBSans-Regular;
+    position: relative;
+    top: -50px;
 }
 
 .bigGoalscorers {
     position: relative;
     height: 50px;
-    max-width: 150px;
-    font-size: 15px;
+    max-width: 300px;
+    font-size: 19px;
     font-family: DFBSans-Regular;
+    white-space: pre-line;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#bigHomeGoalscorers {
+    text-align: left;
+}
+
+#bigAwayGoalscorers {
+    text-align: right;
+    top: -70px;
+    left: 650px;
 }
 
 @keyframes spielfeldBottom {

@@ -87,22 +87,23 @@ export class GameService {
 		}
 
 		if (event.eventType === 'SHOW_GOAL') {
-			// Save when and who the goal was socred to show in a summary
 			const player = this.findPlayer(this.getTeam(event.team).players, event.number);
 			if (player) {
 				// 18:43
 				const time = this.matchTimer.getTimeText();
-				// 18
-				const timerMinute = +time.split(':')[0];
-				// 2
-				const gameMinute = 20 - timerMinute + (this.matchTimer.firstHalfDone ? 20 : 0);
-				this.goalEvents.push({
-					player: player,
-					minute: gameMinute,
-					team: event.team,
-					scoreHome: this.scoreHome,
-					scoreAway: this.scoreAway,
-				});
+				if (time) {
+					// 18
+					const timerMinute = +time.split(':')[0];
+					// 2
+					const gameMinute = 20 - timerMinute + (this.matchTimer.firstHalfDone ? 20 : 0);
+					this.goalEvents.push({
+						player: player,
+						minute: gameMinute,
+						team: event.team,
+						scoreHome: this.scoreHome,
+						scoreAway: this.scoreAway,
+					});
+				}
 			}
 		}
 

@@ -276,53 +276,47 @@ function setBigExtraText(goalEvents) {
 
 	const homeGoals = goalEvents.filter((e) => e.team === 'HOME');
 	const awayGoals = goalEvents.filter((e) => e.team === 'AWAY');
+	setGoalScorersText(homeGoals, 'bigHomeGoalscorers');
+	setGoalScorersText(awayGoals, 'bigAwayGoalscorers');
 
-	// We should prob limit this to 1-2 lines
-	// So this below should create a string with all information which then gets broken in the middle.
+	return true;
+}
 
-	let homePlayerToGoals = {};
-	for (const goal of homeGoals) {
-		if (homePlayerToGoals[goal.player.number]) {
-			homePlayerToGoals[goal.player.number].push(goal);
+function setGoalScorersText(goals, id) {
+	let playerToGoals = [];
+	for (const goal of goals) {
+		const existing = playerToGoals.find((e) => e.number === goal.player.number);
+		if (existing) {
+			existing.goals.push(goal);
 		} else {
-			homePlayerToGoals[goal.player.number] = [goal];
+			playerToGoals.push({
+				player: goal.player,
+				number: goal.player.number,
+				goals: [goal],
+			});
 		}
 	}
 
-	// TODO does not work, how to get number of properties?
-	const divider = homePlayerToGoals.length / 2;
-	let homeText = '';
-	let i = 1;
-	for (const number in homePlayerToGoals) {
+	const divider = Math.ceil(playerToGoals.length / 2);
+	let text = '';
+	let i = 0;
+	for (const number of playerToGoals) {
 		if (i === divider) {
-			homeText += '\n';
-		} else if (i > 1) {
-			homeText += ', ';
+			text += '\n';
+		} else if (i > 0) {
+			text += ', ';
 		}
-		const player = homePlayerToGoals[number][0].player;
-		homeText += player.lastName + ' (';
-		for (const goal of homePlayerToGoals[number]) {
-			homeText += `${goal.minute}', `;
+		const player = number.player;
+		text += player.lastName + ' (';
+		for (const goal of number.goals) {
+			text += `${goal.minute}', `;
 		}
-		homeText = homeText.slice(0, homeText.length - 2);
-		homeText += ')';
+		text = text.slice(0, text.length - 2);
+		text += ')';
 		i++;
 	}
 
-	console.log(homeText);
-
-	document.getElementById('bigHomeGoalscorers').textContent = homeText;
-
-	let awayPlayerToGoals = {};
-	for (const goal of homeGoals) {
-		if (awayPlayerToGoals[goal.player.number]) {
-			awayPlayerToGoals[goal.player.number].push(goal);
-		} else {
-			awayPlayerToGoals[goal.player.number] = [goal];
-		}
-	}
-
-	return true;
+	document.getElementById(id).textContent = text;
 }
 
 function animateBigScoreboardOut() {
