@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadTeams() {
+	const foulsHomePre = foulsHome;
+	const foulsAwayPre = foulsAway;
 	fetch('/data/info', { method: 'GET' })
 		.then((response) => response.json())
 		.then((value) => {
@@ -70,7 +72,9 @@ function loadTeams() {
 			if (firstHalfDone) {
 				updateHalfIndicator();
 			}
-			updateFouls();
+			if (foulsHomePre !== foulsHome || foulsAwayPre !== foulsAway) {
+				updateFouls();
+			}
 		})
 		.catch(console.log);
 }
