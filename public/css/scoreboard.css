@@ -281,7 +281,7 @@ html {
 	top: 66px;
 	width: 90px;
 	height: 53px;
-	z-index: 5;
+	z-index: 1;
 	stroke-dasharray: 480;
 	stroke-dashoffset: 0;
 }
