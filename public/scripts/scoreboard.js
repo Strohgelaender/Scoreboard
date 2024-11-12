@@ -474,12 +474,22 @@ function updateScore() {
 
 function doubleDigitAdjustments() {
 	if (scoreHome >= 10) {
-		document.getElementById('bigHomeScore').style.left = '600px';
-		document.getElementById('homeTimeScore').style.left = '432px';
+		const bigScore = document.getElementById('bigHomeScore');
+		bigScore.style.left = '602px';
+		bigScore.style.fontSize = '75px';
+		const timeScore = document.getElementById('homeTimeScore');
+		timeScore.style.left = '435px';
+		timeScore.style.fontSize = '30px';
+		document.getElementById('awayTimeScore').style.fontSize = '30px';
 	}
 	if (scoreAway >= 10) {
-		document.getElementById('bigAwayScore').style.left = '695px';
-		document.getElementById('awayTimeScore').style.left = '470px';
+		const bigScore = document.getElementById('bigAwayScore');
+		bigScore.style.left = '695px';
+		bigScore.style.fontSize = '75px';
+		const timeScore = document.getElementById('awayTimeScore');
+		timeScore.style.left = '475px';
+		timeScore.style.fontSize = '30px';
+		document.getElementById('homeTimeScore').style.fontSize = '30px';
 	}
 }
 
