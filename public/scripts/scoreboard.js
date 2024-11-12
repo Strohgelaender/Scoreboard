@@ -270,13 +270,12 @@ function setBigExtraText(goalEvents) {
 		setText('bigAdditionalText', '');
 		showingText = false;
 	}
-	if (!goalEvents) {
-		return showingText;
-	}
 
 	const expectedGoals = scoreHome + scoreAway;
-	if (expectedGoals !== goalEvents.length) {
-		console.warn('Expected goals', expectedGoals, 'but got', goalEvents.length);
+	if (!goalEvents || expectedGoals !== goalEvents.length) {
+		console.warn('Expected goals', expectedGoals, 'but got', goalEvents?.length);
+		setText('bigHomeGoalscorers', '');
+		setText('bigAwayGoalscorers', '');
 		return showingText;
 	}
 
@@ -322,7 +321,7 @@ function setGoalScorersText(goals, id) {
 		i++;
 	}
 
-	document.getElementById(id).textContent = text;
+	setText(id, text);
 }
 
 function animateBigScoreboardOut() {
