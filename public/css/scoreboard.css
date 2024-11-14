@@ -61,7 +61,7 @@ html {
 	position: absolute;
 	font-size: 35px;
 	top: 58px;
-    line-height: 70px;
+	line-height: 70px;
 	font-family: DFBSans-Bold, sans-serif;
 }
 
@@ -647,29 +647,29 @@ html {
 	opacity: 0;
 	display: inline-block;
 	font-family: DFBSans-Regular;
-    position: relative;
-    top: -50px;
+	position: relative;
+	top: -50px;
 }
 
 .bigGoalscorers {
-    position: relative;
-    height: 50px;
-    max-width: 300px;
-    font-size: 19px;
-    font-family: DFBSans-Regular;
-    white-space: pre-line;
-    padding-left: 20px;
-    padding-right: 20px;
+	position: relative;
+	height: 50px;
+	max-width: 300px;
+	font-size: 19px;
+	font-family: DFBSans-Regular;
+	white-space: pre-line;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #bigHomeGoalscorers {
-    text-align: left;
+	text-align: left;
 }
 
 #bigAwayGoalscorers {
-    text-align: right;
-    top: -70px;
-    left: 650px;
+	text-align: right;
+	top: -70px;
+	left: 650px;
 }
 
 @keyframes spielfeldBottom {
@@ -969,6 +969,23 @@ html {
 	width: 400px;
 	background: var(--futsal-blue-2);
 	position: absolute;
+}
+
+#lowerCard {
+	position: absolute;
+	height: 40px;
+	width: 25px;
+	left: 350px;
+	top: 0;
+	margin: 5px;
+}
+
+.lowerRedCard {
+	background: red;
+}
+
+.lowerYellowCard {
+	background: yellow;
 }
 
 .lowerSubAdditionalBackground {

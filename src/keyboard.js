@@ -129,6 +129,16 @@ export class Keyboard {
 			case 'SHOW_GOAL':
 				this.eventEmitter('SHOW_GOAL');
 				return;
+			case 'SHOW YELLOW CARD':
+			case 'YELLOW':
+			case 'SHOW_YELLOW':
+			case 'SHOW YELLOW':
+				this.eventEmitter('SHOW_YELLOW_CARD');
+				return;
+			case 'SHOW RED':
+			case 'SHOW_RED':
+				this.eventEmitter('SHOW_RED_CARD');
+				return;
 		}
 	}
 }

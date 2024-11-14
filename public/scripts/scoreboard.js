@@ -414,6 +414,7 @@ function showYellowCard(event) {
 		} else {
 			setText('lowerSubText', 'GELBE KARTE');
 		}
+		document.getElementById('lowerCard').classList.add('lowerYellowCard');
 	}
 	toggleLowerThird();
 }
@@ -427,6 +428,7 @@ function showRedCard(event) {
 		setAnimationAndImage(event);
 		setPlayerName(player);
 		setText('lowerSubText', 'ROTE KARTE');
+		document.getElementById('lowerCard').classList.add('lowerRedCard');
 	}
 	toggleLowerThird();
 }
@@ -449,6 +451,7 @@ function toggleLowerThird() {
 			animate('lowerSubAdditionalBackground', 'revealDownOut', '0.5s');
 		}, 100);
 		setTimeout(() => {
+			document.getElementById('lowerCard').classList.remove('lowerYellowCard', 'lowerRedCard');
 			if (lowerThirdImage) {
 				animate(lowerThirdImage, 'hideImage');
 				lowerThirdImage = undefined;
