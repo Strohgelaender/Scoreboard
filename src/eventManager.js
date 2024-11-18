@@ -104,11 +104,11 @@ function sendAndReset() {
 	addEventData(event);
 	sendEvent(event);
 	const originalEvent = event;
-	if (!event.eventType.startsWith('SHOW')) {
-		event = { ...DEFAULT_EVENT, number: originalEvent.number };
-	} else if (event.eventType === 'GOAL') {
+	if (event.eventType === 'GOAL') {
 		// Keep team info to make following show goal easier
 		event = { ...DEFAULT_EVENT, team: originalEvent.team };
+	} else if (!event.eventType.startsWith('SHOW')) {
+		event = { ...DEFAULT_EVENT, number: originalEvent.number };
 	} else {
 		event = { ...DEFAULT_EVENT };
 	}

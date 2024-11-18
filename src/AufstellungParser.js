@@ -73,7 +73,7 @@ export async function readReferees() {
 	} catch (e) {
 		console.error(e);
 	}*/
-	return ['Andreas Link', 'Andreas Grübel', 'Marijo Kraljic', 'Martin Horne'];
+	return ['Eric Schell', 'Pascal Rastetter', 'Marijo Kraljic', 'Farras Fathi'];
 }
 
 export async function readTable() {
