@@ -14,7 +14,8 @@
 		{
 			"firstName": "Vahid",
 			"lastName": "Idrizovic",
-			"number": 6
+			"number": 6,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Mirza",
@@ -26,17 +27,20 @@
 			"lastName": "Skoro",
 			"is_captain": true,
 			"number": 11,
-			"goals": 2,
+			"goals": 4,
 			"yellowCards": 2
 		},
 		{
 			"firstName": "Fikret",
 			"lastName": "Jahic",
-			"goals": 2
+			"goals": 2,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Omer",
-			"lastName": "Jahic"
+			"lastName": "Jahic",
+			"goals": 1,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Tino",
@@ -54,11 +58,13 @@
 		{
 			"firstName": "Marko",
 			"lastName": "Stjepanovic",
-			"number": 15
+			"number": 15,
+			"goals": 1
 		},
 		{
 			"firstName": "Ante",
-			"lastName": "Vicic"
+			"lastName": "Vicic",
+			"yellowCards": 2
 		},
 		{
 			"firstName": "Burhan",
@@ -99,6 +105,13 @@
 			"firstName": "Marko",
 			"lastName": "Ereiz",
 			"number": 13
+		},
+		{
+			"firstName": "Renato",
+			"lastName": "Tuka",
+			"goals": 1,
+			"number": 3,
+			"yellowCards": 1
 		}
 	]
 }
