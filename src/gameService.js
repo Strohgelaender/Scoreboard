@@ -66,6 +66,9 @@ export class GameService {
 		if (event.eventType === 'GOAL') {
 			this.addScore(event.team === 'HOME');
 			this.handleRedCardGoal(event);
+			if (this.matchTimer.isRunning()) {
+				this.matchTimer.pauseTimer();
+			}
 		} else if (event.eventType === 'OWN_GOAL') {
 			this.reduceScore(event.team === 'HOME');
 		}
