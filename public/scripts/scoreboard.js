@@ -351,7 +351,7 @@ function animateBigScoreboardOut() {
 function showCaster() {
 	if (!currentContent) {
 		const element = document.getElementById('lowerMainText');
-		element.innerHTML = 'Gilbert Kalb';
+		element.innerHTML = '<span style="font-family: DFBSans-Italic, sans-serif">Gilbert</span> Kalb';
 		setText('lowerSubText', 'KOMMENTATOR');
 		lowerThirdAnimation = 'revealCenter';
 	}
