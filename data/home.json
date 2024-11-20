@@ -3,7 +3,10 @@
 	"fullName": "Beton Boys München",
 	"shirtColor": "#000000",
 	"imagePath": "/images/Vereinlogo BB cut.png",
-	"coach": " Ilija Krajinovic",
+	"coach": {
+		"firstName": "Ilija",
+		"lastName": "Krajinovic"
+	},
 	"players": [
 		{
 			"firstName": "Petar",

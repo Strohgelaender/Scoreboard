@@ -3,7 +3,10 @@
 	"fullName": "FC Liria Futsal",
 	"shirtColor": "#ffffff",
 	"imagePath": "/images/liria.png",
-	"coach": "Petr Schatalin",
+	"coach": {
+		"firstName": "Petr",
+		"lastName": "Schatalin"
+	},
 	"players": [
 		{ "firstName": "Jean-Michel", "lastName": "Göde", "number": 1, "is_keeper": true, "yellowCards": 2 },
 		{ "firstName": "Tomislav", "lastName": "Krolo", "is_keeper": true, "yellowCards": 1 },

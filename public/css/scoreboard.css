@@ -227,11 +227,11 @@ html {
 }
 
 #homeTimeImage {
-	left: 185px;
+	left: 190px;
 }
 
 #awayTimeImage {
-	left: 700px;
+	left: 710px;
 }
 
 #homeTimeNameBox {
@@ -630,7 +630,7 @@ html {
 	height: 50px;
 	width: 1000px;
 	border-radius: 15px 15px 0px 0px;
-	background-color: var(--futsal-blue-2);
+	background-color: #1eb4c8b3;
 	z-index: -10;
 	clip-path: inset(100% 0 0 0);
 }
@@ -639,6 +639,8 @@ html {
 	width: 1000px;
 	text-align: center;
 	position: absolute;
+	height: 50px;
+	overflow: hidden;
 }
 
 #bigAdditionalText {
@@ -656,7 +658,7 @@ html {
 	height: 50px;
 	max-width: 300px;
 	font-size: 19px;
-	font-family: DFBSans-Regular;
+	font-family: DFBSans-Bold;
 	white-space: pre-line;
 	padding-left: 20px;
 	padding-right: 20px;

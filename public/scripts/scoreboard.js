@@ -380,7 +380,11 @@ function showGoalScorer(event) {
 
 function setPlayerName(player) {
 	const element = document.getElementById('lowerMainText');
-	element.innerHTML = player.number + '&nbsp;&nbsp;&nbsp;<span style="font-family: DFBSans-Italic, sans-serif">' + player.firstName + '</span> ' + player.lastName;
+	if (player.number) {
+		element.innerHTML = player.number + '&nbsp;&nbsp;&nbsp;<span style="font-family: DFBSans-Italic, sans-serif">' + player.firstName + '</span> ' + player.lastName;
+	} else {
+		element.innerHTML = '<span style="font-family: DFBSans-Italic, sans-serif">' + player.firstName + '</span> ' + player.lastName;
+	}
 }
 
 function setAnimationAndImage(event) {
@@ -394,8 +398,7 @@ function showCoach(event) {
 			return;
 		}
 		setAnimationAndImage(event);
-		const element = document.getElementById('lowerMainText');
-		element.innerHTML = event.coach;
+		setPlayerName(event.coach);
 		setText('lowerSubText', 'TRAINER');
 	}
 	toggleLowerThird();
