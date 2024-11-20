@@ -953,7 +953,7 @@ function showLiveMatchday(matches) {
 }
 
 function showNextMatchday(matchday) {
-	if (!matches) {
+	if (!matchday.matches) {
 		return;
 	}
 	if (currentContent === NEXT_MATCHDAY) {
@@ -981,6 +981,8 @@ function showNextMatchday(matchday) {
 			setText('nextMatchesDate', '');
 			document.getElementById('nextMatchesDate').style.display = 'none';
 		}
+
+		setText('nextMatchesTitle', matchday.number + '. Spieltag');
 
 		const table = document.getElementById('nextMatchesTable');
 		for (const match of matchday.matches) {
