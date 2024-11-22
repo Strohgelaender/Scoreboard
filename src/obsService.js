@@ -59,8 +59,8 @@ export class ObsService {
 		if (this.showingScoreboard) {
 			this.obs
 				.call('SetSceneItemEnabled', {
-					sceneName: 'Main',
-					sceneItemId: 12,
+					sceneName: 'Overlay',
+					sceneItemId: 3,
 					sceneItemEnabled: false,
 				})
 				.catch((e) => console.error(e.message));
@@ -68,17 +68,17 @@ export class ObsService {
 			this.obs
 				.call('TriggerMediaInputAction', {
 					inputName: 'Logo',
-					inputUuid: 12,
+					inputUuid: 3,
 					mediaAction: 'OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART',
 				})
 				.then(() => {
 					this.obs
 						.call('SetSceneItemEnabled', {
-							sceneName: 'Main',
-							sceneItemId: 12,
+							sceneName: 'Overlay',
+							sceneItemId: 3,
 							sceneItemEnabled: true,
 						})
-						.catch((e) => console.error(e));
+						.catch((e) => console.error(e.message));
 				})
 				.catch((e) => console.error(e.message));
 		}
