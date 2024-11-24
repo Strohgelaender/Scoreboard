@@ -131,6 +131,8 @@ export class GameService {
 			event.player = this.findPlayer(team.players, event.number);
 		} else if (event.eventType === 'SHOW_BOTTOM_SCOREBOARD') {
 			event.goalEvents = this.goalEvents;
+		} else if (event.eventType === 'SHOW_OWN_GOAL') {
+			event.player = this.findPlayer(team.players, event.number);
 		}
 	}
 

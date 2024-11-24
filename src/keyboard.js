@@ -129,6 +129,10 @@ export class Keyboard {
 			case 'SHOW_GOAL':
 				this.eventEmitter('SHOW_GOAL');
 				return;
+			case 'SHOW OWN GOAL':
+			case 'SHOW_OWN_GOAL':
+				this.eventEmitter('SHOW_OWN_GOAL');
+				return;
 			case 'SHOW YELLOW CARD':
 			case 'YELLOW':
 			case 'SHOW_YELLOW':

@@ -42,7 +42,7 @@ const EVENT_ACTIONS = {
 	['REFRESH']: refresh,
 };
 
-const NUMBER_EVENTS = ['SHOW_GOAL', 'SHOW_YELLOW_CARD', 'SHOW_RED_CARD'];
+const NUMBER_EVENTS = ['SHOW_GOAL', 'SHOW_YELLOW_CARD', 'SHOW_RED_CARD', 'SHOW_OWN_GOAL'];
 
 export function addListener(listener) {
 	listeners.push(listener);
