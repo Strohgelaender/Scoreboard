@@ -105,6 +105,9 @@ function handleEventInternal(event) {
 		case 'SHOW_RED_CARD':
 			bigContentSafeguard(LOWER_THIRD, () => showRedCard(event));
 			break;
+		case 'INTERVIEW':
+			bigContentSafeguard(LOWER_THIRD, showSkoroInterview);
+			break;
 		case 'TOGGLE_SCOREBOARD':
 			toggleScoreboard();
 			break;
@@ -390,6 +393,19 @@ function setPlayerName(player) {
 function setAnimationAndImage(event) {
 	lowerThirdImage = event.team === 'HOME' ? 'lowerThirdHome' : 'lowerThirdAway';
 	lowerThirdAnimation = event.team === 'HOME' ? 'revealToRight' : 'revealToLeft';
+}
+
+function showSkoroInterview() {
+	if (!currentContent) {
+		const player = { firstName: "Andrej", lastName: "Skoro", number: 11};
+		if (!player) {
+			return;
+		}
+		setAnimationAndImage({team: "HOME"});
+		setPlayerName(player);
+		setText('lowerSubText', 'Beton Boys München');
+	}
+	toggleLowerThird();
 }
 
 function showCoach(event) {
