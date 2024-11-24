@@ -96,6 +96,9 @@ function handleEventInternal(event) {
 		case 'SHOW_GOAL':
 			bigContentSafeguard(LOWER_THIRD, () => showGoalScorer(event));
 			break;
+		case 'SHOW_OWN_GOAL':
+			bigContentSafeguard(LOWER_THIRD, () => showOwnGoalScorer(event));
+			break;
 		case 'SHOW_COACH':
 			bigContentSafeguard(LOWER_THIRD, () => showCoach(event));
 			break;
@@ -374,6 +377,19 @@ function showGoalScorer(event) {
 		} else {
 			setText('lowerSubText', 'TORSCHÜTZE');
 		}
+	}
+	toggleLowerThird();
+}
+
+function showOwnGoalScorer(event) {
+	if (!currentContent) {
+		const player = event.player;
+		if (!player) {
+			return;
+		}
+		setAnimationAndImage(event);
+		setPlayerName(player);
+		setText('lowerSubText', 'EIGENTOR');
 	}
 	toggleLowerThird();
 }

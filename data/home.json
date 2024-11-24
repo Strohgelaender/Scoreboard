@@ -90,7 +90,7 @@
 		{
 			"firstName": "Karlo",
 			"lastName": "Lujic",
-			"number": 9
+			"number": 4
 		},
 		{
 			"firstName": "Srecko",
@@ -115,6 +115,11 @@
 			"goals": 1,
 			"number": 3,
 			"yellowCards": 1
+		},
+		{
+			"firstName": "Admir",
+			"lastName": "Durmic",
+			"number": 21
 		}
 	]
 }
