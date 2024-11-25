@@ -113,7 +113,7 @@ function sendAndReset() {
 		event = { ...DEFAULT_EVENT };
 	}
 	for (const listener of listeners) {
-		listener({ team: '', number: '' });
+		listener({ team: event.team ?? '', number: event.number });
 	}
 }
 
