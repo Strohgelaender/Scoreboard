@@ -143,6 +143,9 @@ export class Keyboard {
 			case 'SHOW_RED':
 				this.eventEmitter('SHOW_RED_CARD');
 				return;
+			case 'INTERVIEW':
+				this.eventEmitter('INTERVIEW');
+				return;
 		}
 	}
 }
