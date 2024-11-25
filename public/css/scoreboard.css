@@ -1105,7 +1105,7 @@ html {
 #liveTableContent {
 	top: 550px;
 	height: 530px;
-	width: 530px;
+	width: 550px;
 }
 
 .liveTitle {
@@ -1169,7 +1169,7 @@ html {
 #liveTableAdditionalBackground {
 	top: 550px;
 	height: 530px;
-	width: 530px;
+	width: 550px;
 	left: 0;
 	clip-path: inset(100% 0 0 0);
 }
