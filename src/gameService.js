@@ -36,6 +36,7 @@ export class GameService {
 				setTimeout(() => {
 					this.sendEvent({ eventType: 'SECOND_HALF' });
 					this.sendEvent({ eventType: 'CLEAR_FOULS' });
+					this.sendEvent({ eventType: 'HALFTIME_TIMER' });
 					this.matchTimer.resetTimer();
 				}, 10000);
 			},
@@ -43,8 +44,12 @@ export class GameService {
 	}
 
 	reloadTeamFiles() {
-		this.homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
-		this.awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
+		const newHome = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
+		const newAway = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
+		newHome.players = this.homeTeam.players;
+		newAway.players = this.awayTeam.players;
+		this.homeTeam = newHome;
+		this.awayTeam = newAway;
 	}
 
 	getTeam(specifier) {
@@ -89,25 +94,8 @@ export class GameService {
 			this.reloadTeamFiles();
 		}
 
-		if (event.eventType === 'SHOW_GOAL') {
-			const player = this.findPlayer(this.getTeam(event.team).players, event.number);
-			if (player) {
-				// 18:43
-				const time = this.matchTimer.getTimeText();
-				if (time) {
-					// 18
-					const timerMinute = +time.split(':')[0];
-					// 2
-					const gameMinute = 20 - timerMinute + (this.matchTimer.firstHalfDone ? 20 : 0);
-					this.goalEvents.push({
-						player: player,
-						minute: gameMinute,
-						team: event.team,
-						scoreHome: this.scoreHome,
-						scoreAway: this.scoreAway,
-					});
-				}
-			}
+		if (event.eventType === 'SHOW_GOAL' || event.eventType === 'SHOW_OWN_GOAL') {
+			this.addGoalScorerAction(event);
 		}
 
 		this.addEventData(event, this.getTeam(event.team));
@@ -116,6 +104,34 @@ export class GameService {
 			console.log(event);
 		}
 		return false;
+	}
+
+	addGoalScorerAction(event) {
+		const player = this.findPlayer(this.getTeam(event.team).players, event.number);
+		let team = event.team;
+		const ownGoal = event.eventType === 'SHOW_OWN_GOAL';
+		if (ownGoal) {
+			// Flip team to show it on the correct side in report
+			team = team === 'HOME' ? 'AWAY' : 'HOME';
+		}
+		if (player) {
+			// 18:43
+			const time = this.matchTimer.getTimeText();
+			if (time) {
+				// 18
+				const timerMinute = +time.split(':')[0];
+				// 2
+				const gameMinute = 20 - timerMinute + (this.matchTimer.firstHalfDone ? 20 : 0);
+				this.goalEvents.push({
+					player: player,
+					minute: gameMinute,
+					team,
+					scoreHome: this.scoreHome,
+					scoreAway: this.scoreAway,
+					ownGoal
+				});
+			}
+		}
 	}
 
 	addEventData(event, team) {
@@ -132,6 +148,8 @@ export class GameService {
 		} else if (event.eventType === 'SHOW_BOTTOM_SCOREBOARD') {
 			event.goalEvents = this.goalEvents;
 		} else if (event.eventType === 'SHOW_OWN_GOAL') {
+			event.player = this.findPlayer(team.players, event.number);
+		} else if (event.eventType === 'SHOW_INTERVIEW') {
 			event.player = this.findPlayer(team.players, event.number);
 		}
 	}

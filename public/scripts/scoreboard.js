@@ -108,8 +108,8 @@ function handleEventInternal(event) {
 		case 'SHOW_RED_CARD':
 			bigContentSafeguard(LOWER_THIRD, () => showRedCard(event));
 			break;
-		case 'INTERVIEW':
-			bigContentSafeguard(LOWER_THIRD, showSkoroInterview);
+		case 'SHOW_INTERVIEW':
+			bigContentSafeguard(LOWER_THIRD, () => showPlayerInterview(event));
 			break;
 		case 'TOGGLE_SCOREBOARD':
 			toggleScoreboard();
@@ -282,7 +282,7 @@ function setBigExtraText(goalEvents) {
 	}
 
 	const expectedGoals = scoreHome + scoreAway;
-	if (!goalEvents || expectedGoals !== goalEvents.length) {
+	if (!goalEvents || expectedGoals !== goalEvents.length || expectedGoals === 0) {
 		console.warn('Expected goals', expectedGoals, 'but got', goalEvents?.length);
 		setText('bigHomeGoalscorers', '');
 		setText('bigAwayGoalscorers', '');
@@ -300,13 +300,14 @@ function setBigExtraText(goalEvents) {
 function setGoalScorersText(goals, id) {
 	let playerToGoals = [];
 	for (const goal of goals) {
-		const existing = playerToGoals.find((e) => e.number === goal.player.number);
+		const existing = playerToGoals.find((e) => e.number === goal.player.number && e.team === goal.team);
 		if (existing) {
 			existing.goals.push(goal);
 		} else {
 			playerToGoals.push({
 				player: goal.player,
 				number: goal.player.number,
+				team: goal.team,
 				goals: [goal],
 			});
 		}
@@ -324,6 +325,9 @@ function setGoalScorersText(goals, id) {
 		const player = number.player;
 		text += player.lastName + ' (';
 		for (const goal of number.goals) {
+			if (goal.ownGoal) {
+				text += 'ET ';
+			}
 			text += `${goal.minute}', `;
 		}
 		text = text.slice(0, text.length - 2);
@@ -335,6 +339,8 @@ function setGoalScorersText(goals, id) {
 }
 
 function animateBigScoreboardOut() {
+	setText('bigHomeGoalscorers', '');
+	setText('bigAwayGoalscorers', '');
 	animate('bottomScoreBackground', 'revealCenterOut');
 	animate('bottomContent', 'revealCenterOut');
 	animate('bigHomeImage', 'hideImage', '0.5s');
@@ -357,7 +363,7 @@ function animateBigScoreboardOut() {
 function showCaster() {
 	if (!currentContent) {
 		const element = document.getElementById('lowerMainText');
-		element.innerHTML = '<span style="font-family: DFBSans-Italic, sans-serif">Gilbert</span> Kalb';
+		element.innerHTML = '<span style="font-family: DFBSans-Italic, sans-serif">Edin</span> Kulasic';
 		setText('lowerSubText', 'KOMMENTATOR');
 		lowerThirdAnimation = 'revealCenter';
 	}
@@ -411,15 +417,16 @@ function setAnimationAndImage(event) {
 	lowerThirdAnimation = event.team === 'HOME' ? 'revealToRight' : 'revealToLeft';
 }
 
-function showSkoroInterview() {
+function showPlayerInterview(event) {
 	if (!currentContent) {
-		const player = { firstName: "Andrej", lastName: "Skoro", number: 11};
+		const player = event.player;
 		if (!player) {
 			return;
 		}
-		setAnimationAndImage({team: "HOME"});
+		setAnimationAndImage(event);
 		setPlayerName(player);
-		setText('lowerSubText', 'Beton Boys München');
+		const teamName = fullNames[event.team === 'HOME' ? 0 : 1];
+		setText('lowerSubText', teamName);
 	}
 	toggleLowerThird();
 }
@@ -629,7 +636,8 @@ function animateLineup(team, players) {
 				createPlayerRow(player, player.is_starting ? startingPlayersTable : substitutePlayersTable);
 			}
 		}
-		setText('aufstellungCoach', coaches[team]);
+		const coach = coaches[team];
+		setText('aufstellungCoach', coach.firstName + ' ' + coach.lastName);
 
 		currentContent = LINEUP;
 		animate('aufstellungSpielfeldCircle', 'drawCircleIn', duration);
@@ -985,9 +993,6 @@ function showLiveMatchday(matches) {
 }
 
 function showNextMatchday(matchday) {
-	if (!matchday.matches) {
-		return;
-	}
 	if (currentContent === NEXT_MATCHDAY) {
 		animate('nextMatchesContent', 'revealUpOut');
 		setTimeout(() => {
@@ -998,6 +1003,9 @@ function showNextMatchday(matchday) {
 		}, 1100);
 		currentContent = undefined;
 	} else {
+		if (!matchday.matches) {
+			return;
+		}
 		// 1) Split time into date and time
 		for (const match of matchday.matches) {
 			const split = match.date.split(',')[1].trim().split(' ');

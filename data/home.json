@@ -1,7 +1,7 @@
 {
 	"name": "Beton Boys",
 	"fullName": "Beton Boys München",
-	"shirtColor": "#000000",
+	"shirtColor": "#ffffff",
 	"imagePath": "/images/Vereinlogo BB cut.png",
 	"coach": {
 		"firstName": "Ilija",
@@ -30,7 +30,7 @@
 			"lastName": "Skoro",
 			"is_captain": true,
 			"number": 11,
-			"goals": 4,
+			"goals": 5,
 			"yellowCards": 2
 		},
 		{
@@ -62,7 +62,7 @@
 			"firstName": "Marko",
 			"lastName": "Stjepanovic",
 			"number": 15,
-			"goals": 1
+			"goals": 2
 		},
 		{
 			"firstName": "Ante",
@@ -73,7 +73,7 @@
 			"firstName": "Burhan",
 			"lastName": "Mustafov",
 			"number": 8,
-			"goals": 4
+			"goals": 5
 		},
 		{
 			"firstName": "Arijanit",
@@ -90,7 +90,8 @@
 		{
 			"firstName": "Karlo",
 			"lastName": "Lujic",
-			"number": 4
+			"number": 4,
+			"goals": 1
 		},
 		{
 			"firstName": "Srecko",
