@@ -128,7 +128,7 @@ export class GameService {
 					team,
 					scoreHome: this.scoreHome,
 					scoreAway: this.scoreAway,
-					ownGoal
+					ownGoal,
 				});
 			}
 		}

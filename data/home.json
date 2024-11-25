@@ -31,7 +31,7 @@
 			"is_captain": true,
 			"number": 11,
 			"goals": 5,
-			"yellowCards": 2
+			"yellowCards": 3
 		},
 		{
 			"firstName": "Fikret",
@@ -85,7 +85,8 @@
 		{
 			"firstName": "Lirim",
 			"lastName": "Kelmendi",
-			"goals": 1
+			"goals": 1,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Karlo",

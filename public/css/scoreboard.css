@@ -80,7 +80,6 @@ html {
 	top: 54px;
 	background-color: #59aadf;
 	border-radius: 10px 10px 0px 0px;
-	border: var(--futsal-accent) 1px solid;
 	z-index: -5;
 }
 
