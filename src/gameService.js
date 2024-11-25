@@ -80,6 +80,9 @@ export class GameService {
 
 		if (event.eventType === 'FOUL') {
 			this.addFoul(event.team === 'HOME');
+			if (this.matchTimer.isRunning()) {
+				this.matchTimer.pauseTimer();
+			}
 		} else if (event.eventType === 'REMOVE_FOUL') {
 			this.reduceFoul(event.team === 'HOME');
 		} else if (event.eventType === 'CLEAR_FOULS') {
@@ -87,6 +90,9 @@ export class GameService {
 		}
 
 		if (event.eventType === 'RED_CARD') {
+			if (this.matchTimer.isRunning()) {
+				this.matchTimer.pauseTimer();
+			}
 			this.addRedCardTimer(event);
 		}
 
