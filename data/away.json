@@ -8,12 +8,12 @@
 		"lastName": "Schatalin"
 	},
 	"players": [
-		{ "firstName": "Christian", "lastName": "Bilavcic" },
-		{ "firstName": "Maksym", "lastName": "Lysenko", "yellowCards": 2 },
-		{ "firstName": "Feim", "lastName": "Statovci", "yellowCards": 2 },
+		{ "firstName": "Christian", "lastName": "Bilavcic", "is_keeper": true },
+		{ "firstName": "Maksym", "lastName": "Lysenko", "yellowCards": 2, "is_keeper": true, "number": 3 },
+		{ "firstName": "Feim", "lastName": "Statovci", "yellowCards": 2, "is_keeper": true },
 		{ "firstName": "Kadir", "lastName": "Sentürk", "goals": 6, "yellowCards": 5 },
 		{ "firstName": "Muhammet", "lastName": "Sözer", "goals": 7 },
-		{ "firstName": "Suad", "lastName": "Ak", "goals": 8, "yellowCards": 3 },
+		{ "firstName": "Suad", "lastName": "Ak", "goals": 8, "yellowCards": 3, "is_captain": true },
 		{ "firstName": "Fouad", "lastName": "Aghnima", "goals": 5, "yellowCards": 1 },
 		{ "firstName": "Furkan", "lastName": "Ars" },
 		{ "firstName": "Oliver", "lastName": "Bollwicht" },
