@@ -1,3 +1,8 @@
+:root {
+    --opacity-1: 1;
+    --opacity-0: 0;
+}
+
 html {
 	background: transparent;
 }
@@ -436,22 +441,22 @@ html {
 @keyframes growImage {
 	0% {
 		transform: scale(0); /* Fully hidden (small size) */
-		opacity: 0; /* Invisible */
+		opacity: var(--opacity-0); /* Invisible */
 	}
 	100% {
 		transform: scale(1); /* Full size */
-		opacity: 1; /* Fully visible */
+		opacity: var(--opacity-1); /* Fully visible */
 	}
 }
 
 @keyframes hideImage {
 	0% {
 		transform: scale(1); /* Full size */
-		opacity: 1; /* Fully visible */
+		opacity: var(--opacity-1); /* Fully visible */
 	}
 	100% {
 		transform: scale(0); /* Fully hidden (small size) */
-		opacity: 0; /* Invisible */
+		opacity: var(--opacity-0); /* Invisible */
 	}
 }
 
@@ -631,6 +636,7 @@ html {
 	width: 1000px;
 	border-radius: 15px 15px 0px 0px;
 	background-color: #1eb4c8b3;
+	/* background-color: var(--futsal-blue-2); */
 	z-index: -10;
 	clip-path: inset(100% 0 0 0);
 }
@@ -726,7 +732,7 @@ html {
 	padding: 5px;
 	position: relative;
 	transform: scale(0);
-	opacity: 0;
+	opacity: var(--opacity-0);
 }
 
 #bigHomeImage {
@@ -929,7 +935,7 @@ html {
 	height: 100px;
 	width: auto;
 	transform: scale(0);
-	opacity: 0;
+	opacity: var(--opacity-0);
 }
 
 #lowerThirdHome {
