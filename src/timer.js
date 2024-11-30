@@ -72,10 +72,10 @@ export class Timer {
 		}
 
 		if (d <= 0) {
-			this.firstHalfDone = true;
 			if (this.callback) {
 				this.callback();
 			}
+			this.firstHalfDone = true;
 			this.clear();
 		}
 	}

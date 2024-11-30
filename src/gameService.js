@@ -28,15 +28,12 @@ export class GameService {
 				this.sendWS('game', text);
 			},
 			() => {
-				// TODO is this true?
-				/*for (const timer of redCardTimers) {
-					timer.resetTimer();
-				}
-				redCardTimers = [];*/
 				setTimeout(() => {
 					this.sendEvent({ eventType: 'SECOND_HALF' });
 					this.sendEvent({ eventType: 'CLEAR_FOULS' });
-					this.sendEvent({ eventType: 'HALFTIME_TIMER' });
+					if (!this.matchTimer.isFirstHalfDone()) {
+						this.sendEvent({ eventType: 'HALFTIME_TIMER' });
+					}
 					this.matchTimer.resetTimer();
 				}, 10000);
 			},
