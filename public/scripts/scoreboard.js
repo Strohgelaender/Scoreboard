@@ -251,6 +251,8 @@ function toggleBigScoreboard(goalEvents) {
 				if (showingExtraText) {
 					setTimeout(() => {
 						animate('bigAdditionalText', 'opacityIn');
+						animate('bigHomeGoalscorers', 'opacityIn');
+						animate('bigAwayGoalscorers', 'opacityIn');
 						animate('bottomMoreInfoBackground', 'revealUp');
 					}, 500);
 				}
@@ -260,6 +262,8 @@ function toggleBigScoreboard(goalEvents) {
 	} else {
 		if (showingExtraText) {
 			animate('bigAdditionalText', 'opacityOut', '0.5s');
+			animate('bigHomeGoalscorers', 'opacityOut', '0.5s');
+			animate('bigAwayGoalscorers', 'opacityOut', '0.5s');
 			animate('bottomMoreInfoBackground', 'revealUpOut');
 			setTimeout(animateBigScoreboardOut, 800);
 		} else {

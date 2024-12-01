@@ -1,6 +1,8 @@
 :root {
-    --opacity-1: 1;
-    --opacity-0: 0;
+	--opacity-1: 1;
+	--opacity-0: 0;
+	--more-info-background: #1eb4c8b3;
+	/*--more-info-background: var(--futsal-blue-2);*/
 }
 
 html {
@@ -635,8 +637,7 @@ html {
 	height: 50px;
 	width: 1000px;
 	border-radius: 15px 15px 0px 0px;
-	background-color: #1eb4c8b3;
-	/* background-color: var(--futsal-blue-2); */
+	background-color: var(--more-info-background);
 	z-index: -10;
 	clip-path: inset(100% 0 0 0);
 }
@@ -662,12 +663,13 @@ html {
 .bigGoalscorers {
 	position: relative;
 	height: 50px;
-	max-width: 300px;
+	max-width: 350px;
 	font-size: 19px;
 	font-family: DFBSans-Bold;
 	white-space: pre-line;
 	padding-left: 20px;
 	padding-right: 20px;
+    opacity: 0;
 }
 
 #bigHomeGoalscorers {
@@ -676,8 +678,8 @@ html {
 
 #bigAwayGoalscorers {
 	text-align: right;
-	top: -70px;
-	left: 650px;
+	top: -100px;
+	left: 620px;
 }
 
 @keyframes spielfeldBottom {
