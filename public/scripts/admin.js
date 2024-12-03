@@ -5,6 +5,7 @@ let createdPlayers = 0;
 addEventListener('DOMContentLoaded', () => {
 	loadTeams();
 	loadPlayers();
+	loadGoalEvents();
 	document.getElementById('addHome').addEventListener('click', addPlayerRow.bind(this, 'homeBody'));
 	document.getElementById('addAway').addEventListener('click', addPlayerRow.bind(this, 'awayBody'));
 	document.getElementById('saveBtn').addEventListener('click', postLineup);
@@ -41,6 +42,17 @@ function loadPlayers() {
 			if (value.away?.length) {
 				const awayBody = document.getElementById('awayBody');
 				addAllPlayers(awayBody, value.away);
+			}
+		})
+		.catch(console.error);
+}
+
+function loadGoalEvents() {
+	fetch('/goalEvents0', {method: 'GET'})
+		.then((r) => r.json())
+		.then((events) => {
+			for (const event of events) {
+				addGoalEvent(event);
 			}
 		})
 		.catch(console.error);
@@ -129,3 +141,26 @@ function collectPlayers(table, result) {
 		result.push(player);
 	}
 }
+
+function addGoalEvent(event) {
+	const tbody = document.getElementById('goalEventBody');
+	const row = document.createElement('tr');
+
+	// TODO Team Input combobox
+	row.innerHTML = `
+        <td><input type="number" min="1" max="20" name="minute" class="form-control" value="${event.minute}"></td>
+        <td><input type="text" name="team" class="form-control" value="${event.team}"></td>
+        <td><input type="number" min="1" name="number" class="form-control" value="${event.player.number}"></td>
+		<td>${event.player.firstName} ${event.player.lastName}</td>
+	`;
+
+	tbody.appendChild(row);
+}
+
+// TODO update goal event table
+function handleEventInternal(event) {
+	if (event.eventType === 'SHOW_BOTTOM_SCOREBOARD') {
+		const goalEvents = event.goalEvents;
+	}
+}
+
