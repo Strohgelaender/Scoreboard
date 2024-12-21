@@ -1,6 +1,7 @@
 'use strict';
 
 let createdPlayers = 0;
+let goalEvents = [];
 
 addEventListener('DOMContentLoaded', () => {
 	loadTeams();
@@ -9,6 +10,10 @@ addEventListener('DOMContentLoaded', () => {
 	document.getElementById('addHome').addEventListener('click', addPlayerRow.bind(this, 'homeBody'));
 	document.getElementById('addAway').addEventListener('click', addPlayerRow.bind(this, 'awayBody'));
 	document.getElementById('saveBtn').addEventListener('click', postLineup);
+	document.getElementById('refreshGoalEvents').addEventListener('click', loadGoalEvents);
+	document.getElementById('addGoalEvent').addEventListener('click', () => {
+		addGoalEvent({ scoreHome, scoreAway, minute: 0, team: 'HOME', player: { number: 0, firstName: '', lastName: '' } });
+	});
 });
 
 document.addEventListener('keydown', (e) => {
@@ -48,12 +53,10 @@ function loadPlayers() {
 }
 
 function loadGoalEvents() {
-	fetch('/goalEvents0', { method: 'GET' })
+	fetch('/goalEvents', { method: 'GET' })
 		.then((r) => r.json())
 		.then((events) => {
-			for (const event of events) {
-				addGoalEvent(event);
-			}
+			updateGoalEvents(events);
 		})
 		.catch(console.error);
 }
@@ -142,14 +145,27 @@ function collectPlayers(table, result) {
 	}
 }
 
+function updateGoalEvents(newEvents) {
+	let difference = newEvents.filter((x) => !goalEvents.find((y) => x.minute === y.minute && x.team === y.team && x.player.number === y.player.number));
+	if (difference.length) {
+		for (const event of difference) {
+			addGoalEvent(event);
+		}
+	}
+	goalEvents = newEvents;
+}
+
 function addGoalEvent(event) {
 	const tbody = document.getElementById('goalEventBody');
 	const row = document.createElement('tr');
 
-	// TODO Team Input combobox
 	row.innerHTML = `
+		<td>${event.scoreHome}:${event.scoreAway}</td>
         <td><input type="number" min="1" max="20" name="minute" class="form-control" value="${event.minute}"></td>
-        <td><input type="text" name="team" class="form-control" value="${event.team}"></td>
+        <td><select name="team" class="form-select">
+        <option value="HOME" ${event.team === 'HOME' ? 'selected' : ''}>HOME</option>
+        <option value="AWAY" ${event.team === 'AWAY' ? 'selected' : ''}>AWAY</option>
+        </select></td>
         <td><input type="number" min="1" name="number" class="form-control" value="${event.player.number}"></td>
 		<td>${event.player.firstName} ${event.player.lastName}</td>
 	`;
@@ -157,9 +173,9 @@ function addGoalEvent(event) {
 	tbody.appendChild(row);
 }
 
-// TODO update goal event table
 function handleEventInternal(event) {
 	if (event.eventType === 'SHOW_BOTTOM_SCOREBOARD') {
 		const goalEvents = event.goalEvents;
+		updateGoalEvents(goalEvents);
 	}
 }

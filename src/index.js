@@ -163,11 +163,11 @@ app.post('/lineup', express.json(), (req, res) => {
 	res.status(200).send();
 });
 
-app.get('goalEvents', (req, res) => {
+app.get('/goalEvents', (req, res) => {
 	res.send(game.goalEvents);
 });
 
-app.post('goalEvents', express.json(), (req, res) => {
+app.post('/goalEvents', express.json(), (req, res) => {
 	let body = req.body;
 	// TODO some merging?
 	game.goalEvents = body;
