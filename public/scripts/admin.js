@@ -48,7 +48,7 @@ function loadPlayers() {
 }
 
 function loadGoalEvents() {
-	fetch('/goalEvents0', {method: 'GET'})
+	fetch('/goalEvents0', { method: 'GET' })
 		.then((r) => r.json())
 		.then((events) => {
 			for (const event of events) {
@@ -163,4 +163,3 @@ function handleEventInternal(event) {
 		const goalEvents = event.goalEvents;
 	}
 }
-
