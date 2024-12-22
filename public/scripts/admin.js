@@ -1,5 +1,7 @@
 'use strict';
 
+let home;
+let away;
 let createdPlayers = 0;
 let goalEvents = [];
 
@@ -14,6 +16,7 @@ addEventListener('DOMContentLoaded', () => {
 	document.getElementById('addGoalEvent').addEventListener('click', () => {
 		addGoalEvent({ scoreHome, scoreAway, minute: 0, team: 'HOME', player: { number: 0, firstName: '', lastName: '' } });
 	});
+	document.getElementById('saveBtnGoalEvents').addEventListener('click', saveGoalEvents);
 });
 
 document.addEventListener('keydown', (e) => {
@@ -41,10 +44,12 @@ function loadPlayers() {
 		.then((response) => response.json())
 		.then((value) => {
 			if (value.home?.length) {
+				home = value.home;
 				const homeBody = document.getElementById('homeBody');
 				addAllPlayers(homeBody, value.home);
 			}
 			if (value.away?.length) {
+				away = value.away;
 				const awayBody = document.getElementById('awayBody');
 				addAllPlayers(awayBody, value.away);
 			}
@@ -116,6 +121,9 @@ function postLineup() {
 	collectPlayers(document.getElementById('homeBody'), result.home);
 	collectPlayers(document.getElementById('awayBody'), result.away);
 
+	home = result.home;
+	away = result.away;
+
 	fetch('/lineup', {
 		method: 'POST',
 		headers: {
@@ -146,7 +154,7 @@ function collectPlayers(table, result) {
 }
 
 function updateGoalEvents(newEvents) {
-	let difference = newEvents.filter((x) => !goalEvents.find((y) => x.minute === y.minute && x.team === y.team && x.player.number === y.player.number));
+	let difference = newEvents.filter((x) => !goalEvents.find((y) => +x.minute === +y.minute && x.team === y.team && +x.player.number === +y.player.number));
 	if (difference.length) {
 		for (const event of difference) {
 			addGoalEvent(event);
@@ -159,18 +167,121 @@ function addGoalEvent(event) {
 	const tbody = document.getElementById('goalEventBody');
 	const row = document.createElement('tr');
 
-	row.innerHTML = `
-		<td>${event.scoreHome}:${event.scoreAway}</td>
-        <td><input type="number" min="1" max="20" name="minute" class="form-control" value="${event.minute}"></td>
-        <td><select name="team" class="form-select">
-        <option value="HOME" ${event.team === 'HOME' ? 'selected' : ''}>HOME</option>
-        <option value="AWAY" ${event.team === 'AWAY' ? 'selected' : ''}>AWAY</option>
-        </select></td>
-        <td><input type="number" min="1" name="number" class="form-control" value="${event.player.number}"></td>
-		<td>${event.player.firstName} ${event.player.lastName}</td>
-	`;
+	const scoreCell = document.createElement('td');
+	scoreCell.textContent = `${event.scoreHome}:${event.scoreAway}`;
+	row.appendChild(scoreCell);
+
+	const minuteCell = document.createElement('td');
+	const minuteInput = document.createElement('input');
+	minuteInput.type = 'number';
+	minuteInput.min = '1';
+	minuteInput.max = '20';
+	minuteInput.name = 'minute';
+	minuteInput.className = 'form-control';
+	minuteInput.value = event.minute;
+	minuteCell.appendChild(minuteInput);
+	row.appendChild(minuteCell);
+
+	const teamCell = document.createElement('td');
+	const teamSelect = document.createElement('select');
+	teamSelect.name = 'team';
+	teamSelect.className = 'form-select';
+
+	const homeOption = document.createElement('option');
+	homeOption.value = 'HOME';
+	homeOption.textContent = 'HOME';
+	if (event.team === 'HOME') homeOption.selected = true;
+	teamSelect.appendChild(homeOption);
+
+	const awayOption = document.createElement('option');
+	awayOption.value = 'AWAY';
+	awayOption.textContent = 'AWAY';
+	if (event.team === 'AWAY') awayOption.selected = true;
+	teamSelect.appendChild(awayOption);
+
+	teamCell.appendChild(teamSelect);
+	row.appendChild(teamCell);
+
+	const numberCell = document.createElement('td');
+	const numberInput = document.createElement('input');
+	numberInput.type = 'number';
+	numberInput.min = '1';
+	numberInput.className = 'form-control';
+	numberInput.value = event.player.number;
+	numberCell.appendChild(numberInput);
+	row.appendChild(numberCell);
+
+	const playerCell = document.createElement('td');
+	playerCell.textContent = `${event.player.firstName} ${event.player.lastName}`;
+	playerCell.data = event.player;
+	playerCell.name = 'player';
+	row.appendChild(playerCell);
+
+	const onwGoalCell = document.createElement('td');
+	const ownGoalInput = document.createElement('input');
+	ownGoalInput.type = 'checkbox';
+	ownGoalInput.name = 'ownGoal';
+	ownGoalInput.className = 'form-check-input';
+	ownGoalInput.checked = event.ownGoal;
+	onwGoalCell.appendChild(ownGoalInput);
+	row.appendChild(onwGoalCell);
+
+	const updatePlayer = () => {
+		const newNumber = numberInput.value;
+		const team = teamSelect.value === 'HOME' ? home : away;
+		const newPlayer = team.find((p) => +p.number === +newNumber);
+		if (newPlayer) {
+			playerCell.textContent = `${newPlayer.firstName} ${newPlayer.lastName}`;
+			playerCell.data = newPlayer;
+		} else {
+			playerCell.textContent = 'PLAYER NOT FOUND';
+		}
+	};
+
+	numberInput.addEventListener('change', updatePlayer);
+	teamSelect.addEventListener('change', updatePlayer);
 
 	tbody.appendChild(row);
+}
+
+function saveGoalEvents() {
+	const result = [];
+	const table = document.getElementById('goalEventBody');
+	for (const tr of table.children) {
+		const event = {};
+		const score = tr.children[0].textContent.split(':');
+		event.scoreHome = score[0];
+		event.scoreAway = score[1];
+		for (let i = 1; i < tr.children.length; i++) {
+			const cell = tr.children[i];
+			if (cell.name === 'player') {
+				event.player = cell.data;
+				continue;
+			}
+			const input = cell.children[0];
+			if (!input?.name) {
+				continue;
+			}
+			if (input.type === 'checkbox') {
+				event[input.name] = input.checked;
+			} else {
+				event[input.name] = input.value;
+			}
+		}
+		result.push(event);
+	}
+
+	goalEvents = result;
+
+	fetch('/goalEvents', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(result),
+	})
+		.then(() => console.log('Goal Events saved'))
+		.catch(console.error);
 }
 
 function handleEventInternal(event) {
