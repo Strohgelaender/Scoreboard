@@ -295,8 +295,30 @@ function setBigExtraText(goalEvents) {
 
 	const homeGoals = goalEvents.filter((e) => e.team === 'HOME');
 	const awayGoals = goalEvents.filter((e) => e.team === 'AWAY');
-	setGoalScorersText(homeGoals, 'bigHomeGoalscorers');
-	setGoalScorersText(awayGoals, 'bigAwayGoalscorers');
+	const homeSize = setGoalScorersText(homeGoals, 'bigHomeGoalscorers');
+	const awaySize = setGoalScorersText(awayGoals, 'bigAwayGoalscorers');
+
+	const lines = Math.max(homeSize, awaySize);
+	const diff = lines - Math.min(homeSize, awaySize);
+	const newHeight = 50 * lines;
+	const homeHeight = 50 * homeSize;
+	const awayHeight = 50 * awaySize;
+	const newTop = -((lines - 1) * 50);
+	const homeTop = homeSize < awaySize ? (diff * 50) : 0; // ?????????
+	const awayTop = awaySize < homeSize ? (diff * 50) : 0;
+
+	const background = document.getElementById('bottomMoreInfoBackground');
+	background.style.height = newHeight + 'px';
+	background.style.top = newTop + "px";
+	const homeScorers = document.getElementById('bigHomeGoalscorers');
+	homeScorers.style.height = homeHeight + "px";
+	homeScorers.style.top = homeTop + "px";
+	const awayScorers = document.getElementById('bigAwayGoalscorers');
+	awayScorers.style.height = awayHeight + "px";
+	awayScorers.style.top = awayTop + "px";
+	const textBox = document.getElementById('bigAdditionalTextBox');
+	textBox.style.height = newHeight + "px";
+	textBox.style.top = newTop + "px";
 
 	return true;
 }
@@ -317,15 +339,9 @@ function setGoalScorersText(goals, id) {
 		}
 	}
 
-	const divider = Math.ceil(playerToGoals.length / 2);
 	let text = '';
 	let i = 0;
 	for (const number of playerToGoals) {
-		if (i === divider) {
-			text += '\n';
-		} else if (i > 0) {
-			text += ', ';
-		}
 		const player = number.player;
 		text += player.lastName + ' (';
 		for (const goal of number.goals) {
@@ -337,9 +353,13 @@ function setGoalScorersText(goals, id) {
 		text = text.slice(0, text.length - 2);
 		text += ')';
 		i++;
+		if (i < playerToGoals.length) {
+			text += '\n';
+		}
 	}
 
 	setText(id, text);
+	return playerToGoals.length;
 }
 
 function animateBigScoreboardOut() {

@@ -657,18 +657,19 @@ html {
 	display: inline-block;
 	font-family: DFBSans-Regular;
 	position: relative;
-	top: -50px;
 }
 
 .bigGoalscorers {
 	position: relative;
 	height: 50px;
 	max-width: 350px;
-	font-size: 19px;
+    width: 350px;
+	font-size: 26px;
 	font-family: DFBSans-Bold;
 	white-space: pre-line;
 	padding-left: 20px;
 	padding-right: 20px;
+    line-height: 50px;
 	opacity: 0;
 }
 
@@ -678,8 +679,9 @@ html {
 
 #bigAwayGoalscorers {
 	text-align: right;
-	top: -100px;
-	left: 620px;
+	left: 610px;
+    top: 0;
+    position: absolute;
 }
 
 @keyframes spielfeldBottom {
