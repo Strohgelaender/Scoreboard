@@ -320,6 +320,14 @@ function setBigExtraText(goalEvents) {
 	textBox.style.height = newHeight + "px";
 	textBox.style.top = newTop + "px";
 
+	const middleText = document.getElementById('bigAdditionalText');
+	if (awaySize > homeSize) {
+		const newPosition = (50 * diff) - 50;
+		middleText.style.top = newPosition + "px";
+	} else {
+		middleText.style.top = "-50px";
+	}
+
 	return true;
 }
 
