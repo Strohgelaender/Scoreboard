@@ -333,6 +333,10 @@ function setBigExtraText(goalEvents) {
 
 function setGoalScorersText(goals, id) {
 	let playerToGoals = [];
+	// TODO in welcher Reihenfolge will ich das haben?
+	goals = goals.sort((a, b) => {
+		return +a.minute - +b.minute;
+	});
 	for (const goal of goals) {
 		const existing = playerToGoals.find((e) => e.number === goal.player.number && e.team === goal.team);
 		if (existing) {

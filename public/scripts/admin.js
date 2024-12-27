@@ -228,7 +228,11 @@ function addGoalEvent(event) {
 
 	const updatePlayer = () => {
 		const newNumber = numberInput.value;
-		const team = teamSelect.value === 'HOME' ? home : away;
+		let team = teamSelect.value === 'HOME' ? home : away;
+		if (ownGoalInput.checked) {
+			// For own goals search at the other team
+			team = teamSelect.value === 'HOME' ? away : home;
+		}
 		const newPlayer = team.find((p) => +p.number === +newNumber);
 		if (newPlayer) {
 			playerCell.textContent = `${newPlayer.firstName} ${newPlayer.lastName}`;
