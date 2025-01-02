@@ -14,6 +14,7 @@ export class ObsService {
 			try {
 				await this.obs.connect('ws://localhost:4455', OBS_PASSWORD);
 				console.log('OBS connected');
+				this.logoItemId = await this.getScoreboardLogoItemId();
 			} catch {
 				console.error('OBS not connected');
 			}
@@ -60,7 +61,7 @@ export class ObsService {
 			this.obs
 				.call('SetSceneItemEnabled', {
 					sceneName: 'Overlay',
-					sceneItemId: 3,
+					sceneItemId: this.logoItemId,
 					sceneItemEnabled: false,
 				})
 				.catch((e) => console.error(e.message));
@@ -68,14 +69,14 @@ export class ObsService {
 			this.obs
 				.call('TriggerMediaInputAction', {
 					inputName: 'Logo',
-					inputUuid: 3,
+					inputUuid: this.logoItemId,
 					mediaAction: 'OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART',
 				})
 				.then(() => {
 					this.obs
 						.call('SetSceneItemEnabled', {
 							sceneName: 'Overlay',
-							sceneItemId: 3,
+							sceneItemId: this.logoItemId,
 							sceneItemEnabled: true,
 						})
 						.catch((e) => console.error(e.message));
@@ -83,6 +84,14 @@ export class ObsService {
 				.catch((e) => console.error(e.message));
 		}
 		this.showingScoreboard = !this.showingScoreboard;
+	}
+
+	async getScoreboardLogoItemId() {
+		const response = await this.obs.call('GetSceneItemId', {
+			sceneName: 'Overlay',
+			sourceName: 'Logo',
+		});
+		return response.sceneItemId;
 	}
 
 	disconnect() {
