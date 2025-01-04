@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="de">
+	<head>
+		<title>Halbzeit</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="/css/default.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/halftimeVideo.css" media="screen" />
+		<script src="/scripts/eventSocket.js" defer></script>
+		<script src="/scripts/halftime.js" defer></script>
+	</head>
+	<body>
+		<div id="container">
+			<!--- links icons der Teams + Spielstand --->
+			<div id="score">
+				<img id="homeTimeImage" class="teamImage" src="/image/home" alt="Home Team" />
+				<span id="homeScore" class="teamScore">0</span>
+				<span id="colon">:</span>
+				<span id="awayScore" class="teamScore">0</span>
+				<img id="awayTimeImage" class="teamImage" src="/image/away" alt="Away Team" />
+			</div>
+			<!-- Mitte: Text "Halbzeit" --->
+			<div id="halftimeText">
+				<h1>Halbzeitpause</h1>
+			</div>
+			<!-- rechts countdown --->
+			<div id="timer">
+				<h1 id="time" class="time"></h1>
+			</div>
+		</div>
+	</body>
+</html>

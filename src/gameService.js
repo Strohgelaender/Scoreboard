@@ -12,7 +12,7 @@ export class GameService {
 		this.sendWS = sendWS;
 		this.homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
 		this.awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
-		this.halftimeTimer = new Timer(14 * 60 * 1000, (text) => {
+		this.halftimeTimer = new Timer((14 * 60 + 30) * 1000, (text) => {
 			this.sendWS('half', text);
 		});
 

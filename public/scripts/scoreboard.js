@@ -304,28 +304,28 @@ function setBigExtraText(goalEvents) {
 	const homeHeight = 50 * homeSize;
 	const awayHeight = 50 * awaySize;
 	const newTop = -((lines - 1) * 50);
-	const homeTop = homeSize < awaySize ? (diff * 50) : 0; // ?????????
-	const awayTop = awaySize < homeSize ? (diff * 50) : 0;
+	const homeTop = homeSize < awaySize ? diff * 50 : 0; // ?????????
+	const awayTop = awaySize < homeSize ? diff * 50 : 0;
 
 	const background = document.getElementById('bottomMoreInfoBackground');
 	background.style.height = newHeight + 'px';
-	background.style.top = newTop + "px";
+	background.style.top = newTop + 'px';
 	const homeScorers = document.getElementById('bigHomeGoalscorers');
-	homeScorers.style.height = homeHeight + "px";
-	homeScorers.style.top = homeTop + "px";
+	homeScorers.style.height = homeHeight + 'px';
+	homeScorers.style.top = homeTop + 'px';
 	const awayScorers = document.getElementById('bigAwayGoalscorers');
-	awayScorers.style.height = awayHeight + "px";
-	awayScorers.style.top = awayTop + "px";
+	awayScorers.style.height = awayHeight + 'px';
+	awayScorers.style.top = awayTop + 'px';
 	const textBox = document.getElementById('bigAdditionalTextBox');
-	textBox.style.height = newHeight + "px";
-	textBox.style.top = newTop + "px";
+	textBox.style.height = newHeight + 'px';
+	textBox.style.top = newTop + 'px';
 
 	const middleText = document.getElementById('bigAdditionalText');
 	if (awaySize > homeSize) {
-		const newPosition = (50 * diff) - 50;
-		middleText.style.top = newPosition + "px";
+		const newPosition = 50 * diff - 50;
+		middleText.style.top = newPosition + 'px';
 	} else {
-		middleText.style.top = "-50px";
+		middleText.style.top = '-50px';
 	}
 
 	return true;
@@ -399,7 +399,7 @@ function animateBigScoreboardOut() {
 function showCaster() {
 	if (!currentContent) {
 		const element = document.getElementById('lowerMainText');
-		element.innerHTML = '<span style="font-family: DFBSans-Italic, sans-serif">Edin</span> Kulasic';
+		element.innerHTML = '<span style="font-family: DFBSans-Italic, sans-serif">Gilbert</span> Kalb';
 		setText('lowerSubText', 'KOMMENTATOR');
 		lowerThirdAnimation = 'revealCenter';
 	}
