@@ -108,6 +108,9 @@ export class Keyboard {
 			case 'NEXT':
 				this.eventEmitter('NEXT_MATCHDAY');
 				return;
+			case 'LAST':
+				this.eventEmitter('LAST_MATCHDAY');
+				return;
 			case 'REFRESH':
 				this.eventEmitter('REFRESH');
 				return;

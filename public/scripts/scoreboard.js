@@ -12,6 +12,7 @@ const MATCHDAY = 'MATCHDAY';
 const LIVE_TABLE = 'LIVE_TABLE';
 const LIVE_MATCHDAY = 'LIVE_MATCHDAY';
 const NEXT_MATCHDAY = 'NEXT_MATCHDAY';
+const LAST_MATCHDAY = 'LAST_MATCHDAY';
 
 const transitions = {
 	[LINEUP]: animateLineup.bind(this, 0, []),
@@ -24,6 +25,7 @@ const transitions = {
 	[LIVE_TABLE]: showLiveTable.bind(this, []),
 	[LIVE_MATCHDAY]: showLiveMatchday.bind(this, []),
 	[NEXT_MATCHDAY]: showNextMatchday.bind(this, []),
+	[LAST_MATCHDAY]: showLastMatchday.bind(this, []),
 };
 
 let currentContent;
@@ -149,6 +151,9 @@ function handleEventInternal(event) {
 			break;
 		case 'NEXT_MATCHDAY':
 			bigContentSafeguard(NEXT_MATCHDAY, () => showNextMatchday(event.matchday));
+			break;
+		case 'LAST_MATCHDAY':
+			bigContentSafeguard(LAST_MATCHDAY, () => showLastMatchday(event.matchday));
 			break;
 		case 'SECOND_HALF':
 			if (firstHalfDone) {
@@ -1068,5 +1073,23 @@ function showNextMatchday(matchday) {
 		animate('nextMatchesAdditionalBackground', 'revealUp', '0.7s');
 		animate('nextMatchesContent', 'revealUp', '1s');
 		currentContent = NEXT_MATCHDAY;
+	}
+}
+
+function showLastMatchday(matchday) {
+	if (currentContent === LAST_MATCHDAY) {
+		animate('matchday', 'revealToLeftOut');
+		setTimeout(() => {
+			document.getElementById('matchesTable').replaceChildren();
+		}, 1300);
+		currentContent = undefined;
+	} else {
+		const table = document.getElementById('matchesTable');
+		for (const match of matchday.matches) {
+			createMatchdayRow(match, table);
+		}
+		setText('matchdayTitle', matchday.number + '. Spieltag');
+		animate('matchday', 'revealToLeft');
+		currentContent = MATCHDAY;
 	}
 }

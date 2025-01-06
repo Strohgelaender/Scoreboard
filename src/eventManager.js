@@ -2,7 +2,7 @@
 // and the index.js server. It handles event creation, resets, and loading data.
 
 import { sendEvent } from './index.js';
-import { readMatchday, readNextMatchday, readReferees, readTable } from './AufstellungParser.js';
+import { readLastMatchday, readMatchday, readNextMatchday, readReferees, readTable } from './AufstellungParser.js';
 
 const DEFAULT_EVENT = { number: '' };
 
@@ -12,6 +12,7 @@ let referees = [];
 let table;
 let matchday;
 let nextMatchday;
+let lastMatchday;
 
 let listeners = [];
 
@@ -26,6 +27,7 @@ const STANDALONE_EVENTS = [
 	'LIVE_TABLE',
 	'LIVE_MATCHDAY',
 	'NEXT_MATCHDAY',
+	'LAST_MATCHDAY',
 	'MATCHDAY',
 	'LINEUP',
 	'SHOW_REFEREES',
@@ -39,6 +41,7 @@ const EVENT_ACTIONS = {
 	['MATCHDAY']: loadMatchday,
 	['LIVE_MATCHDAY']: loadMatchday,
 	['NEXT_MATCHDAY']: loadNextMatchday,
+	['LAST_MATCHDAY']: loadLastMatchday,
 	['REFRESH']: refresh,
 };
 
@@ -129,6 +132,8 @@ function addEventData(event) {
 		event.matchday = matchday;
 	} else if (event.eventType === 'NEXT_MATCHDAY') {
 		event.matchday = nextMatchday;
+	} else if (event.eventType === 'LAST_MATCHDAY') {
+		event.matchday = lastMatchday;
 	}
 }
 
@@ -174,5 +179,11 @@ async function loadMatchday(force = false) {
 async function loadNextMatchday(force = false) {
 	if (force || !nextMatchday) {
 		nextMatchday = await readNextMatchday();
+	}
+}
+
+async function loadLastMatchday(force = false) {
+	if (force || !lastMatchday) {
+		lastMatchday = await readLastMatchday();
 	}
 }
