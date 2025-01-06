@@ -36,7 +36,7 @@
 		"eslint-plugin-prettier": "^5.2.1",
 		"globals": "^15.14.0",
 		"nodemon": "^3.1.9",
-		"npm-check-updates": "^17.1.12",
+		"npm-check-updates": "^17.1.13",
 		"prettier": "3.4.2"
 	}
 }
