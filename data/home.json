@@ -23,7 +23,8 @@
 		{
 			"firstName": "Mirza",
 			"lastName": "Idrizovic",
-			"goals": 2
+			"goals": 2,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Andrej",
@@ -94,7 +95,8 @@
 			"firstName": "Karlo",
 			"lastName": "Lujic",
 			"number": 4,
-			"goals": 1
+			"goals": 1,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Srecko",

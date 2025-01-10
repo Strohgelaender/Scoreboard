@@ -27,7 +27,7 @@
 		{ "firstName": "Ermin", "lastName": "Kojic", "number": 5, "goals": 2, "yellowCards": 3 },
 		{ "firstName": "Gabriel Henrique", "lastName": "Kerpen", "number": 2, "goals": 1 },
 		{ "firstName": "Adam", "lastName": "Husenica" },
-		{ "firstName": "Kim", "lastName": "Herterich", "number": 17, "goals": 5 },
+		{ "firstName": "Kim", "lastName": "Herterich", "number": 17, "goals": 5, "yellowCards": 1 },
 		{ "firstName": "Christian", "lastName": "Fischer" },
 		{ "firstName": "Martin", "lastName": "Enderlein" }
 	]
