@@ -668,6 +668,13 @@ function animateLineup(team, players) {
 				} else if (!a.is_keeper && b.is_keeper) {
 					return 1;
 				}
+				if (!a.number && !b.number) {
+					return 0;
+				} else if (a.number && !b.number) {
+					return 1;
+				} else if (!a.number && b.number) {
+					return -1;
+				}
 				return +a.number - +b.number;
 			});
 			for (const player of players) {

@@ -17,14 +17,16 @@
 		{
 			"firstName": "Vahid",
 			"lastName": "Idrizovic",
-			"number": 6,
-			"yellowCards": 1
+			"number": 2,
+			"yellowCards": 1,
+			"is_starting": true
 		},
 		{
 			"firstName": "Mirza",
 			"lastName": "Idrizovic",
 			"goals": 2,
-			"yellowCards": 1
+			"yellowCards": 1,
+			"number": 3
 		},
 		{
 			"firstName": "Andrej",
@@ -32,21 +34,20 @@
 			"is_captain": true,
 			"number": 11,
 			"goals": 8,
-			"yellowCards": 3
+			"yellowCards": 3,
+			"is_starting": true
 		},
 		{
 			"firstName": "Fikret",
 			"lastName": "Jahic",
 			"goals": 2,
-			"yellowCards": 1,
-			"number": 2
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Omer",
 			"lastName": "Jahic",
 			"goals": 2,
-			"yellowCards": 1,
-			"number": 9
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Tino",
@@ -57,7 +58,6 @@
 		{
 			"firstName": "Ensar",
 			"lastName": "Skrijelj",
-			"number": 10,
 			"goals": 2,
 			"yellowCards": 3
 		},
@@ -75,13 +75,11 @@
 		{
 			"firstName": "Burhan",
 			"lastName": "Mustafov",
-			"number": 8,
 			"goals": 5
 		},
 		{
 			"firstName": "Arijanit",
 			"lastName": "Kelmendi",
-			"number": 19,
 			"goals": 2,
 			"yellowCards": 2
 		},
@@ -94,9 +92,10 @@
 		{
 			"firstName": "Karlo",
 			"lastName": "Lujic",
-			"number": 4,
+			"number": 10,
 			"goals": 1,
-			"yellowCards": 1
+			"yellowCards": 1,
+			"is_starting": true
 		},
 		{
 			"firstName": "Srecko",
@@ -112,30 +111,29 @@
 		{
 			"firstName": "Marko",
 			"lastName": "Ereiz",
-			"number": 13
+			"number": 16
 		},
 		{
 			"firstName": "Renato",
 			"lastName": "Tuka",
 			"goals": 1,
-			"number": 3,
+			"number": 6,
 			"yellowCards": 1
 		},
 		{
 			"firstName": "Admir",
-			"lastName": "Durmic",
-			"number": 21
+			"lastName": "Durmic"
 		},
 		{
 			"firstName": "Marijan",
 			"lastName": "Krasnic",
 			"number": 1,
-			"is_keeper": true
+			"is_keeper": true,
+			"is_starting": true
 		},
 		{
 			"firstName": "Vendim",
 			"lastName": "Sinani",
-			"number": 5,
 			"goals": 1,
 			"yellowCards": 1
 		},
@@ -143,7 +141,13 @@
 			"firstName": "Ljubisa",
 			"lastName": "Jovic",
 			"number": 7,
-			"goals": 1
+			"goals": 1,
+			"is_starting": true
+		},
+		{
+			"firstName": "Aleksandar",
+			"lastName": "Demonjic",
+			"number": 9
 		}
 	]
 }
