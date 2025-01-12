@@ -213,6 +213,8 @@ function convertToConsistentName(team) {
 			return 'FC Liria Futsal';
 		case 'Beton Boys München (Futsal)':
 			return 'Beton Boys München';
+		case 'Jahn Regensburg (Futsal)':
+			return 'Jahn Regensburg Futsal';
 	}
 	return team;
 }
