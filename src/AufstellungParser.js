@@ -210,6 +210,7 @@ function convertToConsistentName(team) {
 			return 'TSV Weilimdorf';
 		case 'FC Liria':
 		case 'FC Liria  Berlin':
+		case 'FC Liria Berlin':
 			return 'FC Liria Futsal';
 		case 'Beton Boys München (Futsal)':
 			return 'Beton Boys München';
