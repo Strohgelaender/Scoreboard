@@ -129,7 +129,7 @@ function handleEventInternal(event) {
 			bigContentSafeguard(REFEREES, animateReferees);
 			break;
 		case 'CASTER':
-			bigContentSafeguard(CASTER, showCaster);
+			bigContentSafeguard(CASTER, () => showCaster(event.caster));
 			break;
 		case 'FOUL':
 		case 'REMOVE_FOUL':
@@ -401,11 +401,11 @@ function animateBigScoreboardOut() {
 	currentContent = undefined;
 }
 
-function showCaster() {
+function showCaster(caster) {
 	if (!currentContent) {
 		const element = document.getElementById('lowerMainText');
-		element.innerHTML = '<span style="font-family: DFBSans-Italic, sans-serif">Gilbert</span> Kalb';
-		setText('lowerSubText', 'KOMMENTATOR');
+		element.innerHTML = `<span style="font-family: DFBSans-Italic, sans-serif">${caster.firstName}</span> ${caster.lastName}`;
+		setText('lowerSubText', caster.title);
 		lowerThirdAnimation = 'revealCenter';
 	}
 	toggleLowerThird();

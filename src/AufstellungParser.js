@@ -8,9 +8,9 @@ import { parse } from 'node-html-parser';
 
 const matchdayNumber = +process.env.MATCHDAY || 10;
 
-const matchId = '02Q0SKPN94000000VS5489B3VU5PPGUO';
+const matchId = '02Q0SKPNQK000000VS5489B3VU5PPGUO';
 
-const otherMatches = ['02Q0SKPNAO000000VS5489B3VU5PPGUO', '02Q0SKPNCC000000VS5489B3VU5PPGUO', '02Q0SKPNFK000000VS5489B3VU5PPGUO', '02Q0SKPNE0000000VS5489B3VU5PPGUO'];
+const otherMatches = ['02Q0SKPNSG000000VS5489B3VU5PPGUO', '02Q0SKPO0G000000VS5489B3VU5PPGUO', '02Q0SKPO2G000000VS5489B3VU5PPGUO', '02Q0SKPNUO000000VS5489B3VU5PPGUO'];
 
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
 // const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/beton-boys-muenchen-futsal-sv-pars-neu-isenburg-2388070';

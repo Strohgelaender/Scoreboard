@@ -21,6 +21,7 @@ const STANDALONE_EVENTS = [
 	'SHOW_BOTTOM_SCOREBOARD',
 	'SHOW_FOULS',
 	'CASTER',
+	'CO-CASTER',
 	'START_TIMER',
 	'HALFTIME_TIMER',
 	'TABLE',
@@ -134,6 +135,19 @@ function addEventData(event) {
 		event.matchday = nextMatchday;
 	} else if (event.eventType === 'LAST_MATCHDAY') {
 		event.matchday = lastMatchday;
+	} else if (event.eventType === 'CASTER') {
+		event.caster = {
+			firstName: 'Gilbert',
+			lastName: 'Kalb',
+			title: 'KOMMENTATOR',
+		};
+	} else if (event.eventType === 'CO-CASTER') {
+		event.eventType = 'CASTER';
+		event.caster = {
+			firstName: 'Stephan',
+			lastName: 'TODO',
+			title: 'CO-KOMMENTATOR',
+		};
 	}
 }
 

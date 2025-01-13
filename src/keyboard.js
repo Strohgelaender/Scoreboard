@@ -86,6 +86,11 @@ export class Keyboard {
 			case 'LOWER':
 				this.eventEmitter('CASTER');
 				return;
+			case 'CO_CASTER':
+			case 'CO-CASTER':
+			case 'CO CASTER':
+				this.eventEmitter('CO-CASTER');
+				return;
 			case 'START':
 			case 'START_TIMER':
 				this.eventEmitter('START_TIMER');

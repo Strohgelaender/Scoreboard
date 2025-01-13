@@ -92,7 +92,7 @@
 		{
 			"firstName": "Karlo",
 			"lastName": "Lujic",
-			"number": 10,
+			"number": 9,
 			"goals": 1,
 			"yellowCards": 1,
 			"is_starting": true
@@ -117,7 +117,7 @@
 			"firstName": "Renato",
 			"lastName": "Tuka",
 			"goals": 1,
-			"number": 6,
+			"number": 2,
 			"yellowCards": 1
 		},
 		{
@@ -127,7 +127,7 @@
 		{
 			"firstName": "Marijan",
 			"lastName": "Krasnic",
-			"number": 1,
+			"number": 21,
 			"is_keeper": true,
 			"is_starting": true
 		},
@@ -147,7 +147,7 @@
 		{
 			"firstName": "Aleksandar",
 			"lastName": "Demonjic",
-			"number": 9
+			"number": 10
 		}
 	]
 }
