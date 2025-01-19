@@ -547,6 +547,24 @@ html {
 	}
 }
 
+@keyframes revealScoreboard {
+    0% {
+        clip-path: inset(0 40% 0 60%); /* Completely hidden */
+    }
+    100% {
+        clip-path: inset(0 0 0 0); /* Fully visible */
+    }
+}
+
+@keyframes revealScoreboardOut {
+    0% {
+        clip-path: inset(0 0 0 0); /* Fully visible */
+    }
+    100% {
+        clip-path: inset(0 40% 0 60%); /* Completely hidden */
+    }
+}
+
 #referees {
 	top: 750px;
 }

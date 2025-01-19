@@ -203,7 +203,7 @@ function animate(id, animation, duration = '1s', curve = 'cubic-bezier(0.16, 0, 
 
 function toggleScoreboard() {
 	if (!showingSmallScoreboard) {
-		animate('scoreboardTime', 'revealCenter');
+		animate('scoreboardTime', 'revealScoreboard');
 		animate('scoreboardSpielfeldCircle', 'ScoreboardSpielfeldIn');
 		setTimeout(() => {
 			animate('homeTimeImage', 'growImage');
@@ -215,7 +215,7 @@ function toggleScoreboard() {
 			animate('awayTimeScore', 'opacityIn');
 		}, 100);
 	} else {
-		animate('scoreboardTime', 'revealCenterOut');
+		animate('scoreboardTime', 'revealScoreboardOut');
 		animate('scoreboardSpielfeldCircle', 'ScoreboardSpielfeldOut');
 		animate('homeTimeImage', 'hideImage');
 		animate('awayTimeImage', 'hideImage');
