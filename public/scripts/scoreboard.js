@@ -282,7 +282,7 @@ function setBigExtraText(goalEvents) {
 	if (secondHalfDone || (firstHalfDone && time === '00:00')) {
 		setText('bigAdditionalText', 'Endstand');
 	} else if (!firstHalfDone && time === '20:00') {
-		setText('bigAdditionalText', matchdayNumber + '. Spieltag | Sportpark Freiham');
+		setText('bigAdditionalText', matchdayNumber + '. Spieltag | Städt. Thomas-Mann-Gymnasium München');
 	} else if ((!firstHalfDone && time === '00:00') || (firstHalfDone && time === '20:00')) {
 		setText('bigAdditionalText', 'Halbzeitstand');
 	} else {
@@ -305,12 +305,12 @@ function setBigExtraText(goalEvents) {
 
 	const lines = Math.max(homeSize, awaySize);
 	const diff = lines - Math.min(homeSize, awaySize);
-	const newHeight = 50 * lines;
-	const homeHeight = 50 * homeSize;
-	const awayHeight = 50 * awaySize;
-	const newTop = -((lines - 1) * 50);
-	const homeTop = homeSize < awaySize ? diff * 50 : 0; // ?????????
-	const awayTop = awaySize < homeSize ? diff * 50 : 0;
+	const newHeight = 40 * lines;
+	const homeHeight = 40 * homeSize;
+	const awayHeight = 40 * awaySize;
+	const newTop = -(30 + (lines - 2) * 40);
+	const homeTop = homeSize < awaySize ? diff * 40 : 0; // ?????????
+	const awayTop = awaySize < homeSize ? diff * 40 : 0;
 
 	const background = document.getElementById('bottomMoreInfoBackground');
 	background.style.height = newHeight + 'px';
@@ -327,7 +327,7 @@ function setBigExtraText(goalEvents) {
 
 	const middleText = document.getElementById('bigAdditionalText');
 	if (awaySize > homeSize) {
-		const newPosition = 50 * diff - 50;
+		const newPosition = 40 * diff - 40;
 		middleText.style.top = newPosition + 'px';
 	} else {
 		middleText.style.top = '-50px';

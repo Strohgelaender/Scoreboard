@@ -657,12 +657,12 @@ html {
 	display: inline-block;
 	font-family: DFBSans-Regular;
 	position: relative;
-	top: -50px;
+	top: -40px;
 }
 
 .bigGoalscorers {
 	position: relative;
-	height: 50px;
+	height: 40px;
 	max-width: 350px;
 	width: 350px;
 	font-size: 26px;
@@ -670,7 +670,7 @@ html {
 	white-space: pre-line;
 	padding-left: 20px;
 	padding-right: 20px;
-	line-height: 50px;
+	line-height: 40px;
 	opacity: 0;
 }
 
