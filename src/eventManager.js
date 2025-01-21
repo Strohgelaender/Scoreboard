@@ -144,8 +144,8 @@ function addEventData(event) {
 	} else if (event.eventType === 'CO-CASTER') {
 		event.eventType = 'CASTER';
 		event.caster = {
-			firstName: 'Stephan',
-			lastName: 'TODO',
+			firstName: 'Stefan',
+			lastName: 'Mellentin',
 			title: 'CO-KOMMENTATOR',
 		};
 	}
