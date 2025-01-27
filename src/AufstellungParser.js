@@ -73,7 +73,7 @@ export async function readReferees() {
 	} catch (e) {
 		console.error(e);
 	}*/
-	return ['Jacob Pawlowski', 'Fatih Sava', 'Tobias Szombati', 'Farras Fathi'];
+	return ['Maximilian Alkofer', 'Tobias Szombati', 'Alexander Schkarlat', 'Farras Fathi'];
 }
 
 export async function readTable() {
