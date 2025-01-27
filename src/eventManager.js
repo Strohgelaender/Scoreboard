@@ -2,7 +2,14 @@
 // and the index.js server. It handles event creation, resets, and loading data.
 
 import { sendEvent } from './index.js';
-import { readLastMatchday, readMatchday, readNextMatchday, readReferees, readTable } from './AufstellungParser.js';
+import {
+	parseMatchEvents,
+	readLastMatchday,
+	readMatchday,
+	readNextMatchday,
+	readReferees,
+	readTable
+} from './AufstellungParser.js';
 
 const DEFAULT_EVENT = { number: '' };
 
@@ -200,4 +207,13 @@ async function loadLastMatchday(force = false) {
 	if (force || !lastMatchday) {
 		lastMatchday = await readLastMatchday();
 	}
+}
+
+
+async function createHighlightEvents() {
+	const goals = await parseMatchEvents();
+	const messages = [{
+		eventType: 'SHOW_BOTTOM_SCOREBOARD'
+	}];
+	// TODO create events and sent do client
 }

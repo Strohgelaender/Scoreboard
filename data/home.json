@@ -18,14 +18,13 @@
 			"firstName": "Vahid",
 			"lastName": "Idrizovic",
 			"number": 2,
-			"yellowCards": 1,
-			"is_starting": true
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Mirza",
 			"lastName": "Idrizovic",
 			"goals": 2,
-			"yellowCards": 1,
+			"yellowCards": 2,
 			"number": 3
 		},
 		{
@@ -34,8 +33,7 @@
 			"is_captain": true,
 			"number": 11,
 			"goals": 8,
-			"yellowCards": 3,
-			"is_starting": true
+			"yellowCards": 3
 		},
 		{
 			"firstName": "Fikret",
@@ -94,8 +92,7 @@
 			"lastName": "Lujic",
 			"number": 9,
 			"goals": 1,
-			"yellowCards": 1,
-			"is_starting": true
+			"yellowCards": 2
 		},
 		{
 			"firstName": "Srecko",
@@ -128,8 +125,7 @@
 			"firstName": "Marijan",
 			"lastName": "Krasnic",
 			"number": 21,
-			"is_keeper": true,
-			"is_starting": true
+			"is_keeper": true
 		},
 		{
 			"firstName": "Vendim",
@@ -141,8 +137,7 @@
 			"firstName": "Ljubisa",
 			"lastName": "Jovic",
 			"number": 7,
-			"goals": 1,
-			"is_starting": true
+			"goals": 1
 		},
 		{
 			"firstName": "Aleksandar",

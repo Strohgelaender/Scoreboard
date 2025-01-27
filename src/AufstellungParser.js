@@ -13,8 +13,7 @@ const matchId = '02Q0SKPNQK000000VS5489B3VU5PPGUO';
 const otherMatches = ['02Q0SKPNSG000000VS5489B3VU5PPGUO', '02Q0SKPO0G000000VS5489B3VU5PPGUO', '02Q0SKPO2G000000VS5489B3VU5PPGUO', '02Q0SKPNUO000000VS5489B3VU5PPGUO'];
 
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
-// const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/beton-boys-muenchen-futsal-sv-pars-neu-isenburg-2388070';
-const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/2388080';
+const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/fc-liria-jahn-regensburg-futsal-2388171';
 const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
 const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/';
@@ -252,3 +251,54 @@ export async function parseKaderList() {
 		return [];
 	}
 }
+
+export async function parseMatchEvents() {
+	try {
+		const response = await overview.get('');
+		const root = parse(response.data);
+
+		const result = [];
+
+		const allLists = root.querySelectorAll('.m-MatchDetails-history');
+		const matchDetailsList = allLists.find((list) => {
+			const title = list.querySelector('.m-MatchDetails-history-title').text.trim();
+			return title === 'Tore';
+		});
+
+		for (const item of matchDetailsList.querySelectorAll('.m-MatchDetails-history-item')) {
+			let minute = item.querySelector('.m-MatchDetails-history-minute').text;
+			minute = minute.trim();
+			minute = parseInt(minute.replace("'", '')); // Remove '
+
+			const events = item.querySelectorAll('.m-MatchDetails-history-event');
+			const event = events.find((event) => !event.classList.contains('is-empty'));
+			const team = event.classList.contains('m-MatchDetails-history-event--home') ? 'HOME' : 'AWAY';
+
+			const segments = event.querySelectorAll('.m-MatchDetails-history-event-text-segment');
+			for (const segment of segments) {
+				const playerName = segment.querySelector('a')?.text;
+
+				const event = {
+					minute: minute,
+					team: team,
+					player: playerName,
+				};
+
+				const text = segment.text;
+				if (text.includes('Eigentor')) {
+					event.team = team === 'HOME' ? 'AWAY' : 'HOME';
+					event.ownGoal = true;
+				}
+
+				result.push(event);
+			}
+		}
+
+		return result;
+	} catch (e) {
+		console.error(e);
+		return [];
+	}
+}
+
+parseMatchEvents().then(console.log);
