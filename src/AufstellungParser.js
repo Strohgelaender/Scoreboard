@@ -300,5 +300,3 @@ export async function parseMatchEvents() {
 		return [];
 	}
 }
-
-parseMatchEvents().then(console.log);
