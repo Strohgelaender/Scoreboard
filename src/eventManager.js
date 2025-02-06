@@ -59,12 +59,21 @@ export function addListener(listener) {
 	listeners.push(listener);
 }
 
+let showCoCaster = false;
+
 export async function onInput(input, options) {
 	input = input.toUpperCase().trim();
 
 	if (input === 'ADD_TIME') {
 		changeTime(options);
 		return;
+	}
+
+	if (input === 'CASTER') {
+		if (showCoCaster) {
+			input = 'CO-CASTER';
+		}
+		showCoCaster = !showCoCaster;
 	}
 
 	if (input === 'HOME' || input === 'AWAY') {
