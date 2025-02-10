@@ -2,14 +2,7 @@
 // and the index.js server. It handles event creation, resets, and loading data.
 
 import { sendEvent } from './index.js';
-import {
-	parseMatchEvents,
-	readLastMatchday,
-	readMatchday,
-	readNextMatchday,
-	readReferees,
-	readTable
-} from './AufstellungParser.js';
+import { parseMatchEvents, readLastMatchday, readMatchday, readNextMatchday, readReferees, readTable } from './AufstellungParser.js';
 
 const DEFAULT_EVENT = { number: '' };
 
@@ -28,7 +21,6 @@ const STANDALONE_EVENTS = [
 	'SHOW_BOTTOM_SCOREBOARD',
 	'SHOW_FOULS',
 	'CASTER',
-	'CO-CASTER',
 	'START_TIMER',
 	'HALFTIME_TIMER',
 	'TABLE',
@@ -59,21 +51,12 @@ export function addListener(listener) {
 	listeners.push(listener);
 }
 
-let showCoCaster = false;
-
 export async function onInput(input, options) {
 	input = input.toUpperCase().trim();
 
 	if (input === 'ADD_TIME') {
 		changeTime(options);
 		return;
-	}
-
-	if (input === 'CASTER') {
-		if (showCoCaster) {
-			input = 'CO-CASTER';
-		}
-		showCoCaster = !showCoCaster;
 	}
 
 	if (input === 'HOME' || input === 'AWAY') {
@@ -157,13 +140,6 @@ function addEventData(event) {
 			lastName: 'Kalb',
 			title: 'KOMMENTATOR',
 		};
-	} else if (event.eventType === 'CO-CASTER') {
-		event.eventType = 'CASTER';
-		event.caster = {
-			firstName: 'Stefan',
-			lastName: 'Mellentin',
-			title: 'CO-KOMMENTATOR',
-		};
 	}
 }
 
@@ -218,11 +194,12 @@ async function loadLastMatchday(force = false) {
 	}
 }
 
-
 async function createHighlightEvents() {
 	const goals = await parseMatchEvents();
-	const messages = [{
-		eventType: 'SHOW_BOTTOM_SCOREBOARD'
-	}];
+	const messages = [
+		{
+			eventType: 'SHOW_BOTTOM_SCOREBOARD',
+		},
+	];
 	// TODO create events and sent do client
 }

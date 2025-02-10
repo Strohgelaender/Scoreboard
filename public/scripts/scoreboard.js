@@ -282,7 +282,7 @@ function setBigExtraText(goalEvents) {
 	if (secondHalfDone || (firstHalfDone && time === '00:00')) {
 		setText('bigAdditionalText', 'Endstand');
 	} else if (!firstHalfDone && time === '20:00') {
-		setText('bigAdditionalText', matchdayNumber + '. Spieltag | Städt. Thomas-Mann-Gymnasium München');
+		setText('bigAdditionalText', matchdayNumber + '. Spieltag | Sportpark Freiham');
 	} else if ((!firstHalfDone && time === '00:00') || (firstHalfDone && time === '20:00')) {
 		setText('bigAdditionalText', 'Halbzeitstand');
 	} else {
