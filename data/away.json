@@ -1,7 +1,7 @@
 {
 	"name": "Futsal Panthers",
 	"fullName": "Futsal Panthers Köln",
-	"shirtColor": "#ff0000",
+	"shirtColor": "#000000",
 	"imagePath": "/images/logo-futsal-panthers.png",
 	"coach": {
 		"firstName": "Amin",

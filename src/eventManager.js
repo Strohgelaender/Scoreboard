@@ -107,6 +107,10 @@ function sendAndReset() {
 	addEventData(event);
 	sendEvent(event);
 	const originalEvent = event;
+	if (!event.eventType) {
+		event = { ...DEFAULT_EVENT };
+		return;
+	}
 	if (event.eventType === 'GOAL') {
 		// Keep team info to make following show goal easier
 		event = { ...DEFAULT_EVENT, team: originalEvent.team };
@@ -114,6 +118,9 @@ function sendAndReset() {
 		event = { ...DEFAULT_EVENT, number: originalEvent.number };
 	} else {
 		event = { ...DEFAULT_EVENT };
+	}
+	if (event.number === undefined) {
+		event.number = '';
 	}
 	for (const listener of listeners) {
 		listener({ team: event.team ?? '', number: event.number });

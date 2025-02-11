@@ -8,9 +8,9 @@ import { parse } from 'node-html-parser';
 
 const matchdayNumber = +process.env.MATCHDAY || 10;
 
-const matchId = '02Q0SKPNQK000000VS5489B3VU5PPGUO';
+const matchId = '02Q0SKPO60000000VS5489B3VU5PPGUO';
 
-const otherMatches = ['02Q0SKPNSG000000VS5489B3VU5PPGUO', '02Q0SKPO0G000000VS5489B3VU5PPGUO', '02Q0SKPO2G000000VS5489B3VU5PPGUO', '02Q0SKPNUO000000VS5489B3VU5PPGUO'];
+const otherMatches = ['02Q0SKPO7O000000VS5489B3VU5PPGUO', '02Q0SKPO9G000000VS5489B3VU5PPGUO', '02Q0SKPO48000000VS5489B3VU5PPGUO', '02Q0SKPOB8000000VS5489B3VU5PPGUO'];
 
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
 const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/fc-liria-jahn-regensburg-futsal-2388171';
@@ -72,7 +72,7 @@ export async function readReferees() {
 	} catch (e) {
 		console.error(e);
 	}*/
-	return ['Maximilian Alkofer', 'Tobias Szombati', 'Alexander Schkarlat', 'Farras Fathi'];
+	return ['Florian Schaible', 'Matti Kastendeich', 'Marijo Kraljic', 'Farras Fathi'];
 }
 
 export async function readTable() {
