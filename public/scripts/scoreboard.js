@@ -1138,13 +1138,13 @@ function showPlayoffs(matches) {
 	} else {
 		const table = document.getElementById('playoffMatchesBodys');
 		for (const match of matches) {
-			createPlayoffRow(table, match)
+			createPlayoffRow(table, match);
 			table.appendChild(document.createElement('br'));
 		}
 		// Create HF matches
 		const hfTable = document.getElementById('hfMatchesBodys');
 		for (let i = 0; i < 2; i++) {
-			createEmptyPlayoffRow(hfTable)
+			createEmptyPlayoffRow(hfTable);
 			hfTable.appendChild(document.createElement('br'));
 			hfTable.appendChild(document.createElement('br'));
 			hfTable.appendChild(document.createElement('br'));

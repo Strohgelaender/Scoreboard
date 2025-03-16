@@ -1222,21 +1222,21 @@ html {
 }
 
 #previousMatchesContent {
-    top: 830px;
-    height: 250px;
-    width: 300px;
+	top: 830px;
+	height: 250px;
+	width: 300px;
 }
 
 #previousMatchesAdditionalBackground {
-    top: 830px;
-    height: 250px;
-    width: 300px;
-    left: 0;
-    clip-path: inset(100% 0 0 0);
+	top: 830px;
+	height: 250px;
+	width: 300px;
+	left: 0;
+	clip-path: inset(100% 0 0 0);
 }
 
 #previousMatchesBox {
-    height: 110px;
+	height: 110px;
 }
 
 #playoffTable {
@@ -1265,10 +1265,10 @@ html {
 }
 
 #fTable {
-    position: absolute;
-    left: 650px;
-    top: 300px;
-    border-collapse: separate;
+	position: absolute;
+	left: 650px;
+	top: 300px;
+	border-collapse: separate;
 }
 
 .ptable td {
@@ -1277,25 +1277,25 @@ html {
 
 .ti-pl {
 	width: 30px;
-    background-color: var(--futsal-blue-2);
+	background-color: var(--futsal-blue-2);
 }
 
 .tn-pl {
 	width: 60px;
-    background-color: var(--futsal-blue-2);
+	background-color: var(--futsal-blue-2);
 }
 
 .playoffArrow {
-    position: absolute;
-    top: 0;
-    left: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 #playoffLogo {
-     position: absolute;
-     width: auto;
-     height: 100px;
-     left: 700px;
-     top: 40px;
-     z-index: 2;
- }
+	position: absolute;
+	width: auto;
+	height: 100px;
+	left: 700px;
+	top: 40px;
+	z-index: 2;
+}
