@@ -1221,6 +1221,24 @@ html {
 	clip-path: inset(100% 0 0 0);
 }
 
+#previousMatchesContent {
+    top: 830px;
+    height: 250px;
+    width: 300px;
+}
+
+#previousMatchesAdditionalBackground {
+    top: 830px;
+    height: 250px;
+    width: 300px;
+    left: 0;
+    clip-path: inset(100% 0 0 0);
+}
+
+#previousMatchesBox {
+    height: 110px;
+}
+
 #playoffTable {
 	border-collapse: separate;
 	margin-top: 30px;

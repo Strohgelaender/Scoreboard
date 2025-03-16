@@ -14,6 +14,7 @@ const LIVE_MATCHDAY = 'LIVE_MATCHDAY';
 const NEXT_MATCHDAY = 'NEXT_MATCHDAY';
 const LAST_MATCHDAY = 'LAST_MATCHDAY';
 const PLAYOFFS = 'PLAYOFFS';
+const PREVIOUS_MATCHES = 'PREVIOUS_MATCHES';
 
 const transitions = {
 	[LINEUP]: animateLineup.bind(this, 0, []),
@@ -28,6 +29,7 @@ const transitions = {
 	[NEXT_MATCHDAY]: showNextMatchday.bind(this, []),
 	[LAST_MATCHDAY]: showLastMatchday.bind(this, []),
 	[PLAYOFFS]: showPlayoffs.bind(this, []),
+	[PREVIOUS_MATCHES]: showPreviousMatches,
 };
 
 let currentContent;
@@ -175,6 +177,9 @@ function handleEventInternal(event) {
 			break;
 		case PLAYOFFS:
 			bigContentSafeguard(PLAYOFFS, () => showPlayoffs(event.matches));
+			break;
+		case PREVIOUS_MATCHES:
+			bigContentSafeguard(PREVIOUS_MATCHES, showPreviousMatches);
 			break;
 	}
 }
@@ -1103,6 +1108,20 @@ function showLastMatchday(matchday) {
 		setText('matchdayTitle', matchday.number + '. Spieltag');
 		animate('matchday', 'revealToLeft');
 		currentContent = MATCHDAY;
+	}
+}
+
+function showPreviousMatches() {
+	if (currentContent === PREVIOUS_MATCHES) {
+		animate('previousMatchesContent', 'revealUpOut');
+		setTimeout(() => {
+			animate('previousMatchesAdditionalBackground', 'revealUpOut');
+		}, 80);
+		currentContent = undefined;
+	} else {
+		animate('previousMatchesAdditionalBackground', 'revealUp', '0.7s');
+		animate('previousMatchesContent', 'revealUp', '1s');
+		currentContent = PREVIOUS_MATCHES;
 	}
 }
 

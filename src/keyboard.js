@@ -159,6 +159,13 @@ export class Keyboard {
 			case 'PLAYOFF':
 				this.eventEmitter('PLAYOFFS');
 				return;
+			case 'PREV':
+			case 'PREVIOUS':
+			case 'PREVIOUS MATCHDAY':
+			case 'PREVIOUS_MATCHDAY':
+			case 'PREVIOUS_MATCHES':
+			case 'PREVIOUS MATCHES':
+				this.eventEmitter('PREVIOUS_MATCHES');
 		}
 	}
 }
