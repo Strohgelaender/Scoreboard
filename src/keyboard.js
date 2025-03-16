@@ -155,6 +155,10 @@ export class Keyboard {
 			case 'SHOW INTERVIEW':
 				this.eventEmitter('SHOW_INTERVIEW');
 				return;
+			case 'PLAYOFFS':
+			case 'PLAYOFF':
+				this.eventEmitter('PLAYOFFS');
+				return;
 		}
 	}
 }

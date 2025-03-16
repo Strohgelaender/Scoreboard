@@ -17,13 +17,62 @@ const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/20
 const tableUrl =
 	'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
 const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/';
+const matchdayUrlQF = 'https://datencenter.dfb.de//de/competitions/futsal-bundesliga/seasons/2024-2025/matchday/viertelfinale';
 const awayTeamPlayersUrl = 'https://datencenter.dfb.de/competitions/futsal-bundesliga/seasons/2024-2025/teams/hamburger-sv-futsal';
 
 const game = axios.create({ baseURL: matchUrl });
 const overview = axios.create({ baseURL: overviewUrl });
 const table = axios.create({ baseURL: tableUrl });
 const matchday = axios.create({ baseURL: matchdayUrl });
+const matchdayQF = axios.create({ baseURL: matchdayUrlQF });
 const awayTeamPlayers = axios.create({ baseURL: awayTeamPlayersUrl });
+
+export const playoffMatches = [
+	{
+		homeTeam: 'FCL',
+		homeImage: getTeamLogo('FC Liria Futsal'),
+		awayTeam: 'TSV',
+		awayImage: getTeamLogo('TSV Weilimdorf'),
+		scores: [
+			{ home: '-', away: '-' },
+			{ home: '-', away: '-' },
+			{ home: '-', away: '-' },
+		],
+	},
+	{
+		homeTeam: 'BBM',
+		homeImage: getTeamLogo('Beton Boys München'),
+		awayTeam: 'HSV',
+		awayImage: getTeamLogo('Hamburger SV'),
+		scores: [
+			{ home: '-', away: '-' },
+			{ home: '-', away: '-' },
+			{ home: '-', away: '-' },
+		],
+	},
+	{
+		homeTeam: 'MCH',
+		homeImage: getTeamLogo('MCH Futsal Club Bielefeld'),
+		awayTeam: 'SSV',
+		awayImage: getTeamLogo('Jahn Regensburg Futsal'),
+		scores: [
+			{ home: '-', away: '-' },
+			{ home: '-', away: '-' },
+			{ home: '-', away: '-' },
+		],
+	},
+	{
+		homeTeam: 'F95',
+		homeImage: getTeamLogo('Fortuna Düsseldorf'),
+		awayTeam: 'HOT',
+		awayImage: getTeamLogo('HOT 05 Futsal'),
+		scores: [
+			{ home: '-', away: '-' },
+			{ home: '-', away: '-' },
+			{ home: '-', away: '-' },
+		],
+	},
+];
 
 export async function readLineup() {
 	try {
@@ -129,7 +178,8 @@ function getTeamLogo(teamName) {
 }
 
 export async function readMatchday() {
-	return await parseMatchday(matchdayNumber, true);
+	// return await parseMatchday(matchdayNumber, true);
+	return await parseDFBMatchdayOverviewWithBase(matchdayQF, '');
 }
 
 export async function readNextMatchday() {
@@ -158,7 +208,11 @@ async function parseMatchday(number, addLiveScores = false) {
 }
 
 async function parseDFBMatchdayOverview(number) {
-	const response = await matchday.get(number + '-spieltag');
+	return await parseDFBMatchdayOverviewWithBase(matchday, number + '-spieltag');
+}
+
+async function parseDFBMatchdayOverviewWithBase(base, path) {
+	const response = await base.get(path);
 	const root = parse(response.data);
 	const matchdayHtml = root.querySelector('.c-MatchTable-body');
 	let result = [];

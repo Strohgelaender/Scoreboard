@@ -1069,13 +1069,15 @@ html {
 	}
 }
 
-#matchdayWrapper {
+#matchdayWrapper,
+#playoffWrapper {
 	position: absolute;
 	top: 200px;
 	left: 500px;
 }
 
-#matchday {
+#matchday,
+#playoff {
 	height: 700px;
 	width: 1000px;
 	background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
@@ -1089,7 +1091,8 @@ html {
 	top: 50px;
 }
 
-#matchdayContent {
+#matchdayContent,
+#playoffContent {
 	height: 650px;
 	width: 910px;
 	position: absolute;
@@ -1099,7 +1102,8 @@ html {
 	font-family: DFBSans-Bold, sans-serif;
 }
 
-#matchdayTitle {
+#matchdayTitle,
+#playoffTitle {
 	font-size: 60px;
 	margin: 30px;
 }
@@ -1216,3 +1220,64 @@ html {
 	left: 0;
 	clip-path: inset(100% 0 0 0);
 }
+
+#playoffTable {
+	border-collapse: separate;
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+#playoffMatchesBodys td {
+	padding: 5px 10px;
+}
+
+.b1 {
+	background-color: var(--futsal-blue-2);
+}
+
+.b2 {
+	background-color: var(--futsal-blue-1);
+}
+
+#hfTable {
+	position: absolute;
+	left: 350px;
+	top: 170px;
+	border-collapse: separate;
+}
+
+#fTable {
+    position: absolute;
+    left: 650px;
+    top: 300px;
+    border-collapse: separate;
+}
+
+.ptable td {
+	padding: 5px 10px;
+}
+
+.ti-pl {
+	width: 30px;
+    background-color: var(--futsal-blue-2);
+}
+
+.tn-pl {
+	width: 60px;
+    background-color: var(--futsal-blue-2);
+}
+
+.playoffArrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#playoffLogo {
+     position: absolute;
+     width: auto;
+     height: 100px;
+     left: 700px;
+     top: 40px;
+     z-index: 2;
+ }

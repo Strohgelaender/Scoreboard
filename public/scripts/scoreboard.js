@@ -13,6 +13,7 @@ const LIVE_TABLE = 'LIVE_TABLE';
 const LIVE_MATCHDAY = 'LIVE_MATCHDAY';
 const NEXT_MATCHDAY = 'NEXT_MATCHDAY';
 const LAST_MATCHDAY = 'LAST_MATCHDAY';
+const PLAYOFFS = 'PLAYOFFS';
 
 const transitions = {
 	[LINEUP]: animateLineup.bind(this, 0, []),
@@ -26,6 +27,7 @@ const transitions = {
 	[LIVE_MATCHDAY]: showLiveMatchday.bind(this, []),
 	[NEXT_MATCHDAY]: showNextMatchday.bind(this, []),
 	[LAST_MATCHDAY]: showLastMatchday.bind(this, []),
+	[PLAYOFFS]: showPlayoffs.bind(this, []),
 };
 
 let currentContent;
@@ -170,6 +172,9 @@ function handleEventInternal(event) {
 			break;
 		case 'CLEAR_RED_CARD':
 			clearRedCardTimer(event.team);
+			break;
+		case PLAYOFFS:
+			bigContentSafeguard(PLAYOFFS, () => showPlayoffs(event.matches));
 			break;
 	}
 }
@@ -1099,4 +1104,91 @@ function showLastMatchday(matchday) {
 		animate('matchday', 'revealToLeft');
 		currentContent = MATCHDAY;
 	}
+}
+
+function showPlayoffs(matches) {
+	if (currentContent === PLAYOFFS) {
+		animate('playoff', 'revealCenterOut');
+		animate('playoffLogo', 'hideImage');
+		setTimeout(() => {
+			document.getElementById('playoffMatchesBodys').replaceChildren();
+			document.getElementById('hfMatchesBodys').replaceChildren();
+			document.getElementById('fMatchesBodys').replaceChildren();
+		}, 1300);
+		currentContent = undefined;
+	} else {
+		const table = document.getElementById('playoffMatchesBodys');
+		for (const match of matches) {
+			createPlayoffRow(table, match)
+			table.appendChild(document.createElement('br'));
+		}
+		// Create HF matches
+		const hfTable = document.getElementById('hfMatchesBodys');
+		for (let i = 0; i < 2; i++) {
+			createEmptyPlayoffRow(hfTable)
+			hfTable.appendChild(document.createElement('br'));
+			hfTable.appendChild(document.createElement('br'));
+			hfTable.appendChild(document.createElement('br'));
+			hfTable.appendChild(document.createElement('br'));
+			hfTable.appendChild(document.createElement('br'));
+		}
+
+		const finalTable = document.getElementById('fMatchesBodys');
+		createEmptyPlayoffRow(finalTable);
+		animate('playoff', 'revealCenter');
+		animate('playoffLogo', 'growImage');
+		currentContent = PLAYOFFS;
+	}
+}
+
+function createPlayoffRow(table, match) {
+	const homeRow = document.createElement('tr');
+	const awayRow = document.createElement('tr');
+
+	const homeLogoTd = document.createElement('td');
+	homeLogoTd.style.textAlign = 'center';
+	homeLogoTd.classList.add('b1');
+	const homeLogoImage = document.createElement('img');
+	homeLogoImage.src = match.homeImage;
+	homeLogoImage.classList.add('tableTeamLogo');
+	homeLogoTd.appendChild(homeLogoImage);
+	homeRow.appendChild(homeLogoTd);
+
+	const awayLogoTd = document.createElement('td');
+	awayLogoTd.style.textAlign = 'center';
+	awayLogoTd.classList.add('b1');
+	const awayLogoImage = document.createElement('img');
+	awayLogoImage.src = match.awayImage;
+	awayLogoImage.classList.add('tableTeamLogo');
+	awayLogoTd.appendChild(awayLogoImage);
+	awayRow.appendChild(awayLogoTd);
+
+	homeRow.appendChild(createElement('td', match.homeTeam, 'b1'));
+	awayRow.appendChild(createElement('td', match.awayTeam, 'b1'));
+	for (const score of match.scores) {
+		homeRow.appendChild(createElement('td', score.home, 'b2'));
+		awayRow.appendChild(createElement('td', score.away, 'b2'));
+	}
+
+	table.appendChild(homeRow);
+	table.appendChild(awayRow);
+}
+
+function createEmptyPlayoffRow(table) {
+	const homeRow = document.createElement('tr');
+	const awayRow = document.createElement('tr');
+
+	homeRow.appendChild(createElement('td', '', 'ti-pl'));
+	awayRow.appendChild(createElement('td', '', 'ti-pl'));
+
+	homeRow.appendChild(createElement('td', '', 'tn-pl'));
+	awayRow.appendChild(createElement('td', '', 'tn-pl'));
+
+	for (let j = 0; j < 3; j++) {
+		homeRow.appendChild(createElement('td', '-', 'b2'));
+		awayRow.appendChild(createElement('td', '-', 'b2'));
+	}
+
+	table.appendChild(homeRow);
+	table.appendChild(awayRow);
 }
