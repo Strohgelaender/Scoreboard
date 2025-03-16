@@ -969,7 +969,7 @@ function showMatchday(matchday) {
 		for (const match of matchday) {
 			createMatchdayRow(match, table);
 		}
-		setText('matchdayTitle', matchdayNumber + '. Spieltag');
+		setText('matchdayTitle', 'Viertelfinale');
 		animate('matchday', 'revealToLeft');
 		currentContent = MATCHDAY;
 	}
@@ -1036,7 +1036,7 @@ function showLiveMatchday(matches) {
 		}, 1100);
 		currentContent = undefined;
 	} else {
-		setText('liveMatchesTitle', matchdayNumber + '. Spieltag');
+		setText('liveMatchesTitle', 'Viertelfinale');
 		const table = document.getElementById('liveMatchesTable');
 		for (const match of matches) {
 			if (match.homeTeam === fullNames[0] || match.awayTeam === fullNames[1]) {

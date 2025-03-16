@@ -114,6 +114,7 @@ export class Keyboard {
 				this.eventEmitter('NEXT_MATCHDAY');
 				return;
 			case 'LAST':
+			case 'LAST MATCHES':
 				this.eventEmitter('LAST_MATCHDAY');
 				return;
 			case 'REFRESH':
