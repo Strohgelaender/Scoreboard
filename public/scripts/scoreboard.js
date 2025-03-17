@@ -1080,7 +1080,8 @@ function showNextMatchday(matchday) {
 			document.getElementById('nextMatchesDate').style.display = 'none';
 		}
 
-		setText('nextMatchesTitle', matchday.number + '. Spieltag');
+		//setText('nextMatchesTitle', matchday.number + '. Spieltag');
+		setText('nextMatchesTitle', 'Viertelfinale');
 
 		const table = document.getElementById('nextMatchesTable');
 		for (const match of matchday.matches) {

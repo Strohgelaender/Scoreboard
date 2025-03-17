@@ -179,12 +179,17 @@ function getTeamLogo(teamName) {
 
 export async function readMatchday() {
 	// return await parseMatchday(matchdayNumber, true);
-	return await parseDFBMatchdayOverviewWithBase(matchdayQF, '');
+	let matches = await parseDFBMatchdayOverviewWithBase(matchdayQF, '');
+	matches = matches.splice(0, 4);
+	await addLiveScoresToMatchday(matches);
+	return matches;
 }
 
 export async function readNextMatchday() {
-	const matches = await parseMatchday(matchdayNumber + 1);
-	return { matches, number: matchdayNumber + 1 };
+	//const matches = await parseMatchday(matchdayNumber + 1);
+	// return { matches, number: matchdayNumber + 1 };
+	const matches = await parseDFBMatchdayOverviewWithBase(matchdayQF, '');
+	return { matches: matches.splice(4) };
 }
 
 export async function readLastMatchday() {
