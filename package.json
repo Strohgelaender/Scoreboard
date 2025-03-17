@@ -19,7 +19,7 @@
 	"dependencies": {
 		"@elgato-stream-deck/node": "7.1.2",
 		"@julusian/jpeg-turbo": "2.2.0",
-		"axios": "1.7.9",
+		"axios": "1.8.3",
 		"body-parser": "1.20.3",
 		"canvas": "2.11.2",
 		"dotenv": "16.4.7",
@@ -30,13 +30,13 @@
 		"tinyws": "^0.1.0"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.17.0",
-		"eslint": "^9.17.0",
+		"@eslint/js": "^9.22.0",
+		"eslint": "^9.22.0",
 		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-prettier": "^5.2.1",
+		"eslint-plugin-prettier": "^5.2.3",
 		"globals": "^15.14.0",
 		"nodemon": "^3.1.9",
-		"npm-check-updates": "^17.1.13",
-		"prettier": "3.4.2"
+		"npm-check-updates": "^17.1.15",
+		"prettier": "3.5.3"
 	}
 }
