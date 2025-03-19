@@ -249,6 +249,11 @@ async function addLiveScoresToMatchday(result) {
 		const guestTeam = convertToConsistentName(root.guest_team.name);
 		// use or to reduce potential error sources, as the team names are not always consistent
 		const match = result.find((m) => m.homeTeam === homeTeam || m.awayTeam === guestTeam);
+
+		const homeImage = getTeamLogo(homeTeam);
+		const awayImage = getTeamLogo(guestTeam);
+		const playoffMatch = playoffMatches.find((m) => m.homeImage === homeImage || m.awayImage === awayImage);
+
 		if (match) {
 			match.originalScore = match.score;
 			match.score = score;
@@ -256,6 +261,11 @@ async function addLiveScoresToMatchday(result) {
 			console.log('Match found:', homeTeam, guestTeam, score, match.isLive);
 		} else {
 			console.warn('Match not found:', homeTeam, guestTeam);
+		}
+
+		if (playoffMatch) {
+			const scoreParts = score.split(':');
+			playoffMatch.scores[0] = { home: scoreParts[0], away: scoreParts[1], live: root.live };
 		}
 	}
 }

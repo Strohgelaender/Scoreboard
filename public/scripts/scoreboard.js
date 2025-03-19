@@ -1186,8 +1186,15 @@ function createPlayoffRow(table, match) {
 	homeRow.appendChild(createElement('td', match.homeTeam, 'b1'));
 	awayRow.appendChild(createElement('td', match.awayTeam, 'b1'));
 	for (const score of match.scores) {
-		homeRow.appendChild(createElement('td', score.home, 'b2'));
-		awayRow.appendChild(createElement('td', score.away, 'b2'));
+		const homeScore = createElement('td', score.home, 'b2');
+		const awayScore = createElement('td', score.away, 'b2');
+		if (score.live) {
+			homeScore.classList.add('live');
+			awayScore.classList.add('live');
+		}
+		homeRow.appendChild(homeScore);
+		awayRow.appendChild(awayScore);
+
 	}
 
 	table.appendChild(homeRow);
