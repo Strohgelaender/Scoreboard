@@ -292,7 +292,7 @@ function setBigExtraText(goalEvents) {
 	if (secondHalfDone || (firstHalfDone && time === '00:00')) {
 		setText('bigAdditionalText', 'Endstand');
 	} else if (!firstHalfDone && time === '20:00') {
-		setText('bigAdditionalText', 'Playoff-Viertelfinale | Sportpark Freiham');
+		setText('bigAdditionalText', 'Playoff-Viertelfinale 1 | Sportpark Freiham');
 	} else if ((!firstHalfDone && time === '00:00') || (firstHalfDone && time === '20:00')) {
 		setText('bigAdditionalText', 'Halbzeitstand');
 	} else {
@@ -969,7 +969,7 @@ function showMatchday(matchday) {
 		for (const match of matchday) {
 			createMatchdayRow(match, table);
 		}
-		setText('matchdayTitle', 'Viertelfinale');
+		setText('matchdayTitle', 'Viertelfinale 1');
 		animate('matchday', 'revealToLeft');
 		currentContent = MATCHDAY;
 	}
@@ -999,7 +999,7 @@ function createMatchdayRow(match, table, short = false, time = false, date = fal
 	} else if (time) {
 		const td = document.createElement('td');
 		if (date) {
-			td.textContent = `${match.date.trim().substring(0, match.date.length - 4)} ${match.time}`;
+			td.textContent = `${match.date.trim().substring(0, match.date.length - 4)} ${match.time ?? 'TBA'}`;
 		} else {
 			td.textContent = match.time;
 		}
@@ -1036,7 +1036,7 @@ function showLiveMatchday(matches) {
 		}, 1100);
 		currentContent = undefined;
 	} else {
-		setText('liveMatchesTitle', 'Viertelfinale');
+		setText('liveMatchesTitle', 'Viertelfinale 1');
 		const table = document.getElementById('liveMatchesTable');
 		for (const match of matches) {
 			if (match.homeTeam === fullNames[0] || match.awayTeam === fullNames[1]) {
@@ -1081,7 +1081,7 @@ function showNextMatchday(matchday) {
 		}
 
 		//setText('nextMatchesTitle', matchday.number + '. Spieltag');
-		setText('nextMatchesTitle', 'Viertelfinale');
+		setText('nextMatchesTitle', 'Viertelfinale 2');
 
 		const table = document.getElementById('nextMatchesTable');
 		for (const match of matchday.matches) {

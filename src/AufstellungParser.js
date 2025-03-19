@@ -181,7 +181,8 @@ export async function readMatchday() {
 	// return await parseMatchday(matchdayNumber, true);
 	let matches = await parseDFBMatchdayOverviewWithBase(matchdayQF, '');
 	matches = matches.splice(0, 4);
-	await addLiveScoresToMatchday(matches);
+	// TODO no live scores available yet
+	// await addLiveScoresToMatchday(matches);
 	return matches;
 }
 
