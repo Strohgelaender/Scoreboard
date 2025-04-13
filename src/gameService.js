@@ -34,11 +34,12 @@ export class GameService {
 				setTimeout(() => {
 					this.sendEvent({ eventType: 'SECOND_HALF' });
 					this.sendEvent({ eventType: 'CLEAR_FOULS' });
-					if (!this.matchTimer.isFirstHalfDone()) {
+					// This callback is delayed and the section is already updated.
+					if (this.matchTimer.getSection() === 2) {
 						this.sendEvent({ eventType: 'HALFTIME_TIMER' });
 					}
 					this.matchTimer.resetTimer();
-				}, 10000);
+				}, 10_000);
 			},
 		);
 	}
