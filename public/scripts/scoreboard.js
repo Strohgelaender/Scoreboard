@@ -1194,7 +1194,6 @@ function createPlayoffRow(table, match) {
 		}
 		homeRow.appendChild(homeScore);
 		awayRow.appendChild(awayScore);
-
 	}
 
 	table.appendChild(homeRow);

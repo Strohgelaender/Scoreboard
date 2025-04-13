@@ -16,7 +16,7 @@ const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
 const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/fc-liria-jahn-regensburg-futsal-2388171';
 const tableUrl =
 	// 'https://www.fussball.de/spieltagsuebersicht/futsal-bundesliga-deutschland-futsal-bundesliga-herren-saison2425-deutschland/-/staffel/02P0KQ4NU4000000VS5489B3VU9BAIPM-C#!/';
-'https://www.fussball.de/ajax.fixtures.tournament/-/action/OPEN/staffel/02Q0HO9U98000002VS5489B4VVE5FNTJ-G';
+	'https://www.fussball.de/ajax.fixtures.tournament/-/action/OPEN/staffel/02Q0HO9U98000002VS5489B4VVE5FNTJ-G';
 const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/seasons/2024-2025/matchday/spieltag/';
 const matchdayUrlQF = 'https://datencenter.dfb.de//de/competitions/futsal-bundesliga/seasons/2024-2025/matchday/viertelfinale';
 const awayTeamPlayersUrl = 'https://datencenter.dfb.de/competitions/futsal-bundesliga/seasons/2024-2025/teams/hamburger-sv-futsal';
