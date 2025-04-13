@@ -42,7 +42,7 @@ let teamImages;
 let coaches;
 
 let time;
-let firstHalfDone = false;
+let section = 1;
 let secondHalfDone = false;
 let matchdayNumber;
 
@@ -74,8 +74,8 @@ function loadTeams() {
 			document.getElementById('awayTimeShirtLine').style.backgroundColor = away.shirtColor;
 
 			matchdayNumber = value.matchday;
-			firstHalfDone = value.firstHalfDone;
-			if (firstHalfDone) {
+			section = value.section;
+			if (section === 2) {
 				updateHalfIndicator();
 			}
 			if (foulsHomePre !== foulsHome || foulsAwayPre !== foulsAway) {
@@ -160,10 +160,7 @@ function handleEventInternal(event) {
 			bigContentSafeguard(LAST_MATCHDAY, () => showLastMatchday(event.matchday));
 			break;
 		case 'SECOND_HALF':
-			if (firstHalfDone) {
-				secondHalfDone = true;
-			}
-			firstHalfDone = true;
+			section++;
 			updateHalfIndicator();
 			break;
 		case 'REFRESH':
@@ -185,8 +182,14 @@ function handleEventInternal(event) {
 }
 
 function updateHalfIndicator() {
-	setText('halfIndicator', '2');
-	setText('halfSup', 'nd');
+	setText('halfIndicator', section);
+	if (section === 1) {
+		setText('halfSup', 'st');
+	} else if (section === 2) {
+		setText('halfSup', 'nd');
+	} else if (section === 3) {
+		setText('halfSup', 'rd');
+	}
 }
 
 function bigContentSafeguard(nextContent, callback) {
@@ -244,7 +247,7 @@ let showingVersus = false;
 function toggleBigScoreboard(goalEvents) {
 	if (!currentContent) {
 		showingExtraText = setBigExtraText(goalEvents);
-		showingVersus = !firstHalfDone && time === '20:00';
+		showingVersus = section === 1 && time === '20:00';
 		animate('bottomAdditionalBackground', 'revealCenter');
 		setTimeout(() => {
 			animate('bottomScoreBackground', 'revealCenter');
@@ -289,11 +292,11 @@ function toggleBigScoreboard(goalEvents) {
 
 function setBigExtraText(goalEvents) {
 	let showingText = true;
-	if (secondHalfDone || (firstHalfDone && time === '00:00')) {
+	if (secondHalfDone || (section > 1 && time === '00:00')) {
 		setText('bigAdditionalText', 'Endstand');
-	} else if (!firstHalfDone && time === '20:00') {
+	} else if (section === 1 && time === '20:00') {
 		setText('bigAdditionalText', 'Playoff-Viertelfinale 1 | Sportpark Freiham');
-	} else if ((!firstHalfDone && time === '00:00') || (firstHalfDone && time === '20:00')) {
+	} else if ((section === 1 && time === '00:00') || (section > 1 && time === '20:00')) {
 		setText('bigAdditionalText', 'Halbzeitstand');
 	} else {
 		setText('bigAdditionalText', '');

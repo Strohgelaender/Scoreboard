@@ -1,12 +1,12 @@
 export class Timer {
-	constructor(defaultTime = 20 * 60 * 1000, stepFunction = undefined, callback = undefined, team = undefined) {
+	constructor(defaultTime, stepFunction = undefined, callback = undefined, team = undefined) {
 		this.defaultTime = defaultTime;
 		this.endtime = null;
 		this.totaltime = null;
 		this.startDate = null;
 		this.stepper = null;
 		this.timeText = null;
-		this.firstHalfDone = false;
+		this.section = 1;
 		this.team = team;
 		this.callback = callback;
 		this.stepFunction = stepFunction;
@@ -75,7 +75,7 @@ export class Timer {
 			if (this.callback) {
 				this.callback();
 			}
-			this.firstHalfDone = true;
+			this.section++;
 			this.clear();
 		}
 	}
@@ -85,7 +85,11 @@ export class Timer {
 	}
 
 	isFirstHalfDone() {
-		return this.firstHalfDone;
+		return this.section === 2;
+	}
+
+	getSection() {
+		return this.section;
 	}
 
 	getTeam() {

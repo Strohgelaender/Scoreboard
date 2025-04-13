@@ -88,7 +88,7 @@ app.get('/data/info', (req, res) => {
 	const data = {
 		home: game.homeTeam,
 		away: game.awayTeam,
-		firstHalfDone: game.matchTimer.isFirstHalfDone(),
+		section: game.matchTimer.getSection(),
 		matchday: process.env.MATCHDAY,
 	};
 	res.send(data);

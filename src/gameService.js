@@ -4,6 +4,9 @@ import fs from 'fs';
 const HOME_PATH = 'data/home.json';
 const AWAY_PATH = 'data/away.json';
 
+const DEFAULT_MATCH_TIME = 20 * 60 * 1000; // 20 minutes
+const HALFTIME_TIME = (14 * 60 + 30) * 1000; // 14:30 minutes
+
 const debug = true;
 
 export class GameService {
@@ -12,7 +15,7 @@ export class GameService {
 		this.sendWS = sendWS;
 		this.homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
 		this.awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
-		this.halftimeTimer = new Timer((14 * 60 + 30) * 1000, (text) => {
+		this.halftimeTimer = new Timer(HALFTIME_TIME, (text) => {
 			this.sendWS('half', text);
 		});
 
@@ -23,7 +26,7 @@ export class GameService {
 		this.foulsHome = 0;
 		this.foulsAway = 0;
 		this.matchTimer = new Timer(
-			20 * 60 * 1000,
+			DEFAULT_MATCH_TIME,
 			(text) => {
 				this.sendWS('game', text);
 			},
@@ -124,7 +127,7 @@ export class GameService {
 				// 18
 				const timerMinute = +time.split(':')[0];
 				// 2
-				const gameMinute = 20 - timerMinute + (this.matchTimer.firstHalfDone ? 20 : 0);
+				const gameMinute = 20 - timerMinute + (this.matchTimer.section === 2 ? 20 : 0);
 				this.goalEvents.push({
 					player: player,
 					minute: gameMinute,
