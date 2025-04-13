@@ -1172,7 +1172,7 @@ html {
 #liveMatchesContent {
 	top: 700px;
 	height: 380px;
-	width: 380px;
+	width: 390px;
 }
 
 .centeredTable {
@@ -1194,7 +1194,7 @@ html {
 #liveMatchesAdditionalBackground {
 	top: 700px;
 	height: 380px;
-	width: 380px;
+	width: 390px;
 	left: 0;
 	clip-path: inset(100% 0 0 0);
 }
