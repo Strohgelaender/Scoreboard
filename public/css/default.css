@@ -50,3 +50,20 @@ html {
 	--futsal-accent: #6edce6;
 	--futsal-grey: #ebf0f6;
 }
+
+.stripes {
+	max-width: 300%;
+	max-height: 300%;
+	opacity: 0.8;
+	animation: stripes 30s linear infinite;
+	z-index: 0;
+}
+
+@keyframes stripes {
+	0% {
+		transform: translateX(80%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
