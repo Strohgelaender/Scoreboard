@@ -962,18 +962,18 @@ function createTableRow(team, tableContent, i, short = false) {
 
 function showMatchday(matchday) {
 	if (currentContent === MATCHDAY) {
-		animate('matchday', 'revealToLeftOut');
+		animate('matchday', 'revealCenterOut');
 		setTimeout(() => {
 			document.getElementById('matchesTable').replaceChildren();
 		}, 1300);
 		currentContent = undefined;
 	} else {
+		setText('matchdayTitle', 'Viertelfinale 1');
 		const table = document.getElementById('matchesTable');
 		for (const match of matchday) {
 			createMatchdayRow(match, table);
 		}
-		setText('matchdayTitle', 'Viertelfinale 1');
-		animate('matchday', 'revealToLeft');
+		animate('matchdayWrapper', 'revealCenter');
 		currentContent = MATCHDAY;
 	}
 }
@@ -1131,7 +1131,7 @@ function showPreviousMatches() {
 
 function showPlayoffs(matches) {
 	if (currentContent === PLAYOFFS) {
-		animate('playoff', 'revealCenterOut');
+		animate('playoffWrapper', 'revealCenterOut');
 		animate('playoffLogo', 'hideImage');
 		setTimeout(() => {
 			document.getElementById('playoffMatchesBodys').replaceChildren();
@@ -1158,7 +1158,7 @@ function showPlayoffs(matches) {
 
 		const finalTable = document.getElementById('fMatchesBodys');
 		createEmptyPlayoffRow(finalTable);
-		animate('playoff', 'revealCenter');
+		animate('playoffWrapper', 'revealCenter');
 		animate('playoffLogo', 'growImage');
 		currentContent = PLAYOFFS;
 	}

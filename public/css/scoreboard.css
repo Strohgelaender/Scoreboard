@@ -1070,6 +1070,7 @@ html {
 	position: absolute;
 	top: 200px;
 	left: 500px;
+    clip-path: inset(0 0 0 100%);
 }
 
 #matchday,
@@ -1079,7 +1080,6 @@ html {
 	background: var(--background);
 	z-index: 3;
 	overflow: hidden;
-	clip-path: inset(0 0 0 100%);
 }
 
 #matchesTable {
@@ -1181,7 +1181,7 @@ html {
 }
 
 .cornerAdditionalBackground {
-	background-color: var(--lower-thirds-bottom);
+	background-color: white;
 	position: absolute;
 	z-index: -10;
 	border-radius: 0 40px 0 0;
