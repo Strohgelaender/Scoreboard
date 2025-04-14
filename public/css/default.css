@@ -49,6 +49,41 @@ html {
 	--futsal-blue-2: #1eb4c8;
 	--futsal-accent: #6edce6;
 	--futsal-grey: #ebf0f6;
+    --futsal-spielfeld: #0088f7;
+    --futsal-background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
+    --futsal-background-long: linear-gradient(to left, var(--futsal-blue-1) 50%, var(--futsal-blue-2));
+    --futsal-transparent-background: linear-gradient(to right, rgba(30, 180, 200, 0.8) 25%, rgba(2, 67, 89, 0.9));
+
+
+    --dfb-green: #20ae80;
+    --dfb-grey: #878787;
+    --dfb-light-green: #dcf3eb;
+    --black: #000000;
+    --beacksoccer-background: var(--dfb-green);
+    --backsoccer-transparent-background: rgba(0, 0, 0, 0.98);
+
+    /*
+    --background: var(--futsal-background);
+    --background-long: var(--futsal-background-long);
+    --transparent-background: var(--futsal-transparent-background);
+    --main-color: var(--futsal-blue-1);
+    --secondary-color: var(--futsal-blue-2);
+    --lower-thirds-top: var(--futsal-blue-1);
+    --lower-thirds-bottom: var(--futsal-blue-2);
+    --spielfeld-color: var(--futsal-spielfeld);
+    --more-info-background: #1eb4c8b3;
+    /*--more-info-background: var(--futsal-blue-2);*/
+
+
+    --background: var(--beacksoccer-background);
+    --background-long: --black;
+    --transparent-background: var(--backsoccer-transparent-background);
+    --main-color: var(--dfb-green);
+    --secondary-color: var(--black);
+    --lower-thirds-top: var(--black);
+    --lower-thirds-bottom: var(--dfb-green);
+    --spielfeld-color: var(--dfb-green);
+    --more-info-background: rgba(32, 174, 128, 0.7);
 }
 
 .stripes {

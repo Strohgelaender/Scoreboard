@@ -1,6 +1,7 @@
 import { OBSWebSocket } from 'obs-websocket-js';
 import fs from 'fs';
 
+const FUTSAL = process.env.FUTSAL === 'true';
 const OBS_PASSWORD = process.env.OBS_PASSWORD || '';
 const EVENT_FILE = `data/${new Date().toISOString().replace(/:/g, '-')}.txt`;
 
@@ -57,6 +58,9 @@ export class ObsService {
 	}
 
 	toggleScoreboardVideo() {
+		if (!FUTSAL) {
+			return;
+		}
 		if (this.showingScoreboard) {
 			this.obs
 				.call('SetSceneItemEnabled', {

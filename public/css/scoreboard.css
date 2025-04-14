@@ -1,8 +1,6 @@
 :root {
 	--opacity-1: 1;
 	--opacity-0: 0;
-	--more-info-background: #1eb4c8b3;
-	/*--more-info-background: var(--futsal-blue-2);*/
 }
 
 html {
@@ -107,7 +105,7 @@ html {
 	text-align: center;
 	vertical-align: center;
 	z-index: -5;
-	border-top: 2px solid #6edce6;
+	border-top: 2px solid var(--futsal-accent);
 }
 
 #allFoulsBox {
@@ -129,7 +127,7 @@ html {
 	border-radius: 0 0 10px 10px;
 	text-align: center;
 	vertical-align: center;
-	background-color: var(--futsal-blue-2);
+	background-color: var(--main-color);
 }
 
 #foulsAdditionalBackground {
@@ -186,7 +184,7 @@ html {
 	vertical-align: center;
 	line-height: 25px;
 	z-index: -5;
-	background: var(--futsal-blue-2);
+	background: var(--secondary-color);
 	font-size: 20px;
 	font-family: DFBSans-Bold, sans-serif;
 }
@@ -199,7 +197,7 @@ html {
 	border-radius: 10px 10px 0 0;
 	vertical-align: center;
 	z-index: -5;
-	background: var(--futsal-blue-2);
+	background: var(--main-color);
 	font-family: DFBSans-Regular-Ofc, sans-serif;
 	display: flex;
 	align-items: center;
@@ -293,6 +291,13 @@ html {
 	stroke-dashoffset: 0;
 }
 
+#scoreboardSpielfeldCircle>circle {
+    stroke: var(--spielfeld-color);
+}
+#scoreboardSpielfeldCircle>line {
+    stroke: var(--spielfeld-color);
+}
+
 @keyframes ScoreboardSpielfeldIn {
 	0% {
 		stroke-dashoffset: 480; /* Hidden */
@@ -347,7 +352,7 @@ html {
 #aufstellungBox {
 	height: 800px;
 	width: 1400px;
-	background: linear-gradient(to right, rgba(30, 180, 200, 0.8) 25%, rgba(2, 67, 89, 0.9));
+	background: var(--transparent-background);
 	clip-path: inset(0 0 0 100%);
 	z-index: 3;
 }
@@ -368,6 +373,10 @@ html {
 	stroke-dasharray: 1200; /* Total length of the line */
 	stroke-dashoffset: 1200; /* Initially hidden */
 	z-index: 5;
+}
+
+#aufstellungSpielfeldCircle>circle, #aufstellungSpielfeldLine>line, #aufstellungGoalline>path {
+    stroke: var(--spielfeld-color);
 }
 
 #aufstellungCoachBox {
@@ -626,7 +635,7 @@ html {
 	height: 80px;
 	width: 1400px;
 	top: 50px;
-	background: linear-gradient(to left, var(--futsal-blue-1) 50%, var(--futsal-blue-2));
+	background: var(--background-long);
 	border-radius: 15px 15px 15px 15px;
 	position: relative;
 	overflow: hidden;
@@ -640,6 +649,10 @@ html {
 	stroke-dashoffset: 597;
 }
 
+#bottomSpielfeldCircle>circle, #bottomSpielfeldCircle>line {
+    stroke: var(--spielfeld-color);
+}
+
 #bottomAdditionalBackground {
 	position: absolute;
 	height: 80px;
@@ -647,7 +660,7 @@ html {
 	top: 50px;
 	border-radius: 15px 15px 15px 15px;
 	clip-path: inset(0 50% 0 50%);
-	background-color: var(--futsal-blue-2);
+	background-color: var(--secondary-color);
 }
 
 #bottomMoreInfoBackground {
@@ -828,7 +841,7 @@ html {
 #tableContent {
 	height: 850px;
 	width: 1000px;
-	background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
+	background: var(--background);
 	z-index: 3;
 }
 
@@ -954,7 +967,7 @@ html {
 .mainBackground {
 	height: 50px;
 	width: 400px;
-	background: var(--futsal-blue-1);
+	background: var(--lower-thirds-top);
 	position: absolute;
 	overflow: hidden;
 }
@@ -981,7 +994,7 @@ html {
 .lowerSubBackground {
 	height: 50px;
 	width: 400px;
-	background: var(--futsal-blue-2);
+	background: var(--lower-thirds-bottom);
 	position: absolute;
 }
 
@@ -1063,7 +1076,7 @@ html {
 #playoff {
 	height: 700px;
 	width: 1000px;
-	background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
+	background: var(--background);
 	z-index: 3;
 	overflow: hidden;
 	clip-path: inset(0 0 0 100%);
@@ -1113,7 +1126,7 @@ html {
 	position: absolute;
 	left: 0;
 	overflow: hidden;
-	background: linear-gradient(to top right, var(--futsal-blue-2) 5%, var(--futsal-blue-1) 100%);
+	background: var(--background);
 	clip-path: inset(100% 0 0 0);
 	border-radius: 0 40px 0 0;
 }
@@ -1168,7 +1181,7 @@ html {
 }
 
 .cornerAdditionalBackground {
-	background-color: var(--futsal-blue-2);
+	background-color: var(--lower-thirds-bottom);
 	position: absolute;
 	z-index: -10;
 	border-radius: 0 40px 0 0;
