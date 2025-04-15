@@ -7,53 +7,27 @@ html {
 	background: transparent;
 }
 
-#scoreboard {
-	position: relative;
-	left: 30px;
-	height: 150px;
-	width: 800px;
-	clip-path: inset(0 0 0 0);
-}
-
-#scoreboardImage {
-	position: relative;
-	width: 750px;
-	height: auto;
-	z-index: -1;
-}
-
 .teamImage {
-	position: absolute;
-	width: auto;
-	height: 45px;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
 	z-index: 1;
-	top: 65px;
 }
 
-#homeImage {
-	left: 120px;
-}
-
-#awayImage {
-	left: 625px;
+.teamImageBox {
+	height: 35px;
+	width: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .teamNameBox {
 	width: 190px;
 	height: 45px;
-	position: absolute;
-	top: 68px;
 	text-align: center;
 	vertical-align: middle;
-	line-height: 45px;
-}
-
-#homeNameBox {
-	left: 160px;
-}
-
-#awayNameBox {
-	left: 435px;
+	line-height: 42px;
 }
 
 .teamName {
@@ -63,37 +37,20 @@ html {
 
 .teamScore {
 	z-index: 5;
-	position: absolute;
-	font-size: 35px;
-	top: 58px;
-	line-height: 70px;
+	font-size: 30px;
+	line-height: 60px;
 	font-family: DFBSans-Bold, sans-serif;
-}
-
-#homeScore {
-	left: 365px;
-}
-
-#awayScore {
-	left: 402px;
+	padding: 0 6px 0 6px;
+	text-align: center;
 }
 
 .shirtLine {
 	position: absolute;
 	width: 150px;
 	height: 10px;
-	top: 54px;
 	background-color: #59aadf;
 	border-radius: 10px 10px 0px 0px;
 	z-index: -5;
-}
-
-#homeShirtLine {
-	left: 180px;
-}
-
-#awayShirtLine {
-	left: 455px;
 }
 
 .foulsBox {
@@ -110,15 +67,15 @@ html {
 
 #allFoulsBox {
 	position: absolute;
-	width: 565px;
+	width: 490px;
 	height: 35px;
-	top: 119px;
-	left: 190px;
+	top: 39px;
+	left: 160px;
 	z-index: -10;
 }
 
 #foulsContent {
-	width: 565px;
+	width: 490px;
 	height: 35px;
 	display: flex;
 	justify-content: space-evenly;
@@ -132,8 +89,8 @@ html {
 
 #foulsAdditionalBackground {
 	position: absolute;
-	width: 565px;
-	height: 35px;
+	width: 490px;
+	height: 34px;
 	border-radius: 0 0 10px 10px;
 	z-index: -10;
 	clip-path: inset(0 0 100% 0);
@@ -148,95 +105,71 @@ html {
 	font-family: DFBSans-Bold, sans-serif;
 }
 
-#homeFoulsBox {
-	left: 230px;
-	background-color: #096780;
-}
-
-#awayFoulsBox {
-	left: 505px;
-	background-color: #024359;
-}
-
-#scoreboardTime {
-	position: relative;
-	left: 30px;
-	height: 160px;
-	width: 800px;
-	clip-path: inset(0 0 0 0);
-}
-
-#scoreboardImageTime {
-	position: relative;
-	width: 800px;
-	height: auto;
-	z-index: -1;
-}
-
 #halfIndicatorBox {
 	position: absolute;
 	width: 50px;
 	height: 35px;
-	left: 90px;
-	top: 118px;
+	left: 75px;
+	top: 39px;
 	border-radius: 0 0 10px 10px;
 	text-align: center;
 	vertical-align: center;
 	line-height: 25px;
 	z-index: -5;
-	background: var(--secondary-color);
+	background: var(--lower-thirds-top);
 	font-size: 20px;
 	font-family: DFBSans-Bold, sans-serif;
 }
 
 .redCardBox {
-	position: absolute;
-	width: 72px;
-	height: 35px;
-	top: 36px;
+	position: relative;
 	border-radius: 10px 10px 0 0;
 	vertical-align: center;
-	z-index: -5;
+	z-index: -1;
 	background: var(--main-color);
 	font-family: DFBSans-Regular-Ofc, sans-serif;
 	display: flex;
 	align-items: center;
-	padding: 0 10px 0 10px;
 	clip-path: inset(100% 0 0 0);
 }
 
+.redCardWrapper {
+	position: absolute;
+	width: 72px;
+	height: 35px;
+	top: -30px;
+}
+
+#homeRedWrapper {
+	left: 160px;
+}
+
+#awayRedWrapper {
+	left: 560px;
+}
+
 #homeRedCardBox {
-	left: 190px;
+	padding-left: 10px;
 }
 
 #awayRedCardBox {
-	left: 658px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .redCard {
 	position: relative;
-	margin: 5px;
-	width: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 10px;
 	height: 20px;
+	top: 0;
 	background-color: red;
 }
 
 .redCardTimer {
 	padding: 0 5px 0 5px;
 	font-size: 18px;
-}
-
-#homeTimeImage,
-#awayTimeImage {
-	top: 70px;
-}
-
-#homeTimeImage {
-	left: 190px;
-}
-
-#awayTimeImage {
-	left: 695px;
 }
 
 #homeTimeNameBox {
@@ -268,34 +201,41 @@ html {
 }
 
 #homeTimeShirtLine {
-	left: 240px;
+	left: 200px;
 }
 
 #awayTimeShirtLine {
-	left: 545px;
+	left: 460px;
 }
 
 #homeTimeShirtLine,
 #awayTimeShirtLine {
-	top: 56px;
+	top: -9px;
 }
 
 #scoreboardSpielfeldCircle {
-	position: absolute;
-	left: 430px;
-	top: 66px;
-	width: 90px;
-	height: 53px;
+	width: 87px;
+	height: 47px;
 	z-index: 1;
 	stroke-dasharray: 480;
 	stroke-dashoffset: 0;
 }
 
-#scoreboardSpielfeldCircle>circle {
-    stroke: var(--spielfeld-color);
+#scoreboardSpielfeldCircle > circle {
+	stroke: var(--spielfeld-color);
 }
-#scoreboardSpielfeldCircle>line {
-    stroke: var(--spielfeld-color);
+#scoreboardSpielfeldCircle > line {
+	stroke: var(--spielfeld-color);
+}
+
+#scoreboardCircleBox {
+	position: absolute;
+	left: 362px;
+	top: 0;
+	width: auto;
+	height: 40px;
+	overflow: hidden;
+	z-index: 5;
 }
 
 @keyframes ScoreboardSpielfeldIn {
@@ -335,12 +275,48 @@ html {
 	line-height: 54px;
 }
 
-#time {
-	font-size: 20px;
+.time {
+	font-family: DFBSans-Regular, DFBSans-Regular-Ofc, DFBSans-Bold;
 }
 
-.time {
-	font-family: DFBSans-Regular-Ofc, DFBSans-Bold;
+#scoreboardCSS {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: start;
+	height: 40px;
+	margin-top: 60px;
+	position: relative;
+}
+
+#timer {
+	background: var(--lower-thirds-bottom);
+	width: 85px;
+	margin-left: 50px;
+	height: 100%;
+	vertical-align: center;
+	text-align: right;
+	line-height: 40px;
+	border-radius: 10px;
+	clip-path: path('M 0 0 H 85 V 40 H 0A 10 10 0 0 0 6 0 Z');
+}
+
+#time {
+	font-size: 20px;
+	padding-right: 4px;
+}
+
+#scoreboardMain {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 500px;
+	height: 40px;
+	background: var(--background-long);
+	position: absolute;
+	left: 150px;
+	padding: 0 5px;
+	border-radius: 10px;
 }
 
 #aufstellungContent {
@@ -375,8 +351,10 @@ html {
 	z-index: 5;
 }
 
-#aufstellungSpielfeldCircle>circle, #aufstellungSpielfeldLine>line, #aufstellungGoalline>path {
-    stroke: var(--spielfeld-color);
+#aufstellungSpielfeldCircle > circle,
+#aufstellungSpielfeldLine > line,
+#aufstellungGoalline > path {
+	stroke: var(--spielfeld-color);
 }
 
 #aufstellungCoachBox {
@@ -558,7 +536,7 @@ html {
 
 @keyframes revealScoreboard {
 	0% {
-		clip-path: inset(0 40% 0 60%); /* Completely hidden */
+		clip-path: inset(0 50% 0 50%); /* Completely hidden */
 	}
 	100% {
 		clip-path: inset(0 0 0 0); /* Fully visible */
@@ -570,7 +548,25 @@ html {
 		clip-path: inset(0 0 0 0); /* Fully visible */
 	}
 	100% {
-		clip-path: inset(0 40% 0 60%); /* Completely hidden */
+		clip-path: inset(0 50% 0 50%); /* Completely hidden */
+	}
+}
+
+@keyframes revealTimer {
+	0% {
+		clip-path: inset(0 0 0 0);
+	}
+	100% {
+		clip-path: path('M 0 0 H 85 V 40 H 0A 10 10 0 0 0 9 0 Z');
+	}
+}
+
+@keyframes revealTimerOut {
+	0% {
+		clip-path: path('M 0 0 H 85 V 40 H 0A 10 10 0 0 0 9 0 Z');
+	}
+	100% {
+		clip-path: inset(0 50% 0 50%);
 	}
 }
 
@@ -649,8 +645,9 @@ html {
 	stroke-dashoffset: 597;
 }
 
-#bottomSpielfeldCircle>circle, #bottomSpielfeldCircle>line {
-    stroke: var(--spielfeld-color);
+#bottomSpielfeldCircle > circle,
+#bottomSpielfeldCircle > line {
+	stroke: var(--spielfeld-color);
 }
 
 #bottomAdditionalBackground {
@@ -1070,7 +1067,7 @@ html {
 	position: absolute;
 	top: 200px;
 	left: 500px;
-    clip-path: inset(0 0 0 100%);
+	clip-path: inset(0 0 0 100%);
 }
 
 #matchday,

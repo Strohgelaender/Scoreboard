@@ -72,18 +72,14 @@ export class GameService {
 		if (event.eventType === 'GOAL') {
 			this.addScore(event.team === 'HOME');
 			this.handleRedCardGoal(event);
-			if (this.matchTimer.isRunning()) {
-				this.matchTimer.pauseTimer();
-			}
+			this.pauseTimer();
 		} else if (event.eventType === 'OWN_GOAL') {
 			this.reduceScore(event.team === 'HOME');
 		}
 
 		if (event.eventType === 'FOUL') {
 			this.addFoul(event.team === 'HOME');
-			if (this.matchTimer.isRunning()) {
-				this.matchTimer.pauseTimer();
-			}
+			this.pauseTimer();
 		} else if (event.eventType === 'REMOVE_FOUL') {
 			this.reduceFoul(event.team === 'HOME');
 		} else if (event.eventType === 'CLEAR_FOULS') {
@@ -91,9 +87,7 @@ export class GameService {
 		}
 
 		if (event.eventType === 'RED_CARD') {
-			if (this.matchTimer.isRunning()) {
-				this.matchTimer.pauseTimer();
-			}
+			this.pauseTimer();
 			this.addRedCardTimer(event);
 		}
 
@@ -111,6 +105,15 @@ export class GameService {
 			console.log(event);
 		}
 		return false;
+	}
+
+	pauseTimer() {
+		if (this.matchTimer.isRunning()) {
+			this.matchTimer.pauseTimer();
+			for (const timer of this.redCardTimers) {
+				timer.pauseTimer();
+			}
+		}
 	}
 
 	addGoalScorerAction(event) {

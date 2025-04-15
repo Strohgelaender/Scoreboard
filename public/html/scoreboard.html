@@ -21,29 +21,34 @@
 		<link rel="preload" href="/images/Futsal-BL_Logo_rechts_RGB_neg.png" as="image" />
 	</head>
 	<body>
-		<div id="scoreboardTime">
-			<img id="scoreboardImageTime" src="/images/Scoreboard_Timer_noLogo_dfb.png" alt="Spielstand_Background" />
-			<svg id="scoreboardSpielfeldCircle" width="120" height="100" viewBox="0 0 100 100">
-				<circle cx="100" cy="100" r="75" fill="none" stroke="#0088f7" stroke-width="4" transform="rotate(90 100 46)" />
-				<line x1="50" y1="0" x2="50" y2="100" stroke="#0088f7" stroke-width="4" />
-			</svg>
-			<div id="timeBox">
-				<span id="time" class="time">20:00</span>
+		<div id="scoreboardCSS">
+			<div id="scoreboardCircleBox">
+				<svg id="scoreboardSpielfeldCircle" width="120" height="100" viewBox="0 0 100 100">
+					<circle cx="100" cy="100" r="75" fill="none" stroke="#0088f7" stroke-width="4" transform="rotate(90 100 46)" />
+					<line x1="50" y1="0" x2="50" y2="100" stroke="#0088f7" stroke-width="4" />
+				</svg>
 			</div>
-			<div id="homeTimeImageBox" class="teamImageBox">
-				<img id="homeTimeImage" class="teamImage" src="/image/home" alt="Home Team" />
+			<div id="timerWrapper">
+				<div id="timer" class="time">
+					<span id="time" class="time">20:00</span>
+				</div>
 			</div>
-			<div id="homeTimeNameBox" class="teamNameBox">
-				<span id="homeTimeName" class="teamName">Home</span>
+			<div id="scoreboardMain">
+				<div class="teamImageBox">
+					<img id="homeImage" class="teamImage" src="/image/home" alt="Home Team" />
+				</div>
+				<div id="homeNameBox" class="teamNameBox">
+					<span id="homeTimeName" class="teamName">Home</span>
+				</div>
+				<span id="homeScoreboardScore" class="teamScore">0</span>
+				<span id="awayScoreboardScore" class="teamScore">0</span>
+				<div id="awayNameBox" class="teamNameBox">
+					<span id="awayTimeName" class="teamName">Away</span>
+				</div>
+				<div class="teamImageBox">
+					<img id="awayImage" class="teamImage" src="/image/away" alt="Away Team" />
+				</div>
 			</div>
-			<span id="homeTimeScore" class="teamScore">0</span>
-			<span id="awayTimeScore" class="teamScore">0</span>
-			<div id="awayTimeNameBox" class="teamNameBox">
-				<span id="awayTimeName" class="teamName">Away</span>
-			</div>
-			<img id="awayTimeImage" class="teamImage" src="/image/away" alt="Away Team" />
-			<div id="homeTimeShirtLine" class="shirtLine"></div>
-			<div id="awayTimeShirtLine" class="shirtLine"></div>
 			<div id="allFoulsBox">
 				<div id="foulsContent">
 					<span id="homeTimeFouls" class="fouls">0</span>
@@ -52,15 +57,21 @@
 				</div>
 				<div id="foulsAdditionalBackground"></div>
 			</div>
-			<div id="homeRedCardBox" class="redCardBox">
-				<div class="redCard"></div>
-				<span id="homeRedCardTimer" class="redCardTimer time">2:00</span>
+			<div id="homeRedWrapper" class="redCardWrapper">
+				<div id="homeRedCardBox" class="redCardBox">
+					<div class="redCard"></div>
+					<span id="homeRedCardTimer" class="redCardTimer time">2:00</span>
+				</div>
 			</div>
-			<div id="awayRedCardBox" class="redCardBox">
-				<span id="awayRedCardTimer" class="redCardTimer time">2:00</span>
-				<div class="redCard"></div>
+			<div id="awayRedWrapper" class="redCardWrapper">
+				<div id="awayRedCardBox" class="redCardBox">
+					<span id="awayRedCardTimer" class="redCardTimer time">2:00</span>
+					<div class="redCard"></div>
+				</div>
 			</div>
 			<div id="halfIndicatorBox"><span id="halfIndicator">1</span><sup id="halfSup">st</sup></div>
+			<div id="homeTimeShirtLine" class="shirtLine"></div>
+			<div id="awayTimeShirtLine" class="shirtLine"></div>
 		</div>
 
 		<div id="bottomScore">

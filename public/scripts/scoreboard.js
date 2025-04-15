@@ -216,27 +216,45 @@ function animate(id, animation, duration = '1s', curve = 'cubic-bezier(0.16, 0, 
 
 function toggleScoreboard() {
 	if (!showingSmallScoreboard) {
-		animate('scoreboardTime', 'revealScoreboard');
+		animate('scoreboardMain', 'revealScoreboard', '0.8s');
+		animate('timerWrapper', 'revealToRight', '0.5s');
 		animate('scoreboardSpielfeldCircle', 'ScoreboardSpielfeldIn');
 		setTimeout(() => {
-			animate('homeTimeImage', 'growImage');
-			animate('awayTimeImage', 'growImage');
+			animate('homeImage', 'growImage');
+			animate('awayImage', 'growImage');
 			animate('time', 'opacityIn');
 			animate('homeTimeName', 'opacityIn');
 			animate('awayTimeName', 'opacityIn');
 			animate('homeTimeScore', 'opacityIn');
 			animate('awayTimeScore', 'opacityIn');
 		}, 100);
+		setTimeout(() => {
+			animate('halfIndicatorBox', 'revealDown', '0.5s');
+			animate('allFoulsBox', 'revealDown', '0.5s');
+			animate('homeTimeShirtLine', 'revealUp', '0.5s');
+			animate('awayTimeShirtLine', 'revealUp', '0.5s');
+			animate('homeRedWrapper', 'revealUp', '0.5s');
+			animate('awayRedWrapper', 'revealUp', '0.5s');
+		}, 400);
 	} else {
-		animate('scoreboardTime', 'revealScoreboardOut');
-		animate('scoreboardSpielfeldCircle', 'ScoreboardSpielfeldOut');
-		animate('homeTimeImage', 'hideImage');
-		animate('awayTimeImage', 'hideImage');
-		animate('time', 'opacityOut');
-		animate('homeTimeName', 'opacityOut');
-		animate('awayTimeName', 'opacityOut');
-		animate('homeTimeScore', 'opacityOut');
-		animate('awayTimeScore', 'opacityOut');
+		animate('halfIndicatorBox', 'revealDownOut', '0.5s');
+		animate('allFoulsBox', 'revealDownOut', '0.5s');
+		animate('homeTimeShirtLine', 'revealUpOut', '0.5s');
+		animate('awayTimeShirtLine', 'revealUpOut', '0.5s');
+		animate('homeRedWrapper', 'revealUpOut', '0.5s');
+		animate('awayRedWrapper', 'revealUpOut', '0.5s');
+		setTimeout(() => {
+			animate('scoreboardMain', 'revealScoreboardOut', '0.8s');
+			animate('timerWrapper', 'revealToRightOut', '0.8s');
+			animate('scoreboardSpielfeldCircle', 'ScoreboardSpielfeldOut', '0.8s');
+			animate('homeImage', 'hideImage');
+			animate('awayImage', 'hideImage');
+			animate('time', 'opacityOut');
+			animate('homeTimeName', 'opacityOut');
+			animate('awayTimeName', 'opacityOut');
+			animate('homeTimeScore', 'opacityOut');
+			animate('awayTimeScore', 'opacityOut');
+		}, 400);
 	}
 	showingSmallScoreboard = !showingSmallScoreboard;
 }
@@ -567,8 +585,8 @@ function updateScoreboardInternal() {
 function updateScore() {
 	setText('bigHomeScore', scoreHome);
 	setText('bigAwayScore', scoreAway);
-	setText('homeTimeScore', scoreHome);
-	setText('awayTimeScore', scoreAway);
+	setText('homeScoreboardScore', scoreHome);
+	setText('awayScoreboardScore', scoreAway);
 }
 
 function doubleDigitAdjustments() {
@@ -576,19 +594,36 @@ function doubleDigitAdjustments() {
 		const bigScore = document.getElementById('bigHomeScore');
 		bigScore.style.left = '602px';
 		bigScore.style.fontSize = '75px';
-		const timeScore = document.getElementById('homeTimeScore');
-		timeScore.style.left = '435px';
-		timeScore.style.fontSize = '30px';
-		document.getElementById('awayTimeScore').style.fontSize = '30px';
 	}
 	if (scoreAway >= 10) {
 		const bigScore = document.getElementById('bigAwayScore');
 		bigScore.style.left = '695px';
 		bigScore.style.fontSize = '75px';
-		const timeScore = document.getElementById('awayTimeScore');
-		timeScore.style.left = '475px';
-		timeScore.style.fontSize = '30px';
-		document.getElementById('homeTimeScore').style.fontSize = '30px';
+	}
+
+	const homeScore = document.getElementById('homeScoreboardScore');
+	const awayScore = document.getElementById('awayScoreboardScore');
+	if (scoreHome >= 10 && scoreAway < 10) {
+		homeScore.style.padding = '0';
+		homeScore.style.paddingLeft = '5px';
+		homeScore.style.fontSize = '28px';
+		awayScore.style.width = '48px';
+		awayScore.style.padding = '0';
+	}
+	if (scoreAway >= 10 && scoreHome < 10) {
+		awayScore.style.padding = '0';
+		awayScore.style.paddingRight = '5px';
+		awayScore.style.fontSize = '28px';
+		homeScore.style.width = '44px';
+		homeScore.style.padding = '0';
+	}
+	if (scoreHome >= 10 && scoreAway >= 10) {
+		homeScore.style.fontSize = '28px';
+		awayScore.style.fontSize = '28px';
+		homeScore.style.padding = '0 2px 0 0';
+		awayScore.style.padding = '0';
+		homeScore.style.width = 'auto';
+		awayScore.style.width = 'auto';
 	}
 }
 
