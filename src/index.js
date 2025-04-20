@@ -78,12 +78,6 @@ app.get('/image/:team', (req, res) => {
 	res.redirect(team.imagePath);
 });
 
-// TODO deprecated, is this used anywhere?
-app.get('/data/:team/:param', (req, res) => {
-	const team = game.getTeam(req.params.team.toUpperCase());
-	res.send(team[req.params.param]);
-});
-
 app.get('/data/info', (req, res) => {
 	const data = {
 		home: game.homeTeam,
@@ -174,23 +168,7 @@ app.post('/goalEvents', express.json(), (req, res) => {
 	res.status(200).send();
 });
 
-// TODO improve location of this function
-async function updateLineup(force = false) {
-	if (force || !game.homeTeam.players?.length || !game.awayTeam.players?.length) {
-		const lineup = await readLineup();
-		if (lineup.home?.length) {
-			game.homeTeam.players = lineup.home;
-		}
-		if (lineup.away?.length) {
-			game.awayTeam.players = lineup.away;
-		}
-		console.log('Lineup updated');
-	}
-}
-
 export function sendEvent(event) {
-	const team = game.getTeam(event.team);
-
 	if (game.handleEvent(event)) {
 		// returns true if the event got handled completely (timer)
 		// and should not be further send to other clients

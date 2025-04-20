@@ -80,37 +80,6 @@ export const playoffMatches = [
 	},
 ];*/
 
-export async function readLineup() {
-	try {
-		const response = await game.get(matchId + '/ticker-id/selectedTickerId');
-		const root = response.data;
-		const home = parsePlayers(root.home_team);
-		const away = parsePlayers(root.guest_team);
-		return { home, away };
-	} catch (e) {
-		console.error(e);
-		return {};
-	}
-}
-
-function parsePlayers(team) {
-	const members = team?.members;
-	const players = [];
-	for (const key in members) {
-		const player = members[key];
-		const result = {
-			firstName: player.firstname,
-			lastName: player.name,
-			number: player.jersey_nr,
-			is_captain: player.is_captain,
-			is_keeper: player.is_keeper,
-			is_starting: player.is_starting,
-		};
-		players.push(result);
-	}
-	return players;
-}
-
 export const referees = ['Christian Grundler', 'Maximilian Scheibel', 'Marijo Kraljic', 'Martin Horne'];
 
 export async function readReferees() {
