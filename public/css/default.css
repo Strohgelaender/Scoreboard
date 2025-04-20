@@ -63,6 +63,7 @@ html {
 	--backsoccer-transparent-background: rgba(0, 0, 0, 0.98);
 	--stripes-animation: none;
 
+	/*
 	--background: var(--futsal-background);
 	--background-long: var(--futsal-background-long);
 	--transparent-background: var(--futsal-transparent-background);
@@ -72,21 +73,19 @@ html {
 	--lower-thirds-bottom: var(--futsal-blue-2);
 	--spielfeld-color: var(--futsal-spielfeld);
 	--more-info-background: #1eb4c8b3;
-	--stripes-animation: var(--futsal-stripes-animation);
+	--stripes-animation: var(--futsal-stripes-animation); */
 
 	/*--more-info-background: var(--futsal-blue-2);*/
 
-	/*
-    --background: var(--beacksoccer-background);
-    --background-long: var(--black);
-    --transparent-background: var(--backsoccer-transparent-background);
-    --main-color: var(--dfb-green);
-    --secondary-color: var(--black);
-    --lower-thirds-top: var(--black);
-    --lower-thirds-bottom: var(--dfb-green);
-    --spielfeld-color: var(--dfb-green);
-    --more-info-background: rgba(32, 174, 128, 0.7);
-    */
+	--background: var(--beacksoccer-background);
+	--background-long: var(--black);
+	--transparent-background: var(--backsoccer-transparent-background);
+	--main-color: var(--dfb-green);
+	--secondary-color: var(--black);
+	--lower-thirds-top: var(--black);
+	--lower-thirds-bottom: var(--dfb-green);
+	--spielfeld-color: var(--dfb-green);
+	--more-info-background: rgba(32, 174, 128, 0.7);
 }
 
 .stripes {

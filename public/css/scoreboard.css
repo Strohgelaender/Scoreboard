@@ -298,7 +298,7 @@ html {
 	text-align: right;
 	line-height: 40px;
 	border-radius: 10px;
-	clip-path: path('M 0 0 H 85 V 40 H 0A 10 10 0 0 0 6 0 Z');
+	clip-path: path('M 0 0 H 85 V 41 H 0A 10 10 0 0 0 6 0 Z');
 }
 
 #time {
@@ -557,13 +557,13 @@ html {
 		clip-path: inset(0 0 0 0);
 	}
 	100% {
-		clip-path: path('M 0 0 H 85 V 40 H 0A 10 10 0 0 0 9 0 Z');
+		clip-path: path('M 0 0 H 85 V 41 H 0A 10 10 0 0 0 6 0 Z');
 	}
 }
 
 @keyframes revealTimerOut {
 	0% {
-		clip-path: path('M 0 0 H 85 V 40 H 0A 10 10 0 0 0 9 0 Z');
+		clip-path: path('M 0 0 H 85 V 41 H 0A 10 10 0 0 0 6 0 Z');
 	}
 	100% {
 		clip-path: inset(0 50% 0 50%);

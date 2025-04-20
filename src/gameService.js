@@ -4,8 +4,13 @@ import fs from 'fs';
 const HOME_PATH = 'data/home.json';
 const AWAY_PATH = 'data/away.json';
 
-const DEFAULT_MATCH_TIME = 20 * 60 * 1000; // 20 minutes
-const HALFTIME_TIME = (14 * 60 + 30) * 1000; // 14:30 minutes
+const FUTSAL_MATCH_TIME = 20 * 60 * 1000; // 20 minutes
+const FUTSAL_HALFTIME_TIME = (14 * 60 + 30) * 1000; // 14:30 minutes
+
+const BEACHSOCCER_MATCH_TIME = 12 * 60 * 1000; // 12 minutes
+
+const DEFAULT_MATCH_TIME = BEACHSOCCER_MATCH_TIME;
+const HALFTIME_TIME = FUTSAL_HALFTIME_TIME; // TODO
 
 const debug = true;
 
@@ -42,6 +47,19 @@ export class GameService {
 				}, 10_000);
 			},
 		);
+	}
+
+	reset() {
+		this.homeTeam = JSON.parse(fs.readFileSync(HOME_PATH, 'utf-8'));
+		this.awayTeam = JSON.parse(fs.readFileSync(AWAY_PATH, 'utf-8'));
+		this.redCardTimers = [];
+		this.goalEvents = [];
+		this.scoreHome = 0;
+		this.scoreAway = 0;
+		this.foulsHome = 0;
+		this.foulsAway = 0;
+		this.matchTimer.resetTimer();
+		this.halftimeTimer.resetTimer();
 	}
 
 	reloadTeamFiles() {

@@ -2,7 +2,7 @@
 // and the index.js server. It handles event creation, resets, and loading data.
 
 import { sendEvent } from './index.js';
-import { parseMatchEvents, playoffMatches, readLastMatchday, readMatchday, readNextMatchday, readReferees, readTable } from './AufstellungParser.js';
+import { parseMatchEvents, readLastMatchday, readMatchday, readNextMatchday, readReferees, readTable } from './AufstellungParser.js';
 
 const DEFAULT_EVENT = { number: '' };
 
@@ -150,7 +150,7 @@ function addEventData(event) {
 			title: 'KOMMENTATOR',
 		};
 	} else if (event.eventType === 'PLAYOFFS') {
-		event.matches = playoffMatches;
+		// event.matches = playoffMatches;
 	}
 }
 

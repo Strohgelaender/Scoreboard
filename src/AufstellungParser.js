@@ -21,13 +21,18 @@ const matchdayUrl = 'https://datencenter.dfb.de//competitions/futsal-bundesliga/
 const matchdayUrlQF = 'https://datencenter.dfb.de//de/competitions/futsal-bundesliga/seasons/2024-2025/matchday/viertelfinale';
 const awayTeamPlayersUrl = 'https://datencenter.dfb.de/competitions/futsal-bundesliga/seasons/2024-2025/teams/hamburger-sv-futsal';
 
+const beachsoccerMatchdayUrl =
+	'https://datencenter.dfb.de//competitions/deutsche-beachsoccer-liga/seasons/2025/matchday/spieltagswochenenden-1-3/1-spieltag?utf8=%E2%9C%93&path=/competitions/deutsche-beachsoccer-liga/seasons/2025/matchday/spieltagswochenenden-1-3/1-spieltag?datacenter_name=datencenter';
+
 const game = axios.create({ baseURL: matchUrl });
 const overview = axios.create({ baseURL: overviewUrl });
 const table = axios.create({ baseURL: tableUrl });
 const matchday = axios.create({ baseURL: matchdayUrl });
+const beachsoccerMatchday = axios.create({ baseURL: beachsoccerMatchdayUrl });
 const matchdayQF = axios.create({ baseURL: matchdayUrlQF });
 const awayTeamPlayers = axios.create({ baseURL: awayTeamPlayersUrl });
 
+/*
 export const playoffMatches = [
 	{
 		homeTeam: 'FCL',
@@ -73,7 +78,7 @@ export const playoffMatches = [
 			{ home: '-', away: '-' },
 		],
 	},
-];
+];*/
 
 export async function readLineup() {
 	try {
@@ -106,6 +111,8 @@ function parsePlayers(team) {
 	return players;
 }
 
+export const referees = ['Christian Grundler', 'Maximilian Scheibel', 'Marijo Kraljic', 'Martin Horne'];
+
 export async function readReferees() {
 	/*try {
 		const response = await overview.get('');
@@ -122,7 +129,7 @@ export async function readReferees() {
 	} catch (e) {
 		console.error(e);
 	}*/
-	return ['Christian Grundler', 'Maximilian Scheibel', 'Marijo Kraljic', 'Martin Horne'];
+	return referees;
 }
 
 export async function readTable() {
@@ -175,13 +182,34 @@ function getTeamLogo(teamName) {
 			return '/images/small/jahn_futsal.png';
 		case 'SV Pars Neu-Isenburg':
 			return '/images/small/SV.png';
+		// Beachsoccer
+		case 'Beach Royals Düsseldorf':
+			return '/images/small/Beach_Royals_Düsseldorf.png';
+		case 'Rostocker Robben':
+			return '/images/small/Rostocker_Robben.png';
+		case 'Bavaria Beach Bazis':
+			return '/images/small/Bavaria_Beach_Bazis.png';
+		case 'Hohensee United':
+			return '/images/small/Hohensee_United.png';
+		case 'Herta BSC':
+		case 'Hertha BSC Beachsoccer':
+			return '/images/small/Hertha_BSC.png';
+		case 'Real Münster':
+			return '/images/small/real_münster_transparent.png';
+		case 'SV Merkur':
+		case 'SV Merkur Beachsoccer':
+			return '/images/small/SV_Merkur.png';
+		case 'Golden Goalers Korbach':
+			return '/images/small/korbach_golden_goalers.png';
+		case 'Beach Boyz Waldkraiburg':
+			return '/images/small/BSC-Beach-Boyz-Waldkraiburg.png';
 	}
 }
 
 export async function readMatchday() {
 	// return await parseMatchday(matchdayNumber, true);
-	let matches = await parseDFBMatchdayOverviewWithBase(matchdayQF, '');
-	matches = matches.splice(0, 4);
+	let matches = await parseDFBMatchdayOverviewWithBase(beachsoccerMatchday, '');
+	matches = matches.splice(0, 5);
 	await addLiveScoresToMatchday(matches);
 	return matches;
 }
@@ -253,7 +281,7 @@ async function addLiveScoresToMatchday(result) {
 
 		const homeImage = getTeamLogo(homeTeam);
 		const awayImage = getTeamLogo(guestTeam);
-		const playoffMatch = playoffMatches.find((m) => m.homeImage === homeImage || m.awayImage === awayImage);
+		// const playoffMatch = playoffMatches.find((m) => m.homeImage === homeImage || m.awayImage === awayImage);
 
 		if (match) {
 			match.originalScore = match.score;
@@ -264,10 +292,12 @@ async function addLiveScoresToMatchday(result) {
 			console.warn('Match not found:', homeTeam, guestTeam);
 		}
 
+		/*
 		if (playoffMatch) {
 			const scoreParts = score.split(':');
 			playoffMatch.scores[0] = { home: scoreParts[0], away: scoreParts[1], live: root.live };
 		}
+		 */
 	}
 }
 

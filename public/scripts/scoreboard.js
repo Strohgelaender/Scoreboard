@@ -32,6 +32,8 @@ const transitions = {
 	[PREVIOUS_MATCHES]: showPreviousMatches,
 };
 
+const DEFAULT_TIME = '12:00';
+
 let currentContent;
 
 let showingSmallScoreboard = true;
@@ -43,7 +45,6 @@ let coaches;
 
 let time;
 let section = 1;
-let secondHalfDone = false;
 let matchdayNumber;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -87,7 +88,7 @@ function loadTeams() {
 
 function updateTimerFromServer() {
 	gameTimeSocket = createWebsocket('time/game', (value) => {
-		const newTime = value?.data?.length ? value.data : '20:00';
+		const newTime = value?.data?.length ? value.data : DEFAULT_TIME;
 		document.getElementById('time').textContent = newTime;
 		time = newTime;
 	});
@@ -265,7 +266,7 @@ let showingVersus = false;
 function toggleBigScoreboard(goalEvents) {
 	if (!currentContent) {
 		showingExtraText = setBigExtraText(goalEvents);
-		showingVersus = section === 1 && time === '20:00';
+		showingVersus = section === 1 && time === DEFAULT_TIME;
 		animate('bottomAdditionalBackground', 'revealCenter');
 		setTimeout(() => {
 			animate('bottomScoreBackground', 'revealCenter');
@@ -310,12 +311,19 @@ function toggleBigScoreboard(goalEvents) {
 
 function setBigExtraText(goalEvents) {
 	let showingText = true;
-	if (secondHalfDone || (section > 1 && time === '00:00')) {
-		setText('bigAdditionalText', 'Endstand');
-	} else if (section === 1 && time === '20:00') {
-		setText('bigAdditionalText', 'Playoff-Viertelfinale 1 | Sportpark Freiham');
-	} else if ((section === 1 && time === '00:00') || (section > 1 && time === '20:00')) {
-		setText('bigAdditionalText', 'Halbzeitstand');
+	if ((section === 2 && time === '00:00') || (section === 3 && time === DEFAULT_TIME)) {
+		setText('bigAdditionalText', 'Ende 2. Drittel');
+	}
+	if ((section === 3 && time === '00:00') || (section === 4 && time === DEFAULT_TIME)) {
+		if (scoreHome === scoreAway) {
+			setText('bigAdditionalText', 'Ende 3. Drittel');
+		} else {
+			setText('bigAdditionalText', 'Endstand');
+		}
+	} else if (section === 1 && time === DEFAULT_TIME) {
+		setText('bigAdditionalText', '1. Spieltag | Munich Beach Resort');
+	} else if ((section === 1 && time === '00:00') || (section === 2 && time === DEFAULT_TIME)) {
+		setText('bigAdditionalText', 'Ende 1. Drittel');
 	} else {
 		setText('bigAdditionalText', '');
 		showingText = false;
@@ -997,13 +1005,13 @@ function createTableRow(team, tableContent, i, short = false) {
 
 function showMatchday(matchday) {
 	if (currentContent === MATCHDAY) {
-		animate('matchday', 'revealCenterOut');
+		animate('matchdayWrapper', 'revealCenterOut');
 		setTimeout(() => {
 			document.getElementById('matchesTable').replaceChildren();
 		}, 1300);
 		currentContent = undefined;
 	} else {
-		setText('matchdayTitle', 'Viertelfinale 1');
+		setText('matchdayTitle', '1. Spieltagswochenende');
 		const table = document.getElementById('matchesTable');
 		for (const match of matchday) {
 			createMatchdayRow(match, table);
