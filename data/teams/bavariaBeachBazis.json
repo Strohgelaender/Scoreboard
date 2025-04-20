@@ -1,13 +1,11 @@
 {
-  "name": "Beach Bazis",
-  "fullName": "Bavaria Beach Bazis",
-  "shirtColor": "#e80c0c",
-  "imagePath": "/images/Bavaria_Beach_Bazis.png",
-  "coach": {
-    "firstName": "Michael",
-    "lastName": "Ruben"
-  },
-  "players": [
-    { "firstName": "German Enrique", "lastName": "Salazar Medina", "is_keeper": false }
-  ]
+	"name": "Beach Bazis",
+	"fullName": "Bavaria Beach Bazis",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/Bavaria_Beach_Bazis.png",
+	"coach": {
+		"firstName": "Michael",
+		"lastName": "Ruben"
+	},
+	"players": [{ "firstName": "German Enrique", "lastName": "Salazar Medina", "is_keeper": false }]
 }

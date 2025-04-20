@@ -1,17 +1,15 @@
 {
-  "name": "Beach Boyz",
-  "fullName": "Beach Boyz Waldkraiburg",
-  "shirtColor": "#e80c0c",
-  "imagePath": "/images/BSC-Beach-Boyz-Waldkraiburg.png",
-  "coach": {
-    "firstName": "Matthias",
-    "lastName": "Brandlmaier"
-  },
-  "players":
-  [
-    { "firstName": "Patrick Pierre", "lastName": "Leemann", "is_keeper": false },
-    { "firstName": "Anis", "lastName": "Ennya", "is_keeper": false },
-    { "firstName": "Advam Vital", "lastName": "Rocha de Oliveira", "is_keeper": false }
-  ]
-
+	"name": "Beach Boyz",
+	"fullName": "Beach Boyz Waldkraiburg",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/BSC-Beach-Boyz-Waldkraiburg.png",
+	"coach": {
+		"firstName": "Matthias",
+		"lastName": "Brandlmaier"
+	},
+	"players": [
+		{ "firstName": "Patrick Pierre", "lastName": "Leemann", "is_keeper": false },
+		{ "firstName": "Anis", "lastName": "Ennya", "is_keeper": false },
+		{ "firstName": "Advam Vital", "lastName": "Rocha de Oliveira", "is_keeper": false }
+	]
 }

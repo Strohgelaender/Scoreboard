@@ -1,12 +1,11 @@
 {
-  "name": "Real Münster",
-  "fullName": "Real Münster",
-  "shirtColor": "#e80c0c",
-  "imagePath": "/images/RM-logo-simple-white.png",
-  "coach": {
-    "firstName": "",
-    "lastName": ""
-  },
-  "players": [
-  ]
+	"name": "Real Münster",
+	"fullName": "Real Münster",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/RM-logo-simple-white.png",
+	"coach": {
+		"firstName": "",
+		"lastName": ""
+	},
+	"players": []
 }

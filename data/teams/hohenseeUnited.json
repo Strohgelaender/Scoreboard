@@ -1,12 +1,11 @@
 {
-  "name": "Hohensee United",
-  "fullName": "Hohensee United",
-  "shirtColor": "#e80c0c",
-  "imagePath": "/images/Hohensee_United.png",
-  "coach": {
-    "firstName": "",
-    "lastName": ""
-  },
-  "players": [
-  ]
+	"name": "Hohensee United",
+	"fullName": "Hohensee United",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/Hohensee_United.png",
+	"coach": {
+		"firstName": "",
+		"lastName": ""
+	},
+	"players": []
 }

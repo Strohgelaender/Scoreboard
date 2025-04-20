@@ -1,19 +1,19 @@
 {
-  "name": "Beach Royals Düsseldorf",
-  "fullName": "Beach Royals Düsseldorf",
-  "shirtColor": "#e80c0c",
-  "imagePath": "/images/Beach_Royals_Düsseldorf.png",
-  "coach": {
-    "firstName": "",
-    "lastName": ""
-  },
-  "players": [
-    { "firstName": "Mohammad Reza", "lastName": "Bahmei", "is_keeper": true },
-    { "firstName": "Max", "lastName": "Kinscher", "is_keeper": false },
-    { "firstName": "Philipp", "lastName": "Borer", "is_keeper": false },
-    { "firstName": "Romain", "lastName": "Goust Alves", "is_keeper": false },
-    { "firstName": "Mikel", "lastName": "Palmerin", "is_keeper": false },
-    { "firstName": "Christoph", "lastName": "Lüth", "is_keeper": false },
-    { "firstName": "Pascal", "lastName": "Marquardt", "is_keeper": false }
-  ]
+	"name": "Beach Royals Düsseldorf",
+	"fullName": "Beach Royals Düsseldorf",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/Beach_Royals_Düsseldorf.png",
+	"coach": {
+		"firstName": "",
+		"lastName": ""
+	},
+	"players": [
+		{ "firstName": "Mohammad Reza", "lastName": "Bahmei", "is_keeper": true },
+		{ "firstName": "Max", "lastName": "Kinscher", "is_keeper": false },
+		{ "firstName": "Philipp", "lastName": "Borer", "is_keeper": false },
+		{ "firstName": "Romain", "lastName": "Goust Alves", "is_keeper": false },
+		{ "firstName": "Mikel", "lastName": "Palmerin", "is_keeper": false },
+		{ "firstName": "Christoph", "lastName": "Lüth", "is_keeper": false },
+		{ "firstName": "Pascal", "lastName": "Marquardt", "is_keeper": false }
+	]
 }
