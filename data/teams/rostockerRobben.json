@@ -1,0 +1,17 @@
+{
+	"name": "Rostocker Robben",
+	"fullName": "Rostocker Robben",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/Rostocker_Robben.png",
+	"coach": {
+		"firstName": "",
+		"lastName": ""
+	},
+	"players": [
+		{ "firstName": "Oliver", "lastName": "Lindberg-Levin", "is_keeper": true },
+		{ "firstName": "Jonas", "lastName": "Banouas", "is_keeper": true },
+		{ "firstName": "Kristian", "lastName": "Marmor", "is_keeper": false },
+		{ "firstName": "Pablo", "lastName": "Perez Gonzalez", "is_keeper": false },
+		{ "firstName": "Max", "lastName": "Krötsching", "is_keeper": false }
+	]
+}

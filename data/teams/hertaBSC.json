@@ -1,0 +1,13 @@
+{
+  "name": "Herta BSC",
+  "fullName": "Hertha BSC Beachsoccer",
+  "shirtColor": "#e80c0c",
+  "imagePath": "/images/Hertha_BSC.png",
+  "coach": {
+    "firstName": "",
+    "lastName": ""
+  },
+  "players": [
+    { "firstName": "Marvin", "lastName": "Klaus", "is_keeper": true }
+  ]
+}

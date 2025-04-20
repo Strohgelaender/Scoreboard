@@ -3,69 +3,162 @@
 	"fullName": "Beton Boys München",
 	"shirtColor": "#ffffff",
 	"imagePath": "/images/Vereinlogo BB cut.png",
-	"coach": " Ilija Krajinovic",
+	"coach": {
+		"firstName": "Ilija",
+		"lastName": "Krajinovic"
+	},
 	"players": [
 		{
 			"firstName": "Petar",
 			"lastName": "Dzalto",
-			"is_keeper": true
+			"is_keeper": true,
+			"number": 12,
+			"yellowCards": 2
+		},
+		{
+			"firstName": "Vahid",
+			"lastName": "Idrizovic",
+			"number": 2,
+			"yellowCards": 1,
+			"goals": 1
 		},
 		{
 			"firstName": "Mirza",
-			"lastName": "Idizovic"
+			"lastName": "Idrizovic",
+			"goals": 2,
+			"yellowCards": 2,
+			"number": 3
 		},
 		{
 			"firstName": "Andrej",
 			"lastName": "Skoro",
-			"is_captain": true
+			"is_captain": true,
+			"number": 11,
+			"goals": 12,
+			"yellowCards": 3
 		},
 		{
 			"firstName": "Fikret",
-			"lastName": "Jahic"
+			"lastName": "Jahic",
+			"goals": 6,
+			"yellowCards": 3
 		},
 		{
 			"firstName": "Omer",
-			"lastName": "Jahic"
+			"lastName": "Jahic",
+			"goals": 5,
+			"yellowCards": 2
 		},
 		{
 			"firstName": "Tino",
-			"lastName": "Pticar"
+			"lastName": "Pticar",
+			"goals": 2,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Ensar",
-			"lastName": "Skrijelj"
+			"lastName": "Skrijelj",
+			"goals": 2,
+			"yellowCards": 3
 		},
 		{
 			"firstName": "Marko",
-			"lastName": "Stjepanovic"
+			"lastName": "Stjepanovic",
+			"number": 15,
+			"goals": 3
 		},
 		{
 			"firstName": "Ante",
-			"lastName": "Vicic"
+			"lastName": "Vicic",
+			"yellowCards": 3,
+			"goals": 3
 		},
 		{
 			"firstName": "Burhan",
-			"lastName": "Mustafov"
+			"lastName": "Mustafov",
+			"goals": 5
 		},
 		{
 			"firstName": "Arijanit",
-			"lastName": "Kelmendi"
+			"lastName": "Kelmendi",
+			"goals": 2,
+			"yellowCards": 2
+		},
+		{
+			"firstName": "Lirim",
+			"lastName": "Kelmendi",
+			"goals": 1,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Karlo",
-			"lastName": "Lujic"
+			"lastName": "Lujic",
+			"number": 9,
+			"goals": 1,
+			"yellowCards": 2
 		},
 		{
 			"firstName": "Srecko",
-			"lastName": "Miskovic"
+			"lastName": "Miskovic",
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Azur",
-			"lastName": "Velagić"
+			"lastName": "Velagić",
+			"goals": 1,
+			"yellowCards": 1
 		},
 		{
 			"firstName": "Marko",
-			"lastName": "Ereiz"
+			"lastName": "Ereiz",
+			"number": 16
+		},
+		{
+			"firstName": "Marko",
+			"lastName": "Mikac",
+			"goals": 1,
+			"yellowCards": 1
+		},
+		{
+			"firstName": "Renato",
+			"lastName": "Tuka",
+			"goals": 1,
+			"number": 2,
+			"yellowCards": 1
+		},
+		{
+			"firstName": "Admir",
+			"lastName": "Durmic"
+		},
+		{
+			"firstName": "Marijan",
+			"lastName": "Krasnic",
+			"number": 21,
+			"is_keeper": true
+		},
+		{
+			"firstName": "Vendim",
+			"lastName": "Sinani",
+			"goals": 1,
+			"yellowCards": 1
+		},
+		{
+			"firstName": "Ljubisa",
+			"lastName": "Jovic",
+			"number": 7,
+			"goals": 1
+		},
+		{
+			"firstName": "Aleksandar",
+			"lastName": "Demonjic",
+			"number": 10,
+			"goals": 8,
+			"yellowCards": 2
+		},
+		{
+			"firstName": "Nenad",
+			"lastName": "Elez",
+			"yellowCards": 1
 		}
 	]
 }

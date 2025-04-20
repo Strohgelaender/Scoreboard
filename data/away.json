@@ -1,27 +1,19 @@
 {
-	"name": "Hamburger SV",
-	"fullName": "Hamburger SV",
-	"shirtColor": "#0930de",
-	"imagePath": "/images/HSV_Raute_4c-_1_.jpg",
-	"coach": {
-		"firstName": "Michael",
-		"lastName": "Meyer"
-	},
-	"players": [
-		{ "firstName": "Boris", "lastName": "Lastro", "is_keeper": true, "is_captain": true, "number": 22, "yellowCards": 2 },
-		{ "firstName": "Pavlos", "lastName": "Wiegels", "is_keeper": true, "number": 1, "goals": 3, "yellowCards": 1 },
-		{ "firstName": "Joao", "lastName": "Neves", "goals": 17, "yellowCards": 4 },
-		{ "firstName": "Maximilian", "lastName": "Grünberg", "number": 27, "goals": 11, "yellowCards": 5 },
-		{ "firstName": "Mohamed", "lastName": "Labiadh", "number": 5, "goals": 5, "yellowCards": 1 },
-		{ "firstName": "Bilal", "lastName": "Mirzayi", "number": 12, "goals": 8 },
-		{ "firstName": "Jure", "lastName": "Pusic", "number": 23, "goals": 13, "yellowCards": 2 },
-		{ "firstName": "Onur", "lastName": "Saglam", "number": 10, "goals": 10, "yellowCards": 7 },
-		{ "firstName": "Nikola", "lastName": "Stankovic", "goals": 6, "yellowCards": 5 },
-		{ "firstName": "Eike Joschka", "lastName": "Thiemann", "number": 14, "goals": 5, "yellowCards": 1 },
-		{ "firstName": "Leon", "lastName": "Hämling", "number": 15 },
-		{ "firstName": "Komeil", "lastName": "Heideri", "number": 17, "goals": 6, "yellowCards": 3 },
-		{ "firstName": "Albert", "lastName": "Nikolla" },
-		{ "firstName": "Michael", "lastName": "Meyer", "number": 7, "goals": 18, "yellowCards": 2 },
-		{ "firstName": "Vassilios", "lastName": "Siopis", "number": 19 }
-	]
+  "name": "Beach Royals Düsseldorf",
+  "fullName": "Beach Royals Düsseldorf",
+  "shirtColor": "#e80c0c",
+  "imagePath": "/images/Beach_Royals_Düsseldorf.png",
+  "coach": {
+    "firstName": "",
+    "lastName": ""
+  },
+  "players": [
+    { "firstName": "Mohammad Reza", "lastName": "Bahmei", "is_keeper": true },
+    { "firstName": "Max", "lastName": "Kinscher", "is_keeper": false },
+    { "firstName": "Philipp", "lastName": "Borer", "is_keeper": false },
+    { "firstName": "Romain", "lastName": "Goust Alves", "is_keeper": false },
+    { "firstName": "Mikel", "lastName": "Palmerin", "is_keeper": false },
+    { "firstName": "Christoph", "lastName": "Lüth", "is_keeper": false },
+    { "firstName": "Pascal", "lastName": "Marquardt", "is_keeper": false }
+  ]
 }

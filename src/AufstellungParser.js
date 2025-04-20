@@ -195,7 +195,7 @@ function getTeamLogo(teamName) {
 		case 'Hertha BSC Beachsoccer':
 			return '/images/small/Hertha_BSC.png';
 		case 'Real Münster':
-			return '/images/small/real_münster_transparent.png';
+			return '/images/small/real_münster_black.png';
 		case 'SV Merkur':
 		case 'SV Merkur Beachsoccer':
 			return '/images/small/SV_Merkur.png';
