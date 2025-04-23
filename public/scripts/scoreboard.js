@@ -84,6 +84,10 @@ function loadTeams() {
 			}
 		})
 		.catch(console.log);
+
+	for (const image of document.getElementsByClassName('refreshTeamImage')) {
+		image.src = image.src.includes('?v=') ? image.src.replace('?v=', '?v=' + new Date().getTime()) : image.src + '?v=' + new Date().getTime();
+	}
 }
 
 function updateTimerFromServer() {

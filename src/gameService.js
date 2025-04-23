@@ -47,6 +47,17 @@ export class GameService {
 				}, 10_000);
 			},
 		);
+		this.readTeams();
+	}
+
+	readTeams() {
+		this.teams = [];
+		fs.readdirSync('data/teams').forEach((file) => {
+			if (file.endsWith('.json')) {
+				const team = JSON.parse(fs.readFileSync(`data/teams/${file}`, 'utf-8'));
+				this.teams.push(team);
+			}
+		});
 	}
 
 	reset() {
@@ -110,7 +121,8 @@ export class GameService {
 		}
 
 		if (event.eventType === 'REFRESH') {
-			this.reloadTeamFiles();
+			// Don't reload files, use value from admin page
+			// this.reloadTeamFiles();
 		}
 
 		if (event.eventType === 'SHOW_GOAL' || event.eventType === 'SHOW_OWN_GOAL') {

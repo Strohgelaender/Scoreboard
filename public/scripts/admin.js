@@ -9,6 +9,7 @@ addEventListener('DOMContentLoaded', () => {
 	loadTeams();
 	loadPlayers();
 	loadGoalEvents();
+	loadAllTeams();
 	document.getElementById('addHome').addEventListener('click', addPlayerRow.bind(this, 'homeBody'));
 	document.getElementById('addAway').addEventListener('click', addPlayerRow.bind(this, 'awayBody'));
 	document.getElementById('saveBtn').addEventListener('click', postLineup);
@@ -30,8 +31,8 @@ function loadTeams() {
 	fetch('/data/info', { method: 'GET' })
 		.then((response) => response.json())
 		.then((value) => {
-			const home = value.home;
-			const away = value.away;
+			home = value.home;
+			away = value.away;
 
 			document.getElementById('homeName').textContent = home.name;
 			document.getElementById('awayName').textContent = away.name;
@@ -44,12 +45,10 @@ function loadPlayers() {
 		.then((response) => response.json())
 		.then((value) => {
 			if (value.home?.length) {
-				home = value.home;
 				const homeBody = document.getElementById('homeBody');
 				addAllPlayers(homeBody, value.home);
 			}
 			if (value.away?.length) {
-				away = value.away;
 				const awayBody = document.getElementById('awayBody');
 				addAllPlayers(awayBody, value.away);
 			}
@@ -64,6 +63,81 @@ function loadGoalEvents() {
 			updateGoalEvents(events);
 		})
 		.catch(console.error);
+}
+
+function loadAllTeams() {
+	fetch('/teams', { method: 'GET' })
+		.then((response) => response.json())
+		.then((teams) => {
+			const selectHome = document.getElementById('selectHome');
+			const selectAway = document.getElementById('selectAway');
+
+			for (const team of teams) {
+				createTeamOption(team, selectHome, home);
+				createTeamOption(team, selectAway, away);
+			}
+
+			selectHome.addEventListener('change', (event) => {
+				const selectedTeam = teams.find((team) => team.name === event.target.value);
+				if (selectedTeam) {
+					home = selectedTeam;
+					updateTeamSelection();
+					fetch('/home', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(selectedTeam),
+					})
+						.then(() => console.log('Home Team updated'))
+						.catch(console.error);
+				}
+			});
+
+			selectAway.addEventListener('change', (event) => {
+				const selectedTeam = teams.find((team) => team.name === event.target.value);
+				if (selectedTeam) {
+					away = selectedTeam;
+					updateTeamSelection();
+					fetch('/away', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(selectedTeam),
+					})
+						.then(() => console.log('Away Team updated'))
+						.catch(console.error);
+				}
+			});
+		})
+		.catch(console.error);
+}
+
+function updateTeamSelection() {
+	document.getElementById('homeName').textContent = home.name;
+	document.getElementById('awayName').textContent = away.name;
+
+	const homeBody = document.getElementById('homeBody');
+	homeBody.replaceChildren();
+	addAllPlayers(homeBody, home.players);
+
+	const awayBody = document.getElementById('awayBody');
+	awayBody.replaceChildren();
+	addAllPlayers(awayBody, away.players);
+}
+
+function createTeamOption(team, select, currentTeam) {
+	const option = document.createElement('option');
+
+	option.value = team.name;
+	option.innerHTML = team.name;
+
+	if (currentTeam.name === team.name) {
+		option.selected = true;
+	}
+
+	select.appendChild(option);
 }
 
 function addAllPlayers(body, players) {

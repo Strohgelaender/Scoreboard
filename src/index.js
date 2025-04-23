@@ -3,7 +3,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { tinyws } from 'tinyws';
 import fs from 'fs';
-import { readLineup } from './AufstellungParser.js';
 import { GameService } from './gameService.js';
 import { ObsService } from './obsService.js';
 
@@ -165,6 +164,28 @@ app.post('/goalEvents', express.json(), (req, res) => {
 	let body = req.body;
 	// TODO some merging?
 	game.goalEvents = body;
+	res.status(200).send();
+});
+
+app.get('/teams', (req, res) => {
+	res.send(game.teams);
+});
+
+app.post('/home', express.json(), (req, res) => {
+	const body = req.body;
+	game.homeTeam = body;
+	sendEvent({
+		eventType: 'REFRESH',
+	});
+	res.status(200).send();
+});
+
+app.post('/away', express.json(), (req, res) => {
+	const body = req.body;
+	game.awayTeam = body;
+	sendEvent({
+		eventType: 'REFRESH',
+	});
 	res.status(200).send();
 });
 
