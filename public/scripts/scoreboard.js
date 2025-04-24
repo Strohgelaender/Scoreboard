@@ -84,7 +84,10 @@ function loadTeams() {
 			}
 		})
 		.catch(console.log);
+}
 
+function refreshTeamImages() {
+	loadTeams();
 	for (const image of document.getElementsByClassName('refreshTeamImage')) {
 		image.src = image.src.includes('?v=') ? image.src.replace('?v=', '?v=' + new Date().getTime()) : image.src + '?v=' + new Date().getTime();
 	}
@@ -170,6 +173,9 @@ function handleEventInternal(event) {
 			break;
 		case 'REFRESH':
 			loadTeams();
+			break;
+		case 'REFRESH_IMAGES':
+			refreshTeamImages();
 			break;
 		case 'RED_CARD':
 			showRedCardTimer(event.team);

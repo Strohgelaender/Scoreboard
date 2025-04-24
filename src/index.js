@@ -172,19 +172,17 @@ app.get('/teams', (req, res) => {
 });
 
 app.post('/home', express.json(), (req, res) => {
-	const body = req.body;
-	game.homeTeam = body;
+	game.homeTeam = req.body;
 	sendEvent({
-		eventType: 'REFRESH',
+		eventType: 'REFRESH_IMAGES',
 	});
 	res.status(200).send();
 });
 
 app.post('/away', express.json(), (req, res) => {
-	const body = req.body;
-	game.awayTeam = body;
+	game.awayTeam = req.body;
 	sendEvent({
-		eventType: 'REFRESH',
+		eventType: 'REFRESH_IMAGES',
 	});
 	res.status(200).send();
 });
