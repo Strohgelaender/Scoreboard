@@ -104,6 +104,9 @@ function updateTimerFromServer() {
 function handleEventInternal(event) {
 	switch (event.eventType) {
 		case 'GOAL':
+			showGoalAnimation(event);
+			updateScoreboardInternal();
+			break;
 		case 'OWN_GOAL':
 			updateScoreboardInternal();
 			break;
@@ -1273,4 +1276,52 @@ function createEmptyPlayoffRow(table) {
 
 	table.appendChild(homeRow);
 	table.appendChild(awayRow);
+}
+
+function showGoalAnimation(event) {
+	if (!event || !showingSmallScoreboard) {
+		return;
+	}
+	const team = event.team === 'HOME' ? 0 : 1;
+	setText('topScoreboardText', fullNames[team]);
+	const animation = team === 0 ? 'revealToRight' : 'revealToLeft';
+	animate('topScoreboardBackground', animation, '0.5s');
+	setTimeout(() => {
+		animate('topScoreboardOverlay', animation, '0.5s');
+		setTimeout(() => {
+			animate('goalAnimationWrapper', 'revealDown', '0.5s');
+			setTimeout(() => {
+				animate('gatb1', 'growFade', '4s');
+			}, 200);
+			setTimeout(() => {
+				animate('gatb2', 'growFade', '4s');
+			}, 1000);
+			setTimeout(() => {
+				animate('gatb3', 'growFade', '4s');
+			}, 2500);
+			setTimeout(() => {
+				animate('gatb4', 'growFade', '4s');
+			}, 3300);
+			setTimeout(() => {
+				animate('gatb5', 'growFade', '4s');
+			}, 1200);
+
+			setTimeout(() => {
+				animate('goalAnimationWrapper', 'revealDownOut', '0.5s');
+			}, 4_000);
+
+			setTimeout(() => {
+				animate('topScoreboardBackground', animation + 'Out', '0.5s');
+				document.getElementById('gatb1').style.animation = 'none';
+				document.getElementById('gatb2').style.animation = 'none';
+				document.getElementById('gatb3').style.animation = 'none';
+				document.getElementById('gatb4').style.animation = 'none';
+				document.getElementById('gatb5').style.animation = 'none';
+			}, 4_500);
+
+			setTimeout(() => {
+				animate('topScoreboardOverlay', animation + 'Out', '0.5s');
+			}, 4_300);
+		}, 400);
+	}, 300);
 }
