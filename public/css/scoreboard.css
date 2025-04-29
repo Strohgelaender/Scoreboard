@@ -49,7 +49,7 @@ html {
 	width: 150px;
 	height: 10px;
 	background-color: #59aadf;
-	border-radius: 10px 10px 0px 0px;
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	z-index: -5;
 }
 
@@ -58,7 +58,7 @@ html {
 	width: 50px;
 	height: 35px;
 	top: 115px;
-	border-radius: 0 0 10px 10px;
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
 	text-align: center;
 	vertical-align: center;
 	z-index: -5;
@@ -81,7 +81,7 @@ html {
 	justify-content: space-evenly;
 	align-items: center;
 	clip-path: inset(0 0 100% 0);
-	border-radius: 0 0 10px 10px;
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
 	text-align: center;
 	vertical-align: center;
 	background-color: var(--main-color);
@@ -91,7 +91,7 @@ html {
 	position: absolute;
 	width: 490px;
 	height: 34px;
-	border-radius: 0 0 10px 10px;
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
 	z-index: -10;
 	clip-path: inset(0 0 100% 0);
 	background-color: white;
@@ -111,7 +111,7 @@ html {
 	height: 35px;
 	left: 75px;
 	top: 39px;
-	border-radius: 0 0 10px 10px;
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
 	text-align: center;
 	vertical-align: center;
 	line-height: 25px;
@@ -123,7 +123,7 @@ html {
 
 .redCardBox {
 	position: relative;
-	border-radius: 10px 10px 0 0;
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	vertical-align: center;
 	z-index: -1;
 	background: var(--main-color);
@@ -257,7 +257,7 @@ html {
 	vertical-align: center;
 	text-align: right;
 	line-height: 40px;
-	border-radius: 10px;
+	border-radius: var(--border-radius);
 	clip-path: path('M 0 0 H 85 V 41 H 0A 10 10 0 0 0 6 0 Z');
 }
 
@@ -276,7 +276,7 @@ html {
 	position: absolute;
 	left: 150px;
 	padding: 0 5px;
-	border-radius: 10px;
+	border-radius: var(--border-radius);
 	overflow: hidden;
 }
 
@@ -288,6 +288,7 @@ html {
 	left: 155px;
 	overflow: hidden;
 	clip-path: inset(0 0 100% 0);
+    z-index: 9;
 }
 
 #goalAnimationBox {
@@ -296,8 +297,8 @@ html {
 	width: 500px;
 	height: 80px;
 	position: absolute;
-	background: var(--background-long);
-	border-radius: 0 0 10px 10px;
+	background: var(--main-color);
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
 #goalAnimationText {
@@ -314,7 +315,7 @@ html {
 	font-size: 60px;
 	color: rgba(255, 255, 255, 0.1);
 	text-stroke: 1px rgba(255, 255, 255, 0.3);
-	z-index: 3;
+	z-index: 2;
 	transform: scale(0);
 }
 
@@ -335,8 +336,8 @@ html {
 	position: absolute;
 	left: 150px;
 	background: var(--background-long);
-	z-index: 10;
-	border-radius: 10px;
+	z-index: 6;
+	border-radius: var(--border-radius);
 	padding: 0 5px;
 	clip-path: inset(0 100% 0 0);
 	display: flex;
@@ -349,6 +350,7 @@ html {
 	font-family: DFBSans-Bold, sans-serif;
 	text-align: center;
 	line-height: 40px;
+    z-index: 15;
 }
 
 #topScoreboardBackground {
@@ -357,8 +359,8 @@ html {
 	position: absolute;
 	left: 150px;
 	background: var(--lower-thirds-bottom);
-	z-index: 9;
-	border-radius: 10px;
+	z-index: 5;
+	border-radius: var(--border-radius);
 	padding: 0 5px;
 	clip-path: inset(0 100% 0 0);
 }

@@ -73,6 +73,7 @@ html {
 	--spielfeld-color: var(--futsal-spielfeld);
 	--more-info-background: #1eb4c8b3;
 	--stripes-animation: var(--futsal-stripes-animation);
+    --border-radius: 10px;
 
 	/*--more-info-background: var(--futsal-blue-2);*/
 

@@ -280,42 +280,42 @@ function toggleBigScoreboard(goalEvents) {
 	if (!currentContent) {
 		showingExtraText = setBigExtraText(goalEvents);
 		showingVersus = section === 1 && time === DEFAULT_TIME;
-		animate('bottomAdditionalBackground', 'revealCenter');
+		animate('bottomAdditionalBackground', 'revealCenter', '0.5s');
 		setTimeout(() => {
-			animate('bottomScoreBackground', 'revealCenter');
-			animate('bottomContent', 'revealCenter');
+			animate('bottomScoreBackground', 'revealCenter', '0.5s');
+			animate('bottomContent', 'revealCenter', '0.5s');
 			if (!showingVersus) {
-				animate('bottomSpielfeldCircle', 'spielfeldBottom');
+				animate('bottomSpielfeldCircle', 'spielfeldBottom', '0.5s');
 			}
 			setTimeout(() => {
-				animate('bigHomeImage', 'growImage');
-				animate('bigAwayImage', 'growImage');
-				animate('bigHomeName', 'opacityIn');
-				animate('bigAwayName', 'opacityIn');
+				animate('bigHomeImage', 'growImage', '0.5s');
+				animate('bigAwayImage', 'growImage', '0.5s');
+				animate('bigHomeName', 'opacityIn', '0.5s');
+				animate('bigAwayName', 'opacityIn', '0.5s');
 				if (showingVersus) {
-					animate('bigVersus', 'opacityIn');
+					animate('bigVersus', 'opacityIn', '0.5s');
 				} else {
-					animate('bigHomeScore', 'opacityIn');
-					animate('bigAwayScore', 'opacityIn');
+					animate('bigHomeScore', 'opacityIn', '0.5s');
+					animate('bigAwayScore', 'opacityIn', '0.5s');
 				}
 				if (showingExtraText) {
 					setTimeout(() => {
-						animate('bigAdditionalText', 'opacityIn');
-						animate('bigHomeGoalscorers', 'opacityIn');
-						animate('bigAwayGoalscorers', 'opacityIn');
-						animate('bottomMoreInfoBackground', 'revealUp');
-					}, 500);
+						animate('bigAdditionalText', 'opacityIn', '0.5s');
+						animate('bigHomeGoalscorers', 'opacityIn', '0.5s');
+						animate('bigAwayGoalscorers', 'opacityIn', '0.5s');
+						animate('bottomMoreInfoBackground', 'revealUp', '0.5s');
+					}, 250);
 				}
-			}, 200);
-		}, 80);
+			}, 100);
+		}, 40);
 		currentContent = BIG_SCOREBOARD;
 	} else {
 		if (showingExtraText) {
-			animate('bigAdditionalText', 'opacityOut', '0.5s');
-			animate('bigHomeGoalscorers', 'opacityOut', '0.5s');
-			animate('bigAwayGoalscorers', 'opacityOut', '0.5s');
-			animate('bottomMoreInfoBackground', 'revealUpOut');
-			setTimeout(animateBigScoreboardOut, 800);
+			animate('bigAdditionalText', 'opacityOut', '0.3s');
+			animate('bigHomeGoalscorers', 'opacityOut', '0.3s');
+			animate('bigAwayGoalscorers', 'opacityOut', '0.3s');
+			animate('bottomMoreInfoBackground', 'revealUpOut', '0.5s');
+			setTimeout(animateBigScoreboardOut, 400);
 		} else {
 			animateBigScoreboardOut();
 		}
@@ -434,8 +434,8 @@ function setGoalScorersText(goals, id) {
 function animateBigScoreboardOut() {
 	setText('bigHomeGoalscorers', '');
 	setText('bigAwayGoalscorers', '');
-	animate('bottomScoreBackground', 'revealCenterOut');
-	animate('bottomContent', 'revealCenterOut');
+	animate('bottomScoreBackground', 'revealCenterOut', '0.5s');
+	animate('bottomContent', 'revealCenterOut', '0.5s');
 	animate('bigHomeImage', 'hideImage', '0.5s');
 	animate('bigAwayImage', 'hideImage', '0.5s');
 	animate('bigHomeName', 'opacityOut', '0.5s');
@@ -445,11 +445,11 @@ function animateBigScoreboardOut() {
 	} else {
 		animate('bigHomeScore', 'opacityOut', '0.5s');
 		animate('bigAwayScore', 'opacityOut', '0.5s');
-		animate('bottomSpielfeldCircle', 'spielfeldBottomOut');
+		animate('bottomSpielfeldCircle', 'spielfeldBottomOut', '0.5s');
 	}
 	setTimeout(() => {
-		animate('bottomAdditionalBackground', 'revealCenterOut');
-	}, 80);
+		animate('bottomAdditionalBackground', 'revealCenterOut', '0.5s');
+	}, 40);
 	currentContent = undefined;
 }
 
