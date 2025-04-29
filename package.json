@@ -19,7 +19,7 @@
 	"dependencies": {
 		"@elgato-stream-deck/node": "7.1.2",
 		"@julusian/jpeg-turbo": "2.2.0",
-		"axios": "1.8.4",
+		"axios": "1.9.0",
 		"body-parser": "2.2.0",
 		"dotenv": "16.5.0",
 		"express": "5.1.0",
@@ -35,7 +35,7 @@
 		"eslint-plugin-prettier": "^5.2.6",
 		"globals": "^16.0.0",
 		"nodemon": "^3.1.10",
-		"npm-check-updates": "^18.0.0",
+		"npm-check-updates": "^18.0.1",
 		"prettier": "3.5.3"
 	}
 }
