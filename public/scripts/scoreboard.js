@@ -245,16 +245,16 @@ function toggleScoreboard() {
 		setTimeout(() => {
 			animate('halfIndicatorBox', 'revealDown', '0.5s');
 			animate('allFoulsBox', 'revealDown', '0.5s');
-			animate('homeTimeShirtLine', 'revealUp', '0.5s');
-			animate('awayTimeShirtLine', 'revealUp', '0.5s');
+			animate('homeTimeShirtLine', 'revealToLeft', '0.5s');
+			animate('awayTimeShirtLine', 'revealToRight', '0.5s');
 			animate('homeRedWrapper', 'revealUp', '0.5s');
 			animate('awayRedWrapper', 'revealUp', '0.5s');
 		}, 400);
 	} else {
 		animate('halfIndicatorBox', 'revealDownOut', '0.5s');
 		animate('allFoulsBox', 'revealDownOut', '0.5s');
-		animate('homeTimeShirtLine', 'revealUpOut', '0.5s');
-		animate('awayTimeShirtLine', 'revealUpOut', '0.5s');
+		animate('homeTimeShirtLine', 'revealToLeftOut', '0.5s');
+		animate('awayTimeShirtLine', 'revealToRightOut', '0.5s');
 		animate('homeRedWrapper', 'revealUpOut', '0.5s');
 		animate('awayRedWrapper', 'revealUpOut', '0.5s');
 		setTimeout(() => {
@@ -268,7 +268,7 @@ function toggleScoreboard() {
 			animate('awayTimeName', 'opacityOut');
 			animate('homeTimeScore', 'opacityOut');
 			animate('awayTimeScore', 'opacityOut');
-		}, 400);
+		}, 350);
 	}
 	showingSmallScoreboard = !showingSmallScoreboard;
 }
@@ -1311,17 +1311,17 @@ function showGoalAnimation(event) {
 			}, 4_000);
 
 			setTimeout(() => {
+				animate('topScoreboardOverlay', animation + 'Out', '0.5s');
+			}, 4_400);
+
+			setTimeout(() => {
 				animate('topScoreboardBackground', animation + 'Out', '0.5s');
 				document.getElementById('gatb1').style.animation = 'none';
 				document.getElementById('gatb2').style.animation = 'none';
 				document.getElementById('gatb3').style.animation = 'none';
 				document.getElementById('gatb4').style.animation = 'none';
 				document.getElementById('gatb5').style.animation = 'none';
-			}, 4_500);
-
-			setTimeout(() => {
-				animate('topScoreboardOverlay', animation + 'Out', '0.5s');
-			}, 4_300);
+			}, 4_600);
 		}, 400);
 	}, 300);
 }

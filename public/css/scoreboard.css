@@ -46,11 +46,21 @@ html {
 
 .shirtLine {
 	position: absolute;
-	width: 150px;
-	height: 10px;
+	top: 0;
+	width: 20px;
+	height: 40px;
 	background-color: #59aadf;
-	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	z-index: -5;
+}
+
+#homeTimeShirtLine {
+	left: 150px;
+	border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+#awayTimeShirtLine {
+	left: 660px;
+	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .foulsBox {
@@ -70,7 +80,7 @@ html {
 	width: 490px;
 	height: 35px;
 	top: 39px;
-	left: 160px;
+	left: 170px;
 	z-index: -10;
 }
 
@@ -137,15 +147,15 @@ html {
 	position: absolute;
 	width: 72px;
 	height: 35px;
-	top: -30px;
+	top: -29px;
 }
 
 #homeRedWrapper {
-	left: 160px;
+	left: 170px;
 }
 
 #awayRedWrapper {
-	left: 560px;
+	left: 570px;
 }
 
 #homeRedCardBox {
@@ -179,19 +189,6 @@ html {
 	text-align: center;
 }
 
-#homeTimeShirtLine {
-	left: 200px;
-}
-
-#awayTimeShirtLine {
-	left: 460px;
-}
-
-#homeTimeShirtLine,
-#awayTimeShirtLine {
-	top: -9px;
-}
-
 #scoreboardSpielfeldCircle {
 	width: 87px;
 	height: 47px;
@@ -209,7 +206,7 @@ html {
 
 #scoreboardCircleBox {
 	position: absolute;
-	left: 362px;
+	left: 372px;
 	top: 0;
 	width: auto;
 	height: 40px;
@@ -274,27 +271,27 @@ html {
 	height: 40px;
 	background: var(--background-long);
 	position: absolute;
-	left: 150px;
+	left: 160px;
 	padding: 0 5px;
 	border-radius: var(--border-radius);
 	overflow: hidden;
 }
 
 #goalAnimationWrapper {
-	width: 500px;
+	width: 520px;
 	height: 80px;
 	position: absolute;
 	top: 39px;
 	left: 155px;
 	overflow: hidden;
 	clip-path: inset(0 0 100% 0);
-    z-index: 9;
+	z-index: 9;
 }
 
 #goalAnimationBox {
 	display: flex;
 	justify-content: center;
-	width: 500px;
+	width: 520px;
 	height: 80px;
 	position: absolute;
 	background: var(--main-color);
@@ -331,7 +328,7 @@ html {
 }
 
 #topScoreboardOverlay {
-	width: 500px;
+	width: 520px;
 	height: 40px;
 	position: absolute;
 	left: 150px;
@@ -350,11 +347,11 @@ html {
 	font-family: DFBSans-Bold, sans-serif;
 	text-align: center;
 	line-height: 40px;
-    z-index: 15;
+	z-index: 15;
 }
 
 #topScoreboardBackground {
-	width: 500px;
+	width: 520px;
 	height: 40px;
 	position: absolute;
 	left: 150px;
