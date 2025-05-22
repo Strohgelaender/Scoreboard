@@ -32,7 +32,7 @@ const transitions = {
 	[PREVIOUS_MATCHES]: showPreviousMatches,
 };
 
-const DEFAULT_TIME = '12:00';
+const DEFAULT_TIME = '20:00';
 
 let currentContent;
 
@@ -230,12 +230,12 @@ function animate(id, animation, duration = '1s', curve = 'cubic-bezier(0.16, 0, 
 
 function toggleScoreboard() {
 	if (!showingSmallScoreboard) {
-		animate('scoreboardMain', 'revealScoreboard', '0.8s');
+		animate('scoreboardMain', 'revealScoreboard', '0.6s');
 		animate('timerWrapper', 'revealToRight', '0.5s');
 		animate('scoreboardSpielfeldCircle', 'ScoreboardSpielfeldIn');
 		setTimeout(() => {
-			animate('homeImage', 'growImage');
-			animate('awayImage', 'growImage');
+			animate('homeImage', 'growImage', '0.6s');
+			animate('awayImage', 'growImage', '0.6s');
 			animate('time', 'opacityIn');
 			animate('homeTimeName', 'opacityIn');
 			animate('awayTimeName', 'opacityIn');
@@ -243,20 +243,24 @@ function toggleScoreboard() {
 			animate('awayTimeScore', 'opacityIn');
 		}, 100);
 		setTimeout(() => {
-			animate('halfIndicatorBox', 'revealDown', '0.5s');
-			animate('allFoulsBox', 'revealDown', '0.5s');
 			animate('homeTimeShirtLine', 'revealToLeft', '0.5s');
 			animate('awayTimeShirtLine', 'revealToRight', '0.5s');
+		}, 500);
+		setTimeout(() => {
+			animate('halfIndicatorBox', 'revealDown', '0.5s');
+			animate('allFoulsBox', 'revealDown', '0.5s');
 			animate('homeRedWrapper', 'revealUp', '0.5s');
 			animate('awayRedWrapper', 'revealUp', '0.5s');
-		}, 400);
+		}, 900);
 	} else {
-		animate('halfIndicatorBox', 'revealDownOut', '0.5s');
-		animate('allFoulsBox', 'revealDownOut', '0.5s');
-		animate('homeTimeShirtLine', 'revealToLeftOut', '0.5s');
-		animate('awayTimeShirtLine', 'revealToRightOut', '0.5s');
-		animate('homeRedWrapper', 'revealUpOut', '0.5s');
-		animate('awayRedWrapper', 'revealUpOut', '0.5s');
+		animate('halfIndicatorBox', 'revealDownOut', '0.4s');
+		animate('allFoulsBox', 'revealDownOut', '0.4s');
+		animate('homeRedWrapper', 'revealUpOut', '0.4s');
+		animate('awayRedWrapper', 'revealUpOut', '0.4s');
+		setTimeout(() => {
+			animate('homeTimeShirtLine', 'revealToLeftOut', '0.2s');
+			animate('awayTimeShirtLine', 'revealToRightOut', '0.2s');
+		}, 350);
 		setTimeout(() => {
 			animate('scoreboardMain', 'revealScoreboardOut', '0.8s');
 			animate('timerWrapper', 'revealToRightOut', '0.8s');
@@ -268,7 +272,7 @@ function toggleScoreboard() {
 			animate('awayTimeName', 'opacityOut');
 			animate('homeTimeScore', 'opacityOut');
 			animate('awayTimeScore', 'opacityOut');
-		}, 350);
+		}, 450);
 	}
 	showingSmallScoreboard = !showingSmallScoreboard;
 }
@@ -325,18 +329,16 @@ function toggleBigScoreboard(goalEvents) {
 function setBigExtraText(goalEvents) {
 	let showingText = true;
 	if ((section === 2 && time === '00:00') || (section === 3 && time === DEFAULT_TIME)) {
-		setText('bigAdditionalText', 'Ende 2. Drittel');
-	}
-	if ((section === 3 && time === '00:00') || (section === 4 && time === DEFAULT_TIME)) {
-		if (scoreHome === scoreAway) {
-			setText('bigAdditionalText', 'Ende 3. Drittel');
+		if (scoreHome === scoreAway && false) { // activate for playoff machtes
+			setText('bigAdditionalText', 'Ende 2. Halbzeit');
 		} else {
-			setText('bigAdditionalText', 'Endstand');
+			setText('bigAdditionalText', 'Endestand');
 		}
-	} else if (section === 1 && time === DEFAULT_TIME) {
-		setText('bigAdditionalText', '1. Spieltag | Munich Beach Resort');
+	}
+	else if (section === 1 && time === DEFAULT_TIME) {
+		setText('bigAdditionalText', '1. Spieltag | Sportpark Freiham'); // TODO evn-Var + Admin-Feld
 	} else if ((section === 1 && time === '00:00') || (section === 2 && time === DEFAULT_TIME)) {
-		setText('bigAdditionalText', 'Ende 1. Drittel');
+		setText('bigAdditionalText', 'Ende 1. Halbzeit');
 	} else {
 		setText('bigAdditionalText', '');
 		showingText = false;
