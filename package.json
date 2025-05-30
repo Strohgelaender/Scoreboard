@@ -17,7 +17,7 @@
 		"node": ">=22.10.0"
 	},
 	"dependencies": {
-		"@elgato-stream-deck/node": "7.1.2",
+		"@elgato-stream-deck/node": "7.2.0",
 		"@julusian/jpeg-turbo": "2.2.0",
 		"axios": "1.9.0",
 		"body-parser": "2.2.0",
@@ -32,8 +32,8 @@
 		"@eslint/js": "^9.27.0",
 		"eslint": "^9.27.0",
 		"eslint-config-prettier": "^10.1.5",
-		"eslint-plugin-prettier": "^5.4.0",
-		"globals": "^16.1.0",
+		"eslint-plugin-prettier": "^5.4.1",
+		"globals": "^16.2.0",
 		"nodemon": "^3.1.10",
 		"npm-check-updates": "^18.0.1",
 		"prettier": "3.5.3"
