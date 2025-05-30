@@ -279,20 +279,20 @@ html {
 }
 
 #goalAnimationWrapper {
-	width: 520px;
+	width: 530px;
 	height: 80px;
 	position: absolute;
-	top: 39px;
-	left: 155px;
+	top: 33px;
+	left: 150px;
 	overflow: hidden;
 	clip-path: inset(0 0 100% 0);
-	z-index: 9;
+	z-index: 2;
 }
 
 #goalAnimationBox {
 	display: flex;
 	justify-content: center;
-	width: 520px;
+	width: 530px;
 	height: 80px;
 	position: absolute;
 	background: var(--main-color);
@@ -333,7 +333,7 @@ html {
 	height: 40px;
 	position: absolute;
 	left: 150px;
-	background: var(--background-long);
+	background: var(--background); /* TODO welche Farbe soll hier sein? */
 	z-index: 6;
 	border-radius: var(--border-radius);
 	padding: 0 5px;
