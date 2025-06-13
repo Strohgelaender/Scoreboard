@@ -817,7 +817,7 @@ html {
 .bigTeamImage {
 	max-width: 80px;
 	height: auto;
-	max-height: 80px;
+	max-height: 76px;
     transform: scale(0);
     opacity: var(--opacity-0);
 }
