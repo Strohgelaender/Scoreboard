@@ -1,0 +1,11 @@
+{
+	"name": "YB Balkan",
+	"fullName": "Young Boys Balkan",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/ybb.png",
+	"coach": {
+		"firstName": "Almedin",
+		"lastName": "Ljutic"
+	},
+	"players": []
+}

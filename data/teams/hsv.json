@@ -1,0 +1,11 @@
+{
+	"name": "Hamburger SV",
+	"fullName": "Hamburger SV",
+	"shirtColor": "#0000ff",
+	"imagePath": "/images/HSV_Raute_4c-_1_.jpg",
+	"coach": {
+		"firstName": "Michael",
+		"lastName": "Meyer"
+	},
+	"players": []
+}

@@ -1,0 +1,11 @@
+{
+	"name": "FC Liria",
+	"fullName": "FC Liria Berlin",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/liria.png",
+	"coach": {
+		"firstName": "Petr",
+		"lastName": "Schatalin"
+	},
+	"players": []
+}

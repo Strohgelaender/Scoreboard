@@ -1,0 +1,11 @@
+{
+  "name": "Beton Boys",
+  "fullName": "Beton Boys München",
+  "shirtColor": "#ff00ff",
+  "imagePath": "/images/Vereinlogo BB cut.png",
+  "coach": {
+    "firstName": "Ilija",
+    "lastName": "Krajinovic"
+  },
+  "players": []
+}

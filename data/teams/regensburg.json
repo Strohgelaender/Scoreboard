@@ -1,0 +1,11 @@
+{
+	"name": "Regensburg",
+	"fullName": "SSV Jahn Regensburg Futsal",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/Jahn Logo Rot.png",
+	"coach": {
+		"firstName": "Thorsten",
+		"lastName": "Porkert"
+	},
+	"players": []
+}

@@ -1,0 +1,11 @@
+{
+	"name": "Weilimdorf",
+	"fullName": "TSV Weilimdorf",
+	"shirtColor": "#ff0000",
+	"imagePath": "/images/TSV Weilimdorf_Original.gif",
+	"coach": {
+		"firstName": "Vojkan",
+		"lastName": "Vukmirovic"
+	},
+	"players": []
+}

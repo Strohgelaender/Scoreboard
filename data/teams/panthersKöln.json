@@ -1,0 +1,11 @@
+{
+	"name": "Futsal Panthers",
+	"fullName": "Futsal Panthers Köln",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/logo-futsal-panthers.png",
+	"coach": {
+		"firstName": "Frederico",
+		"lastName": "Moreira"
+	},
+	"players": []
+}

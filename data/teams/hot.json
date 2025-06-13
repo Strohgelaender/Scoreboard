@@ -1,0 +1,11 @@
+{
+	"name": "HOT 05",
+	"fullName": "HOT 05 Futsal",
+	"shirtColor": "#ff0000",
+	"imagePath": "/images/VfL05 neues Logo 2019 - mehrfarbig - 1000x1000px.jpg",
+	"coach": {
+		"firstName": "Yevgen",
+		"lastName": "Ryvkin"
+	},
+	"players": []
+}

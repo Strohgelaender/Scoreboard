@@ -1,0 +1,11 @@
+{
+	"name": "MCH Bielefeld",
+	"fullName": "MCH Futsal Club Bielefeld",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/mhc.png",
+	"coach": {
+		"firstName": "Mario",
+		"lastName": "Ermisch"
+	},
+	"players": []
+}

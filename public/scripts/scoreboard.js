@@ -329,13 +329,13 @@ function toggleBigScoreboard(goalEvents) {
 function setBigExtraText(goalEvents) {
 	let showingText = true;
 	if ((section === 2 && time === '00:00') || (section === 3 && time === DEFAULT_TIME)) {
-		if (scoreHome === scoreAway && false) { // activate for playoff machtes
+		if (scoreHome === scoreAway && false) {
+			// activate for playoff machtes
 			setText('bigAdditionalText', 'Ende 2. Halbzeit');
 		} else {
 			setText('bigAdditionalText', 'Endestand');
 		}
-	}
-	else if (section === 1 && time === DEFAULT_TIME) {
+	} else if (section === 1 && time === DEFAULT_TIME) {
 		setText('bigAdditionalText', '1. Spieltag | Sportpark Freiham'); // TODO evn-Var + Admin-Feld
 	} else if ((section === 1 && time === '00:00') || (section === 2 && time === DEFAULT_TIME)) {
 		setText('bigAdditionalText', 'Ende 1. Halbzeit');

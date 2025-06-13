@@ -1,0 +1,11 @@
+{
+	"name": "SV Pars",
+	"fullName": "SV Pars Neu-Isenburg",
+	"shirtColor": "#e80c0c",
+	"imagePath": "/images/VereinslogoSV.png",
+	"coach": {
+		"firstName": "Sasan",
+		"lastName": "Tabib"
+	},
+	"players": []
+}
