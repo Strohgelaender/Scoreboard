@@ -80,7 +80,7 @@ export const playoffMatches = [
 	},
 ];*/
 
-export const referees = ['Christian Grundler', 'Maximilian Scheibel', 'Marijo Kraljic', 'Martin Horne'];
+export const referees = ['Christian Grundler'];
 
 export async function readReferees() {
 	/*try {

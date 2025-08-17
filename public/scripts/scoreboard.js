@@ -847,6 +847,10 @@ function updateRefText(referees) {
 	for (let i = 1; i <= 4; i++) {
 		setText(`referee${i}Text`, referees[i - 1] || '');
 	}
+	if (referees.length < 2) {
+		document.getElementById('refAdditionalContent').style.display = 'none';
+		document.getElementById('refUpAdditionalBackground').style.display = 'none';
+	}
 }
 
 function showTable(table) {
