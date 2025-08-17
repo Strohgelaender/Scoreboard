@@ -45,7 +45,7 @@ export class GameService {
 					if (this.matchTimer.getSection() === 2) {
 						this.sendEvent({ eventType: 'HALFTIME_TIMER' });
 					}
-					this.matchTimer.resetTimer();
+					// this.matchTimer.resetTimer();
 				}, 10_000);
 			},
 		);
@@ -103,14 +103,14 @@ export class GameService {
 		if (event.eventType === 'GOAL') {
 			this.addScore(event.team === 'HOME');
 			this.handleRedCardGoal(event);
-			this.pauseTimer();
+			// this.pauseTimer();
 		} else if (event.eventType === 'OWN_GOAL') {
 			this.reduceScore(event.team === 'HOME');
 		}
 
 		if (event.eventType === 'FOUL') {
 			this.addFoul(event.team === 'HOME');
-			this.pauseTimer();
+			// this.pauseTimer();
 		} else if (event.eventType === 'REMOVE_FOUL') {
 			this.reduceFoul(event.team === 'HOME');
 		} else if (event.eventType === 'CLEAR_FOULS') {
@@ -118,7 +118,7 @@ export class GameService {
 		}
 
 		if (event.eventType === 'RED_CARD') {
-			this.pauseTimer();
+			// this.pauseTimer();
 			this.addRedCardTimer(event);
 		}
 
@@ -163,7 +163,8 @@ export class GameService {
 				// 18
 				const timerMinute = +time.split(':')[0];
 				// 2
-				const gameMinute = 20 - timerMinute + (this.matchTimer.section === 2 ? 20 : 0);
+				// const gameMinute = 20 - timerMinute + (this.matchTimer.section === 2 ? 20 : 0);
+				const gameMinute = timerMinute + 1;
 				this.goalEvents.push({
 					player: player,
 					minute: gameMinute,

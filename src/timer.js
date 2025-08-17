@@ -62,6 +62,10 @@ export class Timer {
 			d = dd;
 		}
 
+		if (this.section > 1) {
+			min += 45; // Add 45 minutes for the second half
+		}
+
 		let text = '';
 		text = (min < 10 ? '0' : '') + min + ':';
 		text += (sec < 10 ? '0' : '') + sec;
@@ -71,7 +75,8 @@ export class Timer {
 			this.stepFunction?.(text);
 		}
 
-		if (d <= 0) {
+		//if (d <= 0) {
+		if ((min === 45 && this.section === 1) || (min === 90 && this.section === 2)) { // Fußball, TODO diese klasse müsste ich mal refactoren
 			if (this.callback) {
 				this.callback();
 			}

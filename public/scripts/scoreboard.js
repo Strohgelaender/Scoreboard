@@ -328,17 +328,17 @@ function toggleBigScoreboard(goalEvents) {
 
 function setBigExtraText(goalEvents) {
 	let showingText = true;
-	if ((section === 2 && time === '00:00') || (section === 3 && time === DEFAULT_TIME)) {
+	if ((section === 2 && time === '00:00') || (section === 3 && time === DEFAULT_TIME) || (section === 2 && time === '90:00')) {
 		if (scoreHome === scoreAway && false) {
-			// activate for playoff machtes
+			// activate for playoff matches
 			setText('bigAdditionalText', 'Ende 2. Halbzeit');
 		} else {
 			setText('bigAdditionalText', 'Endestand');
 		}
 	} else if (section === 1 && time === DEFAULT_TIME) {
-		setText('bigAdditionalText', '1. Spieltag | Sportpark Freiham'); // TODO evn-Var + Admin-Feld
-	} else if ((section === 1 && time === '00:00') || (section === 2 && time === DEFAULT_TIME)) {
-		setText('bigAdditionalText', 'Ende 1. Halbzeit');
+		setText('bigAdditionalText', '2. Spieltag | Kreisklasse A Heidelberg'); // TODO evn-Var + Admin-Feld
+	} else if ((section === 1 && time === '00:00') || (section === 2 && time === DEFAULT_TIME) || (time === '45:00')) {
+		setText('bigAdditionalText', 'Halbzeitstand');
 	} else {
 		setText('bigAdditionalText', '');
 		showingText = false;

@@ -10,7 +10,7 @@ const matchdayNumber = +process.env.MATCHDAY || 10;
 
 const matchId = '02SK0R87NK000000VS5489B4VVT7BD1S';
 
-const otherMatches = ['02SK0QTUCG000000VS5489B4VVT7BD1S', '02SK0RK914000000VS5489B4VVT7BD1S', '02SK0RU7OS000000VS5489B4VVT7BD1S'];
+const otherMatches = ['02TP7QKT94000000VS5489BTVV0LE4BT', '02TP7QKTB8000000VS5489BTVV0LE4BT', '02TP7QKTD0000000VS5489BTVV0LE4BT', '02TP7QKTES000000VS5489BTVV0LE4BT', '02TP7QKTGK000000VS5489BTVV0LE4BT'];
 
 const matchUrl = 'https://www.fussball.de/ajax.liveticker/-/spiel/';
 const overviewUrl = 'https://datencenter.dfb.de/datencenter/futsal-bundesliga/2024-2025/spieltag/fc-liria-jahn-regensburg-futsal-2388171';
@@ -80,7 +80,7 @@ export const playoffMatches = [
 	},
 ];*/
 
-export const referees = ['Christian Grundler'];
+export const referees = ['Ben Grießmann'];
 
 export async function readReferees() {
 	/*try {

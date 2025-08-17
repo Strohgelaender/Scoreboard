@@ -1,19 +1,13 @@
 {
-	"name": "YB Balkan",
-	"fullName": "Young Boys Balkan",
+	"name": "Pfaffengrund",
+	"fullName": "TSV Pfaffengrund",
 	"shirtColor": "#000000",
-	"imagePath": "/images/ybb.png",
+	"imagePath": "/images/Pfaffengrund.png",
 	"coach": {
 		"firstName": "",
 		"lastName": ""
 	},
 	"players": [
-		{ "firstName": "Mohammad Reza", "lastName": "Bahmei", "is_keeper": true },
-		{ "firstName": "Max", "lastName": "Kinscher", "is_keeper": false },
-		{ "firstName": "Philipp", "lastName": "Borer", "is_keeper": false },
-		{ "firstName": "Romain", "lastName": "Goust Alves", "is_keeper": false },
-		{ "firstName": "Mikel", "lastName": "Palmerin", "is_keeper": false },
-		{ "firstName": "Christoph", "lastName": "Lüth", "is_keeper": false },
-		{ "firstName": "Pascal", "lastName": "Marquardt", "is_keeper": false }
+		{ "firstName": "Mohammad Reza", "lastName": "Bahmei", "is_keeper": true }
 	]
 }
