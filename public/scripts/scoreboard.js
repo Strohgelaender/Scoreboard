@@ -32,7 +32,7 @@ const transitions = {
 	[PREVIOUS_MATCHES]: showPreviousMatches,
 };
 
-const DEFAULT_TIME = '20:00';
+const DEFAULT_TIME = '00:00';
 
 let currentContent;
 

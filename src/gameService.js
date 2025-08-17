@@ -9,7 +9,9 @@ const FUTSAL_HALFTIME_TIME = (14 * 60 + 30) * 1000; // 14:30 minutes
 
 const BEACHSOCCER_MATCH_TIME = 12 * 60 * 1000; // 12 minutes
 
-const DEFAULT_MATCH_TIME = FUTSAL_MATCH_TIME;
+const SOCCER_MATCH_TIME = 45 * 60 * 1000; // 45 minutes
+
+const DEFAULT_MATCH_TIME = SOCCER_MATCH_TIME;
 const HALFTIME_TIME = FUTSAL_HALFTIME_TIME; // TODO
 
 const debug = true;

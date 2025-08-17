@@ -103,7 +103,7 @@ export class Timer {
 		this.startDate = Date.now();
 		this.endtime = this.startDate + this.totaltime;
 		this.stepper = setInterval(() => {
-			this.displayTime(this.endtime - Date.now());
+			this.displayTime(Date.now() - this.startDate);
 		}, 100);
 		if (this.onPause) {
 			this.onPause(this.isRunning());
