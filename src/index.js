@@ -5,6 +5,7 @@ import { tinyws } from 'tinyws';
 import fs from 'fs';
 import { GameService } from './gameService.js';
 import { ObsService } from './obsService.js';
+import { FllTeamManager } from './fllTeamManager.js';
 
 const PORT = process.env.PORT || 1860;
 
@@ -14,10 +15,13 @@ const timerWS = {
 	half: [],
 	redhome: [],
 	redaway: [],
+	teamA: [],
+	teamB: [],
 };
 
 let game = new GameService(sendEvent, sendTime);
 let obs = new ObsService();
+const fllManager = new FllTeamManager();
 
 const app = express();
 
@@ -187,10 +191,48 @@ app.post('/away', express.json(), (req, res) => {
 	res.status(200).send();
 });
 
+// FLL data endpoints
+app.get('/teamA', tinyws(), async (req) => {
+	if (req.ws) {
+		const ws = await req.ws();
+		setupCloseListener(ws, timerWS.teamA);
+		timerWS.teamA.push(ws);
+		ws.send(JSON.stringify(fllManager.teamA));
+	}
+});
+
+app.get('/teamB', tinyws(), async (req) => {
+	if (req.ws) {
+		const ws = await req.ws();
+		setupCloseListener(ws, timerWS.teamB);
+		timerWS.teamB.push(ws);
+		ws.send(JSON.stringify(fllManager.teamB));
+	}
+});
+
+app.put('/round', express.json(), (req, res) => {
+	fllManager.setRound(req.body);
+	sendWS(timerWS['teamA'], JSON.stringify(fllManager.teamA));
+	sendWS(timerWS['teamB'], JSON.stringify(fllManager.teamB));
+	req.status(200).send();
+});
+
+app.put('/next', (req, res) => {
+	fllManager.nextTeam();
+	sendWS(timerWS['teamA'], JSON.stringify(fllManager.teamA));
+	sendWS(timerWS['teamB'], JSON.stringify(fllManager.teamB));
+	req.status(200).send();
+});
+
 export function sendEvent(event) {
 	if (game.handleEvent(event)) {
 		// returns true if the event got handled completely (timer)
 		// and should not be further send to other clients
+		return;
+	}
+	if (fllManager.handleEvent(event)) {
+		sendWS(timerWS['teamA'], JSON.stringify(fllManager.teamA));
+		sendWS(timerWS['teamB'], JSON.stringify(fllManager.teamB));
 		return;
 	}
 	obs.handleEvent(event);

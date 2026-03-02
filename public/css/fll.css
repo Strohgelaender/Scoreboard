@@ -1,0 +1,65 @@
+#container {
+	width: 1920px;
+	height: 1080px;
+	position: relative;
+	background: transparent;
+	overflow: hidden;
+}
+
+.teamBox {
+	position: absolute;
+	bottom: 40px;
+	background: linear-gradient(135deg, rgba(30, 180, 200, 0.95) 0%, rgba(2, 67, 89, 0.95) 100%);
+	border: 3px solid var(--futsal-blue-2);
+	border-radius: var(--border-radius);
+	padding: 20px 30px;
+	min-width: 350px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 8px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.leftBox {
+	left: 40px;
+}
+
+.rightBox {
+	right: 40px;
+	text-align: right;
+}
+
+.teamName {
+	font-family: DFBSans-Bold, sans-serif;
+	font-size: 32px;
+	color: white;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.2;
+}
+
+.teamInstitution {
+	font-family: DFBSans-Regular, sans-serif;
+	font-size: 20px;
+	color: var(--futsal-grey);
+	font-weight: normal;
+	line-height: 1.2;
+}
+
+/* Responsive adjustments for different resolutions */
+@media (max-width: 1920px) {
+	.teamBox {
+		min-width: 300px;
+		padding: 18px 25px;
+	}
+
+	.teamName {
+		font-size: 28px;
+	}
+
+	.teamInstitution {
+		font-size: 18px;
+	}
+}

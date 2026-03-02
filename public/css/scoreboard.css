@@ -803,23 +803,23 @@ html {
 }
 
 .bigImageBox {
-    width: 80px;
-    height: 80px;
-    z-index: 1;
-    padding-left: 5px;
-    padding-right: 5px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 80px;
+	height: 80px;
+	z-index: 1;
+	padding-left: 5px;
+	padding-right: 5px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .bigTeamImage {
 	max-width: 80px;
 	height: auto;
 	max-height: 76px;
-    transform: scale(0);
-    opacity: var(--opacity-0);
+	transform: scale(0);
+	opacity: var(--opacity-0);
 }
 
 #bigHomeImageBox {
@@ -828,7 +828,7 @@ html {
 
 #bigAwayImageBox {
 	left: 1290px;
-    top: -80px;
+	top: -80px;
 }
 
 .bigTeamName {
@@ -841,7 +841,7 @@ html {
 	vertical-align: middle;
 	padding: 5px;
 	opacity: 0;
-    top: 0;
+	top: 0;
 }
 
 #bigHomeName {
@@ -863,7 +863,7 @@ html {
 	vertical-align: middle;
 	padding: 5px;
 	opacity: 0;
-    top: 0;
+	top: 0;
 }
 
 #bigHomeScore {
@@ -883,7 +883,7 @@ html {
 	line-height: 80px;
 	left: 655px;
 	opacity: 0;
-    top: 0;
+	top: 0;
 }
 
 #table {

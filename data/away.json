@@ -7,7 +7,5 @@
 		"firstName": "",
 		"lastName": ""
 	},
-	"players": [
-		{ "firstName": "Mohammad Reza", "lastName": "Bahmei", "is_keeper": true }
-	]
+	"players": [{ "firstName": "Mohammad Reza", "lastName": "Bahmei", "is_keeper": true }]
 }

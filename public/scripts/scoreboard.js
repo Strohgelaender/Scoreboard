@@ -337,7 +337,7 @@ function setBigExtraText(goalEvents) {
 		}
 	} else if (section === 1 && time === DEFAULT_TIME) {
 		setText('bigAdditionalText', '2. Spieltag | Kreisklasse A Heidelberg'); // TODO evn-Var + Admin-Feld
-	} else if ((section === 1 && time === '00:00') || (section === 2 && time === DEFAULT_TIME) || (time === '45:00')) {
+	} else if ((section === 1 && time === '00:00') || (section === 2 && time === DEFAULT_TIME) || time === '45:00') {
 		setText('bigAdditionalText', 'Halbzeitstand');
 	} else {
 		setText('bigAdditionalText', '');

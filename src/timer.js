@@ -76,7 +76,8 @@ export class Timer {
 		}
 
 		//if (d <= 0) {
-		if ((min === 45 && this.section === 1) || (min === 90 && this.section === 2)) { // Fußball, TODO diese klasse müsste ich mal refactoren
+		if ((min === 45 && this.section === 1) || (min === 90 && this.section === 2)) {
+			// Fußball, TODO diese klasse müsste ich mal refactoren
 			if (this.callback) {
 				this.callback();
 			}

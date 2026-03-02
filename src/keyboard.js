@@ -9,8 +9,18 @@ export class Keyboard {
 		});
 		this.rl.on('line', (input) => {
 			input = input.trim().toUpperCase();
-			this.handleInput(input);
+			this.handInputFLL(input);
 		});
+	}
+
+	handInputFLL(input) {
+		if (typeof this.eventEmitter !== 'function') {
+			return;
+		}
+
+		if (input.startsWith('NEXT')) {
+			this.eventEmitter('NEXT_MATCH');
+		}
 	}
 
 	handleInput(input) {
