@@ -163,10 +163,10 @@ const teams = [
 	},
 ];
 
-const testroundOrder = [1, 2, 3, 4, 5, 6, 7];
-const round1Order = [1, 2, 3, 4, 5, 6, 7];
-const round2Order = [3, 4, 1, 5, 2, 6, 7];
-const round3Order = [1, 7, 2, 6, 3, 5, 4];
+const testroundOrder = [6,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
+const round1Order = [6,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
+const round2Order = [17, 18, 19, 20, 16, 22, 23, 24, 1, 2, 3, 4, 6, 5, 7, 8, 21, 10, 9, 12, 13, 14, 15, 11];
+const round3Order = [23, 21, 22, 25, 24, 1, 2, 4, 11, 3, 5, 6, 8, 9, 7, 12, 13, 14, 15, 0, 10, 16, 17, 18, 19, 20];
 
 const orderMapping = {
 	tr: testroundOrder,
