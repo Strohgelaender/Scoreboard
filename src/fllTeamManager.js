@@ -294,4 +294,31 @@ export class FllTeamManager {
 
 		return matrix[len2][len1];
 	}
+
+	/**
+	 * Get all available teams
+	 * @returns {Array} Array of all team objects
+	 */
+	getAllTeams() {
+		return teams;
+	}
+
+	/**
+	 * Get upcoming matches in the current round
+	 * Returns pairs of teams from sortedTeams starting after current position
+	 * @returns {Array} Array of match objects {teamA, teamB}
+	 */
+	getUpcomingMatches(count = 5) {
+		const matches = [];
+		let index = this.i + 2; // Start after current match
+
+		for (let j = 0; j < count && index < this.sortedTeams.length; j += 2) {
+			const teamA = this.sortedTeams[index] ?? null;
+			const teamB = this.sortedTeams[index + 1] ?? null;
+			matches.push({ teamA, teamB });
+			index += 2;
+		}
+
+		return matches;
+	}
 }

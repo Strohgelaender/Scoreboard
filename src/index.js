@@ -63,6 +63,10 @@ app.get('/fulltime', (req, res) => {
 	res.redirect('/html/fulltime.html');
 });
 
+app.get('/fll_admin', (req, res) => {
+	res.redirect('/html/fll_admin.html');
+});
+
 app.get('/matchday/:day', (req, res) => {
 	res.redirect(`/html/matchday.html?day=${req.params.day}`);
 });
@@ -210,18 +214,54 @@ app.get('/teamB', tinyws(), async (req) => {
 	}
 });
 
-app.put('/round', express.json(), (req, res) => {
-	fllManager.setRound(req.body);
+app.post('/teamA', express.json(), (req, res) => {
+	fllManager.teamA = req.body;
+	sendWS(timerWS['teamA'], JSON.stringify(fllManager.teamA));
+	res.status(200).send();
+});
+
+app.post('/teamB', express.json(), (req, res) => {
+	fllManager.teamB = req.body;
+	sendWS(timerWS['teamB'], JSON.stringify(fllManager.teamB));
+	res.status(200).send();
+});
+
+app.put('/round', express.text({ type: 'text/plain' }), (req, res) => {
+	const roundValue = req.body ? req.body.toLowerCase().trim() : null;
+	if (!roundValue) {
+		console.error('Round value is empty. Body:', req.body);
+		res.status(400).send('Round value is required');
+		return;
+	}
+	console.log('Setting round to:', roundValue);
+	fllManager.setRound(roundValue);
 	sendWS(timerWS['teamA'], JSON.stringify(fllManager.teamA));
 	sendWS(timerWS['teamB'], JSON.stringify(fllManager.teamB));
-	req.status(200).send();
+	res.status(200).send();
 });
 
 app.put('/next', (req, res) => {
 	fllManager.nextTeam();
 	sendWS(timerWS['teamA'], JSON.stringify(fllManager.teamA));
 	sendWS(timerWS['teamB'], JSON.stringify(fllManager.teamB));
-	req.status(200).send();
+	res.status(200).send();
+});
+
+// FLL Admin API endpoints
+app.get('/api/fll/teams', (req, res) => {
+	res.send(fllManager.getAllTeams());
+});
+
+app.get('/api/fll/current', (req, res) => {
+	res.send({
+		teamA: fllManager.teamA,
+		teamB: fllManager.teamB,
+		currentRound: fllManager.currentRound,
+	});
+});
+
+app.get('/api/fll/upcoming', (req, res) => {
+	res.send(fllManager.getUpcomingMatches());
 });
 
 export function sendEvent(event) {

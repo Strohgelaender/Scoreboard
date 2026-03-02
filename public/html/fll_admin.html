@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>FLL Admin</title>
+	<link rel="stylesheet" type="text/css" href="/css/default.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/css/fll_admin.css" media="screen" />
+</head>
+<body>
+	<div id="container">
+		<h1>FLL Team Management</h1>
+
+		<!-- Current Round Section -->
+		<section class="admin-section">
+			<h2>Aktuelle Runde</h2>
+			<div class="round-control">
+				<label for="roundSelect">Runde:</label>
+				<select id="roundSelect">
+					<option value="tr">Testround (TR)</option>
+					<option value="vr1">Vorrunde 1 (VR1)</option>
+					<option value="vr2">Vorrunde 2 (VR2)</option>
+					<option value="vr3">Vorrunde 3 (VR3)</option>
+				</select>
+				<button id="setRoundBtn" class="btn btn-primary">Runde setzen</button>
+			</div>
+		</section>
+
+		<!-- Current Teams Section -->
+		<section class="admin-section">
+			<h2>Aktuelle Teams</h2>
+			<div class="teams-display">
+				<div class="team-card team-a">
+					<h3>Team A</h3>
+					<div class="team-info">
+						<p><strong>Name:</strong> <span id="teamAName">-</span></p>
+						<p><strong>Institution:</strong> <span id="teamAInstitution">-</span></p>
+						<p><strong>ID:</strong> <span id="teamAId">-</span></p>
+						<p><strong>Ort:</strong> <span id="teamALocation">-</span></p>
+					</div>
+					<button id="changeTeamABtn" class="btn btn-secondary">Ändern</button>
+				</div>
+
+				<div class="team-card team-b">
+					<h3>Team B</h3>
+					<div class="team-info">
+						<p><strong>Name:</strong> <span id="teamBName">-</span></p>
+						<p><strong>Institution:</strong> <span id="teamBInstitution">-</span></p>
+						<p><strong>ID:</strong> <span id="teamBId">-</span></p>
+						<p><strong>Ort:</strong> <span id="teamBLocation">-</span></p>
+					</div>
+					<button id="changeTeamBBtn" class="btn btn-secondary">Ändern</button>
+				</div>
+			</div>
+
+			<div class="action-buttons">
+				<button id="nextMatchBtn" class="btn btn-success">Nächste Paarung</button>
+			</div>
+		</section>
+
+		<!-- Next Matches Section -->
+		<section class="admin-section">
+			<h2>Nächste Paarungen</h2>
+			<div id="nextMatchesList" class="next-matches-list">
+				<!-- Wird dynamisch gefüllt -->
+			</div>
+		</section>
+
+		<!-- Team Selection Modal -->
+		<div id="teamSelectionModal" class="modal" style="display: none">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Team auswählen</h2>
+					<button id="closeModalBtn" class="close-btn">&times;</button>
+				</div>
+				<div class="modal-body">
+					<input
+						type="text"
+						id="teamSearchInput"
+						class="search-input"
+						placeholder="Team nach Name oder ID suchen..."
+						autocomplete="off"
+					/>
+					<div id="teamsList" class="teams-list">
+						<!-- Wird dynamisch gefüllt -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/scripts/fll_admin.js" defer></script>
+</body>
+</html>
+
