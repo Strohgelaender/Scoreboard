@@ -204,12 +204,10 @@ export class FllTeamManager {
 			const order = orderMapping[newRound];
 			this.i = 0;
 
-			const orderMap = new Map(order.map((id, index) => [id, index]));
-			this.sortedTeams = teams.sort((teamA, teamB) => {
-				const posA = orderMap.get(teamA.id) ?? Infinity;
-				const posB = orderMap.get(teamB.id) ?? Infinity;
-				return posA - posB;
+			this.sortedTeams = order.map(id => {
+				return teams.find(team => team.id === id) ?? null;
 			});
+
 			this.teamA = this.sortedTeams[0] ?? null;
 			this.teamB = this.sortedTeams[1] ?? null;
 			console.log(this.sortedTeams);
