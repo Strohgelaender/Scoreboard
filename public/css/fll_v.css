@@ -1,19 +1,17 @@
 #container {
-	width: 1920px;
-	height: 1080px;
+	width: 1080px;
+	height: 1920px;
 	position: relative;
 	background: transparent;
 	overflow: hidden;
 }
-
 .teamBox {
 	position: absolute;
-	bottom: 40px;
 	background: linear-gradient(135deg, rgba(30, 180, 200, 0.95) 0%, rgba(2, 67, 89, 0.95) 100%);
 	border: 3px solid var(--futsal-blue-2);
 	border-radius: var(--border-radius);
-	padding: 20px 30px;
-	min-width: 350px;
+	padding: 25px 30px;
+	min-width: 300px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -21,54 +19,52 @@
 	gap: 15px;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
-
-.leftBox {
-	left: 40px;
-	flex-direction: row;
+.topBox {
+	top: 65px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	max-width: 1000px;
 }
-
-.rightBox {
-	right: 40px;
-	flex-direction: row-reverse;
+.bottomBox {
+	bottom: 200px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	max-width: 1000px;
 }
 
 .teamInfo {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	gap: 8px;
-}
-
-.leftBox .teamInfo {
-	text-align: left;
-}
-
-.rightBox .teamInfo {
-	text-align: right;
 }
 
 .teamLogo {
 	height: 80px;
 	width: auto;
-	max-width: 120px;
+	max-width: 150px;
 	object-fit: contain;
 	flex-shrink: 0;
 }
 
 .teamName {
 	font-family: Uniform-Bold, DFBSans-Bold, sans-serif;
-	font-size: 50px;
+	font-size: 48px;
 	color: white;
 	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	line-height: 1.2;
+	text-align: center;
 }
-
 .teamInstitution {
 	font-family: Uniform-Regular, DFBSans-Regular, sans-serif;
-	font-size: 35px;
+	font-size: 28px;
 	color: var(--futsal-grey);
 	font-weight: normal;
 	line-height: 1.2;
+	text-align: center;
 }

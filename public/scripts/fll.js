@@ -38,6 +38,7 @@ function updateTeamDisplay(position, team) {
 	const boxElement = document.getElementById(`${position}TeamBox`);
 	const nameElement = document.getElementById(`${position}TeamName`);
 	const institutionElement = document.getElementById(`${position}TeamInstitution`);
+	const logoElement = document.getElementById(`${position}TeamLogo`);
 
 	if (!team) {
 		if (boxElement) {
@@ -57,5 +58,15 @@ function updateTeamDisplay(position, team) {
 
 	if (institutionElement) {
 		institutionElement.textContent = team.institution || '';
+	}
+
+	// Handle logo
+	if (logoElement) {
+		if (team.logo && team.logo.trim() !== '') {
+			logoElement.src = team.logo;
+			logoElement.style.display = 'block';
+		} else {
+			logoElement.style.display = 'none';
+		}
 	}
 }

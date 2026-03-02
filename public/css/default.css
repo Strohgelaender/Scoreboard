@@ -38,6 +38,36 @@
 	src: url(/fonts/DFBSansOfc-Regular.ttf);
 }
 
+@font-face {
+	font-family: Uniform-Regular;
+	src: url(/fonts/Uniform-Regular.otf);
+}
+
+@font-face {
+	font-family: Uniform-Bold;
+	src: url(/fonts/Uniform-Bold.otf);
+}
+
+@font-face {
+	font-family: Uniform-Condensed-Regular;
+	src: url(/fonts/UniformCondensed-Regular.otf);
+}
+
+@font-face {
+	font-family: Poppins-Regular;
+	src: url(/fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+	font-family: Poppins-Bold;
+	src: url(/fonts/Poppins-Bold.ttf);
+}
+
+@font-face {
+	font-family: Poppins-Medium;
+	src: url(/fonts/Poppins-Medium.ttf);
+}
+
 html {
 	font-family: DFBSans-BoldItalic, DFBSans-Bold, Anton, Oxygen, sans-serif;
 	color: white;
