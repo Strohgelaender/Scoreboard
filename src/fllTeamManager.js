@@ -1,4 +1,4 @@
-/*const teams = [
+const teams = [
 	// Schweiz - Jura
 	{
 		id: 1,
@@ -156,115 +156,31 @@
 	// Rockenhausen
 	{
 		id: 23,
+		name: "SpongeBots",
+		institution: "Carl-Friedrich-Gauß-Gymnasium",
+		location: "Hockenheim",
+		logo: null,
+	},
+	{
+		id: 24,
+		name: "RoboDuo",
+		institution: "privat",
+		location: "Reichenau",
+		logo: null
+	},
+	{
+		id: 25,
 		name: 'Strg+R(obotics)',
 		institution: 'Bunsen-Gymnasium Heidelberg',
 		location: 'Heidelberg',
 		logo: null,
 	},
-]; */
-
-
-const teams = [
-	{
-		id: 1,
-		name: 'Desert Falcons',
-		institution: 'Goethe-Gymnasium Gaggenau',
-		location: 'Gaggenau'
-	},
-	{
-		id: 2,
-		name: 'Error X',
-		institution: 'Scheffelgymnasium',
-		location: 'Lahr'
-	}, {
-		id: 3,
-		name: 'Susobotics',
-		institution: 'Heinrich-Suso-Gymnasium',
-		location: 'Konstanz'
-	}, {
-		id: 4,
-		name: 'Kasperl und Seppel',
-		institution: 'Privat',
-		location: 'Heidelberg'
-	}, {
-		id: 5,
-		name: 'LEt it GO',
-		institution: 'Scheffelgymnasium',
-		location: 'Lahr'
-	}, {
-		id: 6,
-		name: 'Strg+R(obotics)',
-		institution: 'Bunsen-Gymnasium Heidelberg',
-		location: 'Heidelberg'
-	}, {
-		id: 7,
-		name: 'Robogang',
-		institution: 'Festo Didactic SE',
-		location: 'Denkendorf'
-	},
-	{
-		id: 8,
-		name: 'FEG Robotik',
-		institution: 'Friedrich-Ebert-Gymnasium',
-		location: 'Sandhausen'
-	},
-	{
-		id: 9,
-		name: 'FFLish',
-		institution: 'Bunsen-Gymnasium Heidelberg',
-		location: 'Heidelberg'
-	}, {
-		id: 10,
-		name: 'RoboDuo',
-		institution: 'Privat',
-		location: 'Reichenau'
-	}, {
-		id: 11,
-		name: 'MPDVeRruEcKtEn',
-		institution: 'Hohenstaufen-Gymnasium',
-		location: 'Bad Wimpfen'
-	}, {
-		id: 12,
-		name: 'SpongeBots',
-		institution: 'Carl-Friedrich-Gauß-Gymnasium',
-		location: 'Hockenheim'
-	}, {
-		id: 13,
-		name: 'APG TangEnten@MPDV',
-		institution: 'Auguste-Pattberg-Gymnasium Mosbach',
-		location: 'Mosbach'
-	}, {
-		id: 14,
-		name: 'EAGuinea pigs',
-		institution: 'Ernst-Abbe-Gymnasium',
-		location: 'Oberkochen'
-	}, {
-		id: 15,
-		name: 'KPI-Lions',
-		institution: 'Kurpfalz-Internat Bammental',
-		location: 'Bammental'
-	}, {
-		id: 16,
-		name: 'APG Let\'s Goooooo@MPDV',
-		institution: 'Auguste-Pattberg-Gymnasium Mosbach',
-		location: 'Mosbach'
-	}, {
-		id: 17,
-		name: 'KFG Robotik AG',
-		institution: 'Karl-Friedrich-Gymnasium',
-		location: 'Heidelberg'
-	}
-
 ];
 
-// const testroundOrder = [6,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
-const testroundOrder = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 0, 1, 2, 3, 4];
-//const round1Order = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
-const round1Order = [13, 14, 15, 16, 17, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-// const round2Order = [17, 18, 19, 20, 16, 22, 23, 24, 1, 2, 3, 4, 6, 5, 7, 8, 21, 10, 9, 12, 13, 14, 15, 11];
-const round2Order = [0, 1, 2, 17, 5, 3, 6, 7, 4, 9, 10, 11, 8, 12, 14, 15, 16, 13];
-//const round3Order = [23, 21, 22, 25, 24, 1, 2, 4, 11, 3, 5, 6, 8, 9, 7, 12, 13, 14, 15, 0, 10, 16, 17, 18, 19, 20];
-const round3Order = [2, 3, 4, 1, 12, 6, 7, 10, 8, 5, 11, 13, 9, 14, 16, 0, 15, 17];
+const testroundOrder = [6,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
+const round1Order = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
+const round2Order = [17, 18, 19, 20, 16, 22, 23, 24, 1, 2, 3, 4, 6, 5, 7, 8, 21, 10, 9, 12, 13, 14, 15, 11];
+const round3Order = [23, 21, 22, 25, 24, 1, 2, 4, 11, 3, 5, 6, 8, 9, 7, 12, 13, 14, 15, 0, 10, 16, 17, 18, 19, 20];
 
 const orderMapping = {
 	tr: testroundOrder,
