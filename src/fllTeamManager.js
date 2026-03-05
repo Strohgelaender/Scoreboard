@@ -163,9 +163,9 @@ const teams = [
 	},
 	{
 		id: 24,
-		name: "RoboDuo",
-		institution: "privat",
-		location: "Reichenau",
+		name: "LEt it GO",
+		institution: "Scheffelgymnasium",
+		location: "Lahr",
 		logo: null
 	},
 	{
