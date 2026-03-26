@@ -17,25 +17,25 @@
 		"node": ">=22.10.0"
 	},
 	"dependencies": {
-		"@elgato-stream-deck/node": "7.3.1",
+		"@elgato-stream-deck/node": "7.6.1",
 		"@julusian/jpeg-turbo": "2.2.0",
-		"axios": "1.9.0",
-		"body-parser": "2.2.0",
+		"axios": "1.13.6",
+		"body-parser": "2.2.2",
 		"dotenv": "16.5.0",
-		"express": "5.1.0",
-		"node-html-parser": "7.0.1",
-		"obs-websocket-js": "5.0.6",
+		"express": "5.2.1",
+		"node-html-parser": "7.1.0",
+		"obs-websocket-js": "5.0.8",
 		"sharp": "0.34.2",
 		"tinyws": "^0.1.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.28.0",
 		"eslint": "^9.28.0",
-		"eslint-config-prettier": "^10.1.5",
-		"eslint-plugin-prettier": "^5.4.1",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-prettier": "^5.5.5",
 		"globals": "^16.2.0",
-		"nodemon": "^3.1.10",
+		"nodemon": "^3.1.14",
 		"npm-check-updates": "^18.0.1",
-		"prettier": "3.5.3"
+		"prettier": "3.8.1"
 	}
 }
