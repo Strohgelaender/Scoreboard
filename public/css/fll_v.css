@@ -8,7 +8,8 @@
 .teamBox {
 	position: absolute;
     background: linear-gradient(135deg, rgba(229, 174, 50, 0.85) 0%, rgba(239, 75, 45, 0.85) 100%);
-	border: 3px solid var(--main-color);
+    /*background: linear-gradient(135deg, rgba(123, 199, 158, 0.85) 0%, rgba(89, 131, 130, 0.85) 100%);*/
+    border: 3px solid var(--main-color);
 	border-radius: var(--border-radius);
 	padding: 25px 30px;
 	min-width: 300px;
