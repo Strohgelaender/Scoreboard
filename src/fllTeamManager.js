@@ -226,12 +226,11 @@ export class FllTeamManager {
 
 			this.teamA = this.sortedTeams[0] ?? null;
 			this.teamB = this.sortedTeams[1] ?? null;
-			console.log(this.sortedTeams);
+			// console.log(this.sortedTeams);
 		}
 	}
 
 	nextTeam() {
-		console.log('next team', this.i, this.sortedTeams, this.currentRound);
 		if (this.i < this.sortedTeams?.length) {
 			this.teamA = this.sortedTeams[this.i + 2] ?? null;
 			this.teamB = this.sortedTeams[this.i + 3] ?? null;

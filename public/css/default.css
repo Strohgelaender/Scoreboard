@@ -96,14 +96,19 @@ html {
 	--background: var(--futsal-background);
 	--background-long: var(--futsal-background-long);
 	--transparent-background: var(--futsal-transparent-background);
+    /*
 	--main-color: var(--futsal-blue-1);
 	--secondary-color: var(--futsal-blue-2);
+     */
 	--lower-thirds-top: var(--futsal-blue-1);
 	--lower-thirds-bottom: var(--futsal-blue-2);
 	--spielfeld-color: var(--futsal-spielfeld);
 	--more-info-background: #1eb4c8b3;
 	--stripes-animation: var(--futsal-stripes-animation);
 	--border-radius: 10px;
+
+    --main-color: #e5ae32;
+    --secondary-color: #ef4b2d;
 
 	/*--more-info-background: var(--futsal-blue-2);*/
 
