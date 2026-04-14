@@ -1,27 +1,25 @@
 const teams = [
-	// Schweiz - Jura
 	{
 		id: 1,
+		name: 'Robonauten',
+		institution: 'privat',
+		location: 'Neunkirchen-Seelscheid',
+		logo: null,
+	},
+	{
+		id: 2,
 		name: 'mindfactory',
 		institution: 'JuFoTec',
 		location: 'Baden',
 		logo: "/images/fll/mindfactory.jpg"
 	},
 	{
-		id: 2,
-		name: 'E-Arts',
-		institution: 'Privat',
-		location: 'Arnex sur Orbe',
+		id: 3,
+		name: 'MANOSapiens',
+		institution: 'Martin-Andersen-Nexö-Gymnasium',
+		location: 'Dresden',
 		logo: null,
 	},
-	{
-		id: 3,
-		name: 'Capricorns',
-		institution: 'Bündner Kantonsschule Chur',
-		location: 'Chur',
-		logo: "/images/fll/capricorns.jpg",
-	},
-	// Aachen
 	{
 		id: 4,
 		name: 'Theobots',
@@ -31,31 +29,37 @@ const teams = [
 	},
 	{
 		id: 5,
-		name: 'GSG Robots',
-		institution: 'Geschwister-Scholl-Gymnasium',
-		location: 'Ludwigshafen am Rhein',
+		name: 'TEAMRemint',
+		institution: 'MS Stainz',
+		location: 'Stainz',
 		logo: null,
 	},
 	{
 		id: 6,
-		name: 'tASG force',
-		institution: 'Städt. Albert Schweizer Gymnasium Plettenberg',
-		location: 'Plettenberg',
+		name: 'Strg+R(obotics)',
+		institution: 'Bunsen-Gymnasium Heidelberg',
+		location: 'Heidelberg',
 		logo: null,
 	},
-	// Heidelberg
 	{
 		id: 7,
+		name: 'MrgeNxtGen',
+		institution: 'Martin-Rinckart-Gymnasium',
+		location: 'Eilenburg',
+		logo: null,
+	},
+	{
+		id: 8,
 		name: 'Here We GO',
 		institution: 'Gymnasium Ottobrunn',
 		location: 'Ottobrunn',
 		logo: null,
 	},
 	{
-		id: 8,
-		name: 'GarsControl Senior',
-		institution: 'Gymnasium Gars',
-		location: 'Gars am Inn',
+		id: 9,
+		name: 'Robotigers',
+		institution: 'KGS Ronnenberg',
+		location: 'Ronnenberg',
 		logo: null,
 	},
 	{
@@ -65,19 +69,18 @@ const teams = [
 		location: 'Holzkirchen',
 		logo: null,
 	},
-	// Braunschweig
 	{
 		id: 11,
-		name: 'Robotigers',
-		institution: 'KGS Ronnenberg',
-		location: 'Ronnenberg',
-		logo: null,
+		name: 'Capricorns',
+		institution: 'Bündner Kantonsschule Chur',
+		location: 'Chur',
+		logo: "/images/fll/capricorns.jpg",
 	},
 	{
 		id: 12,
-		name: 'rhsRobotX',
-		institution: 'Ricarda-Huch-Schule',
-		location: 'Braunschweig',
+		name: 'RoboGeeks',
+		institution: 'Johann-Philipp-von-Schönborn Gymnasium',
+		location: 'Münnerstadt',
 		logo: null,
 	},
 	{
@@ -87,100 +90,96 @@ const teams = [
 		location: 'Büchen',
 		logo: null,
 	},
-	// Wildau
 	{
 		id: 14,
-		name: 'MANOSapiens',
-		institution: 'Martin-Andersen-Nexö-Gymnasium',
-		location: 'Dresden',
-		logo: null,
-	},
-	{
-		id: 15,
-		name: 'PhoenixRobotics',
-		institution: 'Gerhart-Hauptmann-Gymnasium',
-		location: 'Wismar',
-		logo: null,
-	},
-	{
-		id: 16,
-		name: 'Experience',
-		institution: 'Sensys GmbH',
-		location: 'Bad Saarow',
-		logo: null,
-	},
-	// Siegen
-	{
-		id: 17,
-		name: 'Robonauten',
-		institution: 'privat',
-		location: 'Neunkirchen-Seelscheid',
-		logo: null,
-	},
-	{
-		id: 18,
-		name: '1337.exe',
-		institution: 'Rabanus-Maurus-Schule',
-		location: 'Fulda',
-		logo: null,
-	},
-	{
-		id: 19,
-		name: 'RoboGeeks',
-		institution: 'Johann-Philipp-von-Schönborn Gymnasium',
-		location: 'Münnerstadt',
-		logo: null,
-	},
-	// Österreich - Tiorl
-	{
-		id: 20,
-		name: 'TEAMRemint',
-		institution: 'MS Stainz',
-		location: 'Stainz',
-		logo: null,
-	},
-	{
-		id: 21,
 		name: 'BWS',
 		institution: 'Bezauer WirtschaftsSchulen',
 		location: 'Bezau',
 		logo: null,
 	},
 	{
-		id: 22,
-		name: 'Intelligente Enten',
-		institution: 'privat',
-		location: 'Wien',
+		id: 15,
+		name: 'E-Arts',
+		institution: 'Privat',
+		location: 'Arnex sur Orbe',
 		logo: null,
 	},
-	// Rockenhausen
 	{
-		id: 23,
+		id: 16,
+		name: 'GarsControl Senior',
+		institution: 'Gymnasium Gars',
+		location: 'Gars am Inn',
+		logo: null,
+	},
+	{
+		id: 17,
+		name: 'Experience',
+		institution: 'Sensys GmbH',
+		location: 'Bad Saarow',
+		logo: null,
+	},
+	{
+		id: 18,
 		name: "SpongeBots",
 		institution: "Carl-Friedrich-Gauß-Gymnasium",
 		location: "Hockenheim",
 		logo: null,
 	},
 	{
-		id: 24,
+		id: 19,
+		name: 'tASG force',
+		institution: 'Städt. Albert Schweizer Gymnasium Plettenberg',
+		location: 'Plettenberg',
+		logo: null,
+	},
+	{
+		id: 20,
+		name: 'GSG Robots',
+		institution: 'Geschwister-Scholl-Gymnasium',
+		location: 'Ludwigshafen am Rhein',
+		logo: null,
+	},
+	{
+		id: 21,
+		name: 'Intelligente Enten',
+		institution: 'privat',
+		location: 'Wien',
+		logo: null,
+	},
+	{
+		id: 22,
+		name: '1337.exe',
+		institution: 'Rabanus-Maurus-Schule',
+		location: 'Fulda',
+		logo: null,
+	},
+	{
+		id: 23,
 		name: "LEt it GO",
 		institution: "Scheffelgymnasium",
 		location: "Lahr",
 		logo: null
 	},
 	{
+		id: 24,
+		name: 'rhsRobotX',
+		institution: 'Ricarda-Huch-Schule',
+		location: 'Braunschweig',
+		logo: null,
+	},
+	{
 		id: 25,
-		name: 'Strg+R(obotics)',
-		institution: 'Bunsen-Gymnasium Heidelberg',
-		location: 'Heidelberg',
+		name: 'PhoenixRobotics',
+		institution: 'Gerhart-Hauptmann-Gymnasium',
+		location: 'Wismar',
 		logo: null,
 	},
 ];
 
-const testround1Order = [6,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
-const testround2Order = [17, 18, 19, 20, 16, 22, 23, 24, 1, 2, 3, 4, 6, 5, 7, 8, 21, 10, 9, 12, 13, 14, 15, 11];
+const testround1Order = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
+const testround2Order = [16, 22, 23, 24, 25, 0, 1, 2, 3, 4, 6, 5, 7, 8, 21, 10, 9, 12, 13, 14, 15, 11, 17, 18, 19, 20];
 const round1Order = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 1, 2, 3, 4, 5];
-const round2Order = [17, 18, 19, 20, 16, 22, 23, 24, 1, 2, 3, 4, 6, 5, 7, 8, 21, 10, 9, 12, 13, 14, 15, 11];
+const round2Order = [17, 18, 19, 20, 16, 22, 23, 24, 25, 0, 1, 2, 3, 4, 6, 5, 7, 8, 21, 10, 9, 12, 13, 14, 15, 11];
 const round3Order = [23, 21, 22, 25, 24, 1, 2, 4, 11, 3, 5, 6, 8, 9, 7, 12, 13, 14, 15, 0, 10, 16, 17, 18, 19, 20];
 
 const orderMapping = {
