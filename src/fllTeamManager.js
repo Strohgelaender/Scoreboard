@@ -11,7 +11,7 @@ const teams = [
 		name: 'mindfactory',
 		institution: 'JuFoTec',
 		location: 'Baden',
-		logo: "/images/fll/mindfactory.jpg"
+		logo: null,
 	},
 	{
 		id: 3,
@@ -25,7 +25,7 @@ const teams = [
 		name: 'Theobots',
 		institution: 'Gymnasium Theodorianum',
 		location: 'Paderborn',
-		logo: "/images/fll/theobots.png",
+		logo: null,
 	},
 	{
 		id: 5,
@@ -74,7 +74,7 @@ const teams = [
 		name: 'Capricorns',
 		institution: 'Bündner Kantonsschule Chur',
 		location: 'Chur',
-		logo: "/images/fll/capricorns.jpg",
+		logo: null,
 	},
 	{
 		id: 12,
